@@ -1,0 +1,75 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+MV=`which mv`;
+
+#######################################
+# Test Parameters
+#######################################
+EPSILON=0.25
+TESTARGS=
+
+#######################################
+# Get Arguments
+#######################################
+if [ $# -lt 1 ]; then
+  DIR=`$PWD`;             # current directory
+else
+  DIR=$1;
+fi
+
+#######################################
+# Script Parameters
+#######################################
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$DIR/../..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+COMMON=$DIR/../../../../common  # common utilities (plotting, merging, etc.)
+
+# Executables
+MERGEDATA=$COMMON/mergedata.py
+MODDATA=$COMMON/mod_data.py
+
+# Trial parameters
+TRIALS=`seq 1 10`;
+
+# check parameters
+if [ ! -x $MERGEDATA ]; then
+  echo "Could not find executable ... MERGEDATA=$MERGEDATA";
+  exit -1;
+fi
+
+if [ ! -x $MODDATA ]; then
+  echo "Could not find executable ... MODDATA=$MODDATA";
+  exit -1;
+fi
+
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Parse Data
+#######################################
+# Combine all trials
+cd $DIR
+fdrfiles=$( for k in $TRIALS; do \
+              tdir=trial-$( printf "%03d" $k); \
+              if [ -f $tdir/fdr.dat ]; then echo -n "$tdir/fdr.dat "; fi; \
+            done );
+perfiles=$( for k in $TRIALS; do \
+              tdir=trial-$( printf "%03d" $k); \
+              if [ -f $tdir/per.dat ]; then echo -n "$tdir/per.dat "; fi; \
+            done );
+echo "Merging FDR data in $fdrfiles";
+$MERGEDATA $fdrfiles -e $EPSILON > fdr.dat;
+echo "Merging PER data in $perfiles";
+$MERGEDATA $perfiles -e $EPSILON > per.dat;

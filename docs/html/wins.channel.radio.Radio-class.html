@@ -1,0 +1,1193 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel.radio.Radio</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.channel-module.html">Package&nbsp;channel</a> ::
+        <a href="wins.channel.radio-module.html">Module&nbsp;radio</a> ::
+        Class&nbsp;Radio
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Radio</h1><p class="nomargin-top"><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_radio" name="class_hierarchy_for_radio">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="176,5,259,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="163,61,272,88"/>
+<area shape="rect" href="wins.channel.interface.ChannelInterface-class.html" title="interface.ChannelInterface" alt="" coords="132,173,303,200"/>
+<area shape="rect" href="wins.channel.radio.Radio-class.html" title="Radio" alt="" coords="191,229,244,256"/>
+<area shape="rect" href="wins.ieee80211.dot11a.Dot11ARadio-class.html" title="ieee80211.dot11a.Dot11ARadio" alt="" coords="5,285,205,312"/>
+<area shape="rect" href="wins.ieee80211.dot11n.Dot11NRadio-class.html" title="ieee80211.dot11n.Dot11NRadio" alt="" coords="229,285,429,312"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="157,117,277,144"/>
+</map>
+  <img src="class_hierarchy_for_radio.gif" alt='' usemap="#class_hierarchy_for_radio" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Interface to connect to a wireless channel.</p>
+<div class="rst-section" id="rst-packet-annotations-and-radio">
+<h1 class="heading">Packet Annotations and Radio</h1>
+<p>This class sets the following annotations:</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cif-txpower</td>
+<td>Power of transmitted packets (in dBm).</td>
+</tr>
+<tr><td>rxpower</td>
+<td><p class="rst-first">Power of received packet (in dBm).</p>
+<p class="rst-last">This value is computed from the 'cif-txpower' and 'pathloss'
+annotations as well as <a href="wins.channel.radio.Radio-class.html#Lrx" class="link">Lrx</a> and <a href="wins.channel.radio.Radio-class.html#Grx" class="link">Grx</a> parameters.</p>
+</td>
+</tr>
+<tr><td>noisepower</td>
+<td>Power of additive thermal noise at receiver (in dBm).</td>
+</tr>
+<tr><td>tx-cfo</td>
+<td>Local frequency offset at transmitter (in Hz).</td>
+</tr>
+<tr><td>rx-cfo</td>
+<td>Local frequency offset at receiver (in Hz).</td>
+</tr>
+</tbody>
+</table>
+<p>Overload <a href="wins.channel.radio.Radio-class.html#set_sendanno" class="link">set_sendanno()</a> (or <a href="wins.channel.radio.Radio-class.html#set_recvanno" class="link">set_recvanno()</a>) to change how annotations are
+applied to outgoing (or incoming) packets.</p>
+<p>Local frequency offset is set every time <a href="wins.channel.radio.Radio-class.html#set_sendanno" class="link">set_sendanno()</a> or
+<a href="wins.channel.radio.Radio-class.html#set_recvanno" class="link">set_recvanno()</a> is called.</p>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        The base <a href="wins.channel.radio.Radio-class.html" class="link">Radio</a> class does not consider directionallity. All
+parameters are considered omnidirectional.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#set_cfo" class="summary-sig-name">set_cfo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fo</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set new value for frequency offset of local oscillator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_cfo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Gtx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Grx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Ltx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Lrx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Ntx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Nrx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">fomax</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">txpower</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">bandwidth</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Set up radio parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#set_sendanno" class="summary-sig-name">set_sendanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set radio annotations for transmitted packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_sendanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#set_recvanno" class="summary-sig-name">set_recvanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set radio annotations for received packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_recvanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#rxenergy" class="summary-sig-name">rxenergy</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Calculate total receive energy of packets in <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.rxenergy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#noisepower" class="summary-sig-name">noisepower</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get noise power for radio interface.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.noisepower">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#snr" class="summary-sig-name">snr</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Get signal-to-noise-ratio (SNR) for packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.snr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#log_send" class="summary-sig-name">log_send</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to log 'cif-txpower' annotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#log_recv" class="summary-sig-name">log_recv</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overload to log 'cif-txpower', 'rxpower', and 'pathloss' annotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_recv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#log_drop" class="summary-sig-name">log_drop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overload to log 'cif-txpower', 'rxpower', and 'pathloss' annotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.channel.interface.ChannelInterface-class.html">interface.ChannelInterface</a></code></b>:
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#CAPTURE">CAPTURE</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#RECV">RECV</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#SEND">SEND</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#cleananno">cleananno</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#drop">drop</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#get_cif_anno">get_cif_anno</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#interval_heap">interval_heap</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#log">log</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#sinr_heap">sinr_heap</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#connect">connect</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#rxpower" class="summary-sig-name">rxpower</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">Grx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">Lrx</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">txpower</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">pathloss</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate receive power of a received packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.rxpower">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.radio.Radio-class.html#thermalnoise" class="summary-sig-name">thermalnoise</a>(<span class="summary-sig-arg">bandwidth</span>)</span><br />
+      Compute thermal noise floor for communication systems with given
+bandwidth.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.thermalnoise">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fc"></a><span class="summary-name">fc</span> = <code title="2400000000.0">2400000000.0</code><br />
+      : Default for center frequency (in Hz).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Gtx"></a><span class="summary-name">Gtx</span> = <code title="0">0</code><br />
+      : Default for transmit antenna gain (in dB).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Grx"></a><span class="summary-name">Grx</span> = <code title="0">0</code><br />
+      : Default for receive antenna gain (in dB).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Ltx"></a><span class="summary-name">Ltx</span> = <code title="0">0</code><br />
+      : Default for system loss associated with transmitter (in dB).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Lrx"></a><span class="summary-name">Lrx</span> = <code title="0">0</code><br />
+      : Default for system loss associated with receiver (in dB).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="bandwidth"></a><span class="summary-name">bandwidth</span> = <code title="20000000.0">20000000.0</code><br />
+      : Default for system bandwidth (in Hz).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="txpower"></a><span class="summary-name">txpower</span> = <code title="20">20</code><br />
+      : Default for transmit power (in dBm).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Ntx"></a><span class="summary-name">Ntx</span> = <code title="1">1</code><br />
+      : Default for number of transmit antennas.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Nrx"></a><span class="summary-name">Nrx</span> = <code title="1">1</code><br />
+      : Default for number of receive antennas.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fomax"></a><span class="summary-name">fomax</span> = <code title="0.0">0.0</code><br />
+      : Default for max frequency offset of local oscillator (in ppm).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'radio'"><code class="variable-quote">'</code><code class="variable-string">radio</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'RF'"><code class="variable-quote">'</code><code class="variable-string">RF</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.channel.interface.ChannelInterface-class.html">interface.ChannelInterface</a></code></b>:
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#halfduplex">halfduplex</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer">rxbuffer</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#rxdata">rxdata</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#rxdone">rxdone</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#txdata">txdata</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#txdone">txdone</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.radio.Radio-class.html#cfo" class="summary-name">cfo</a><br />
+      : Property to access frequency offset of local oscillator (in Hz).
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.channel.interface.ChannelInterface-class.html">interface.ChannelInterface</a></code></b>:
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#ifstate">ifstate</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#inreceive">inreceive</a></code>,
+      <code><a href="wins.channel.interface.ChannelInterface-class.html#intransmit">intransmit</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>start</code></strong> - Boolean; if true, call <a href="wins.element.Element-class.html#start" class="link">start()</a> at the end of constructor.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to <a href="wins.trace.Traceable-class.html" class="link">Traceable</a> constructor and
+<a href="wins.channel.radio.Radio-class.html#configure" class="link">configure()</a> method.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_cfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_cfo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fo</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_cfo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set new value for frequency offset of local oscillator.</p>
+<p>If <code class="link">fo</code> is None, this method will determine a new <a href="wins.channel.radio.Radio-class.html#cfo" class="link">cfo</a> based on a
+uniform distribution based on <a href="wins.channel.radio.Radio-class.html#fomax" class="link">fomax</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fo</code></strong> - New value of frequency offset (in Hz) [default=None].</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Gtx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Grx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Ltx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Lrx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Ntx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Nrx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">fomax</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">txpower</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">bandwidth</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set up radio parameters.</p>
+<p>All parameters not specified will be set to their default values as
+specified by the class.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fc</code></strong> - Center frequency of <a href="wins.channel.radio.Radio-class.html" class="link">Radio</a> (in Hz).</li>
+        <li><strong class="pname"><code>Gtx</code></strong> - Transmit antenna gain (in dB).</li>
+        <li><strong class="pname"><code>Grx</code></strong> - Receive antenna gain (in dB).</li>
+        <li><strong class="pname"><code>Ltx</code></strong> - System loss associated with transmitter (in dB).</li>
+        <li><strong class="pname"><code>Lrx</code></strong> - System loss associated with receiver (in dB).</li>
+        <li><strong class="pname"><code>Ntx</code></strong> - Number of transmit antennas.</li>
+        <li><strong class="pname"><code>Nrx</code></strong> - Number of receive antennas.</li>
+        <li><strong class="pname"><code>fomax</code></strong> - Maximum frequency offset of local oscillator (in ppm).</li>
+        <li><strong class="pname"><code>txpower</code></strong> - Transmit power (in dBm).</li>
+        <li><strong class="pname"><code>bandwidth</code></strong> - System bandwidth (in Hz).</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to <a href="wins.channel.interface.ChannelInterface-class.html#configure" class="link">ChannelInterface.configure()</a>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_sendanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_sendanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_sendanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set radio annotations for transmitted packet.</p>
+<p>If the 'cif-txpower' annotation has not already been set by another
+protocol, this method will use the local <a href="wins.channel.radio.Radio-class.html#txpower" class="link">txpower</a> value. The transmit
+power is then adjusted by the transmit antenna gain <a href="wins.channel.radio.Radio-class.html#Grx" class="link">Grx</a> and the
+transmitter system loss <a href="wins.channel.radio.Radio-class.html#Lrx" class="link">Lrx</a>, such that the new transmit power is:</p>
+<blockquote>
+Ptx (dBm) = Pold (dBm) + Gtx (dB) - Ltx (dB)</blockquote>
+<p>The 'cif-txpower' annotation is then set to this new value. Finally, the
+method calls <a href="wins.channel.interface.ChannelInterface-class.html#set_sendanno" class="link">ChannelInterface.set_sendanno()</a>. Overload this method as
+necessary.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+    <dt>Overrides:
+        <a href="wins.channel.interface.ChannelInterface-class.html#set_sendanno">interface.ChannelInterface.set_sendanno</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_recvanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_recvanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.set_recvanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set radio annotations for received packet.</p>
+<p>This method sets the 'rxpower' annotation to the value returned by
+<a href="wins.channel.radio.Radio-class.html#rxpower" class="link">rxpower()</a>, sets the 'noisepower' annotation using <a href="wins.channel.radio.Radio-class.html#thermalnoise" class="link">thermalnoise()</a> and
+<a href="wins.channel.radio.Radio-class.html#bandwidth" class="link">bandwidth</a>, and then calls ChannelInterface.set_recvanno()`. Overload
+this method as needed.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+    <dt>Overrides:
+        <a href="wins.channel.interface.ChannelInterface-class.html#set_recvanno">interface.ChannelInterface.set_recvanno</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method is called immediately after the packet <code class="link">p</code> has been
+inserted in the <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="rxenergy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rxenergy</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.rxenergy">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate total receive energy of packets in <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>.</p>
+<p>This method uses the 'rxpower' annotation of packets in <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a> to
+determine the total receive power. Any packets that do not support this
+annotation will not contribute to the total power calculated.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Receive power (in dBm), or -Inf if nothing is in <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="noisepower"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">noisepower</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.noisepower">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get noise power for radio interface.</p>
+<p>By default, this returns the <code class="link">thremalnoise</code> of the system.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Noise power (in dBm).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="snr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">snr</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.snr">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get signal-to-noise-ratio (SNR) for packet.</p>
+<p>This method only uses the <a href="wins.channel.radio.Radio-class.html#rxpower" class="link">rxpower()</a> and <a href="wins.channel.radio.Radio-class.html#noisepower" class="link">noisepower()</a> functions to
+compute the SNR of the packet in question. This means the calculated SNR
+is a pre-processing value.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.channel.radio.Radio-class.html#rxpower" class="link">rxpower</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Preprocessing SNR (in dB).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rxpower"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rxpower</span>(<span class="sig-arg">cls</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">Grx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">Lrx</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">txpower</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">pathloss</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.rxpower">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate receive power of a received packet.</p>
+<p>If <a href="wins.channel.radio.Radio-class.html#txpower" class="link">txpower</a> and <code class="link">pathloss</code> are not provided, this method utilizes the
+'cif-txpower' and 'pathloss' annotations along with the <a href="wins.channel.radio.Radio-class.html#Lrx" class="link">Lrx</a> and <a href="wins.channel.radio.Radio-class.html#Grx" class="link">Grx</a>
+parameters to compute the receive power. If <a href="wins.channel.radio.Radio-class.html#Lrx" class="link">Lrx</a> and <a href="wins.channel.radio.Radio-class.html#Grx" class="link">Grx</a> are not
+provided, these parameters will use the default values specified by the
+class. Overload this method as needed.</p>
+<p>Received power is a function of transmit power, pathloss, system loss at
+the receiver, and receiver antenna gain:</p>
+<blockquote>
+Prx (dBm) = Ptx (dBm) - PL (dB) + Grx (dB) - Lrx (dB)</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>Grx</code></strong> - Receive antenna gain (in dB).</li>
+        <li><strong class="pname"><code>Lrx</code></strong> - System loss associated with receiver (in dB).</li>
+        <li><strong class="pname"><code>txpower</code></strong> - Transmit power (in dBm) [default=None].</li>
+        <li><strong class="pname"><code>pathloss</code></strong> - Pathloss (in dB) [defulat=None].</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Receive power (in dBm).</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method throws an AssertionError if either 'cif-txpower' or
+'pathloss' annotations are not available.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="thermalnoise"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">thermalnoise</span>(<span class="sig-arg">bandwidth</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.thermalnoise">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Compute thermal noise floor for communication systems with given
+bandwidth.</p>
+<p>See <a class="rst-reference external" href="http://en.wikipedia.org/wiki/Thermal_noise#Noise_in_decibels" target="_top">Thermal Noise</a> for more on how the thermal noise floor of a
+communications system is computed in this method.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>bandwidth</code></strong> - Bandwidth of system (in Hz).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Thermal noise noise power (in dBm).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log_send"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log_send</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_send">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to log 'cif-txpower' annotation.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.channel.interface.ChannelInterface-class.html#log_send">interface.ChannelInterface.log_send</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log_recv"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log_recv</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_recv">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overload to log 'cif-txpower', 'rxpower', and 'pathloss' annotation.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.channel.interface.ChannelInterface-class.html#log_recv">interface.ChannelInterface.log_recv</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log_drop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log_drop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.radio-pysrc.html#Radio.log_drop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overload to log 'cif-txpower', 'rxpower', and 'pathloss' annotation.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.channel.interface.ChannelInterface-class.html#log_drop">interface.ChannelInterface.log_drop</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="cfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">cfo</h3>
+  : Property to access frequency offset of local oscillator (in Hz).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:31 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

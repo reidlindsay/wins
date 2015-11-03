@@ -1,0 +1,89 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=3;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR MODEL";
+  echo "  EXEC     - experiment executable"
+  echo "  DIR      - output directory"
+  echo "  MODEL    - use model? -> 0 or 1"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+DIR=$2;
+if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+MODEL=$3;                   # use model?
+
+# Default Parameter Setting
+#DIR=$PWD;
+#MODEL=0;
+
+#######################################
+# Simulation parameters
+#######################################
+
+# experiment parameters
+#NTOPO=100           # number of random topologies (default -> "")
+ALT=""              # --alt?
+CFO=""              # --cfo?
+
+# -> optional PHY parameters
+if [ $MODEL -lt 1 ]; then
+  USEMODEL=""
+else
+  USEMODEL="--model"
+fi
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+TESTEXEC=$EXEC
+if [ ! -x $TESTEXEC ]; then
+  echo "Cannot find executable $TESTEXEC";
+  exit 0;
+fi
+
+# experiment parameters
+if [ ! -z $NTOPO ]; then
+  ntopo="--ntopo=$NTOPO"
+fi
+alt="$ALT"
+cfo="$CFO"
+expargs="$ntopo $alt $cfo"
+
+# PHY parameters
+usemodel="$USEMODEL"
+phyargs="$usemodel"
+
+# run simulation
+args="$expargs $phyargs"
+pdrfile="pdr.dat"
+simexec="$TESTEXEC $args"
+echo $simexec
+$simexec > $DIR/$pdrfile
+
+exit 0;

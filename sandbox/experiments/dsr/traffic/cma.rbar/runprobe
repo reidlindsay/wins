@@ -1,0 +1,199 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=3;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR MODEL [TOPO]";
+  echo "  EXEC     - experiment executable"
+  echo "  DIR      - output directory"
+  echo "  MODEL    - use model? -> 0 or 1"
+  echo "  [TOPO]   - topology file"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+DIR=$2;
+if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+MODEL=$3;                   # use model?
+if [ $# -gt 3 ]; then
+  TOPO=$4;                  # topology file
+else
+  TOPO=
+fi
+
+# Default Parameter Setting
+#DIR=$PWD;
+#MODEL=0;
+#TOPO=topo.dat;
+
+#######################################
+# Simulation parameters
+#######################################
+
+# simulation parameters
+VERBOSE=40            # DOT11_VERBOSE=53, DOT11N_VERBOSE=64, ROUTING_VERBOSE=34
+MAXRUNTIME=           # maximum runtime ("hh:mm:ss")
+PROBE="--probe"       # probe route? (no -> "", yes -> "--probe")
+
+# default topology parameters
+TOPOFILE=topo.dat   # default topology file for saving topology
+BORDER="--xmax=100 --ymax=100"      # small 25-node square
+
+# experiment parameters
+NUMNODES=25
+NCONNECT=5
+
+# agent parameters
+PACKETLEN=1024      # in bytes
+AGTMODE=            # traffic generation mode
+
+# NET parameters
+RREQRATE="--rreqrate=3"     # specify RREQ rate (default -> "", otherwise -> "--rreqrate=RATE")
+DATARATE=                   # specify data rate (default -> "", otherwise -> "--datarate=RATE")
+ROUTEFILE=route.dat         # routing file
+SAVEROUTE="--save-route=$ROUTEFILE" # save routing?  (no -> "", yes -> "--save-route=$ROUTEFILE")
+if [ -f $ROUTEFILE ]; then
+  echo "WARNING: Routing file already exists ... $ROUTEFILE";
+  exit;
+fi
+
+# MAC parameters
+CONSERVATIVE="--conservative"           # use conservative RBAR thresholds (no -> "", yes -> "--conservative")
+USERBAR="--use-rbar"                    # use RBAR? (no -> "", yes -> "--use-rbar")
+
+# PHY parameters
+MCS=0               # mcs index
+FOMAX=0.0           # in ppm (default = 13.675)
+CFOCORRECTION="--disable-cfo-correction"  # enable CFO correction (yes -> "", no -> "--disable-cfo-correction")
+# -> optional PHY parameters
+if [ $MODEL -lt 1 ]; then
+  USEWAVEFORM="--use-waveform"          # enable waveform? (no -> "", yes -> "--use-waveform")
+else
+  USEWAVEFORM=""
+fi
+
+# Channel parameters
+ALPHA=2.0                               # pathloss exponent
+BIDIRECTIONAL="--bidirectional-channel" # bidirectional (yes -> "--bidirectional-channel", no -> "")
+TGNMODEL="--tgn-model=A"                # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+USEDOPPLER="--use-doppler"              # enable doppler filter (yes -> "--use-doppler", no -> "")
+USEFADING=""                            # use fading (yes -> "", no -> "--disable-fading")
+ENVSPEED="0 "                           # environment speed (default -> "")
+
+#######################################
+# Independent Variables
+#   - use traffic rate as independent variable
+#######################################
+NUMPKTS=100                       # average number of packets to send
+simrates=(   1.0 )                # in packets/second
+runtests="0 "
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+TESTEXEC=$EXEC
+if [ ! -x $TESTEXEC ]; then
+  echo "Cannot find executable $TESTEXEC";
+  exit 0;
+fi
+
+for k in $runtests; do
+  # simulation parameters
+  verbose="-v $VERBOSE"
+  srate=${simrates[k]}
+  stime=`echo "scale=2; $NUMPKTS/$srate"|bc`
+  simtime="-s $stime"
+  if [ ! -z $MAXRUNTIME ]; then
+    maxruntime="--max-runtime=$MAXRUNTIME"
+  fi
+  simargs="$simtime $verbose $maxruntime"
+
+  # experiment parameters
+  numnodes="-n $NUMNODES"
+  nconnect="-c $NCONNECT"
+  expargs="$numnodes $nconnect"
+
+  # agent parameters
+  rate="-r $srate"
+  plen="-l $PACKETLEN"
+  if [ ! -z $AGTMODE ]; then
+    mode="--agent-mode=$AGTMODE"
+  fi
+  probe="$PROBE"
+  agtargs="$rate $plen $mode $probe"
+
+  # network parameters
+  if [ ! -z $ROUTEFILE ] && [ -f $ROUTEFILE ]; then
+    useroute="--use-route=$ROUTEFILE";
+  else
+    saveroute=$SAVEROUTE;
+  fi
+  rreqrate="$RREQRATE";
+  datarate="$DATARATE";
+  netargs="$rreqrate $datarate $useroute $saveroute"
+
+  # MAC parameters
+  userbar="$USERBAR"
+  conservative="$CONSERVATIVE"
+  macargs="$userbar $conservative"
+
+  # PHY parameters
+  mcs="--mcs=$MCS"
+  fomax="--fomax=$FOMAX"
+  usewaveform=$USEWAVEFORM
+  cfocorrection=$CFOCORRECTION
+  phyargs="$mcs $fomax $usewaveform $cfocorrection";
+
+  # topology parameters
+  if [ ! -z $TOPO ] && [ -f $TOPO ]; then
+    usetopo="--use-topo=$TOPO"
+  elif [ ! -z $TOPOFILE ] && [ -f $TOPOFILE ]; then
+    usetopo="--use-topo=$TOPOFILE"
+  else
+    savetopo="--save-topo=$TOPOFILE $BORDER"
+  fi
+  topoargs="$usetopo $savetopo"
+
+  # channel parameters
+  alpha="--alpha=$ALPHA"
+  bidirectional="$BIDIRECTIONAL"
+  tgnmodel=$TGNMODEL
+  usedoppler=$USEDOPPLER
+  usefading=$USEFADING
+  if [ ! -z $ENVSPEED ]; then
+    envspeed="--environment-speed=$ENVSPEED"
+  fi
+  chargs="$alpha $bidirectional $tgnmodel $usedoppler $usefading $envspeed";
+
+  # run simulation
+  args="$simargs $expargs $agtargs $netargs $macargs $phyargs $topoargs $chargs"
+  tracefile="trace-dsr-r$srate.raw"
+  simexec="$TESTEXEC $args -o $DIR/$tracefile"
+  echo $simexec
+  $simexec
+done
+
+exit 0;

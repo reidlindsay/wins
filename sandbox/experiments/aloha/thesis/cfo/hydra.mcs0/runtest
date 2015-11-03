@@ -1,0 +1,69 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+
+#######################################
+# Test Parameters
+#######################################
+MCS=0
+SNR=15                # minimum SNR
+MODEL=0               # use model?
+TESTARGS="$MCS $SNR $MODEL"
+
+#######################################
+# Script Parameters
+#######################################
+DIR=`$PWD`;               # current directory
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$SRCDIR/..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+RUNTRIAL=$SRCDIR/runtrial # script to run trial
+
+EXEC=$TOPDIR/test.py
+NUMTRIALS=10
+
+# check parameters
+if [ -z $NUMTRIALS ]; then
+  TRIALS="1 ";
+else
+  TRIALS=`seq 1 $NUMTRIALS`
+fi
+
+if [ ! -x $RUNTRIAL ]; then
+  echo "Could not find script ... RUNTRIAL=$RUNTRIAL";
+  exit -1;
+fi
+
+if [ ! -x $EXEC ] || [ -z "$EXEC" ]; then
+  echo "Could not find executable ... EXEC=$EXEC";
+  exit -1;
+fi
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Run Trials
+#######################################
+for k in $TRIALS; do
+  TNUM=`printf "%03d" $k`;
+  # create trial directory
+  TDIR=$DIR/trial-$TNUM;
+  if [ ! -d $TDIR ]; then $MKDIR -p $TDIR; fi
+  # run trial
+  runexec="$RUNTRIAL $EXEC $TDIR $TESTARGS"
+  logfile=sim-$TNUM.log
+  echo "Running trial $k ...";
+  trap "echo; exit $k;" INT TERM;
+  $runexec > $logfile 2>&1;
+  mv $logfile $TDIR/;
+  trap - INT TERM;
+done

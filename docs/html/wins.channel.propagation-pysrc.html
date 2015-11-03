@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel.propagation</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.channel-module.html">Package&nbsp;channel</a> ::
+        Module&nbsp;propagation
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins.channel.propagation-module.html">Module wins.channel.propagation</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Basic propagation model for wireless channel; contains `Propagation` class.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009 The University of Texas at Austin</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package wins=wins-module.html"><a title="wins" class="py-name" href="#" onclick="return doclink('link-0', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package wins.channel=wins.channel-module.html"><a title="wins.channel" class="py-name" href="#" onclick="return doclink('link-1', 'channel', 'link-1');">channel</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module wins.channel.channelbase=wins.channel.channelbase-module.html"><a title="wins.channel.channelbase" class="py-name" href="#" onclick="return doclink('link-2', 'channelbase', 'link-2');">channelbase</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class wins.channel.channelbase.ChannelModel=wins.channel.channelbase.ChannelModel-class.html"><a title="wins.channel.channelbase.ChannelModel" class="py-name" href="#" onclick="return doclink('link-3', 'ChannelModel', 'link-3');">ChannelModel</a></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-4', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="wins.channel" class="py-name" href="#" onclick="return doclink('link-5', 'channel', 'link-1');">channel</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module wins.channel.interface=wins.channel.interface-module.html"><a title="wins.channel.interface" class="py-name" href="#" onclick="return doclink('link-6', 'interface', 'link-6');">interface</a></tt>   <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class wins.channel.interface.ChannelInterface=wins.channel.interface.ChannelInterface-class.html"><a title="wins.channel.interface.ChannelInterface" class="py-name" href="#" onclick="return doclink('link-7', 'ChannelInterface', 'link-7');">ChannelInterface</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-8', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Package wins.mobile=wins.mobile-module.html"><a title="wins.mobile" class="py-name" href="#" onclick="return doclink('link-9', 'mobile', 'link-9');">mobile</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module wins.mobile.motion=wins.mobile.motion-module.html"><a title="wins.mobile.motion" class="py-name" href="#" onclick="return doclink('link-10', 'motion', 'link-10');">motion</a></tt>       <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class wins.mobile.motion.Motion=wins.mobile.motion.Motion-class.html"><a title="wins.mobile.motion.Motion" class="py-name" href="#" onclick="return doclink('link-11', 'Motion', 'link-11');">Motion</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-12', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module wins.helper=wins.helper-module.html"><a title="wins.helper" class="py-name" href="#" onclick="return doclink('link-13', 'helper', 'link-13');">helper</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Function wins.helper.linear2db()=wins.helper-module.html#linear2db"><a title="wins.helper.linear2db" class="py-name" href="#" onclick="return doclink('link-14', 'linear2db', 'link-14');">linear2db</a></tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Function wins.helper.db2linear()=wins.helper-module.html#db2linear"><a title="wins.helper.db2linear" class="py-name" href="#" onclick="return doclink('link-15', 'db2linear', 'link-15');">db2linear</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-16" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-16', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Module wins.base=wins.base-module.html,Variable wins.mac.arf.ARF.base=wins.mac.arf.ARF-class.html#base,Variable wins.mac.rbar.RBAR.base=wins.mac.rbar.RBAR-class.html#base"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-17', 'base', 'link-17');">base</a></tt>   <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name" targets="Class wins.base.Reference=wins.base.Reference-class.html"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-18', 'Reference', 'link-18');">Reference</a></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-19" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-19', 'wins', 'link-0');">wins</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Module wins.const=wins.const-module.html"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-20', 'const', 'link-20');">const</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> <tt class="py-keyword">as</tt> <tt class="py-name">np</tt> </tt>
+<a name="Propagation"></a><div id="Propagation-def"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="Propagation-toggle" onclick="return toggle('Propagation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html">Propagation</a><tt class="py-op">(</tt><tt class="py-base-class">ChannelModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Propagation-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-docstring">"""Basic propagation model for wireless channels.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    By default, this class implements the Freespace pathloss model using unit</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    antenna gain and no system loss. Overload the `apply()` method to customize</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">    a `Propagation` subclass. The following parameters are defined in this class</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    and may be redefined in dervied classes:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">        * `n`:  Pathloss exponent.</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        * `fc`: Center frequency for channel.</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    Packet Annotations and Propagation</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    ==================================</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    By default, this class will set the annotation listed below. **Derived</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    classes must set 'pathloss', 'cm-delay', and any other needed annotations.**</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    ========== ==============================================================</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    Name        Description</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    ========== ==============================================================</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">    pathloss    Pathloss between transmitter and receiver.</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    ---------- --------------------------------------------------------------</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    doppler     Doppler shift from perspective of receiver (in Hz).</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    ---------- --------------------------------------------------------------</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    cm-delay    Propagation delay annotation marked by `ChannelModel`.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">    ========== ==============================================================</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">    Pathloss is defined as a ratio of transmit power to receive power (i.e.</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">    pathloss is greater than or equal to 1). Thus received power is equal to</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">    transmit power divided by pathloss, or in decibels:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        Pr (db) = Pt (db) - PL (db).</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    See `Link Budget`_ and `Friis transmission equation`_ for more about how</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    pathloss is computed.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    Propagation delay is a function of separation `distance()` and the speed of</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    light (`const.SPEED_OF_LIGHT`):</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">        delay = (separation distance)/(speed of light) (meters/sec)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">    .. _`Link Budget`: http://en.wikipedia.org/wiki/Link_budget</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">    .. _`Friis Transmission Equation`: http://en.wikipedia.org/wiki/Friis_transmission_equation#Modifications_to_the_basic_equation</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    :CVariables:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">     * `n`:  Pathloss exponent.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">     * `fc`: Center frequency for channel.</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt id="link-21" class="py-name" targets="Variable wins.channel.propagation.Propagation.n=wins.channel.propagation.Propagation-class.html#n,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.n=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#n"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-21', 'n', 'link-21');">n</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt id="link-22" class="py-name" targets="Variable wins.channel.propagation.Propagation.fc=wins.channel.propagation.Propagation-class.html#fc,Variable wins.channel.radio.Radio.fc=wins.channel.radio.Radio-class.html#fc,Variable wins.ieee80211.dot11a.Dot11ARadio.fc=wins.ieee80211.dot11a.Dot11ARadio-class.html#fc,Variable wins.ieee80211.dot11n.Dot11NRadio.fc=wins.ieee80211.dot11n.Dot11NRadio-class.html#fc,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.fc=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#fc"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-22', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2.4e9</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt id="link-23" class="py-name" targets="Variable wins.base.Base.name=wins.base.Base-class.html#name,Variable wins.channel.breakpoint.Breakpoint.name=wins.channel.breakpoint.Breakpoint-class.html#name,Variable wins.channel.channelbase.Channel.name=wins.channel.channelbase.Channel-class.html#name,Variable wins.channel.channelbase.ChannelModel.name=wins.channel.channelbase.ChannelModel-class.html#name,Variable wins.channel.interface.ChannelInterface.name=wins.channel.interface.ChannelInterface-class.html#name,Variable wins.channel.propagation.Propagation.name=wins.channel.propagation.Propagation-class.html#name,Variable wins.channel.radio.Radio.name=wins.channel.radio.Radio-class.html#name,Variable wins.channel.refprop.ReferencePropagation.name=wins.channel.refprop.ReferencePropagation-class.html#name,Variable wins.crc.CRC32.name=wins.crc.CRC32-class.html#name,Variable wins.digital.modulation.Modulation.name=wins.digital.modulation.Modulation-class.html#name,Variable wins.digital.mqam.MQAM.name=wins.digital.mqam.MQAM-class.html#name,Variable wins.digital.rcpc.RCPC.name=wins.digital.rcpc.RCPC-class.html#name,Variable wins.digital.reedsolomon.ReedSolomon.name=wins.digital.reedsolomon.ReedSolomon-class.html#name,Variable wins.element.Port.name=wins.element.Port-class.html#name,Variable wins.fsm.FSM.name=wins.fsm.FSM-class.html#name,Variable wins.fsm.Timer.name=wins.fsm.Timer-class.html#name,Variable wins.helper.PseudoIPv4.name=wins.helper.PseudoIPv4-class.html#name,Variable wins.ieee80211.dcf.DCF.name=wins.ieee80211.dcf.DCF-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Ack.name=wins.ieee80211.dot11_support.Dot11Ack-class.html#name,Variable wins.ieee80211.dot11_support.Dot11CTS.name=wins.ieee80211.dot11_support.Dot11CTS-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Data.name=wins.ieee80211.dot11_support.Dot11Data-class.html#name,Variable wins.ieee80211.dot11_support.Dot11RTS.name=wins.ieee80211.dot11_support.Dot11RTS-class.html#name,Variable wins.ieee80211.dot11a.Dot11APHY.name=wins.ieee80211.dot11a.Dot11APHY-class.html#name,Variable wins.ieee80211.dot11a.Dot11ARadio.name=wins.ieee80211.dot11a.Dot11ARadio-class.html#name,Variable wins.ieee80211.dot11a_support.Dot11A.name=wins.ieee80211.dot11a_support.Dot11A-class.html#name,Variable wins.ieee80211.dot11n.Dot11NPHY.name=wins.ieee80211.dot11n.Dot11NPHY-class.html#name,Variable wins.ieee80211.dot11n.Dot11NRadio.name=wins.ieee80211.dot11n.Dot11NRadio-class.html#name,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.name=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#name,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.name=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#name,Variable wins.ieee80211.dot11n_support.Dot11N.name=wins.ieee80211.dot11n_support.Dot11N-class.html#name,Variable wins.ieee80211.navtimer.NAVTimer.name=wins.ieee80211.navtimer.NAVTimer-class.html#name,Variable wins.mac.arf.ARF.name=wins.mac.arf.ARF-class.html#name,Variable wins.mac.rateadaptation.RAI.name=wins.mac.rateadaptation.RAI-class.html#name,Variable wins.mac.rateadaptation.RateAdapt.name=wins.mac.rateadaptation.RateAdapt-class.html#name,Variable wins.mac.rbar.RBAR.name=wins.mac.rbar.RBAR-class.html#name,Variable wins.mac.rbar_support.Dot11RSH.name=wins.mac.rbar_support.Dot11RSH-class.html#name,Variable wins.mobile.motion.Motion.name=wins.mobile.motion.Motion-class.html#name,Variable wins.mobile.waypoint.RandomWaypoint.name=wins.mobile.waypoint.RandomWaypoint-class.html#name,Variable wins.net.dsr.DSR.name=wins.net.dsr.DSR-class.html#name,Variable wins.net.dsr_rreq.RouteRequestTable.name=wins.net.dsr_rreq.RouteRequestTable-class.html#name,Variable wins.net.dsr_support.DSRPacket.name=wins.net.dsr_support.DSRPacket-class.html#name,Variable wins.net.routecache.RouteCache.name=wins.net.routecache.RouteCache-class.html#name,Variable wins.protocol.aloha.Aloha.name=wins.protocol.aloha.Aloha-class.html#name,Variable wins.protocol.arp.ARP.name=wins.protocol.arp.ARP-class.html#name,Variable wins.protocol.arp_support.ARPReply.name=wins.protocol.arp_support.ARPReply-class.html#name,Variable wins.protocol.arp_support.ARPRequest.name=wins.protocol.arp_support.ARPRequest-class.html#name,Variable wins.protocol.csmac.CSMAC.name=wins.protocol.csmac.CSMAC-class.html#name,Variable wins.protocol.csphy.CSPHY.name=wins.protocol.csphy.CSPHY-class.html#name,Variable wins.protocol.mac.MAC.name=wins.protocol.mac.MAC-class.html#name,Variable wins.protocol.net.NET.name=wins.protocol.net.NET-class.html#name,Variable wins.protocol.phy.PHY.name=wins.protocol.phy.PHY-class.html#name,Variable wins.protocol.routetable.RouteTable.name=wins.protocol.routetable.RouteTable-class.html#name,Variable wins.protocol.routing.Routing.name=wins.protocol.routing.Routing-class.html#name,Variable wins.queue.Queue.name=wins.queue.Queue-class.html#name,Variable wins.trace.Trace.name=wins.trace.Trace-class.html#name,Variable wins.trace.Traceable.name=wins.trace.Traceable-class.html#name,Variable wins.traffic.agent.Agent.name=wins.traffic.agent.Agent-class.html#name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-23', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"propagation"</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt id="link-24" class="py-name" targets="Variable wins.channel.breakpoint.Breakpoint.tracename=wins.channel.breakpoint.Breakpoint-class.html#tracename,Variable wins.channel.channelbase.Channel.tracename=wins.channel.channelbase.Channel-class.html#tracename,Variable wins.channel.channelbase.ChannelModel.tracename=wins.channel.channelbase.ChannelModel-class.html#tracename,Variable wins.channel.interface.ChannelInterface.tracename=wins.channel.interface.ChannelInterface-class.html#tracename,Variable wins.channel.propagation.Propagation.tracename=wins.channel.propagation.Propagation-class.html#tracename,Variable wins.channel.radio.Radio.tracename=wins.channel.radio.Radio-class.html#tracename,Variable wins.channel.refprop.ReferencePropagation.tracename=wins.channel.refprop.ReferencePropagation-class.html#tracename,Variable wins.digital.modulation.Modulation.tracename=wins.digital.modulation.Modulation-class.html#tracename,Variable wins.digital.mqam.MQAM.tracename=wins.digital.mqam.MQAM-class.html#tracename,Variable wins.digital.rcpc.RCPC.tracename=wins.digital.rcpc.RCPC-class.html#tracename,Variable wins.digital.reedsolomon.ReedSolomon.tracename=wins.digital.reedsolomon.ReedSolomon-class.html#tracename,Variable wins.element.Port.tracename=wins.element.Port-class.html#tracename,Variable wins.fsm.FSM.tracename=wins.fsm.FSM-class.html#tracename,Variable wins.fsm.Timer.tracename=wins.fsm.Timer-class.html#tracename,Variable wins.ieee80211.dcf.DCF.tracename=wins.ieee80211.dcf.DCF-class.html#tracename,Variable wins.ieee80211.dot11a.Dot11APHY.tracename=wins.ieee80211.dot11a.Dot11APHY-class.html#tracename,Variable wins.ieee80211.dot11n.Dot11NPHY.tracename=wins.ieee80211.dot11n.Dot11NPHY-class.html#tracename,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.tracename=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#tracename,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#tracename,Variable wins.ieee80211.navtimer.NAVTimer.tracename=wins.ieee80211.navtimer.NAVTimer-class.html#tracename,Variable wins.mac.arf.ARF.tracename=wins.mac.arf.ARF-class.html#tracename,Variable wins.mac.rateadaptation.RateAdapt.tracename=wins.mac.rateadaptation.RateAdapt-class.html#tracename,Variable wins.mac.rbar.RBAR.tracename=wins.mac.rbar.RBAR-class.html#tracename,Variable wins.mobile.motion.Motion.tracename=wins.mobile.motion.Motion-class.html#tracename,Variable wins.mobile.waypoint.RandomWaypoint.tracename=wins.mobile.waypoint.RandomWaypoint-class.html#tracename,Variable wins.net.dsr.DSR.tracename=wins.net.dsr.DSR-class.html#tracename,Variable wins.net.dsr_rreq.RouteRequestTable.tracename=wins.net.dsr_rreq.RouteRequestTable-class.html#tracename,Variable wins.net.routecache.RouteCache.tracename=wins.net.routecache.RouteCache-class.html#tracename,Variable wins.protocol.aloha.Aloha.tracename=wins.protocol.aloha.Aloha-class.html#tracename,Variable wins.protocol.arp.ARP.tracename=wins.protocol.arp.ARP-class.html#tracename,Variable wins.protocol.csmac.CSMAC.tracename=wins.protocol.csmac.CSMAC-class.html#tracename,Variable wins.protocol.csphy.CSPHY.tracename=wins.protocol.csphy.CSPHY-class.html#tracename,Variable wins.protocol.mac.MAC.tracename=wins.protocol.mac.MAC-class.html#tracename,Variable wins.protocol.net.NET.tracename=wins.protocol.net.NET-class.html#tracename,Variable wins.protocol.phy.PHY.tracename=wins.protocol.phy.PHY-class.html#tracename,Variable wins.protocol.routetable.RouteTable.tracename=wins.protocol.routetable.RouteTable-class.html#tracename,Variable wins.protocol.routing.Routing.tracename=wins.protocol.routing.Routing-class.html#tracename,Variable wins.queue.Queue.tracename=wins.queue.Queue-class.html#tracename,Variable wins.trace.Traceable.tracename=wins.trace.Traceable-class.html#tracename,Variable wins.traffic.agent.Agent.tracename=wins.traffic.agent.Agent-class.html#tracename"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-24', 'tracename', 'link-24');">tracename</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"PROP"</tt> </tt>
+<a name="Propagation.__init__"></a><div id="Propagation.__init__-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="Propagation.__init__-toggle" onclick="return toggle('Propagation.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.__init__-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-docstring">"""Constructor.</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        :param fc: Center frequency of channel [default=2.4e9]</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        :param n:  Pathloss exponent.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-comment"># get parameters</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">cls</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-25" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-25', 'fc', 'link-22');">fc</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt id="link-26" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-26', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-27', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-28" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-28', 'n', 'link-21');">n</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt>  <tt id="link-29" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-29', 'n', 'link-21');">n</a></tt>  <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-30', 'n', 'link-21');">n</a></tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-comment"># set parameters</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-31', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-32', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-33', 'n', 'link-21');">n</a></tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-34', 'n', 'link-21');">n</a></tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="wins.channel.channelbase.ChannelModel" class="py-name" href="#" onclick="return doclink('link-35', 'ChannelModel', 'link-3');">ChannelModel</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method wins.backend.crc.CRC.__init__()=wins.backend.crc.CRC-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Channel.__init__()=wins.backend.dot11n_backend.Dot11N_Channel-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Receiver.__init__()=wins.backend.dot11n_backend.Dot11N_Receiver-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Transmitter.__init__()=wins.backend.dot11n_backend.Dot11N_Transmitter-class.html#__init__,Method wins.backend.dot11n_backend.MimoChannel.__init__()=wins.backend.dot11n_backend.MimoChannel-class.html#__init__,Method wins.backend.waveform.SwigPyIterator.__init__()=wins.backend.waveform.SwigPyIterator-class.html#__init__,Method wins.backend.waveform.Waveform.__init__()=wins.backend.waveform.Waveform-class.html#__init__,Method wins.backend.waveform.vectorc.__init__()=wins.backend.waveform.vectorc-class.html#__init__,Method wins.backend.waveform.vectori.__init__()=wins.backend.waveform.vectori-class.html#__init__,Method wins.base.Base.__init__()=wins.base.Base-class.html#__init__,Method wins.base.Reference.__init__()=wins.base.Reference-class.html#__init__,Method wins.channel.breakpoint.Breakpoint.__init__()=wins.channel.breakpoint.Breakpoint-class.html#__init__,Method wins.channel.channelbase.Channel.__init__()=wins.channel.channelbase.Channel-class.html#__init__,Method wins.channel.channelbase.ChannelModel.__init__()=wins.channel.channelbase.ChannelModel-class.html#__init__,Method wins.channel.interface.ChannelInterface.__init__()=wins.channel.interface.ChannelInterface-class.html#__init__,Method wins.channel.propagation.Propagation.__init__()=wins.channel.propagation.Propagation-class.html#__init__,Method wins.channel.radio.Radio.__init__()=wins.channel.radio.Radio-class.html#__init__,Method wins.channel.refprop.ReferencePropagation.__init__()=wins.channel.refprop.ReferencePropagation-class.html#__init__,Method wins.crc.CRC32.__init__()=wins.crc.CRC32-class.html#__init__,Method wins.digital.modulation.Modulation.__init__()=wins.digital.modulation.Modulation-class.html#__init__,Method wins.digital.mqam.MQAM.__init__()=wins.digital.mqam.MQAM-class.html#__init__,Method wins.digital.rcpc.RCPC.__init__()=wins.digital.rcpc.RCPC-class.html#__init__,Method wins.digital.reedsolomon.ReedSolomon.__init__()=wins.digital.reedsolomon.ReedSolomon-class.html#__init__,Method wins.element.Element.__init__()=wins.element.Element-class.html#__init__,Method wins.element.Port.__init__()=wins.element.Port-class.html#__init__,Method wins.fsm.FSM.__init__()=wins.fsm.FSM-class.html#__init__,Method wins.fsm.Timer.__init__()=wins.fsm.Timer-class.html#__init__,Method wins.ieee80211.dcf.DCF.__init__()=wins.ieee80211.dcf.DCF-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11Ack.__init__()=wins.ieee80211.dot11_support.Dot11Ack-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11CTS.__init__()=wins.ieee80211.dot11_support.Dot11CTS-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11Data.__init__()=wins.ieee80211.dot11_support.Dot11Data-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11RTS.__init__()=wins.ieee80211.dot11_support.Dot11RTS-class.html#__init__,Method wins.ieee80211.dot11a.Dot11APHY.__init__()=wins.ieee80211.dot11a.Dot11APHY-class.html#__init__,Method wins.ieee80211.dot11a.Dot11ARadio.__init__()=wins.ieee80211.dot11a.Dot11ARadio-class.html#__init__,Method wins.ieee80211.dot11n.Dot11NPHY.__init__()=wins.ieee80211.dot11n.Dot11NPHY-class.html#__init__,Method wins.ieee80211.dot11n.Dot11NRadio.__init__()=wins.ieee80211.dot11n.Dot11NRadio-class.html#__init__,Method wins.ieee80211.dot11n_channel.Dot11NChannel.__init__()=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#__init__,Method wins.ieee80211.dot11n_dsp.Dot11N_DSP.__init__()=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#__init__,Method wins.ieee80211.navtimer.NAVTimer.__init__()=wins.ieee80211.navtimer.NAVTimer-class.html#__init__,Method wins.mac.arf.ARF.__init__()=wins.mac.arf.ARF-class.html#__init__,Method wins.mac.rateadaptation.RAI.__init__()=wins.mac.rateadaptation.RAI-class.html#__init__,Method wins.mac.rateadaptation.RateAdapt.__init__()=wins.mac.rateadaptation.RateAdapt-class.html#__init__,Method wins.mac.rbar.RBAR.__init__()=wins.mac.rbar.RBAR-class.html#__init__,Method wins.mac.rbar_support.Dot11RSH.__init__()=wins.mac.rbar_support.Dot11RSH-class.html#__init__,Method wins.mobile.motion.Motion.__init__()=wins.mobile.motion.Motion-class.html#__init__,Method wins.mobile.waypoint.RandomWaypoint.__init__()=wins.mobile.waypoint.RandomWaypoint-class.html#__init__,Method wins.net.dsr.DSR.__init__()=wins.net.dsr.DSR-class.html#__init__,Method wins.net.dsr_rreq.RouteRequestEntry.__init__()=wins.net.dsr_rreq.RouteRequestEntry-class.html#__init__,Method wins.net.dsr_rreq.RouteRequestTable.__init__()=wins.net.dsr_rreq.RouteRequestTable-class.html#__init__,Method wins.net.routecache.RouteCache.__init__()=wins.net.routecache.RouteCache-class.html#__init__,Method wins.packet.ANNO.__init__()=wins.packet.ANNO-class.html#__init__,Method wins.packet.FuncField.__init__()=wins.packet.FuncField-class.html#__init__,Method wins.packet.HiddenField.__init__()=wins.packet.HiddenField-class.html#__init__,Method wins.protocol.aloha.Aloha.__init__()=wins.protocol.aloha.Aloha-class.html#__init__,Method wins.protocol.arp.ARP.__init__()=wins.protocol.arp.ARP-class.html#__init__,Method wins.protocol.arp_support.ARPReply.__init__()=wins.protocol.arp_support.ARPReply-class.html#__init__,Method wins.protocol.arp_support.ARPRequest.__init__()=wins.protocol.arp_support.ARPRequest-class.html#__init__,Method wins.protocol.csmac.CSMAC.__init__()=wins.protocol.csmac.CSMAC-class.html#__init__,Method wins.protocol.csphy.CSPHY.__init__()=wins.protocol.csphy.CSPHY-class.html#__init__,Method wins.protocol.mac.MAC.__init__()=wins.protocol.mac.MAC-class.html#__init__,Method wins.protocol.net.NET.__init__()=wins.protocol.net.NET-class.html#__init__,Method wins.protocol.phy.PHY.__init__()=wins.protocol.phy.PHY-class.html#__init__,Method wins.protocol.routetable.RouteTable.__init__()=wins.protocol.routetable.RouteTable-class.html#__init__,Method wins.protocol.routing.Routing.__init__()=wins.protocol.routing.Routing-class.html#__init__,Method wins.queue.Queue.__init__()=wins.queue.Queue-class.html#__init__,Method wins.trace.Trace.__init__()=wins.trace.Trace-class.html#__init__,Method wins.trace.Traceable.__init__()=wins.trace.Traceable-class.html#__init__,Method wins.traffic.agent.Agent.__init__()=wins.traffic.agent.Agent-class.html#__init__,Method wins.util.monitor.Monitor.__init__()=wins.util.monitor.Monitor-class.html#__init__"><a title="wins.backend.crc.CRC.__init__
+wins.backend.dot11n_backend.Dot11N_Channel.__init__
+wins.backend.dot11n_backend.Dot11N_Receiver.__init__
+wins.backend.dot11n_backend.Dot11N_Transmitter.__init__
+wins.backend.dot11n_backend.MimoChannel.__init__
+wins.backend.waveform.SwigPyIterator.__init__
+wins.backend.waveform.Waveform.__init__
+wins.backend.waveform.vectorc.__init__
+wins.backend.waveform.vectori.__init__
+wins.base.Base.__init__
+wins.base.Reference.__init__
+wins.channel.breakpoint.Breakpoint.__init__
+wins.channel.channelbase.Channel.__init__
+wins.channel.channelbase.ChannelModel.__init__
+wins.channel.interface.ChannelInterface.__init__
+wins.channel.propagation.Propagation.__init__
+wins.channel.radio.Radio.__init__
+wins.channel.refprop.ReferencePropagation.__init__
+wins.crc.CRC32.__init__
+wins.digital.modulation.Modulation.__init__
+wins.digital.mqam.MQAM.__init__
+wins.digital.rcpc.RCPC.__init__
+wins.digital.reedsolomon.ReedSolomon.__init__
+wins.element.Element.__init__
+wins.element.Port.__init__
+wins.fsm.FSM.__init__
+wins.fsm.Timer.__init__
+wins.ieee80211.dcf.DCF.__init__
+wins.ieee80211.dot11_support.Dot11Ack.__init__
+wins.ieee80211.dot11_support.Dot11CTS.__init__
+wins.ieee80211.dot11_support.Dot11Data.__init__
+wins.ieee80211.dot11_support.Dot11RTS.__init__
+wins.ieee80211.dot11a.Dot11APHY.__init__
+wins.ieee80211.dot11a.Dot11ARadio.__init__
+wins.ieee80211.dot11n.Dot11NPHY.__init__
+wins.ieee80211.dot11n.Dot11NRadio.__init__
+wins.ieee80211.dot11n_channel.Dot11NChannel.__init__
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.__init__
+wins.ieee80211.navtimer.NAVTimer.__init__
+wins.mac.arf.ARF.__init__
+wins.mac.rateadaptation.RAI.__init__
+wins.mac.rateadaptation.RateAdapt.__init__
+wins.mac.rbar.RBAR.__init__
+wins.mac.rbar_support.Dot11RSH.__init__
+wins.mobile.motion.Motion.__init__
+wins.mobile.waypoint.RandomWaypoint.__init__
+wins.net.dsr.DSR.__init__
+wins.net.dsr_rreq.RouteRequestEntry.__init__
+wins.net.dsr_rreq.RouteRequestTable.__init__
+wins.net.routecache.RouteCache.__init__
+wins.packet.ANNO.__init__
+wins.packet.FuncField.__init__
+wins.packet.HiddenField.__init__
+wins.protocol.aloha.Aloha.__init__
+wins.protocol.arp.ARP.__init__
+wins.protocol.arp_support.ARPReply.__init__
+wins.protocol.arp_support.ARPRequest.__init__
+wins.protocol.csmac.CSMAC.__init__
+wins.protocol.csphy.CSPHY.__init__
+wins.protocol.mac.MAC.__init__
+wins.protocol.net.NET.__init__
+wins.protocol.phy.PHY.__init__
+wins.protocol.routetable.RouteTable.__init__
+wins.protocol.routing.Routing.__init__
+wins.queue.Queue.__init__
+wins.trace.Trace.__init__
+wins.trace.Traceable.__init__
+wins.traffic.agent.Agent.__init__
+wins.util.monitor.Monitor.__init__" class="py-name" href="#" onclick="return doclink('link-36', '__init__', 'link-36');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="Propagation.apply"></a><div id="Propagation.apply-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Propagation.apply-toggle" onclick="return toggle('Propagation.apply');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#apply">apply</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-param">u</tt><tt class="py-op">,</tt> <tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.apply-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.apply-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-docstring">"""Apply freespace channel model.</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        :param p: Packet to modify.</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        :param u: Transmitting `ChannelInterface`.</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        :param v: Receiving `ChannelInterface`.</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Modified packet.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        This method set the 'pathloss' and 'cm-delay' annotations. Overload</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        this method to change how the channel model applies channel annotations</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        (i.e. to implement a new channel model).</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        This method also computes the doppler shift between the transmitter and</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        receiver and sets the 'doppler' annotation.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">dist</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method wins.backend.waveform.SwigPyIterator.distance()=wins.backend.waveform.SwigPyIterator-class.html#distance,Class Method wins.channel.propagation.Propagation.distance()=wins.channel.propagation.Propagation-class.html#distance"><a title="wins.backend.waveform.SwigPyIterator.distance
+wins.channel.propagation.Propagation.distance" class="py-name" href="#" onclick="return doclink('link-37', 'distance', 'link-37');">distance</a></tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">,</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">pl</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method wins.channel.breakpoint.Breakpoint.pathloss()=wins.channel.breakpoint.Breakpoint-class.html#pathloss,Method wins.channel.propagation.Propagation.pathloss()=wins.channel.propagation.Propagation-class.html#pathloss,Method wins.channel.refprop.ReferencePropagation.pathloss()=wins.channel.refprop.ReferencePropagation-class.html#pathloss"><a title="wins.channel.breakpoint.Breakpoint.pathloss
+wins.channel.propagation.Propagation.pathloss
+wins.channel.refprop.ReferencePropagation.pathloss" class="py-name" href="#" onclick="return doclink('link-38', 'pathloss', 'link-38');">pathloss</a></tt><tt class="py-op">(</tt><tt class="py-name">dist</tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-39', 'fc', 'link-22');">fc</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-40', 'fc', 'link-22');">fc</a></tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-41', 'n', 'link-21');">n</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-42', 'n', 'link-21');">n</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">setanno</tt><tt class="py-op">(</tt><tt class="py-string">'pathloss'</tt><tt class="py-op">,</tt> <tt class="py-name">pl</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">delay</tt> <tt class="py-op">=</tt> <tt class="py-name">dist</tt><tt class="py-op">/</tt><tt id="link-43" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-43', 'const', 'link-20');">const</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable wins.const.SPEED_OF_LIGHT=wins.const-module.html#SPEED_OF_LIGHT"><a title="wins.const.SPEED_OF_LIGHT" class="py-name" href="#" onclick="return doclink('link-44', 'SPEED_OF_LIGHT', 'link-44');">SPEED_OF_LIGHT</a></tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">setanno</tt><tt class="py-op">(</tt><tt class="py-string">'cm-delay'</tt><tt class="py-op">,</tt> <tt class="py-name">delay</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">fd</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Class Method wins.channel.propagation.Propagation.doppler()=wins.channel.propagation.Propagation-class.html#doppler"><a title="wins.channel.propagation.Propagation.doppler" class="py-name" href="#" onclick="return doclink('link-45', 'doppler', 'link-45');">doppler</a></tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">,</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-46" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-46', 'fc', 'link-22');">fc</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-47', 'fc', 'link-22');">fc</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">setanno</tt><tt class="py-op">(</tt><tt class="py-string">'doppler'</tt><tt class="py-op">,</tt> <tt class="py-name">fd</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">p</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="Propagation.pathloss"></a><div id="Propagation.pathloss-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="Propagation.pathloss-toggle" onclick="return toggle('Propagation.pathloss');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#pathloss">pathloss</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dist</tt><tt class="py-op">,</tt> <tt class="py-param">fc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.pathloss-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.pathloss-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-docstring">"""Calculate pathloss over specified distance using local (or specified)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">        parameters; **overload this method as needed**.</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        :param dist: Separation distance (in meters).</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        :param fc: Center frequency of channel.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        :param n:  Pathloss exponent.</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Pathloss (in dB).</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        By default this method returns the `freespace` pathloss. Overload this</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        method to change how pathloss is computed.</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-48" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-48', 'fc', 'link-22');">fc</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt id="link-49" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-49', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-50', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-51" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-51', 'n', 'link-21');">n</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt>  <tt id="link-52" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-52', 'n', 'link-21');">n</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-53', 'n', 'link-21');">n</a></tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Class Method wins.channel.propagation.Propagation.freespace()=wins.channel.propagation.Propagation-class.html#freespace"><a title="wins.channel.propagation.Propagation.freespace" class="py-name" href="#" onclick="return doclink('link-54', 'freespace', 'link-54');">freespace</a></tt><tt class="py-op">(</tt><tt class="py-name">dist</tt><tt class="py-op">,</tt> <tt id="link-55" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-55', 'fc', 'link-22');">fc</a></tt><tt class="py-op">=</tt><tt id="link-56" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-56', 'fc', 'link-22');">fc</a></tt><tt class="py-op">,</tt> <tt id="link-57" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-57', 'n', 'link-21');">n</a></tt><tt class="py-op">=</tt><tt id="link-58" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-58', 'n', 'link-21');">n</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="Propagation.freespace"></a><div id="Propagation.freespace-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="Propagation.freespace-toggle" onclick="return toggle('Propagation.freespace');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#freespace">freespace</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">dist</tt><tt class="py-op">,</tt> <tt class="py-param">fc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.freespace-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.freespace-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-docstring">"""Calculate freespace pathloss over distance `dist`.</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        :param dist: Separation distance between transmitter and receiver.</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        :param fc: Center frequency of channel.</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        :param n: Pathloss exponent.</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Freespace pathloss in dB.</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        If `fc` or `n` are not provided, this method will simply use the default</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        values associated with the class. Freespace pathloss is given by:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">            PL (db) = 10n*log10(4*pi*d/wavelength),</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">        where wavelength = (fc/c) and d = separation distance.</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        :note: This method assumes unit antenna gain and no system loss. This</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">               method also uses `const.SPEED_OF_LIGHT` as the speed of light</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">               parameter 'c' in meters/second.</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt class="py-name">dist</tt><tt class="py-op">&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"[PROPAGATION]: freespace() pathloss can only "</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">                <tt class="py-string">"be computed for positive separation distance!"</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-comment"># set parameters</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-59" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-59', 'fc', 'link-22');">fc</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt id="link-60" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-60', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-61', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-62" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-62', 'n', 'link-21');">n</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt>  <tt id="link-63" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-63', 'n', 'link-21');">n</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-64', 'n', 'link-21');">n</a></tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-65', 'const', 'link-20');">const</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="wins.const.SPEED_OF_LIGHT" class="py-name" href="#" onclick="return doclink('link-66', 'SPEED_OF_LIGHT', 'link-44');">SPEED_OF_LIGHT</a></tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-comment"># calculate pathloss in dB</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-name">wavelength</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt><tt class="py-op">/</tt><tt id="link-67" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-67', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-name">Lfs</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="wins.channel.propagation.Propagation.n
+wins.ieee80211.dot11n_channel.Dot11NChannel.n" class="py-name" href="#" onclick="return doclink('link-68', 'n', 'link-21');">n</a></tt><tt class="py-op">*</tt><tt id="link-69" class="py-name"><a title="wins.helper.linear2db" class="py-name" href="#" onclick="return doclink('link-69', 'linear2db', 'link-14');">linear2db</a></tt><tt class="py-op">(</tt><tt class="py-number">4</tt><tt class="py-op">*</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">pi</tt><tt class="py-op">*</tt><tt class="py-name">dist</tt><tt class="py-op">/</tt><tt class="py-name">wavelength</tt><tt class="py-op">)</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">Lfs</tt> </tt>
+</div><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="Propagation.distance"></a><div id="Propagation.distance-def"><a name="L178"></a><tt class="py-lineno">178</tt> <a class="py-toggle" href="#" id="Propagation.distance-toggle" onclick="return toggle('Propagation.distance');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#distance">distance</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">u</tt><tt class="py-op">,</tt> <tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.distance-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.distance-expanded"><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-docstring">"""Calculate the distance between `u` and `v`.</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">        :param u: `ChannelInterface` or location of transmitter.</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">        :param v: `ChannelInterface` or location of receiver.</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">        :note: This method calls `getposition()` to determine the position of</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">               `u` and `v`.</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-comment"># extract location information</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-70', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">u</tt> <tt class="py-op">=</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name" targets="Variable wins.base.Reference._deref=wins.base.Reference-class.html#_deref"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-71', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-72" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-72', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-73', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name" targets="Static Method wins.channel.propagation.Propagation.position()=wins.channel.propagation.Propagation-class.html#position,Variable wins.mobile.motion.Motion.position=wins.mobile.motion.Motion-class.html#position"><a title="wins.channel.propagation.Propagation.position
+wins.mobile.motion.Motion.position" class="py-name" href="#" onclick="return doclink('link-74', 'position', 'link-74');">position</a></tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="wins.channel.propagation.Propagation.position
+wins.mobile.motion.Motion.position" class="py-name" href="#" onclick="return doclink('link-75', 'position', 'link-74');">position</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">        <tt class="py-comment"># calculate distance</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">dist</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">norm</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">-</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">dist</tt> </tt>
+</div><a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Propagation.position"></a><div id="Propagation.position-def"><a name="L197"></a><tt class="py-lineno">197</tt> <a class="py-toggle" href="#" id="Propagation.position-toggle" onclick="return toggle('Propagation.position');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#position">position</a><tt class="py-op">(</tt><tt class="py-param">c</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.position-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.position-expanded"><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">        <tt class="py-docstring">"""Determine position of a `ChannelInterface`.</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        :param c: `ChannelInterface` or position information.</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Location as a `numpy.array`.</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">        If `c` is a `ChannelInterface` object, this method will attempt to get</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">        the location of the interface by searching for a `Motion` object</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">        registered with its `container` under the nickname 'motion'. If no such</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">        child is found in the container, this method throws an AssertionError.</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">        If `c` is already position information, this method will convert it to a</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">        `numpy.array`. Overload this method to change how position is found.</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-docstring">        :note: This method throws an AssertionError if it cannot find a valid</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-docstring">               'motion' in the `ChannelInterface`.</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-76" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-76', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-77', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-78" class="py-name"><a title="wins.channel.interface.ChannelInterface" class="py-name" href="#" onclick="return doclink('link-78', 'ChannelInterface', 'link-7');">ChannelInterface</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name" targets="Variable wins.base.Base.container=wins.base.Base-class.html#container"><a title="wins.base.Base.container" class="py-name" href="#" onclick="return doclink('link-79', 'container', 'link-79');">container</a></tt><tt class="py-op">.</tt><tt id="link-80" class="py-name" targets="Method wins.base.Base.getchild()=wins.base.Base-class.html#getchild"><a title="wins.base.Base.getchild" class="py-name" href="#" onclick="return doclink('link-80', 'getchild', 'link-80');">getchild</a></tt><tt class="py-op">(</tt><tt class="py-string">'motion'</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt id="link-81" class="py-name"><a title="wins.mobile.motion.Motion" class="py-name" href="#" onclick="return doclink('link-81', 'Motion', 'link-11');">Motion</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"[PROPAGATION]: getposition() "</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                    <tt class="py-string">"could not find `Motion` element in container of %s!"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">            <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="wins.channel.propagation.Propagation.position
+wins.mobile.motion.Motion.position" class="py-name" href="#" onclick="return doclink('link-82', 'position', 'link-74');">position</a></tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">pos</tt> </tt>
+</div><a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Propagation.velocity"></a><div id="Propagation.velocity-def"><a name="L224"></a><tt class="py-lineno">224</tt> <a class="py-toggle" href="#" id="Propagation.velocity-toggle" onclick="return toggle('Propagation.velocity');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#velocity">velocity</a><tt class="py-op">(</tt><tt class="py-param">c</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.velocity-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.velocity-expanded"><a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">        <tt class="py-docstring">"""Determine velocity for `ChannelInterface` `c`.</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-docstring">        :param c: `ChannelInterface` or velocity vector.</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Velocity as a `numpy.array`.</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-83" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-83', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-84', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-85" class="py-name"><a title="wins.channel.interface.ChannelInterface" class="py-name" href="#" onclick="return doclink('link-85', 'ChannelInterface', 'link-7');">ChannelInterface</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">            <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="wins.base.Base.container" class="py-name" href="#" onclick="return doclink('link-86', 'container', 'link-79');">container</a></tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="wins.base.Base.getchild" class="py-name" href="#" onclick="return doclink('link-87', 'getchild', 'link-80');">getchild</a></tt><tt class="py-op">(</tt><tt class="py-string">'motion'</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt id="link-88" class="py-name"><a title="wins.mobile.motion.Motion" class="py-name" href="#" onclick="return doclink('link-88', 'Motion', 'link-11');">Motion</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"[PROPAGATION]: getvelocity() "</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">                    <tt class="py-string">"could not find `Motion` element in container of %s!"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">            <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name" targets="Static Method wins.channel.propagation.Propagation.velocity()=wins.channel.propagation.Propagation-class.html#velocity,Variable wins.mobile.motion.Motion.velocity=wins.mobile.motion.Motion-class.html#velocity"><a title="wins.channel.propagation.Propagation.velocity
+wins.mobile.motion.Motion.velocity" class="py-name" href="#" onclick="return doclink('link-89', 'velocity', 'link-89');">velocity</a></tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">v</tt> </tt>
+</div><a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="Propagation.doppler"></a><div id="Propagation.doppler-def"><a name="L240"></a><tt class="py-lineno">240</tt> <a class="py-toggle" href="#" id="Propagation.doppler-toggle" onclick="return toggle('Propagation.doppler');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#doppler">doppler</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">u</tt><tt class="py-op">,</tt> <tt class="py-param">v</tt><tt class="py-op">,</tt> <tt class="py-param">fc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.doppler-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.doppler-expanded"><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-docstring">"""Calculate doppler shift between `u` and `v`.</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-docstring">        :param u: `ChannelInterface` of transmitter.</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-docstring">        :param v: `ChannelInterface` of receiver.</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-docstring">        :param fc: Center frequency of channel.</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-docstring">        :return: Doppler shift (w.r.t. receiver) in Hz.</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-docstring">        :note: This method calls `getvelocity()` to determine the position of</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-docstring">               `u` and `v`.</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">        <tt class="py-comment"># get parameters</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-90" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-90', 'fc', 'link-22');">fc</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt id="link-91" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-91', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-92', 'fc', 'link-22');">fc</a></tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">        <tt class="py-comment"># extract location information</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">,</tt> <tt id="link-93" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-93', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">u</tt> <tt class="py-op">=</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-94', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-95" class="py-name"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-95', 'Reference', 'link-18');">Reference</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="wins.base.Reference._deref" class="py-name" href="#" onclick="return doclink('link-96', '_deref', 'link-71');">_deref</a></tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">        <tt class="py-comment"># calculate relative velocity and position (w.r.t. receiver)</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">        <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="wins.channel.propagation.Propagation.velocity
+wins.mobile.motion.Motion.velocity" class="py-name" href="#" onclick="return doclink('link-97', 'velocity', 'link-89');">velocity</a></tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="wins.channel.propagation.Propagation.velocity
+wins.mobile.motion.Motion.velocity" class="py-name" href="#" onclick="return doclink('link-98', 'velocity', 'link-89');">velocity</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="wins.channel.propagation.Propagation.position
+wins.mobile.motion.Motion.position" class="py-name" href="#" onclick="return doclink('link-99', 'position', 'link-74');">position</a></tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="wins.channel.propagation.Propagation.position
+wins.mobile.motion.Motion.position" class="py-name" href="#" onclick="return doclink('link-100', 'position', 'link-74');">position</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-comment"># calculate relative speed of transmitter (w.r.t. receiver)</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">norm</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">        <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt id="link-101" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-101', 'const', 'link-20');">const</a></tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="wins.const.SPEED_OF_LIGHT" class="py-name" href="#" onclick="return doclink('link-102', 'SPEED_OF_LIGHT', 'link-44');">SPEED_OF_LIGHT</a></tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">&lt;</tt><tt class="py-name">c</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"[PROPAGATION]: Cannot travel faster than speed of light!"</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">,</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">            <tt class="py-name">sr</tt> <tt class="py-op">=</tt> <tt class="py-name">s</tt><tt class="py-op">/</tt><tt class="py-name">c</tt>    <tt class="py-comment"># transmitter moving away from receiver</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">,</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">&lt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">            <tt class="py-name">sr</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-name">s</tt><tt class="py-op">/</tt><tt class="py-name">c</tt>   <tt class="py-comment"># transmitter moving towards receiver</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">            <tt class="py-name">sr</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt>      <tt class="py-comment"># tangential motion</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-comment"># calculate doppler shift</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">        <tt class="py-name">fd</tt> <tt class="py-op">=</tt> <tt id="link-103" class="py-name"><a title="wins.channel.propagation.Propagation.fc
+wins.channel.radio.Radio.fc
+wins.ieee80211.dot11a.Dot11ARadio.fc
+wins.ieee80211.dot11n.Dot11NRadio.fc
+wins.ieee80211.dot11n_channel.Dot11NChannel.fc" class="py-name" href="#" onclick="return doclink('link-103', 'fc', 'link-22');">fc</a></tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-number">1.0</tt><tt class="py-op">/</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">-</tt><tt class="py-name">sr</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">fd</tt> </tt>
+</div><a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"> </tt>
+<a name="Propagation.log_forward"></a><div id="Propagation.log_forward-def"><a name="L273"></a><tt class="py-lineno">273</tt> <a class="py-toggle" href="#" id="Propagation.log_forward-toggle" onclick="return toggle('Propagation.log_forward');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.channel.propagation.Propagation-class.html#log_forward">log_forward</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Propagation.log_forward-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Propagation.log_forward-expanded"><a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">        <tt class="py-docstring">"""Overload to log 'pathloss' annotation."""</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">hasanno</tt><tt class="py-op">(</tt><tt class="py-string">'pathloss'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">            <tt id="link-104" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.pathloss
+wins.channel.propagation.Propagation.pathloss
+wins.channel.refprop.ReferencePropagation.pathloss" class="py-name" href="#" onclick="return doclink('link-104', 'pathloss', 'link-38');">pathloss</a></tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">getanno</tt><tt class="py-op">(</tt><tt class="py-string">'pathloss'</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">            <tt class="py-name">kwargs</tt><tt class="py-op">[</tt><tt class="py-string">'pathloss'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-string">"%.2f dB"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt id="link-105" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.pathloss
+wins.channel.propagation.Propagation.pathloss
+wins.channel.refprop.ReferencePropagation.pathloss" class="py-name" href="#" onclick="return doclink('link-105', 'pathloss', 'link-38');">pathloss</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">        <tt id="link-106" class="py-name"><a title="wins.channel.channelbase.ChannelModel" class="py-name" href="#" onclick="return doclink('link-106', 'ChannelModel', 'link-3');">ChannelModel</a></tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Method wins.channel.channelbase.ChannelModel.log_forward()=wins.channel.channelbase.ChannelModel-class.html#log_forward,Method wins.channel.propagation.Propagation.log_forward()=wins.channel.propagation.Propagation-class.html#log_forward,Method wins.protocol.routing.Routing.log_forward()=wins.protocol.routing.Routing-class.html#log_forward"><a title="wins.channel.channelbase.ChannelModel.log_forward
+wins.channel.propagation.Propagation.log_forward
+wins.protocol.routing.Routing.log_forward" class="py-name" href="#" onclick="return doclink('link-107', 'log_forward', 'link-107');">log_forward</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:38 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

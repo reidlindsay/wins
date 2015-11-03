@@ -1,0 +1,100 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+MV=`which mv`;
+
+#######################################
+# Test Parameters
+#######################################
+EPSILON=0.25
+TESTARGS=
+
+#######################################
+# Get Arguments
+#######################################
+if [ $# -lt 1 ]; then
+  DIR=`$PWD`;             # current directory
+else
+  DIR=$1;
+fi
+
+#######################################
+# Script Parameters
+#######################################
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$DIR/../..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+COMMON=$DIR/../../../../common  # common utilities (plotting, merging, etc.)
+
+# Executables
+PARSEFDR=$TOPDIR/parse-fdr.py
+PARSEPER=$TOPDIR/parse-per.py
+MERGEDATA=$COMMON/mergedata.py
+MODDATA=$COMMON/mod_data.py
+
+# Trial parameters
+TRIALS=`seq 1 10`;
+
+# check parameters
+
+if [ ! -x $PARSEFDR ]; then
+  echo "Could not find executable ... PARSEFDR=$PARSEFDR";
+  exit -1;
+fi
+
+if [ ! -x $PARSEPER ]; then
+  echo "Could not find executable ... PARSEPER=$PARSEPER";
+  exit -1;
+fi
+
+if [ ! -x $MERGEDATA ]; then
+  echo "Could not find executable ... MERGEDATA=$MERGEDATA";
+  exit -1;
+fi
+
+if [ ! -x $MODDATA ]; then
+  echo "Could not find executable ... MODDATA=$MODDATA";
+  exit -1;
+fi
+
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Parse Data
+#######################################
+echo "Parsing data in $DIR";
+for k in $TRIALS; do
+  TNUM=`printf "%03d" $k`;
+  TRIALDIR=trial-$TNUM;
+  # check if trial directory exists
+  TDIR=$DIR/$TRIALDIR;
+  if [ -d $TDIR ] && [ ! -f $TDIR/data.tmp ]; then
+    # parse trace files
+    cd $TDIR;
+    tracefiles=`ls trace-mcs*.raw`;
+    # parse FDR
+    echo "Parsing FDR ... $TRIALDIR/$tracefiles";
+    $PARSEFDR $tracefiles > data.tmp;
+    $MERGEDATA data.tmp -e $EPSILON > fdr.dat;
+    $MODDATA fdr.dat --set-yvar="0" > data.tmp;
+    $MV data.tmp fdr.dat;
+    # parse PER
+    echo "Parsing PER ... $TRIALDIR/$tracefiles";
+    $PARSEPER $tracefiles > data.tmp;
+    $MERGEDATA data.tmp -e $EPSILON > per.dat;
+    $MODDATA per.dat --set-yvar="0" > data.tmp;
+    $MV data.tmp per.dat;
+  else
+    echo "Could not find $TRIALDIR directory with no data.tmp ... $TRIALDIR"
+  fi
+done

@@ -1,0 +1,168 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=4;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR MCS MODEL";
+  echo "  EXEC     - experiment executable"
+  echo "  DIR      - output directory"
+  echo "  MCS      - modulation/coding scheme"
+  echo "  MODEL    - use model? -> 0 or 1"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+DIR=$2;
+if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+
+MCS=$3;               # modulation coding scheme
+MODEL=$4;             # use model?
+
+#######################################
+# Simulation parameters
+#######################################
+
+SNRTHRESH=( 5  7 10 14 17 22 23 25 )    # PER < 1% for CM-A
+
+# simulation parameters
+VERBOSE=65                # ALOHA_VERBOSE=54, DOT11N_VERBOSE=64
+
+SNRMIN=${SNRTHRESH[MCS]}  # minimum SNR of direct link neede for PER ~ 1%
+MARGIN=3                  # excess link margin (above SNRmin)
+PHI=-10                   # offset from SNRmin (e.g. strong -> +10, weak -> -5)
+EPSILON=0                 # define +/- range of SINR (must be < PHI+MARGIN)
+
+# experiment parameters
+SNR=`echo "scale=2; $SNRMIN+$MARGIN"|bc`          # SNR of direct link
+SINRAVG=`echo "scale=2; $SNRMIN+(0$PHI)"|bc`
+SINRMIN=`echo "scale=2; $SINRAVG-$EPSILON"|bc`    # minimum SINR
+SINRMAX=`echo "scale=2; $SINRAVG+$EPSILON"|bc`    # maximum SINR
+
+# traffic parameters
+NUMNODES=10           #number of interferers
+NUMSLOTS=200          # in number of frame-slots
+PACKETLEN=40          # in bytes
+#TFRAME="0.001876"     # corresponds to 1480 byte packet @ MCS 0
+#TFRAME="0.001352"     # corresponds to 1024 byte packet @ MCS 0
+TFRAME="0.000144"     # corresponds to   40 byte packet @ MCS 0
+SIMTIME=`echo "scale=8; 3*$NUMSLOTS*$TFRAME/($MCS + 1)"|bc`
+
+# topology parameters
+TOPOFILE=topo.dat
+
+# agent parameters
+RATE=1.0            # in packets/second   XXX IGNORED - see workload below XXX
+AGTMODE="poisson"   # traffic generation mode for interferers
+
+# NET parameters
+
+# PHY parameters
+FOMAX=0.0           # in ppm (default = 13.675)
+CFOCORRECTION="--disable-cfo-correction"  # enable CFO correction (yes -> "", no -> "--disable-cfo-correction")
+# -> optional PHY parameters
+if [ $MODEL -lt 1 ]; then
+  USEWAVEFORM="--use-waveform"          # enable waveform? (no -> "", yes -> "--use-waveform")
+else
+  USEWAVEFORM=""
+fi
+
+# Channel parameters
+ALPHA=2.0                               # pathloss exponent
+BIDIRECTIONAL=""                        # bidirectional (yes -> "--bidirectional-channel", no -> "")
+TGNMODEL="--tgn-model=A"                # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+USEDOPPLER=""                           # enable doppler filter (yes -> "--use-doppler", no -> "")
+USEFADING="--disable-fading"            # use fading (yes -> "", no -> "--disable-fading")
+ENVSPEED=1.2                            # (in km/hr) - only relevat when doppler is enabled
+
+#######################################
+# Independent Variables
+#   - use workload as independent variable (in transmissions/frame-time)
+#######################################
+runtests="0.5 1.0 2.0 3.0 4.0 "
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+TESTEXEC=$EXEC
+if [ ! -x $TESTEXEC ]; then
+  echo "Cannot find executable $TESTEXEC";
+  exit 0;
+fi
+
+for g in $runtests; do
+  # simulation parameters
+  verbose="-v $VERBOSE"
+  simtime="-s `echo "scale=8; $SIMTIME"|bc`"
+  simargs="$simtime $verbose"
+
+  # experiment parameters
+  snr="--snr=$SNR"
+  sinrmin="--sinrmin=$SINRMIN";
+  sinrmax="--sinrmax=$SINRMAX";
+  numnodes="-n $NUMNODES"
+  workload="-G $g"
+  expargs="$snr $numnodes $workload $sinrmin $sinrmax"
+
+  # agent parameters
+  rate="-r $RATE"
+  plen="-l $PACKETLEN"
+  if [ ! -z $AGTMODE ]; then
+    mode="--agent-mode=$AGTMODE"
+  fi
+  agtargs="$rate $plen $mode"
+
+  # network parameters
+  netargs=""
+
+  # PHY parameters
+  mcs="--mcs=$MCS"
+  fomax="--fomax=$FOMAX"
+  usewaveform=$USEWAVEFORM
+  cfocorrection=$CFOCORRECTION
+  phyargs="$mcs $fomax $usewaveform $cfocorrection";
+
+  # topology parameters
+  savetopo="--save-topo=$DIR/$TOPOFILE";
+  topoargs="$savetopo"
+
+  # channel parameters
+  alpha="--alpha=$ALPHA"
+  bidirectional="$BIDIRECTIONAL"
+  tgnmodel=$TGNMODEL
+  usedoppler=$USEDOPPLER
+  usefading=$USEFADING
+  envspeed="--environment-speed=$ENVSPEED"
+  chargs="$alpha $bidirectional $tgnmodel $usedoppler $usefading $envspeed";
+
+  # run simulation
+  args="$simargs $expargs $agtargs $netargs $phyargs $topoargs $chargs"
+  tracefile="trace-g$g.raw"
+  simexec="$TESTEXEC $args -o $DIR/$tracefile"
+  echo $simexec
+  $simexec
+done
+
+exit 0;

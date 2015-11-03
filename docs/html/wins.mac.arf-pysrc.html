@@ -1,0 +1,1182 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.mac.arf</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.mac-module.html">Package&nbsp;mac</a> ::
+        Module&nbsp;arf
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins.mac.arf-module.html">Module wins.mac.arf</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Auto Rate Fallback (ARF) protocol; contains `ARF` class.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009-2011 The University of Texas at Austin</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">SimPy</tt><tt class="py-op">.</tt><tt class="py-name">Simulation</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SimEvent</tt><tt class="py-op">,</tt> <tt class="py-name">waitevent</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package wins=wins-module.html"><a title="wins" class="py-name" href="#" onclick="return doclink('link-0', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module wins.fsm=wins.fsm-module.html"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-1', 'fsm', 'link-1');">fsm</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class wins.fsm.FSM=wins.fsm.FSM-class.html"><a title="wins.fsm.FSM" class="py-name" href="#" onclick="return doclink('link-2', 'FSM', 'link-2');">FSM</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-3', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module wins.packet=wins.packet-module.html"><a title="wins.packet" class="py-name" href="#" onclick="return doclink('link-4', 'packet', 'link-4');">packet</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class wins.packet.ANNO=wins.packet.ANNO-class.html"><a title="wins.packet.ANNO" class="py-name" href="#" onclick="return doclink('link-5', 'ANNO', 'link-5');">ANNO</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-6', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Package wins.ieee80211=wins.ieee80211-module.html"><a title="wins.ieee80211" class="py-name" href="#" onclick="return doclink('link-7', 'ieee80211', 'link-7');">ieee80211</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module wins.ieee80211.dcf=wins.ieee80211.dcf-module.html"><a title="wins.ieee80211.dcf" class="py-name" href="#" onclick="return doclink('link-8', 'dcf', 'link-8');">dcf</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class wins.ieee80211.dcf.DCF=wins.ieee80211.dcf.DCF-class.html"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-9', 'DCF', 'link-9');">DCF</a></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-10', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="wins.ieee80211" class="py-name" href="#" onclick="return doclink('link-11', 'ieee80211', 'link-7');">ieee80211</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module wins.ieee80211.dot11_support=wins.ieee80211.dot11_support-module.html"><a title="wins.ieee80211.dot11_support" class="py-name" href="#" onclick="return doclink('link-12', 'dot11_support', 'link-12');">dot11_support</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-13" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-13', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Package wins.mac=wins.mac-module.html,Variable wins.net.dsr.DSR.mac=wins.net.dsr.DSR-class.html#mac,Module wins.protocol.mac=wins.protocol.mac-module.html,Variable wins.traffic.agent.Agent.mac=wins.traffic.agent.Agent-class.html#mac"><a title="wins.mac
+wins.net.dsr.DSR.mac
+wins.protocol.mac
+wins.traffic.agent.Agent.mac" class="py-name" href="#" onclick="return doclink('link-14', 'mac', 'link-14');">mac</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Module wins.mac.rateadaptation=wins.mac.rateadaptation-module.html"><a title="wins.mac.rateadaptation" class="py-name" href="#" onclick="return doclink('link-15', 'rateadaptation', 'link-15');">rateadaptation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class wins.mac.rateadaptation.RateAdapt=wins.mac.rateadaptation.RateAdapt-class.html"><a title="wins.mac.rateadaptation.RateAdapt" class="py-name" href="#" onclick="return doclink('link-16', 'RateAdapt', 'link-16');">RateAdapt</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-17" class="py-name"><a title="wins" class="py-name" href="#" onclick="return doclink('link-17', 'wins', 'link-0');">wins</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="wins.mac
+wins.net.dsr.DSR.mac
+wins.protocol.mac
+wins.traffic.agent.Agent.mac" class="py-name" href="#" onclick="return doclink('link-18', 'mac', 'link-14');">mac</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Module wins.mac.arf_support=wins.mac.arf_support-module.html"><a title="wins.mac.arf_support" class="py-name" href="#" onclick="return doclink('link-19', 'arf_support', 'link-19');">arf_support</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="ARF"></a><div id="ARF-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="ARF-toggle" onclick="return toggle('ARF');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html">ARF</a><tt class="py-op">(</tt><tt class="py-base-class">DCF</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ARF-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-docstring">"""Auto Rate Fallback (ARF) protocol.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    Implementation based on description from Kamerman and Monteban (1997). By</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    default ARF operates using CSMA/CA (i.e. not MACAW). To enable RTS/CTS</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">    messages, set `usecsma` to False.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    ARF Timeout</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">    ===========</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    The ARF timer is used to indicate that the rate of transmissions should be</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    increased prior to having `nsuccess` consecutive ACKs. This mechanism is</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    meant to allow ARF to explore higher data rates when traffic is sparse.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    The timer can be implemented as a time-based or packet-based timer. The</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    time-based timer is a straight forward timeout timer that waits for a</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    duration before firing and indicating that the rate of the transmission</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    should be increased. The packet-based timer uses the "virtual timer"</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    approach described by Qiao, Choi, and Shin (2002). This "timer" counts the</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    number of transmission attempts made rather than using a time-based timer.</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    This module implements the ARF timer as a time-based timer.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    :CVariables:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">     * `base`: Property to access base rate enumeration from `ra`.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">     * `rates`: Property to access ordered list of valid rate enumerations. This</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">                is ordered based on the data rates reported by `get_datarate()`.</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">    :IVariables:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">     * `ra`: `RateAdapt` module.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">     * `ackcount`: Dictionary containing number of consecutive successful ACKs</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">                   received (negative values indicate consecutive dropped ACKs).</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">                   Values are keyed by destination address.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">     * `arftimer`: Dictionary containing ARF timers used for updating transmit</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">                   data rate. Values are keyed by destination address. This</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">                   module implements ARF timers as packet-based timers.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">     * `probation`: Dictionary containing probation flags indicating if</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">                    probation period has been entered; values are keyed by</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">                    destination address.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">     * `nsuccess`: Threshold for number of consecutive ACKs that must be</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">                   received prior to increasing the data rate.</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">     * `nfailure`: Threshold for number of consecutive ACK failures that</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">                   will trigger a decrease in the data rate.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">     * `timeout`: Timeout value for ARF timer; if exceeded, then increase rate.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt id="link-20" class="py-name" targets="Variable wins.base.Base.name=wins.base.Base-class.html#name,Variable wins.channel.breakpoint.Breakpoint.name=wins.channel.breakpoint.Breakpoint-class.html#name,Variable wins.channel.channelbase.Channel.name=wins.channel.channelbase.Channel-class.html#name,Variable wins.channel.channelbase.ChannelModel.name=wins.channel.channelbase.ChannelModel-class.html#name,Variable wins.channel.interface.ChannelInterface.name=wins.channel.interface.ChannelInterface-class.html#name,Variable wins.channel.propagation.Propagation.name=wins.channel.propagation.Propagation-class.html#name,Variable wins.channel.radio.Radio.name=wins.channel.radio.Radio-class.html#name,Variable wins.channel.refprop.ReferencePropagation.name=wins.channel.refprop.ReferencePropagation-class.html#name,Variable wins.crc.CRC32.name=wins.crc.CRC32-class.html#name,Variable wins.digital.modulation.Modulation.name=wins.digital.modulation.Modulation-class.html#name,Variable wins.digital.mqam.MQAM.name=wins.digital.mqam.MQAM-class.html#name,Variable wins.digital.rcpc.RCPC.name=wins.digital.rcpc.RCPC-class.html#name,Variable wins.digital.reedsolomon.ReedSolomon.name=wins.digital.reedsolomon.ReedSolomon-class.html#name,Variable wins.element.Port.name=wins.element.Port-class.html#name,Variable wins.fsm.FSM.name=wins.fsm.FSM-class.html#name,Variable wins.fsm.Timer.name=wins.fsm.Timer-class.html#name,Variable wins.helper.PseudoIPv4.name=wins.helper.PseudoIPv4-class.html#name,Variable wins.ieee80211.dcf.DCF.name=wins.ieee80211.dcf.DCF-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Ack.name=wins.ieee80211.dot11_support.Dot11Ack-class.html#name,Variable wins.ieee80211.dot11_support.Dot11CTS.name=wins.ieee80211.dot11_support.Dot11CTS-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Data.name=wins.ieee80211.dot11_support.Dot11Data-class.html#name,Variable wins.ieee80211.dot11_support.Dot11RTS.name=wins.ieee80211.dot11_support.Dot11RTS-class.html#name,Variable wins.ieee80211.dot11a.Dot11APHY.name=wins.ieee80211.dot11a.Dot11APHY-class.html#name,Variable wins.ieee80211.dot11a.Dot11ARadio.name=wins.ieee80211.dot11a.Dot11ARadio-class.html#name,Variable wins.ieee80211.dot11a_support.Dot11A.name=wins.ieee80211.dot11a_support.Dot11A-class.html#name,Variable wins.ieee80211.dot11n.Dot11NPHY.name=wins.ieee80211.dot11n.Dot11NPHY-class.html#name,Variable wins.ieee80211.dot11n.Dot11NRadio.name=wins.ieee80211.dot11n.Dot11NRadio-class.html#name,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.name=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#name,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.name=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#name,Variable wins.ieee80211.dot11n_support.Dot11N.name=wins.ieee80211.dot11n_support.Dot11N-class.html#name,Variable wins.ieee80211.navtimer.NAVTimer.name=wins.ieee80211.navtimer.NAVTimer-class.html#name,Variable wins.mac.arf.ARF.name=wins.mac.arf.ARF-class.html#name,Variable wins.mac.rateadaptation.RAI.name=wins.mac.rateadaptation.RAI-class.html#name,Variable wins.mac.rateadaptation.RateAdapt.name=wins.mac.rateadaptation.RateAdapt-class.html#name,Variable wins.mac.rbar.RBAR.name=wins.mac.rbar.RBAR-class.html#name,Variable wins.mac.rbar_support.Dot11RSH.name=wins.mac.rbar_support.Dot11RSH-class.html#name,Variable wins.mobile.motion.Motion.name=wins.mobile.motion.Motion-class.html#name,Variable wins.mobile.waypoint.RandomWaypoint.name=wins.mobile.waypoint.RandomWaypoint-class.html#name,Variable wins.net.dsr.DSR.name=wins.net.dsr.DSR-class.html#name,Variable wins.net.dsr_rreq.RouteRequestTable.name=wins.net.dsr_rreq.RouteRequestTable-class.html#name,Variable wins.net.dsr_support.DSRPacket.name=wins.net.dsr_support.DSRPacket-class.html#name,Variable wins.net.routecache.RouteCache.name=wins.net.routecache.RouteCache-class.html#name,Variable wins.protocol.aloha.Aloha.name=wins.protocol.aloha.Aloha-class.html#name,Variable wins.protocol.arp.ARP.name=wins.protocol.arp.ARP-class.html#name,Variable wins.protocol.arp_support.ARPReply.name=wins.protocol.arp_support.ARPReply-class.html#name,Variable wins.protocol.arp_support.ARPRequest.name=wins.protocol.arp_support.ARPRequest-class.html#name,Variable wins.protocol.csmac.CSMAC.name=wins.protocol.csmac.CSMAC-class.html#name,Variable wins.protocol.csphy.CSPHY.name=wins.protocol.csphy.CSPHY-class.html#name,Variable wins.protocol.mac.MAC.name=wins.protocol.mac.MAC-class.html#name,Variable wins.protocol.net.NET.name=wins.protocol.net.NET-class.html#name,Variable wins.protocol.phy.PHY.name=wins.protocol.phy.PHY-class.html#name,Variable wins.protocol.routetable.RouteTable.name=wins.protocol.routetable.RouteTable-class.html#name,Variable wins.protocol.routing.Routing.name=wins.protocol.routing.Routing-class.html#name,Variable wins.queue.Queue.name=wins.queue.Queue-class.html#name,Variable wins.trace.Trace.name=wins.trace.Trace-class.html#name,Variable wins.trace.Traceable.name=wins.trace.Traceable-class.html#name,Variable wins.traffic.agent.Agent.name=wins.traffic.agent.Agent-class.html#name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-20', 'name', 'link-20');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Auto Rate Fallback"</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt id="link-21" class="py-name" targets="Variable wins.channel.breakpoint.Breakpoint.tracename=wins.channel.breakpoint.Breakpoint-class.html#tracename,Variable wins.channel.channelbase.Channel.tracename=wins.channel.channelbase.Channel-class.html#tracename,Variable wins.channel.channelbase.ChannelModel.tracename=wins.channel.channelbase.ChannelModel-class.html#tracename,Variable wins.channel.interface.ChannelInterface.tracename=wins.channel.interface.ChannelInterface-class.html#tracename,Variable wins.channel.propagation.Propagation.tracename=wins.channel.propagation.Propagation-class.html#tracename,Variable wins.channel.radio.Radio.tracename=wins.channel.radio.Radio-class.html#tracename,Variable wins.channel.refprop.ReferencePropagation.tracename=wins.channel.refprop.ReferencePropagation-class.html#tracename,Variable wins.digital.modulation.Modulation.tracename=wins.digital.modulation.Modulation-class.html#tracename,Variable wins.digital.mqam.MQAM.tracename=wins.digital.mqam.MQAM-class.html#tracename,Variable wins.digital.rcpc.RCPC.tracename=wins.digital.rcpc.RCPC-class.html#tracename,Variable wins.digital.reedsolomon.ReedSolomon.tracename=wins.digital.reedsolomon.ReedSolomon-class.html#tracename,Variable wins.element.Port.tracename=wins.element.Port-class.html#tracename,Variable wins.fsm.FSM.tracename=wins.fsm.FSM-class.html#tracename,Variable wins.fsm.Timer.tracename=wins.fsm.Timer-class.html#tracename,Variable wins.ieee80211.dcf.DCF.tracename=wins.ieee80211.dcf.DCF-class.html#tracename,Variable wins.ieee80211.dot11a.Dot11APHY.tracename=wins.ieee80211.dot11a.Dot11APHY-class.html#tracename,Variable wins.ieee80211.dot11n.Dot11NPHY.tracename=wins.ieee80211.dot11n.Dot11NPHY-class.html#tracename,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.tracename=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#tracename,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#tracename,Variable wins.ieee80211.navtimer.NAVTimer.tracename=wins.ieee80211.navtimer.NAVTimer-class.html#tracename,Variable wins.mac.arf.ARF.tracename=wins.mac.arf.ARF-class.html#tracename,Variable wins.mac.rateadaptation.RateAdapt.tracename=wins.mac.rateadaptation.RateAdapt-class.html#tracename,Variable wins.mac.rbar.RBAR.tracename=wins.mac.rbar.RBAR-class.html#tracename,Variable wins.mobile.motion.Motion.tracename=wins.mobile.motion.Motion-class.html#tracename,Variable wins.mobile.waypoint.RandomWaypoint.tracename=wins.mobile.waypoint.RandomWaypoint-class.html#tracename,Variable wins.net.dsr.DSR.tracename=wins.net.dsr.DSR-class.html#tracename,Variable wins.net.dsr_rreq.RouteRequestTable.tracename=wins.net.dsr_rreq.RouteRequestTable-class.html#tracename,Variable wins.net.routecache.RouteCache.tracename=wins.net.routecache.RouteCache-class.html#tracename,Variable wins.protocol.aloha.Aloha.tracename=wins.protocol.aloha.Aloha-class.html#tracename,Variable wins.protocol.arp.ARP.tracename=wins.protocol.arp.ARP-class.html#tracename,Variable wins.protocol.csmac.CSMAC.tracename=wins.protocol.csmac.CSMAC-class.html#tracename,Variable wins.protocol.csphy.CSPHY.tracename=wins.protocol.csphy.CSPHY-class.html#tracename,Variable wins.protocol.mac.MAC.tracename=wins.protocol.mac.MAC-class.html#tracename,Variable wins.protocol.net.NET.tracename=wins.protocol.net.NET-class.html#tracename,Variable wins.protocol.phy.PHY.tracename=wins.protocol.phy.PHY-class.html#tracename,Variable wins.protocol.routetable.RouteTable.tracename=wins.protocol.routetable.RouteTable-class.html#tracename,Variable wins.protocol.routing.Routing.tracename=wins.protocol.routing.Routing-class.html#tracename,Variable wins.queue.Queue.tracename=wins.queue.Queue-class.html#tracename,Variable wins.trace.Traceable.tracename=wins.trace.Traceable-class.html#tracename,Variable wins.traffic.agent.Agent.tracename=wins.traffic.agent.Agent-class.html#tracename"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-21', 'tracename', 'link-21');">tracename</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"ARF"</tt> </tt>
+<a name="ARF.__init__"></a><div id="ARF.__init__-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="ARF.__init__-toggle" onclick="return toggle('ARF.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">usecsma</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.__init__-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-docstring">"""Constructor."""</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-comment"># create ARF parameters</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nsuccess</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nfailure</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timeout</tt>  <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">arftimer</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">probation</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rates</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-comment"># create ARF events</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt> <tt class="py-op">=</tt> <tt class="py-name">SimEvent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt> <tt class="py-op">=</tt> <tt class="py-name">SimEvent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-22', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method wins.backend.crc.CRC.__init__()=wins.backend.crc.CRC-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Channel.__init__()=wins.backend.dot11n_backend.Dot11N_Channel-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Receiver.__init__()=wins.backend.dot11n_backend.Dot11N_Receiver-class.html#__init__,Method wins.backend.dot11n_backend.Dot11N_Transmitter.__init__()=wins.backend.dot11n_backend.Dot11N_Transmitter-class.html#__init__,Method wins.backend.dot11n_backend.MimoChannel.__init__()=wins.backend.dot11n_backend.MimoChannel-class.html#__init__,Method wins.backend.waveform.SwigPyIterator.__init__()=wins.backend.waveform.SwigPyIterator-class.html#__init__,Method wins.backend.waveform.Waveform.__init__()=wins.backend.waveform.Waveform-class.html#__init__,Method wins.backend.waveform.vectorc.__init__()=wins.backend.waveform.vectorc-class.html#__init__,Method wins.backend.waveform.vectori.__init__()=wins.backend.waveform.vectori-class.html#__init__,Method wins.base.Base.__init__()=wins.base.Base-class.html#__init__,Method wins.base.Reference.__init__()=wins.base.Reference-class.html#__init__,Method wins.channel.breakpoint.Breakpoint.__init__()=wins.channel.breakpoint.Breakpoint-class.html#__init__,Method wins.channel.channelbase.Channel.__init__()=wins.channel.channelbase.Channel-class.html#__init__,Method wins.channel.channelbase.ChannelModel.__init__()=wins.channel.channelbase.ChannelModel-class.html#__init__,Method wins.channel.interface.ChannelInterface.__init__()=wins.channel.interface.ChannelInterface-class.html#__init__,Method wins.channel.propagation.Propagation.__init__()=wins.channel.propagation.Propagation-class.html#__init__,Method wins.channel.radio.Radio.__init__()=wins.channel.radio.Radio-class.html#__init__,Method wins.channel.refprop.ReferencePropagation.__init__()=wins.channel.refprop.ReferencePropagation-class.html#__init__,Method wins.crc.CRC32.__init__()=wins.crc.CRC32-class.html#__init__,Method wins.digital.modulation.Modulation.__init__()=wins.digital.modulation.Modulation-class.html#__init__,Method wins.digital.mqam.MQAM.__init__()=wins.digital.mqam.MQAM-class.html#__init__,Method wins.digital.rcpc.RCPC.__init__()=wins.digital.rcpc.RCPC-class.html#__init__,Method wins.digital.reedsolomon.ReedSolomon.__init__()=wins.digital.reedsolomon.ReedSolomon-class.html#__init__,Method wins.element.Element.__init__()=wins.element.Element-class.html#__init__,Method wins.element.Port.__init__()=wins.element.Port-class.html#__init__,Method wins.fsm.FSM.__init__()=wins.fsm.FSM-class.html#__init__,Method wins.fsm.Timer.__init__()=wins.fsm.Timer-class.html#__init__,Method wins.ieee80211.dcf.DCF.__init__()=wins.ieee80211.dcf.DCF-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11Ack.__init__()=wins.ieee80211.dot11_support.Dot11Ack-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11CTS.__init__()=wins.ieee80211.dot11_support.Dot11CTS-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11Data.__init__()=wins.ieee80211.dot11_support.Dot11Data-class.html#__init__,Method wins.ieee80211.dot11_support.Dot11RTS.__init__()=wins.ieee80211.dot11_support.Dot11RTS-class.html#__init__,Method wins.ieee80211.dot11a.Dot11APHY.__init__()=wins.ieee80211.dot11a.Dot11APHY-class.html#__init__,Method wins.ieee80211.dot11a.Dot11ARadio.__init__()=wins.ieee80211.dot11a.Dot11ARadio-class.html#__init__,Method wins.ieee80211.dot11n.Dot11NPHY.__init__()=wins.ieee80211.dot11n.Dot11NPHY-class.html#__init__,Method wins.ieee80211.dot11n.Dot11NRadio.__init__()=wins.ieee80211.dot11n.Dot11NRadio-class.html#__init__,Method wins.ieee80211.dot11n_channel.Dot11NChannel.__init__()=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#__init__,Method wins.ieee80211.dot11n_dsp.Dot11N_DSP.__init__()=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#__init__,Method wins.ieee80211.navtimer.NAVTimer.__init__()=wins.ieee80211.navtimer.NAVTimer-class.html#__init__,Method wins.mac.arf.ARF.__init__()=wins.mac.arf.ARF-class.html#__init__,Method wins.mac.rateadaptation.RAI.__init__()=wins.mac.rateadaptation.RAI-class.html#__init__,Method wins.mac.rateadaptation.RateAdapt.__init__()=wins.mac.rateadaptation.RateAdapt-class.html#__init__,Method wins.mac.rbar.RBAR.__init__()=wins.mac.rbar.RBAR-class.html#__init__,Method wins.mac.rbar_support.Dot11RSH.__init__()=wins.mac.rbar_support.Dot11RSH-class.html#__init__,Method wins.mobile.motion.Motion.__init__()=wins.mobile.motion.Motion-class.html#__init__,Method wins.mobile.waypoint.RandomWaypoint.__init__()=wins.mobile.waypoint.RandomWaypoint-class.html#__init__,Method wins.net.dsr.DSR.__init__()=wins.net.dsr.DSR-class.html#__init__,Method wins.net.dsr_rreq.RouteRequestEntry.__init__()=wins.net.dsr_rreq.RouteRequestEntry-class.html#__init__,Method wins.net.dsr_rreq.RouteRequestTable.__init__()=wins.net.dsr_rreq.RouteRequestTable-class.html#__init__,Method wins.net.routecache.RouteCache.__init__()=wins.net.routecache.RouteCache-class.html#__init__,Method wins.packet.ANNO.__init__()=wins.packet.ANNO-class.html#__init__,Method wins.packet.FuncField.__init__()=wins.packet.FuncField-class.html#__init__,Method wins.packet.HiddenField.__init__()=wins.packet.HiddenField-class.html#__init__,Method wins.protocol.aloha.Aloha.__init__()=wins.protocol.aloha.Aloha-class.html#__init__,Method wins.protocol.arp.ARP.__init__()=wins.protocol.arp.ARP-class.html#__init__,Method wins.protocol.arp_support.ARPReply.__init__()=wins.protocol.arp_support.ARPReply-class.html#__init__,Method wins.protocol.arp_support.ARPRequest.__init__()=wins.protocol.arp_support.ARPRequest-class.html#__init__,Method wins.protocol.csmac.CSMAC.__init__()=wins.protocol.csmac.CSMAC-class.html#__init__,Method wins.protocol.csphy.CSPHY.__init__()=wins.protocol.csphy.CSPHY-class.html#__init__,Method wins.protocol.mac.MAC.__init__()=wins.protocol.mac.MAC-class.html#__init__,Method wins.protocol.net.NET.__init__()=wins.protocol.net.NET-class.html#__init__,Method wins.protocol.phy.PHY.__init__()=wins.protocol.phy.PHY-class.html#__init__,Method wins.protocol.routetable.RouteTable.__init__()=wins.protocol.routetable.RouteTable-class.html#__init__,Method wins.protocol.routing.Routing.__init__()=wins.protocol.routing.Routing-class.html#__init__,Method wins.queue.Queue.__init__()=wins.queue.Queue-class.html#__init__,Method wins.trace.Trace.__init__()=wins.trace.Trace-class.html#__init__,Method wins.trace.Traceable.__init__()=wins.trace.Traceable-class.html#__init__,Method wins.traffic.agent.Agent.__init__()=wins.traffic.agent.Agent-class.html#__init__,Method wins.util.monitor.Monitor.__init__()=wins.util.monitor.Monitor-class.html#__init__"><a title="wins.backend.crc.CRC.__init__
+wins.backend.dot11n_backend.Dot11N_Channel.__init__
+wins.backend.dot11n_backend.Dot11N_Receiver.__init__
+wins.backend.dot11n_backend.Dot11N_Transmitter.__init__
+wins.backend.dot11n_backend.MimoChannel.__init__
+wins.backend.waveform.SwigPyIterator.__init__
+wins.backend.waveform.Waveform.__init__
+wins.backend.waveform.vectorc.__init__
+wins.backend.waveform.vectori.__init__
+wins.base.Base.__init__
+wins.base.Reference.__init__
+wins.channel.breakpoint.Breakpoint.__init__
+wins.channel.channelbase.Channel.__init__
+wins.channel.channelbase.ChannelModel.__init__
+wins.channel.interface.ChannelInterface.__init__
+wins.channel.propagation.Propagation.__init__
+wins.channel.radio.Radio.__init__
+wins.channel.refprop.ReferencePropagation.__init__
+wins.crc.CRC32.__init__
+wins.digital.modulation.Modulation.__init__
+wins.digital.mqam.MQAM.__init__
+wins.digital.rcpc.RCPC.__init__
+wins.digital.reedsolomon.ReedSolomon.__init__
+wins.element.Element.__init__
+wins.element.Port.__init__
+wins.fsm.FSM.__init__
+wins.fsm.Timer.__init__
+wins.ieee80211.dcf.DCF.__init__
+wins.ieee80211.dot11_support.Dot11Ack.__init__
+wins.ieee80211.dot11_support.Dot11CTS.__init__
+wins.ieee80211.dot11_support.Dot11Data.__init__
+wins.ieee80211.dot11_support.Dot11RTS.__init__
+wins.ieee80211.dot11a.Dot11APHY.__init__
+wins.ieee80211.dot11a.Dot11ARadio.__init__
+wins.ieee80211.dot11n.Dot11NPHY.__init__
+wins.ieee80211.dot11n.Dot11NRadio.__init__
+wins.ieee80211.dot11n_channel.Dot11NChannel.__init__
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.__init__
+wins.ieee80211.navtimer.NAVTimer.__init__
+wins.mac.arf.ARF.__init__
+wins.mac.rateadaptation.RAI.__init__
+wins.mac.rateadaptation.RateAdapt.__init__
+wins.mac.rbar.RBAR.__init__
+wins.mac.rbar_support.Dot11RSH.__init__
+wins.mobile.motion.Motion.__init__
+wins.mobile.waypoint.RandomWaypoint.__init__
+wins.net.dsr.DSR.__init__
+wins.net.dsr_rreq.RouteRequestEntry.__init__
+wins.net.dsr_rreq.RouteRequestTable.__init__
+wins.net.routecache.RouteCache.__init__
+wins.packet.ANNO.__init__
+wins.packet.FuncField.__init__
+wins.packet.HiddenField.__init__
+wins.protocol.aloha.Aloha.__init__
+wins.protocol.arp.ARP.__init__
+wins.protocol.arp_support.ARPReply.__init__
+wins.protocol.arp_support.ARPRequest.__init__
+wins.protocol.csmac.CSMAC.__init__
+wins.protocol.csphy.CSPHY.__init__
+wins.protocol.mac.MAC.__init__
+wins.protocol.net.NET.__init__
+wins.protocol.phy.PHY.__init__
+wins.protocol.routetable.RouteTable.__init__
+wins.protocol.routing.Routing.__init__
+wins.queue.Queue.__init__
+wins.trace.Trace.__init__
+wins.trace.Traceable.__init__
+wins.traffic.agent.Agent.__init__
+wins.util.monitor.Monitor.__init__" class="py-name" href="#" onclick="return doclink('link-23', '__init__', 'link-23');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">usecsma</tt><tt class="py-op">=</tt><tt class="py-name">usecsma</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-comment"># update event names</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-24', 'name', 'link-20');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"%s%s"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-25', 'name', 'link-20');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">".dropack"</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-26', 'name', 'link-20');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"%s%s"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-27', 'name', 'link-20');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">".recvack"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-28" class="py-name" targets="Module wins.base=wins.base-module.html,Variable wins.mac.arf.ARF.base=wins.mac.arf.ARF-class.html#base,Variable wins.mac.rbar.RBAR.base=wins.mac.rbar.RBAR-class.html#base"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-28', 'base', 'link-28');">base</a></tt> <tt class="py-op">=</tt> <tt class="py-name">property</tt><tt class="py-op">(</tt><tt class="py-name">fget</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-29', 'base', 'link-28');">base</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt id="link-30" class="py-name" targets="Variable wins.digital.rcpc.RCPC.rates=wins.digital.rcpc.RCPC-class.html#rates,Variable wins.mac.arf.ARF.rates=wins.mac.arf.ARF-class.html#rates"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-30', 'rates', 'link-30');">rates</a></tt> <tt class="py-op">=</tt> <tt class="py-name">property</tt><tt class="py-op">(</tt><tt class="py-name">fget</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method wins.mac.arf.ARF.get_rates()=wins.mac.arf.ARF-class.html#get_rates"><a title="wins.mac.arf.ARF.get_rates" class="py-name" href="#" onclick="return doclink('link-31', 'get_rates', 'link-31');">get_rates</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="ARF.configure"></a><div id="ARF.configure-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="ARF.configure-toggle" onclick="return toggle('ARF.configure');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#configure">configure</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">base</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">nsuccess</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">nfailure</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">timeout</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.configure-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.configure-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-docstring">"""Configure rate adaptation parameters.</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        :param base: Base rate used to initialize `RateAdapt` component [default=0].</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        :param nsuccess: Threshold for number of consecutive ACKs that must be</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">                         received prior to increasing the data rate.</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        :param nfailure: Threshold for number of consecutive ACK failures that</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">                         will trigger a decrease in the data rate.</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        :param timeout: Timeout that can automatically trigger</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt id="link-32" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-32', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method wins.channel.channelbase.Channel.configure()=wins.channel.channelbase.Channel-class.html#configure,Method wins.channel.interface.ChannelInterface.configure()=wins.channel.interface.ChannelInterface-class.html#configure,Method wins.channel.radio.Radio.configure()=wins.channel.radio.Radio-class.html#configure,Method wins.element.Element.configure()=wins.element.Element-class.html#configure,Method wins.ieee80211.dcf.DCF.configure()=wins.ieee80211.dcf.DCF-class.html#configure,Method wins.ieee80211.dot11a.Dot11APHY.configure()=wins.ieee80211.dot11a.Dot11APHY-class.html#configure,Method wins.ieee80211.dot11n.Dot11NPHY.configure()=wins.ieee80211.dot11n.Dot11NPHY-class.html#configure,Method wins.ieee80211.dot11n_dsp.Dot11N_DSP.configure()=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#configure,Method wins.ieee80211.navtimer.NAVTimer.configure()=wins.ieee80211.navtimer.NAVTimer-class.html#configure,Method wins.mac.arf.ARF.configure()=wins.mac.arf.ARF-class.html#configure,Method wins.mac.rateadaptation.RateAdapt.configure()=wins.mac.rateadaptation.RateAdapt-class.html#configure,Method wins.mac.rbar.RBAR.configure()=wins.mac.rbar.RBAR-class.html#configure,Method wins.mobile.motion.Motion.configure()=wins.mobile.motion.Motion-class.html#configure,Method wins.mobile.waypoint.RandomWaypoint.configure()=wins.mobile.waypoint.RandomWaypoint-class.html#configure,Method wins.net.dsr.DSR.configure()=wins.net.dsr.DSR-class.html#configure,Method wins.protocol.aloha.Aloha.configure()=wins.protocol.aloha.Aloha-class.html#configure,Method wins.protocol.arp.ARP.configure()=wins.protocol.arp.ARP-class.html#configure,Method wins.protocol.mac.MAC.configure()=wins.protocol.mac.MAC-class.html#configure,Method wins.protocol.net.NET.configure()=wins.protocol.net.NET-class.html#configure,Method wins.protocol.phy.PHY.configure()=wins.protocol.phy.PHY-class.html#configure,Method wins.protocol.routing.Routing.configure()=wins.protocol.routing.Routing-class.html#configure,Method wins.traffic.agent.Agent.configure()=wins.traffic.agent.Agent-class.html#configure"><a title="wins.channel.channelbase.Channel.configure
+wins.channel.interface.ChannelInterface.configure
+wins.channel.radio.Radio.configure
+wins.element.Element.configure
+wins.ieee80211.dcf.DCF.configure
+wins.ieee80211.dot11a.Dot11APHY.configure
+wins.ieee80211.dot11n.Dot11NPHY.configure
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.configure
+wins.ieee80211.navtimer.NAVTimer.configure
+wins.mac.arf.ARF.configure
+wins.mac.rateadaptation.RateAdapt.configure
+wins.mac.rbar.RBAR.configure
+wins.mobile.motion.Motion.configure
+wins.mobile.waypoint.RandomWaypoint.configure
+wins.net.dsr.DSR.configure
+wins.protocol.aloha.Aloha.configure
+wins.protocol.arp.ARP.configure
+wins.protocol.mac.MAC.configure
+wins.protocol.net.NET.configure
+wins.protocol.phy.PHY.configure
+wins.protocol.routing.Routing.configure
+wins.traffic.agent.Agent.configure" class="py-name" href="#" onclick="return doclink('link-33', 'configure', 'link-33');">configure</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-34" class="py-name"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-34', 'base', 'link-28');">base</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt id="link-35" class="py-name"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-35', 'base', 'link-28');">base</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">nsuccess</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">nsuccess</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name" targets="Variable wins.mac.arf_support.ARF_NSUCCESS=wins.mac.arf_support-module.html#ARF_NSUCCESS"><a title="wins.mac.arf_support.ARF_NSUCCESS" class="py-name" href="#" onclick="return doclink('link-36', 'ARF_NSUCCESS', 'link-36');">ARF_NSUCCESS</a></tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">nfailure</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">nfailure</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name" targets="Variable wins.mac.arf_support.ARF_NFAILURE=wins.mac.arf_support-module.html#ARF_NFAILURE"><a title="wins.mac.arf_support.ARF_NFAILURE" class="py-name" href="#" onclick="return doclink('link-37', 'ARF_NFAILURE', 'link-37');">ARF_NFAILURE</a></tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">timeout</tt>  <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">timeout</tt>  <tt class="py-op">=</tt> <tt id="link-38" class="py-name" targets="Variable wins.mac.arf_support.ARF_TIMEOUT=wins.mac.arf_support-module.html#ARF_TIMEOUT"><a title="wins.mac.arf_support.ARF_TIMEOUT" class="py-name" href="#" onclick="return doclink('link-38', 'ARF_TIMEOUT', 'link-38');">ARF_TIMEOUT</a></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-name">ra</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method wins.base.Base.newchild()=wins.base.Base-class.html#newchild"><a title="wins.base.Base.newchild" class="py-name" href="#" onclick="return doclink('link-39', 'newchild', 'link-39');">newchild</a></tt><tt class="py-op">(</tt><tt class="py-string">"ra"</tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name"><a title="wins.mac.rateadaptation.RateAdapt" class="py-name" href="#" onclick="return doclink('link-40', 'RateAdapt', 'link-16');">RateAdapt</a></tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-41', 'base', 'link-28');">base</a></tt><tt class="py-op">=</tt><tt id="link-42" class="py-name"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-42', 'base', 'link-28');">base</a></tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-43', 'tracename', 'link-21');">tracename</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-44', 'tracename', 'link-21');">tracename</a></tt><tt class="py-op">+</tt><tt class="py-string">".RA"</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method wins.backend.dot11n_backend.Dot11N_Transmitter.set_rate()=wins.backend.dot11n_backend.Dot11N_Transmitter-class.html#set_rate,Method wins.digital.rcpc.RCPC.set_rate()=wins.digital.rcpc.RCPC-class.html#set_rate,Method wins.digital.reedsolomon.ReedSolomon.set_rate()=wins.digital.reedsolomon.ReedSolomon-class.html#set_rate,Method wins.mac.rateadaptation.RateAdapt.set_rate()=wins.mac.rateadaptation.RateAdapt-class.html#set_rate"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.set_rate
+wins.digital.rcpc.RCPC.set_rate
+wins.digital.reedsolomon.ReedSolomon.set_rate
+wins.mac.rateadaptation.RateAdapt.set_rate" class="py-name" href="#" onclick="return doclink('link-45', 'set_rate', 'link-45');">set_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Variable wins.protocol.mac.MAC.broadcast=wins.protocol.mac.MAC-class.html#broadcast,Variable wins.protocol.net.NET.broadcast=wins.protocol.net.NET-class.html#broadcast,Variable wins.traffic.agent.Agent.broadcast=wins.traffic.agent.Agent-class.html#broadcast"><a title="wins.protocol.mac.MAC.broadcast
+wins.protocol.net.NET.broadcast
+wins.traffic.agent.Agent.broadcast" class="py-name" href="#" onclick="return doclink('link-46', 'broadcast', 'link-46');">broadcast</a></tt><tt class="py-op">)</tt> <tt class="py-comment"># use default base rate for broadcast</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-comment"># create FSM to manage ARF</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt id="link-47" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-47', 'fsm', 'link-1');">fsm</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="wins.base.Base.newchild" class="py-name" href="#" onclick="return doclink('link-48', 'newchild', 'link-39');">newchild</a></tt><tt class="py-op">(</tt><tt class="py-string">"manager"</tt><tt class="py-op">,</tt> <tt id="link-49" class="py-name"><a title="wins.fsm.FSM" class="py-name" href="#" onclick="return doclink('link-49', 'FSM', 'link-2');">FSM</a></tt><tt class="py-op">,</tt> <tt id="link-50" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-50', 'tracename', 'link-21');">tracename</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="wins.channel.breakpoint.Breakpoint.tracename
+wins.channel.channelbase.Channel.tracename
+wins.channel.channelbase.ChannelModel.tracename
+wins.channel.interface.ChannelInterface.tracename
+wins.channel.propagation.Propagation.tracename
+wins.channel.radio.Radio.tracename
+wins.channel.refprop.ReferencePropagation.tracename
+wins.digital.modulation.Modulation.tracename
+wins.digital.mqam.MQAM.tracename
+wins.digital.rcpc.RCPC.tracename
+wins.digital.reedsolomon.ReedSolomon.tracename
+wins.element.Port.tracename
+wins.fsm.FSM.tracename
+wins.fsm.Timer.tracename
+wins.ieee80211.dcf.DCF.tracename
+wins.ieee80211.dot11a.Dot11APHY.tracename
+wins.ieee80211.dot11n.Dot11NPHY.tracename
+wins.ieee80211.dot11n_channel.Dot11NChannel.tracename
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.tracename
+wins.ieee80211.navtimer.NAVTimer.tracename
+wins.mac.arf.ARF.tracename
+wins.mac.rateadaptation.RateAdapt.tracename
+wins.mac.rbar.RBAR.tracename
+wins.mobile.motion.Motion.tracename
+wins.mobile.waypoint.RandomWaypoint.tracename
+wins.net.dsr.DSR.tracename
+wins.net.dsr_rreq.RouteRequestTable.tracename
+wins.net.routecache.RouteCache.tracename
+wins.protocol.aloha.Aloha.tracename
+wins.protocol.arp.ARP.tracename
+wins.protocol.csmac.CSMAC.tracename
+wins.protocol.csphy.CSPHY.tracename
+wins.protocol.mac.MAC.tracename
+wins.protocol.net.NET.tracename
+wins.protocol.phy.PHY.tracename
+wins.protocol.routetable.RouteTable.tracename
+wins.protocol.routing.Routing.tracename
+wins.queue.Queue.tracename
+wins.trace.Traceable.tracename
+wins.traffic.agent.Agent.tracename" class="py-name" href="#" onclick="return doclink('link-51', 'tracename', 'link-21');">tracename</a></tt><tt class="py-op">+</tt><tt class="py-string">".MGR"</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt id="link-52" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-52', 'fsm', 'link-1');">fsm</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Method wins.fsm.FSM.goto()=wins.fsm.FSM-class.html#goto"><a title="wins.fsm.FSM.goto" class="py-name" href="#" onclick="return doclink('link-53', 'goto', 'link-53');">goto</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Method wins.mac.arf.ARF.MGR()=wins.mac.arf.ARF-class.html#MGR"><a title="wins.mac.arf.ARF.MGR" class="py-name" href="#" onclick="return doclink('link-54', 'MGR', 'link-54');">MGR</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-comment"># set other parameters</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nsuccess</tt> <tt class="py-op">=</tt> <tt class="py-name">nsuccess</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nfailure</tt> <tt class="py-op">=</tt> <tt class="py-name">nfailure</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timeout</tt>  <tt class="py-op">=</tt> <tt class="py-name">timeout</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">arftimer</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">probation</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="ARF.MGR"></a><div id="ARF.MGR-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="ARF.MGR-toggle" onclick="return toggle('ARF.MGR');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#MGR">MGR</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fsm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.MGR-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.MGR-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-docstring">"""MGR state; manage ARF protocol."""</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-name">waitevent</tt><tt class="py-op">,</tt> <tt id="link-55" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-55', 'fsm', 'link-1');">fsm</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">dropack</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt> <tt class="py-keyword">in</tt> <tt id="link-56" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-56', 'fsm', 'link-1');">fsm</a></tt><tt class="py-op">.</tt><tt class="py-name">eventsFired</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">recvack</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt> <tt class="py-keyword">in</tt> <tt id="link-57" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-57', 'fsm', 'link-1');">fsm</a></tt><tt class="py-op">.</tt><tt class="py-name">eventsFired</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-comment"># get destination parameter from event</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt> <tt class="py-name">dst</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt><tt class="py-op">.</tt><tt class="py-name">signalparam</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">recvack</tt><tt class="py-op">:</tt> <tt class="py-name">dst</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt><tt class="py-op">.</tt><tt class="py-name">signalparam</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">"[ARF]: Invalid state transition!"</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt class="py-name">dropack</tt> <tt class="py-op">^</tt> <tt class="py-name">recvack</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">errmsg</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-comment"># initialize ackcount if needed</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">dst</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">probation</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">arftimer</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">nack</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">probation</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">probation</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt id="link-58" class="py-name" targets="Variable wins.ieee80211.navtimer.NAVTimer.timer=wins.ieee80211.navtimer.NAVTimer-class.html#timer"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-58', 'timer', 'link-58');">timer</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-comment"># check probation condition</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">"[ARF]: ACK count must be zero in probation!"</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">nack</tt><tt class="py-op">&lt;&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">probation</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">errmsg</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-comment"># increment arftimer for every transmission attempt (packet-based timer)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt id="link-59" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-59', 'timer', 'link-58');">timer</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-comment"># process drop ACK or recv ACK</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">nack</tt><tt class="py-op">&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt>     <tt class="py-name">nack</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">recvack</tt><tt class="py-op">:</tt>   <tt class="py-name">nack</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-op">(</tt><tt class="py-name">nack</tt><tt class="py-op">&lt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt>     <tt class="py-name">nack</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">recvack</tt><tt class="py-op">:</tt>   <tt class="py-name">nack</tt> <tt class="py-op">=</tt> <tt class="py-op">+</tt><tt class="py-number">1</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt>     <tt class="py-name">nack</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">recvack</tt><tt class="py-op">:</tt>   <tt class="py-name">nack</tt> <tt class="py-op">=</tt> <tt class="py-op">+</tt><tt class="py-number">1</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-comment"># probation? dropack -&gt; decrease rate and continue using lower rate</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">probation</tt> <tt class="py-keyword">and</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                <tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt id="link-60" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-60', 'timer', 'link-58');">timer</a></tt><tt class="py-op">,</tt> <tt id="link-61" class="py-name" targets="Variable wins.digital.rcpc.RCPC.rate=wins.digital.rcpc.RCPC-class.html#rate,Variable wins.digital.reedsolomon.ReedSolomon.rate=wins.digital.reedsolomon.ReedSolomon-class.html#rate,Variable wins.protocol.phy.PHY.rate=wins.protocol.phy.PHY-class.html#rate"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-61', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method wins.mac.arf.ARF.decrate()=wins.mac.arf.ARF-class.html#decrate"><a title="wins.mac.arf.ARF.decrate" class="py-name" href="#" onclick="return doclink('link-62', 'decrate', 'link-62');">decrate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name" targets="Method wins.channel.channelbase.Channel.log()=wins.channel.channelbase.Channel-class.html#log,Method wins.channel.interface.ChannelInterface.log()=wins.channel.interface.ChannelInterface-class.html#log,Method wins.fsm.FSM.log()=wins.fsm.FSM-class.html#log,Method wins.fsm.Timer.log()=wins.fsm.Timer-class.html#log,Method wins.ieee80211.dcf.DCF.log()=wins.ieee80211.dcf.DCF-class.html#log,Method wins.ieee80211.dot11n.Dot11NPHY.log()=wins.ieee80211.dot11n.Dot11NPHY-class.html#log,Method wins.ieee80211.dot11n_channel.Dot11NChannel.log()=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#log,Method wins.ieee80211.dot11n_dsp.Dot11N_DSP.log()=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#log,Method wins.ieee80211.navtimer.NAVTimer.log()=wins.ieee80211.navtimer.NAVTimer-class.html#log,Method wins.mobile.waypoint.RandomWaypoint.log()=wins.mobile.waypoint.RandomWaypoint-class.html#log,Method wins.protocol.arp.ARP.log()=wins.protocol.arp.ARP-class.html#log,Method wins.protocol.net.NET.log()=wins.protocol.net.NET-class.html#log,Method wins.protocol.routetable.RouteTable.log()=wins.protocol.routetable.RouteTable-class.html#log,Method wins.protocol.routing.Routing.log()=wins.protocol.routing.Routing-class.html#log,Method wins.trace.Trace.log()=wins.trace.Trace-class.html#log,Method wins.trace.Traceable.log()=wins.trace.Traceable-class.html#log,Method wins.traffic.agent.Agent.log()=wins.traffic.agent.Agent-class.html#log"><a title="wins.channel.channelbase.Channel.log
+wins.channel.interface.ChannelInterface.log
+wins.fsm.FSM.log
+wins.fsm.Timer.log
+wins.ieee80211.dcf.DCF.log
+wins.ieee80211.dot11n.Dot11NPHY.log
+wins.ieee80211.dot11n_channel.Dot11NChannel.log
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.log
+wins.ieee80211.navtimer.NAVTimer.log
+wins.mobile.waypoint.RandomWaypoint.log
+wins.protocol.arp.ARP.log
+wins.protocol.net.NET.log
+wins.protocol.routetable.RouteTable.log
+wins.protocol.routing.Routing.log
+wins.trace.Trace.log
+wins.trace.Traceable.log
+wins.traffic.agent.Agent.log" class="py-name" href="#" onclick="return doclink('link-63', 'log', 'link-63');">log</a></tt><tt class="py-op">(</tt><tt class="py-string">"DECRATE"</tt><tt class="py-op">,</tt> <tt id="link-64" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-64', 'rate', 'link-61');">rate</a></tt><tt class="py-op">=</tt><tt id="link-65" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-65', 'rate', 'link-61');">rate</a></tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">=</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">ackcount</tt><tt class="py-op">=</tt><tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt id="link-66" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-66', 'timer', 'link-58');">timer</a></tt><tt class="py-op">=</tt><tt id="link-67" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-67', 'timer', 'link-58');">timer</a></tt><tt class="py-op">,</tt> <tt class="py-name">probation</tt><tt class="py-op">=</tt><tt class="py-name">probation</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-name">probation</tt> <tt class="py-op">=</tt>  <tt class="py-name">False</tt>      <tt class="py-comment"># reset flag</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-comment"># log events</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dropack</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="wins.channel.channelbase.Channel.log
+wins.channel.interface.ChannelInterface.log
+wins.fsm.FSM.log
+wins.fsm.Timer.log
+wins.ieee80211.dcf.DCF.log
+wins.ieee80211.dot11n.Dot11NPHY.log
+wins.ieee80211.dot11n_channel.Dot11NChannel.log
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.log
+wins.ieee80211.navtimer.NAVTimer.log
+wins.mobile.waypoint.RandomWaypoint.log
+wins.protocol.arp.ARP.log
+wins.protocol.net.NET.log
+wins.protocol.routetable.RouteTable.log
+wins.protocol.routing.Routing.log
+wins.trace.Trace.log
+wins.trace.Traceable.log
+wins.traffic.agent.Agent.log" class="py-name" href="#" onclick="return doclink('link-68', 'log', 'link-63');">log</a></tt><tt class="py-op">(</tt><tt class="py-string">"DROPACK"</tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">=</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">ackcount</tt><tt class="py-op">=</tt><tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt class="py-name">arftimer</tt><tt class="py-op">=</tt><tt id="link-69" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-69', 'timer', 'link-58');">timer</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">recvack</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="wins.channel.channelbase.Channel.log
+wins.channel.interface.ChannelInterface.log
+wins.fsm.FSM.log
+wins.fsm.Timer.log
+wins.ieee80211.dcf.DCF.log
+wins.ieee80211.dot11n.Dot11NPHY.log
+wins.ieee80211.dot11n_channel.Dot11NChannel.log
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.log
+wins.ieee80211.navtimer.NAVTimer.log
+wins.mobile.waypoint.RandomWaypoint.log
+wins.protocol.arp.ARP.log
+wins.protocol.net.NET.log
+wins.protocol.routetable.RouteTable.log
+wins.protocol.routing.Routing.log
+wins.trace.Trace.log
+wins.trace.Traceable.log
+wins.traffic.agent.Agent.log" class="py-name" href="#" onclick="return doclink('link-70', 'log', 'link-63');">log</a></tt><tt class="py-op">(</tt><tt class="py-string">"RECVACK"</tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">=</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">ackcount</tt><tt class="py-op">=</tt><tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt class="py-name">arftimer</tt><tt class="py-op">=</tt><tt id="link-71" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-71', 'timer', 'link-58');">timer</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-comment"># check if Nsuccess or Nfailure condition is met</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-name">timerexpired</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-72" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-72', 'timer', 'link-58');">timer</a></tt><tt class="py-op">&gt;</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timeout</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nsuccess</tt><tt class="py-op">-</tt><tt class="py-name">nack</tt><tt class="py-op">&lt;</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">timerexpired</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">            <tt class="py-comment"># (Nack &gt;= +Nsuccess) OR (Timer expired)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">            <tt class="py-comment">#   -&gt; increase rate, enter probation period</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt id="link-73" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-73', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name" targets="Method wins.mac.arf.ARF.incrate()=wins.mac.arf.ARF-class.html#incrate"><a title="wins.mac.arf.ARF.incrate" class="py-name" href="#" onclick="return doclink('link-74', 'incrate', 'link-74');">incrate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt id="link-75" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-75', 'timer', 'link-58');">timer</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt>      <tt class="py-comment"># reinitialize ackcount and timer</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">probation</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt>        <tt class="py-comment"># set probation flag</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="wins.channel.channelbase.Channel.log
+wins.channel.interface.ChannelInterface.log
+wins.fsm.FSM.log
+wins.fsm.Timer.log
+wins.ieee80211.dcf.DCF.log
+wins.ieee80211.dot11n.Dot11NPHY.log
+wins.ieee80211.dot11n_channel.Dot11NChannel.log
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.log
+wins.ieee80211.navtimer.NAVTimer.log
+wins.mobile.waypoint.RandomWaypoint.log
+wins.protocol.arp.ARP.log
+wins.protocol.net.NET.log
+wins.protocol.routetable.RouteTable.log
+wins.protocol.routing.Routing.log
+wins.trace.Trace.log
+wins.trace.Traceable.log
+wins.traffic.agent.Agent.log" class="py-name" href="#" onclick="return doclink('link-76', 'log', 'link-63');">log</a></tt><tt class="py-op">(</tt><tt class="py-string">"INCRATE"</tt><tt class="py-op">,</tt> <tt id="link-77" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-77', 'rate', 'link-61');">rate</a></tt><tt class="py-op">=</tt><tt id="link-78" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-78', 'rate', 'link-61');">rate</a></tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">=</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">ackcount</tt><tt class="py-op">=</tt><tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt class="py-name">probation</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-op">(</tt><tt class="py-name">nack</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nfailure</tt><tt class="py-op">&lt;</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">            <tt class="py-comment"># Nack &lt;= -Nfailure -&gt; decrease rate</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">            <tt id="link-79" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-79', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="wins.mac.arf.ARF.decrate" class="py-name" href="#" onclick="return doclink('link-80', 'decrate', 'link-62');">decrate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt id="link-81" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-81', 'timer', 'link-58');">timer</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt>     <tt class="py-comment"># set ackcount to 0, reset timer</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="wins.channel.channelbase.Channel.log
+wins.channel.interface.ChannelInterface.log
+wins.fsm.FSM.log
+wins.fsm.Timer.log
+wins.ieee80211.dcf.DCF.log
+wins.ieee80211.dot11n.Dot11NPHY.log
+wins.ieee80211.dot11n_channel.Dot11NChannel.log
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.log
+wins.ieee80211.navtimer.NAVTimer.log
+wins.mobile.waypoint.RandomWaypoint.log
+wins.protocol.arp.ARP.log
+wins.protocol.net.NET.log
+wins.protocol.routetable.RouteTable.log
+wins.protocol.routing.Routing.log
+wins.trace.Trace.log
+wins.trace.Traceable.log
+wins.traffic.agent.Agent.log" class="py-name" href="#" onclick="return doclink('link-82', 'log', 'link-63');">log</a></tt><tt class="py-op">(</tt><tt class="py-string">"DECRATE"</tt><tt class="py-op">,</tt> <tt id="link-83" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-83', 'rate', 'link-61');">rate</a></tt><tt class="py-op">=</tt><tt id="link-84" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-84', 'rate', 'link-61');">rate</a></tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">=</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">ackcount</tt><tt class="py-op">=</tt><tt class="py-name">nack</tt><tt class="py-op">,</tt> <tt class="py-name">probation</tt><tt class="py-op">=</tt><tt class="py-name">probation</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-comment"># set ackcount/probation value</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackcount</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt>  <tt class="py-op">=</tt> <tt class="py-name">nack</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">arftimer</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt>  <tt class="py-op">=</tt> <tt id="link-85" class="py-name"><a title="wins.ieee80211.navtimer.NAVTimer.timer" class="py-name" href="#" onclick="return doclink('link-85', 'timer', 'link-58');">timer</a></tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">probation</tt><tt class="py-op">[</tt><tt class="py-name">dst</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">probation</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-comment"># continue in MGR</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt id="link-86" class="py-name"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-86', 'fsm', 'link-1');">fsm</a></tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="wins.fsm.FSM.goto" class="py-name" href="#" onclick="return doclink('link-87', 'goto', 'link-53');">goto</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="wins.mac.arf.ARF.MGR" class="py-name" href="#" onclick="return doclink('link-88', 'MGR', 'link-54');">MGR</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="ARF.retry"></a><div id="ARF.retry-def"><a name="L198"></a><tt class="py-lineno">198</tt> <a class="py-toggle" href="#" id="ARF.retry-toggle" onclick="return toggle('ARF.retry');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#retry">retry</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.retry-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.retry-expanded"><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-docstring">"""Overloaded to manage dropped ACKs."""</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-name">rc</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">retrycount</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt id="link-89" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-89', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-90" class="py-name" targets="Method wins.ieee80211.dcf.DCF.retry()=wins.ieee80211.dcf.DCF-class.html#retry,Method wins.mac.arf.ARF.retry()=wins.mac.arf.ARF-class.html#retry"><a title="wins.ieee80211.dcf.DCF.retry
+wins.mac.arf.ARF.retry" class="py-name" href="#" onclick="return doclink('link-90', 'retry', 'link-90');">retry</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-comment"># Actual retry?</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">retrycount</tt><tt class="py-op">&gt;</tt><tt class="py-name">rc</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name" targets="Method wins.ieee80211.dcf.DCF.isdot11data()=wins.ieee80211.dcf.DCF-class.html#isdot11data,Function wins.ieee80211.dot11_support.isdot11data()=wins.ieee80211.dot11_support-module.html#isdot11data,Method wins.mac.rbar.RBAR.isdot11data()=wins.mac.rbar.RBAR-class.html#isdot11data"><a title="wins.ieee80211.dcf.DCF.isdot11data
+wins.ieee80211.dot11_support.isdot11data
+wins.mac.rbar.RBAR.isdot11data" class="py-name" href="#" onclick="return doclink('link-91', 'isdot11data', 'link-91');">isdot11data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">datatosend</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">            <tt class="py-comment"># retry count was increased -&gt; dropped ACK</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">            <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name" targets="Method wins.ieee80211.dcf.DCF.get_dot11data()=wins.ieee80211.dcf.DCF-class.html#get_dot11data,Function wins.ieee80211.dot11_support.get_dot11data()=wins.ieee80211.dot11_support-module.html#get_dot11data,Method wins.mac.rbar.RBAR.get_dot11data()=wins.mac.rbar.RBAR-class.html#get_dot11data"><a title="wins.ieee80211.dcf.DCF.get_dot11data
+wins.ieee80211.dot11_support.get_dot11data
+wins.mac.rbar.RBAR.get_dot11data" class="py-name" href="#" onclick="return doclink('link-92', 'get_dot11data', 'link-92');">get_dot11data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">datatosend</tt><tt class="py-op">)</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">            <tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">src</tt>  <tt class="py-op">=</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">addr1</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">addr2</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-comment">#self.log("DROPACK", dst=dst, src=src)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dropack</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="ARF.send_data"></a><div id="ARF.send_data-def"><a name="L210"></a><tt class="py-lineno">210</tt> <a class="py-toggle" href="#" id="ARF.send_data-toggle" onclick="return toggle('ARF.send_data');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#send_data">send_data</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.send_data-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.send_data-expanded"><a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-docstring">"""Additional processing for outgoing DATA."""</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt id="link-93" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-93', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Method wins.ieee80211.dcf.DCF.send_data()=wins.ieee80211.dcf.DCF-class.html#send_data,Method wins.mac.arf.ARF.send_data()=wins.mac.arf.ARF-class.html#send_data,Method wins.mac.rbar.RBAR.send_data()=wins.mac.rbar.RBAR-class.html#send_data"><a title="wins.ieee80211.dcf.DCF.send_data
+wins.mac.arf.ARF.send_data
+wins.mac.rbar.RBAR.send_data" class="py-name" href="#" onclick="return doclink('link-94', 'send_data', 'link-94');">send_data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">        <tt class="py-name">dst</tt>  <tt class="py-op">=</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">addr1</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt id="link-95" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-95', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name" targets="Method wins.backend.dot11n_backend.Dot11N_Transmitter.get_rate()=wins.backend.dot11n_backend.Dot11N_Transmitter-class.html#get_rate,Method wins.digital.reedsolomon.ReedSolomon.get_rate()=wins.digital.reedsolomon.ReedSolomon-class.html#get_rate,Method wins.mac.rateadaptation.RateAdapt.get_rate()=wins.mac.rateadaptation.RateAdapt-class.html#get_rate"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.get_rate
+wins.digital.reedsolomon.ReedSolomon.get_rate
+wins.mac.rateadaptation.RateAdapt.get_rate" class="py-name" href="#" onclick="return doclink('link-96', 'get_rate', 'link-96');">get_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">setanno</tt><tt class="py-op">(</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">,</tt> <tt id="link-97" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-97', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"> </tt>
+<a name="ARF.recv_ack"></a><div id="ARF.recv_ack-def"><a name="L217"></a><tt class="py-lineno">217</tt> <a class="py-toggle" href="#" id="ARF.recv_ack-toggle" onclick="return toggle('ARF.recv_ack');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#recv_ack">recv_ack</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ack</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.recv_ack-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.recv_ack-expanded"><a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-docstring">"""Additional processing for incoming ACK."""</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt id="link-98" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-98', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name" targets="Method wins.ieee80211.dcf.DCF.recv_ack()=wins.ieee80211.dcf.DCF-class.html#recv_ack,Method wins.mac.arf.ARF.recv_ack()=wins.mac.arf.ARF-class.html#recv_ack"><a title="wins.ieee80211.dcf.DCF.recv_ack
+wins.mac.arf.ARF.recv_ack" class="py-name" href="#" onclick="return doclink('link-99', 'recv_ack', 'link-99');">recv_ack</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ack</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-comment"># Expecting ACK?</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="wins.ieee80211.dcf.DCF.isdot11data
+wins.ieee80211.dot11_support.isdot11data
+wins.mac.rbar.RBAR.isdot11data" class="py-name" href="#" onclick="return doclink('link-100', 'isdot11data', 'link-91');">isdot11data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">datatosend</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">            <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="wins.ieee80211.dcf.DCF.get_dot11data
+wins.ieee80211.dot11_support.get_dot11data
+wins.mac.rbar.RBAR.get_dot11data" class="py-name" href="#" onclick="return doclink('link-101', 'get_dot11data', 'link-92');">get_dot11data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">datatosend</tt><tt class="py-op">)</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">            <tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt class="py-name">src</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">addr1</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">addr2</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">            <tt class="py-comment"># ACK for me? -&gt; received ACK</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">src</tt><tt class="py-op">==</tt><tt class="py-name">ack</tt><tt class="py-op">.</tt><tt class="py-name">addr1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                <tt class="py-comment">#self.log("RECVACK", ack, dst=dst, src=src)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">recvack</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"> </tt>
+<a name="ARF.incrate"></a><div id="ARF.incrate-def"><a name="L229"></a><tt class="py-lineno">229</tt> <a class="py-toggle" href="#" id="ARF.incrate-toggle" onclick="return toggle('ARF.incrate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#incrate">incrate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dst</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.incrate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.incrate-expanded"><a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-docstring">"""Increase data rate corresponding to destination `dst`."""</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt id="link-102" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-102', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.get_rate
+wins.digital.reedsolomon.ReedSolomon.get_rate
+wins.mac.rateadaptation.RateAdapt.get_rate" class="py-name" href="#" onclick="return doclink('link-103', 'get_rate', 'link-96');">get_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">"[ARF]: Invalid rate (%s) in incrate()!"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt id="link-104" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-104', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt id="link-105" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-105', 'rate', 'link-61');">rate</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-106', 'rates', 'link-30');">rates</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">errmsg</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">        <tt class="py-name">idx</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-107', 'rates', 'link-30');">rates</a></tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt id="link-108" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-108', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">&lt;</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-109', 'rates', 'link-30');">rates</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">            <tt id="link-110" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-110', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-111', 'rates', 'link-30');">rates</a></tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.set_rate
+wins.digital.rcpc.RCPC.set_rate
+wins.digital.reedsolomon.ReedSolomon.set_rate
+wins.mac.rateadaptation.RateAdapt.set_rate" class="py-name" href="#" onclick="return doclink('link-112', 'set_rate', 'link-45');">set_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt id="link-113" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-113', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-114" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-114', 'rate', 'link-61');">rate</a></tt> </tt>
+</div><a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"> </tt>
+<a name="ARF.decrate"></a><div id="ARF.decrate-def"><a name="L240"></a><tt class="py-lineno">240</tt> <a class="py-toggle" href="#" id="ARF.decrate-toggle" onclick="return toggle('ARF.decrate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#decrate">decrate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dst</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.decrate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.decrate-expanded"><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-docstring">"""Decrease data rate corresponding to destination `dst`."""</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">        <tt id="link-115" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-115', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.get_rate
+wins.digital.reedsolomon.ReedSolomon.get_rate
+wins.mac.rateadaptation.RateAdapt.get_rate" class="py-name" href="#" onclick="return doclink('link-116', 'get_rate', 'link-96');">get_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">"[ARF]: Invalid rate (%s) in incrate()!"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt id="link-117" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-117', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt id="link-118" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-118', 'rate', 'link-61');">rate</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-119', 'rates', 'link-30');">rates</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">errmsg</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-name">idx</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-120" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-120', 'rates', 'link-30');">rates</a></tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt id="link-121" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-121', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">            <tt id="link-122" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-122', 'rate', 'link-61');">rate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-123', 'rates', 'link-30');">rates</a></tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ra</tt><tt class="py-op">.</tt><tt id="link-124" class="py-name"><a title="wins.backend.dot11n_backend.Dot11N_Transmitter.set_rate
+wins.digital.rcpc.RCPC.set_rate
+wins.digital.reedsolomon.ReedSolomon.set_rate
+wins.mac.rateadaptation.RateAdapt.set_rate" class="py-name" href="#" onclick="return doclink('link-124', 'set_rate', 'link-45');">set_rate</a></tt><tt class="py-op">(</tt><tt class="py-name">dst</tt><tt class="py-op">,</tt> <tt id="link-125" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-125', 'rate', 'link-61');">rate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-126" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-126', 'rate', 'link-61');">rate</a></tt> </tt>
+</div><a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"> </tt>
+<a name="ARF.get_rates"></a><div id="ARF.get_rates-def"><a name="L251"></a><tt class="py-lineno">251</tt> <a class="py-toggle" href="#" id="ARF.get_rates-toggle" onclick="return toggle('ARF.get_rates');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#get_rates">get_rates</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">force</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.get_rates-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.get_rates-expanded"><a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get list of valid rate enumerations.</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-docstring">        :param force: If true, recalculate rates; otherwise use cached value</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">                      [default=False].</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring">        :return: List of valid rate enumerations.</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">force</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rates</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-comment"># initialize ordered rates</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rates</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">            <tt class="py-name">orates</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt>     <tt class="py-comment"># ordered rates</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">            <tt id="link-127" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-127', 'rates', 'link-30');">rates</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">r</tt> <tt class="py-keyword">for</tt> <tt class="py-name">r</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name" targets="Variable wins.protocol.mac.MAC.phy=wins.protocol.mac.MAC-class.html#phy,Module wins.protocol.phy=wins.protocol.phy-module.html"><a title="wins.protocol.mac.MAC.phy
+wins.protocol.phy" class="py-name" href="#" onclick="return doclink('link-128', 'phy', 'link-128');">phy</a></tt><tt class="py-op">.</tt><tt id="link-129" class="py-name"><a title="wins.digital.rcpc.RCPC.rate
+wins.digital.reedsolomon.ReedSolomon.rate
+wins.protocol.phy.PHY.rate" class="py-name" href="#" onclick="return doclink('link-129', 'rate', 'link-61');">rate</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt id="link-130" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-130', 'rates', 'link-30');">rates</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                <tt class="py-name">maxrate</tt><tt class="py-op">,</tt> <tt class="py-name">maxidx</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">k</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-131" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-131', 'rates', 'link-30');">rates</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">                    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt id="link-132" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-132', 'rates', 'link-30');">rates</a></tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">                    <tt class="py-name">rbps</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-133" class="py-name" targets="Method wins.ieee80211.dcf.DCF.get_datarate()=wins.ieee80211.dcf.DCF-class.html#get_datarate,Method wins.ieee80211.dot11a.Dot11APHY.get_datarate()=wins.ieee80211.dot11a.Dot11APHY-class.html#get_datarate,Method wins.ieee80211.dot11n.Dot11NPHY.get_datarate()=wins.ieee80211.dot11n.Dot11NPHY-class.html#get_datarate,Method wins.protocol.phy.PHY.get_datarate()=wins.protocol.phy.PHY-class.html#get_datarate"><a title="wins.ieee80211.dcf.DCF.get_datarate
+wins.ieee80211.dot11a.Dot11APHY.get_datarate
+wins.ieee80211.dot11n.Dot11NPHY.get_datarate
+wins.protocol.phy.PHY.get_datarate" class="py-name" href="#" onclick="return doclink('link-133', 'get_datarate', 'link-133');">get_datarate</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">maxrate</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">maxrate</tt><tt class="py-op">,</tt> <tt class="py-name">maxidx</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-name">k</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">                    <tt class="py-name">mbps</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="wins.ieee80211.dcf.DCF.get_datarate
+wins.ieee80211.dot11a.Dot11APHY.get_datarate
+wins.ieee80211.dot11n.Dot11NPHY.get_datarate
+wins.protocol.phy.PHY.get_datarate" class="py-name" href="#" onclick="return doclink('link-134', 'get_datarate', 'link-133');">get_datarate</a></tt><tt class="py-op">(</tt><tt class="py-name">maxrate</tt><tt class="py-op">)</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">rbps</tt><tt class="py-op">&gt;</tt><tt class="py-name">mbps</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  <tt class="py-name">maxrate</tt><tt class="py-op">,</tt> <tt class="py-name">maxidx</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-name">k</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">                <tt class="py-name">orates</tt><tt class="py-op">.</tt><tt id="link-135" class="py-name" targets="Method wins.backend.waveform.vectorc.insert()=wins.backend.waveform.vectorc-class.html#insert,Method wins.backend.waveform.vectori.insert()=wins.backend.waveform.vectori-class.html#insert,Method wins.queue.Queue.insert()=wins.queue.Queue-class.html#insert"><a title="wins.backend.waveform.vectorc.insert
+wins.backend.waveform.vectori.insert
+wins.queue.Queue.insert" class="py-name" href="#" onclick="return doclink('link-135', 'insert', 'link-135');">insert</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-136" class="py-name"><a title="wins.digital.rcpc.RCPC.rates
+wins.mac.arf.ARF.rates" class="py-name" href="#" onclick="return doclink('link-136', 'rates', 'link-30');">rates</a></tt><tt class="py-op">.</tt><tt id="link-137" class="py-name" targets="Method wins.backend.waveform.vectorc.pop()=wins.backend.waveform.vectorc-class.html#pop,Method wins.backend.waveform.vectori.pop()=wins.backend.waveform.vectori-class.html#pop"><a title="wins.backend.waveform.vectorc.pop
+wins.backend.waveform.vectori.pop" class="py-name" href="#" onclick="return doclink('link-137', 'pop', 'link-137');">pop</a></tt><tt class="py-op">(</tt><tt class="py-name">maxidx</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>     <tt class="py-comment"># add max rate to orates</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rates</tt> <tt class="py-op">=</tt> <tt class="py-name">orates</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rates</tt> </tt>
+</div><a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"> </tt>
+<a name="ARF.log_send"></a><div id="ARF.log_send-def"><a name="L275"></a><tt class="py-lineno">275</tt> <a class="py-toggle" href="#" id="ARF.log_send-toggle" onclick="return toggle('ARF.log_send');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#log_send">log_send</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.log_send-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.log_send-expanded"><a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-docstring">"""Updated to print `ARF` related parameters."""</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">hasanno</tt><tt class="py-op">(</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">            <tt class="py-name">kwargs</tt><tt class="py-op">[</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">getanno</tt><tt class="py-op">(</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">)</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">        <tt id="link-138" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-138', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-139" class="py-name" targets="Method wins.channel.interface.ChannelInterface.log_send()=wins.channel.interface.ChannelInterface-class.html#log_send,Method wins.channel.radio.Radio.log_send()=wins.channel.radio.Radio-class.html#log_send,Method wins.ieee80211.dcf.DCF.log_send()=wins.ieee80211.dcf.DCF-class.html#log_send,Method wins.ieee80211.dot11a.Dot11APHY.log_send()=wins.ieee80211.dot11a.Dot11APHY-class.html#log_send,Method wins.ieee80211.dot11n.Dot11NPHY.log_send()=wins.ieee80211.dot11n.Dot11NPHY-class.html#log_send,Method wins.mac.arf.ARF.log_send()=wins.mac.arf.ARF-class.html#log_send,Method wins.mac.rbar.RBAR.log_send()=wins.mac.rbar.RBAR-class.html#log_send,Method wins.protocol.aloha.Aloha.log_send()=wins.protocol.aloha.Aloha-class.html#log_send,Method wins.protocol.arp.ARP.log_send()=wins.protocol.arp.ARP-class.html#log_send,Method wins.protocol.routing.Routing.log_send()=wins.protocol.routing.Routing-class.html#log_send"><a title="wins.channel.interface.ChannelInterface.log_send
+wins.channel.radio.Radio.log_send
+wins.ieee80211.dcf.DCF.log_send
+wins.ieee80211.dot11a.Dot11APHY.log_send
+wins.ieee80211.dot11n.Dot11NPHY.log_send
+wins.mac.arf.ARF.log_send
+wins.mac.rbar.RBAR.log_send
+wins.protocol.aloha.Aloha.log_send
+wins.protocol.arp.ARP.log_send
+wins.protocol.routing.Routing.log_send" class="py-name" href="#" onclick="return doclink('link-139', 'log_send', 'link-139');">log_send</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"> </tt>
+<a name="ARF.log_recv"></a><div id="ARF.log_recv-def"><a name="L281"></a><tt class="py-lineno">281</tt> <a class="py-toggle" href="#" id="ARF.log_recv-toggle" onclick="return toggle('ARF.log_recv');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.mac.arf.ARF-class.html#log_recv">log_recv</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ARF.log_recv-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ARF.log_recv-expanded"><a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">        <tt class="py-docstring">"""Updated to print `ARF` related parameters."""</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">hasanno</tt><tt class="py-op">(</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">            <tt class="py-name">kwargs</tt><tt class="py-op">[</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">getanno</tt><tt class="py-op">(</tt><tt class="py-string">'phy-rate'</tt><tt class="py-op">)</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">        <tt id="link-140" class="py-name"><a title="wins.ieee80211.dcf.DCF" class="py-name" href="#" onclick="return doclink('link-140', 'DCF', 'link-9');">DCF</a></tt><tt class="py-op">.</tt><tt id="link-141" class="py-name" targets="Method wins.channel.interface.ChannelInterface.log_recv()=wins.channel.interface.ChannelInterface-class.html#log_recv,Method wins.channel.radio.Radio.log_recv()=wins.channel.radio.Radio-class.html#log_recv,Method wins.ieee80211.dcf.DCF.log_recv()=wins.ieee80211.dcf.DCF-class.html#log_recv,Method wins.ieee80211.dot11a.Dot11APHY.log_recv()=wins.ieee80211.dot11a.Dot11APHY-class.html#log_recv,Method wins.ieee80211.dot11n.Dot11NPHY.log_recv()=wins.ieee80211.dot11n.Dot11NPHY-class.html#log_recv,Method wins.mac.arf.ARF.log_recv()=wins.mac.arf.ARF-class.html#log_recv,Method wins.mac.rbar.RBAR.log_recv()=wins.mac.rbar.RBAR-class.html#log_recv,Method wins.protocol.aloha.Aloha.log_recv()=wins.protocol.aloha.Aloha-class.html#log_recv,Method wins.protocol.arp.ARP.log_recv()=wins.protocol.arp.ARP-class.html#log_recv,Method wins.protocol.routing.Routing.log_recv()=wins.protocol.routing.Routing-class.html#log_recv"><a title="wins.channel.interface.ChannelInterface.log_recv
+wins.channel.radio.Radio.log_recv
+wins.ieee80211.dcf.DCF.log_recv
+wins.ieee80211.dot11a.Dot11APHY.log_recv
+wins.ieee80211.dot11n.Dot11NPHY.log_recv
+wins.mac.arf.ARF.log_recv
+wins.mac.rbar.RBAR.log_recv
+wins.protocol.aloha.Aloha.log_recv
+wins.protocol.arp.ARP.log_recv
+wins.protocol.routing.Routing.log_recv" class="py-name" href="#" onclick="return doclink('link-141', 'log_recv', 'link-141');">log_recv</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:36 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

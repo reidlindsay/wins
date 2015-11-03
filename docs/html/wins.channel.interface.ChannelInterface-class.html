@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel.interface.ChannelInterface</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.channel-module.html">Package&nbsp;channel</a> ::
+        <a href="wins.channel.interface-module.html">Module&nbsp;interface</a> ::
+        Class&nbsp;ChannelInterface
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ChannelInterface</h1><p class="nomargin-top"><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_channelint" name="class_hierarchy_for_channelint">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="176,5,259,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="163,61,272,88"/>
+<area shape="rect" href="wins.channel.interface.ChannelInterface-class.html" title="ChannelInterface" alt="" coords="159,173,276,200"/>
+<area shape="rect" href="wins.channel.radio.Radio-class.html" title="radio.Radio" alt="" coords="175,229,260,256"/>
+<area shape="rect" href="wins.ieee80211.dot11a.Dot11ARadio-class.html" title="ieee80211.dot11a.Dot11ARadio" alt="" coords="5,285,205,312"/>
+<area shape="rect" href="wins.ieee80211.dot11n.Dot11NRadio-class.html" title="ieee80211.dot11n.Dot11NRadio" alt="" coords="229,285,429,312"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="157,117,277,144"/>
+</map>
+  <img src="class_hierarchy_for_channelint.gif" alt='' usemap="#class_hierarchy_for_channelint" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Interface to connect to a <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</p>
+<dl class="rst-docutils">
+<dt>This element has four <a href="wins.element.Port-class.html" class="link">Port</a> objects:</dt>
+<dd><ol class="rst-first rst-last rst-arabic simple">
+<li>&quot;TXU&quot; - sends received packets to upstream element.</li>
+<li>&quot;RXU&quot; - receives traffic from an upstream element.</li>
+<li>&quot;TXD&quot; - sends traffic to <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</li>
+<li>&quot;RXD&quot; - receives traffic from the <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</li>
+</ol>
+</dd>
+</dl>
+<p>A <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> must be connected to a <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a> using the
+<a href="wins.channel.channelbase.Channel-class.html#connect" class="link">Channel.connect()</a> method.</p>
+<div class="rst-section" id="rst-packet-annotations-and-channelinterface">
+<h1 class="heading">Packet Annotations and ChannelInterface</h1>
+<p>The following annotations are marked or used by <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cif-duration</td>
+<td>Specifies duration of packet so that
+<a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> can simulate transmission and
+reception of packet. <strong>This must be set by an
+upstream protocol.</strong></td>
+</tr>
+<tr><td>cif-collision</td>
+<td>List of other Packet objects that have arrived
+during the reception of a Packet. This collision
+list should be used to resolve collisions.</td>
+</tr>
+<tr><td>cif-src</td>
+<td>Reference to <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> set when sending
+a packet to the <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</td>
+</tr>
+<tr><td>cif-dst</td>
+<td>Reference to <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> set when
+receiving a packet from the <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</td>
+</tr>
+<tr><td>cif-drp</td>
+<td>If marked, indicates that the packet was not
+completely received because of transmission.
+This only occurs in halfduplex operation.</td>
+</tr>
+<tr><td>cif-txts</td>
+<td>Timestamp for when the packet was transmitted
+from 'cif-src'.</td>
+</tr>
+<tr><td>cif-rxts</td>
+<td>Timestamp for when the packet arrived at the
+receiver 'cif-dst'.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">halfduplex</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Set up ports and other parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SEND"></a><span class="summary-sig-name">SEND</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      Manage downstream (or outgoing traffic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.SEND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#RECV" class="summary-sig-name">RECV</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      Manage upstream (or incoming) traffic.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.RECV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="CAPTURE"></a><span class="summary-sig-name">CAPTURE</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Simulate capture process for a Packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.CAPTURE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#set_sendanno" class="summary-sig-name">set_sendanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set annotations for outgoing traffic prior to sending downstream.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.set_sendanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#set_recvanno" class="summary-sig-name">set_recvanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set annotation for incoming traffic at start of capture (i.e. right
+after packet has been inserted into <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.set_recvanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#cleananno" class="summary-sig-name">cleananno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Remove unwanted annotations from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.cleananno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#drop" class="summary-sig-name">drop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set 'cif-drp' annotation in packet p.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#interval_heap" class="summary-sig-name">interval_heap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Create interval heap from collision list in packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.interval_heap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#sinr_heap" class="summary-sig-name">sinr_heap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Calculate signal-to-interference-and noise ratio (SINR) for each
+partition created by <a href="wins.channel.interface.ChannelInterface-class.html#interval_heap" class="link">interval_heap()</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.sinr_heap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_send"></a><span class="summary-sig-name">log_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging a send event for packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.log_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_recv"></a><span class="summary-sig-name">log_recv</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging a receive event for packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.log_recv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_drop"></a><span class="summary-sig-name">log_drop</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging a drop event for packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.log_drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.interface.ChannelInterface-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_cif_anno"></a><span class="summary-sig-name">get_cif_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Convenience method to extract annotations and convert to strings.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.get_cif_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#connect">connect</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'channel interface'"><code class="variable-quote">'</code><code class="variable-string">channel interface</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'CIF'"><code class="variable-quote">'</code><code class="variable-string">CIF</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="halfduplex"></a><span class="summary-name">halfduplex</span><br />
+      : Boolean flag; if true, then use half-duplex operation,
+otherwise use full-duplex operation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rxbuffer"></a><span class="summary-name">rxbuffer</span><br />
+      : Receive buffer of Packets that are actively being received.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rxdata"></a><span class="summary-name">rxdata</span><br />
+      : SimEvent signalled when Packet starts being received.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rxdone"></a><span class="summary-name">rxdone</span><br />
+      : SimEvent signalled when Packet is done being received.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="txdata"></a><span class="summary-name">txdata</span><br />
+      : SimEvent signalled when Packet is sent to <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="txdone"></a><span class="summary-name">txdone</span><br />
+      : SimEvent signalled when Packet duration is done simulating.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.interface.ChannelInterface-class.html#ifstate" class="summary-name">ifstate</a><br />
+      : Property to access current state of <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.interface.ChannelInterface-class.html#intransmit" class="summary-name">intransmit</a><br />
+      : Property to check if in <a href="wins.channel.interface-module.html#CHANNELIF_TX" class="link">CHANNELIF_TX</a> state.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.interface.ChannelInterface-class.html#inreceive" class="summary-name">inreceive</a><br />
+      :  Property to check if in <a href="wins.channel.interface-module.html#CHANNELIF_RX" class="link">CHANNELIF_RX</a> state.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>start</code></strong> - Boolean; if true, call <a href="wins.element.Element-class.html#start" class="link">start()</a> at the end of constructor.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to <a href="wins.trace.Traceable-class.html" class="link">Traceable</a> constructor and
+<a href="wins.channel.interface.ChannelInterface-class.html#configure" class="link">configure()</a> method.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">halfduplex</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Set up ports and other parameters.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>halfduplex</code></strong> - Boolean; if true, operate in half-duplex mode;
+otherwise use full-duplex operation.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="RECV"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RECV</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.RECV">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Manage upstream (or incoming) traffic.</p>
+<p>This method spawn worker processes to simulate the capture of each
+packet. These worker processes manage 'cif-drp' and 'cif-collision'
+annotations; along with simulating packet 'cif-duration'.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_sendanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_sendanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.set_sendanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set annotations for outgoing traffic prior to sending downstream.</p>
+<p>By default, this method sets the 'cif-src' and 'cif-txts' annotations.
+Overload this method as necessary.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Modified packet <code class="link">p</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_recvanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_recvanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.set_recvanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set annotation for incoming traffic at start of capture (i.e. right
+after packet has been inserted into <a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>).</p>
+<p>By default, this method initializes the 'cif-collision' annotation, sets the
+'cif-dst' annotation, and sets the 'cif-rxts' annotation. Overload this
+method as necessary.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Modified packet <code class="link">p</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cleananno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cleananno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.cleananno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove unwanted annotations from packet <code class="link">p</code>.</p>
+<p>Removes any annotations that could cause cyclic references.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="drop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">drop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.drop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Set 'cif-drp' annotation in packet p.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to mark; or if &quot;all&quot;, then mark all packets in
+<a href="wins.channel.interface.ChannelInterface-class.html#rxbuffer" class="link">rxbuffer</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="interval_heap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">interval_heap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.interval_heap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create interval heap from collision list in packet <code class="link">p</code>.</p>
+<p>This method uses the 'cif-rxts' and 'cif-duration' annotations of packet
+<code class="link">p</code> and each packet in its collision list to create an interval heap. To
+do this, the method will create a list of partitions over the duration
+of packet <code class="link">p</code> and sort colliding packets into the appropriate
+partitions. An interval heap looks like:</p>
+<blockquote>
+[(t0,t1,[...]), (t1,t2,[...]), ...]</blockquote>
+<p>This method sets the 'cif-iheap' annotation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet containing collision list in 'cif-collision' annotation.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Interval heap.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sinr_heap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sinr_heap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.sinr_heap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate signal-to-interference-and noise ratio (SINR) for each
+partition created by <a href="wins.channel.interface.ChannelInterface-class.html#interval_heap" class="link">interval_heap()</a>.</p>
+<p>SINR heap has looks like this:</p>
+<blockquote>
+[(t0, t1, sinr0), (t1, t2, sinr1), ... ]</blockquote>
+<p>Note: This method uses the 'rxpower' and 'noisepower' annotations.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to inspect.</li>
+        <li><strong class="pname"><code>force</code></strong> - If true, recalculate interval heap, else use existing
+annotation if it exists.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>SINR heap.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">event</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.interface-pysrc.html#ChannelInterface.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="ifstate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ifstate</h3>
+  : Property to access current state of <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="intransmit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">intransmit</h3>
+  : Property to check if in <a href="wins.channel.interface-module.html#CHANNELIF_TX" class="link">CHANNELIF_TX</a> state.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="inreceive"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">inreceive</h3>
+  :  Property to check if in <a href="wins.channel.interface-module.html#CHANNELIF_RX" class="link">CHANNELIF_RX</a> state.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:30 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

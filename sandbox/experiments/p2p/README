@@ -1,0 +1,54 @@
+##############################################################################
+#
+#   Point-to-point experiments.
+#   
+#   Revision Info
+#   =============
+#   * $LastChangedBy: mandke $
+#   * $LastChangedDate: 2011-08-01 11:01:38 -0500 (Mon, 01 Aug 2011) $
+#   * $LastChangedRevision: 5099 $
+#   
+#   :author: Ketan Mandke <kmandke@mail.utexas.edu>
+#   
+#   :copyright:
+#       Copyright 2009-2011 The University of Texas at Austin
+#   
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#       You may obtain a copy of the License at
+#   
+#          http://www.apache.org/licenses/LICENSE-2.0
+#   
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+##############################################################################
+
+==============================================================================
+Desired Performance Data
+==============================================================================
+
+  1. PER vs. SNR vs. RMS delay-spread
+  2. FDR vs. SNR vs. RMS delay-spread
+
+==============================================================================
+Experiments for INFCOM 2012
+==============================================================================
+
+  1. awgn - TGn CM-A with no fading (i.e. AWGN)
+  2. cfo - carrier frequency offset (13.675 ppm)
+  3. freq - frequency selective fading (TGn CM-D w/o time selective fading)
+  4. fading - time and frequency selective fading (complete TGn CM-D)
+  5. tcpack - short packet (TCP ACK size = 40 bytes)
+
+==============================================================================
+Subdirectories
+==============================================================================
+Important subdirectories for experiments:
+
+  * rawdata/ -raw trace files
+  * parsedata/ - parsed data files (unformatted)
+  * paperdata/ - formatted data used to create graphs in papers

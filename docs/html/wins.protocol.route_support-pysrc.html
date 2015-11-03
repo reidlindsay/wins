@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.protocol.route_support</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.protocol-module.html">Package&nbsp;protocol</a> ::
+        Module&nbsp;route_support
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins.protocol.route_support-module.html">Module wins.protocol.route_support</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">Packet definitions, enumerations, and helper functions for `Routing` protocol.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009-2011 The University of Texas at Austin</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">scapy</tt><tt class="py-op">.</tt><tt class="py-name">all</tt> <tt class="py-keyword">import</tt> <tt class="py-name">IP</tt><tt class="py-op">,</tt> <tt class="py-name">IP_PROTOS</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package wins=wins-module.html"><a title="wins" class="py-name" href="#" onclick="return doclink('link-0', 'wins', 'link-0');">wins</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module wins.const=wins.const-module.html"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-1', 'const', 'link-1');">const</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="_update_IP_with_HOST"></a><div id="_update_IP_with_HOST-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="_update_IP_with_HOST-toggle" onclick="return toggle('_update_IP_with_HOST');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.protocol.route_support-module.html#_update_IP_with_HOST">_update_IP_with_HOST</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_update_IP_with_HOST-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_update_IP_with_HOST-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-docstring">"""Internal method to update `IP` for unknown internal host protocols."""</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">IP</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable wins.crc.CRC32.fields_desc=wins.crc.CRC32-class.html#fields_desc,Variable wins.helper.PseudoIPv4.fields_desc=wins.helper.PseudoIPv4-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11Ack.fields_desc=wins.ieee80211.dot11_support.Dot11Ack-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11CTS.fields_desc=wins.ieee80211.dot11_support.Dot11CTS-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11RTS.fields_desc=wins.ieee80211.dot11_support.Dot11RTS-class.html#fields_desc,Variable wins.ieee80211.dot11a_support.Dot11A.fields_desc=wins.ieee80211.dot11a_support.Dot11A-class.html#fields_desc,Variable wins.ieee80211.dot11n_support.Dot11N.fields_desc=wins.ieee80211.dot11n_support.Dot11N-class.html#fields_desc,Variable wins.mac.rateadaptation.RAI.fields_desc=wins.mac.rateadaptation.RAI-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT.fields_desc=wins.net.dsr_support.DSROPT-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_ACK.fields_desc=wins.net.dsr_support.DSROPT_ACK-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_ACKREQ.fields_desc=wins.net.dsr_support.DSROPT_ACKREQ-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RERR.fields_desc=wins.net.dsr_support.DSROPT_RERR-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RREP.fields_desc=wins.net.dsr_support.DSROPT_RREP-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RREQ.fields_desc=wins.net.dsr_support.DSROPT_RREQ-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc=wins.net.dsr_support.DSROPT_SRCROUTE-class.html#fields_desc,Variable wins.net.dsr_support.DSRPacket.fields_desc=wins.net.dsr_support.DSRPacket-class.html#fields_desc,Variable wins.net.dsr_support._DSROPT_HDR.fields_desc=wins.net.dsr_support._DSROPT_HDR-class.html#fields_desc,Variable wins.packet.ANNO.fields_desc=wins.packet.ANNO-class.html#fields_desc,Variable wins.traffic.agent.AGT.fields_desc=wins.traffic.agent.AGT-class.html#fields_desc"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-2', 'fields_desc', 'link-2');">fields_desc</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Variable wins.base.Base.name=wins.base.Base-class.html#name,Variable wins.channel.breakpoint.Breakpoint.name=wins.channel.breakpoint.Breakpoint-class.html#name,Variable wins.channel.channelbase.Channel.name=wins.channel.channelbase.Channel-class.html#name,Variable wins.channel.channelbase.ChannelModel.name=wins.channel.channelbase.ChannelModel-class.html#name,Variable wins.channel.interface.ChannelInterface.name=wins.channel.interface.ChannelInterface-class.html#name,Variable wins.channel.propagation.Propagation.name=wins.channel.propagation.Propagation-class.html#name,Variable wins.channel.radio.Radio.name=wins.channel.radio.Radio-class.html#name,Variable wins.channel.refprop.ReferencePropagation.name=wins.channel.refprop.ReferencePropagation-class.html#name,Variable wins.crc.CRC32.name=wins.crc.CRC32-class.html#name,Variable wins.digital.modulation.Modulation.name=wins.digital.modulation.Modulation-class.html#name,Variable wins.digital.mqam.MQAM.name=wins.digital.mqam.MQAM-class.html#name,Variable wins.digital.rcpc.RCPC.name=wins.digital.rcpc.RCPC-class.html#name,Variable wins.digital.reedsolomon.ReedSolomon.name=wins.digital.reedsolomon.ReedSolomon-class.html#name,Variable wins.element.Port.name=wins.element.Port-class.html#name,Variable wins.fsm.FSM.name=wins.fsm.FSM-class.html#name,Variable wins.fsm.Timer.name=wins.fsm.Timer-class.html#name,Variable wins.helper.PseudoIPv4.name=wins.helper.PseudoIPv4-class.html#name,Variable wins.ieee80211.dcf.DCF.name=wins.ieee80211.dcf.DCF-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Ack.name=wins.ieee80211.dot11_support.Dot11Ack-class.html#name,Variable wins.ieee80211.dot11_support.Dot11CTS.name=wins.ieee80211.dot11_support.Dot11CTS-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Data.name=wins.ieee80211.dot11_support.Dot11Data-class.html#name,Variable wins.ieee80211.dot11_support.Dot11RTS.name=wins.ieee80211.dot11_support.Dot11RTS-class.html#name,Variable wins.ieee80211.dot11a.Dot11APHY.name=wins.ieee80211.dot11a.Dot11APHY-class.html#name,Variable wins.ieee80211.dot11a.Dot11ARadio.name=wins.ieee80211.dot11a.Dot11ARadio-class.html#name,Variable wins.ieee80211.dot11a_support.Dot11A.name=wins.ieee80211.dot11a_support.Dot11A-class.html#name,Variable wins.ieee80211.dot11n.Dot11NPHY.name=wins.ieee80211.dot11n.Dot11NPHY-class.html#name,Variable wins.ieee80211.dot11n.Dot11NRadio.name=wins.ieee80211.dot11n.Dot11NRadio-class.html#name,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.name=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#name,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.name=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#name,Variable wins.ieee80211.dot11n_support.Dot11N.name=wins.ieee80211.dot11n_support.Dot11N-class.html#name,Variable wins.ieee80211.navtimer.NAVTimer.name=wins.ieee80211.navtimer.NAVTimer-class.html#name,Variable wins.mac.arf.ARF.name=wins.mac.arf.ARF-class.html#name,Variable wins.mac.rateadaptation.RAI.name=wins.mac.rateadaptation.RAI-class.html#name,Variable wins.mac.rateadaptation.RateAdapt.name=wins.mac.rateadaptation.RateAdapt-class.html#name,Variable wins.mac.rbar.RBAR.name=wins.mac.rbar.RBAR-class.html#name,Variable wins.mac.rbar_support.Dot11RSH.name=wins.mac.rbar_support.Dot11RSH-class.html#name,Variable wins.mobile.motion.Motion.name=wins.mobile.motion.Motion-class.html#name,Variable wins.mobile.waypoint.RandomWaypoint.name=wins.mobile.waypoint.RandomWaypoint-class.html#name,Variable wins.net.dsr.DSR.name=wins.net.dsr.DSR-class.html#name,Variable wins.net.dsr_rreq.RouteRequestTable.name=wins.net.dsr_rreq.RouteRequestTable-class.html#name,Variable wins.net.dsr_support.DSRPacket.name=wins.net.dsr_support.DSRPacket-class.html#name,Variable wins.net.routecache.RouteCache.name=wins.net.routecache.RouteCache-class.html#name,Variable wins.protocol.aloha.Aloha.name=wins.protocol.aloha.Aloha-class.html#name,Variable wins.protocol.arp.ARP.name=wins.protocol.arp.ARP-class.html#name,Variable wins.protocol.arp_support.ARPReply.name=wins.protocol.arp_support.ARPReply-class.html#name,Variable wins.protocol.arp_support.ARPRequest.name=wins.protocol.arp_support.ARPRequest-class.html#name,Variable wins.protocol.csmac.CSMAC.name=wins.protocol.csmac.CSMAC-class.html#name,Variable wins.protocol.csphy.CSPHY.name=wins.protocol.csphy.CSPHY-class.html#name,Variable wins.protocol.mac.MAC.name=wins.protocol.mac.MAC-class.html#name,Variable wins.protocol.net.NET.name=wins.protocol.net.NET-class.html#name,Variable wins.protocol.phy.PHY.name=wins.protocol.phy.PHY-class.html#name,Variable wins.protocol.routetable.RouteTable.name=wins.protocol.routetable.RouteTable-class.html#name,Variable wins.protocol.routing.Routing.name=wins.protocol.routing.Routing-class.html#name,Variable wins.queue.Queue.name=wins.queue.Queue-class.html#name,Variable wins.trace.Trace.name=wins.trace.Trace-class.html#name,Variable wins.trace.Traceable.name=wins.trace.Traceable-class.html#name,Variable wins.traffic.agent.Agent.name=wins.traffic.agent.Agent-class.html#name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-3', 'name', 'link-3');">name</a></tt><tt class="py-op">==</tt><tt class="py-string">'proto'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">assert</tt> <tt class="py-op">(</tt><tt class="py-name">proto</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-name">proto</tt><tt class="py-op">.</tt><tt class="py-name">i2s</tt><tt class="py-op">[</tt><tt id="link-4" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-4', 'const', 'link-1');">const</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable wins.const.IP_PROTO_HOST=wins.const-module.html#IP_PROTO_HOST"><a title="wins.const.IP_PROTO_HOST" class="py-name" href="#" onclick="return doclink('link-5', 'IP_PROTO_HOST', 'link-5');">IP_PROTO_HOST</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-string">'host'</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Function wins.protocol.route_support._update_IP_with_HOST()=wins.protocol.route_support-module.html#_update_IP_with_HOST"><a title="wins.protocol.route_support._update_IP_with_HOST" class="py-name" href="#" onclick="return doclink('link-6', '_update_IP_with_HOST', 'link-6');">_update_IP_with_HOST</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:40 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

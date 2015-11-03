@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.packet.ANNO</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.packet-module.html">Module&nbsp;packet</a> ::
+        Class&nbsp;ANNO
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ANNO</h1><p class="nomargin-top"><span class="codelink"><a href="wins.packet-pysrc.html#ANNO">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_anno" name="class_hierarchy_for_anno">
+<area shape="rect" href="javascript:void(0);" title="scapy.base_classes.BasePacket" alt="" coords="5,61,219,88"/>
+<area shape="rect" href="javascript:void(0);" title="scapy.packet.Packet" alt="" coords="40,117,184,144"/>
+<area shape="rect" href="javascript:void(0);" title="scapy.base_classes.Gen" alt="" coords="28,5,196,32"/>
+<area shape="rect" href="wins.packet.ANNO-class.html" title="ANNO" alt="" coords="83,173,141,200"/>
+</map>
+  <img src="class_hierarchy_for_anno.gif" alt='' usemap="#class_hierarchy_for_anno" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Packet annotations implicit to every Scapy Packet object.</p>
+<p>This class implements annotations through a series of <a href="wins.packet.FuncField-class.html" class="link">FuncField</a>, namely
+<a href="wins.packet.ANNO-class.html#setanno" class="link">setanno</a>, <a href="wins.packet.ANNO-class.html#getanno" class="link">getanno</a>, <a href="wins.packet.ANNO-class.html#delanno" class="link">delanno</a>, <a href="wins.packet.ANNO-class.html#hasanno" class="link">hasanno</a>, <a href="wins.packet.ANNO-class.html#mergeanno" class="link">mergeanno</a>, and <a href="wins.packet.ANNO-class.html#writeanno" class="link">writeanno</a>.
+These methods access/modify the underlying dictionary object used to
+implement <a href="wins.packet.ANNO-class.html" class="link">ANNO</a>.</p>
+<p>The following code gives an example of how to generate a Packet and
+access/modify its annotations:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>p = Packet()
+<span class="py-prompt">&gt;&gt;&gt; </span>p.hasanno(<span class="py-string">&quot;x&quot;</span>)
+<span class="py-output">False</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>p.setanno(<span class="py-string">&quot;x&quot;</span>, 100)
+<span class="py-prompt">&gt;&gt;&gt; </span>p
+<span class="py-output">&lt;Packet |&lt;ANNO anno={'x': 100} |&gt;&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>p.hasanno(<span class="py-string">&quot;x&quot;</span>)
+<span class="py-output">True</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>p.delanno(<span class="py-string">&quot;x&quot;</span>)
+<span class="py-output">&lt;Packet |&lt;ANNO anno={} |&gt;&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>p.hasanno(<span class="py-string">&quot;x&quot;</span>)
+<span class="py-output">False</span></pre>
+</blockquote>
+<p>Some common annotations used by other classes are listed in the table below.
+These can be used in a variety of ways and are not set by default. Note that
+these special annotation are kept by <a href="wins.base.Reference-class.html" class="link">Reference</a> automatically.</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head" colspan="2">Annotation Name  Description/Usage</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><code class="link">parent</code></td>
+<td>Denotes the object that created the Packet. When setting
+this annotation, use the <tt class="rst-docutils literal">ref=True</tt> option with
+<a href="wins.packet.ANNO-class.html#setanno" class="link">setanno()</a>. This will maintain a <a href="wins.base.Reference-class.html" class="link">Reference</a> to the parent
+object rather than a direct pointer. This prevents
+unwanted copies from being created.</td>
+</tr>
+<tr><td><code class="link">root</code></td>
+<td>Maintain a pointer to the <em>underlayer</em> that might be
+considered the root of a packet. For instance, an IP Packet
+might encapsulate a TCP packet. So we may want to mark that
+the <em>root</em> of the IP packet is the TCP packet. It may or
+may not be desirable to use the <tt class="rst-docutils literal">ref=True</tt> option when
+setting this annotation with <a href="wins.packet.ANNO-class.html#setanno" class="link">setanno()</a>.</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code><a href="scapy.base_classes.Packet_metaclass-class.html">__metaclass__</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_setup"></a><span class="summary-sig-name">_setup</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> fields of packet so that they are callable and point
+to the appropriate internal method.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO._setup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getanno"></a><span class="summary-sig-name">__getanno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Internal method for retrieving an annotation <code class="link">key</code>; <em>do not call
+directly</em>, instead use <a href="wins.packet.ANNO-class.html#getanno" class="link">getanno</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__getanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#__setanno" class="summary-sig-name" onclick="show_private();">__setanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>,
+        <span class="summary-sig-arg">ref</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">priv</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Internal method for setting an annotation <code class="link">key</code>; <em>do not call
+directly</em>, instead use <a href="wins.packet.ANNO-class.html#setanno" class="link">setanno</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__setanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#__setprivanno" class="summary-sig-name" onclick="show_private();">__setprivanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>,
+        <span class="summary-sig-arg">ref</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Internal method for setting private annotation <code class="link">key</code>; <em>do not call
+directly</em>, instead use <code class="link">setprivanno</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__setprivanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__hasanno"></a><span class="summary-sig-name">__hasanno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Internal method to check if annotation <code class="link">key</code> is present. <em>do not call
+directly</em>, instead use <a href="wins.packet.ANNO-class.html#setanno" class="link">setanno</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__hasanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__delanno"></a><span class="summary-sig-name">__delanno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Internal method for removing an annotation <code class="link">key</code>; <em>do not call
+directly</em> (instead use <a href="wins.packet.ANNO-class.html#delanno" class="link">delanno</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__delanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#__mergeanno" class="summary-sig-name" onclick="show_private();">__mergeanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method for merging an annotation from a Packet or dictionary
+with the current set of annotations; <em>do not call directly</em>, instead use
+<a href="wins.packet.ANNO-class.html#mergeanno" class="link">mergeanno</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__mergeanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__writeanno"></a><span class="summary-sig-name">__writeanno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>)</span><br />
+      Internal method for overwriting the entire set of annotations; <em>do
+not call directly</em>, instead use <a href="wins.packet.ANNO-class.html#writeanno" class="link">writeanno</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__writeanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#copy" class="summary-sig-name">copy</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overwrite Packet.copy from Scapy Packet class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.copy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>__contains__</code>,
+      <code>__deepcopy__</code>,
+      <code>__delattr__</code>,
+      <code>__delitem__</code>,
+      <code>__div__</code>,
+      <code>__eq__</code>,
+      <code>__getattr__</code>,
+      <code>__getitem__</code>,
+      <code>__gt__</code>,
+      <code>__iter__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__mul__</code>,
+      <code>__ne__</code>,
+      <code>__nonzero__</code>,
+      <code>__rdiv__</code>,
+      <code>__repr__</code>,
+      <code>__rmul__</code>,
+      <code>__setattr__</code>,
+      <code>__setitem__</code>,
+      <code>__str__</code>,
+      <code>add_payload</code>,
+      <code>add_underlayer</code>,
+      <code>answers</code>,
+      <code>build</code>,
+      <code>build_done</code>,
+      <code>build_payload</code>,
+      <code>build_ps</code>,
+      <code>canvas_dump</code>,
+      <code>clone_with</code>,
+      <code>command</code>,
+      <code>decode_payload_as</code>,
+      <code>default_payload_class</code>,
+      <code>delfieldval</code>,
+      <code>display</code>,
+      <code>dissect</code>,
+      <code>dissection_done</code>,
+      <code>do_build</code>,
+      <code>do_build_ps</code>,
+      <code>do_dissect</code>,
+      <code>do_dissect_payload</code>,
+      <code>do_init_fields</code>,
+      <code>extract_padding</code>,
+      <code>firstlayer</code>,
+      <code>fragment</code>,
+      <code>get_field</code>,
+      <code>get_tracename</code>,
+      <code>getfield_and_val</code>,
+      <code>getfieldval</code>,
+      <code>getlayer</code>,
+      <code>guess_payload_class</code>,
+      <code>hashret</code>,
+      <code>haslayer</code>,
+      <code>hide_defaults</code>,
+      <code>init_fields</code>,
+      <code>lastlayer</code>,
+      <code>libnet</code>,
+      <code>mysummary</code>,
+      <code>pdfdump</code>,
+      <code>post_build</code>,
+      <code>post_dissect</code>,
+      <code>post_dissection</code>,
+      <code>pre_dissect</code>,
+      <code>psdump</code>,
+      <code>remove_payload</code>,
+      <code>remove_underlayer</code>,
+      <code>route</code>,
+      <code>setfieldval</code>,
+      <code>show</code>,
+      <code>show2</code>,
+      <code>sprintf</code>,
+      <code>summary</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b> (private):
+      <code>_do_summary</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>from_hexcap</code>,
+      <code>lower_bonds</code>,
+      <code>upper_bonds</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="supported"></a><span class="summary-sig-name">supported</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Convenience method to check if object <code class="link">p</code> supports Packet
+annotations as implemented by <a href="wins.packet.ANNO-class.html" class="link">ANNO</a> class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.supported">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.packet.ANNO-class.html#supports" class="summary-sig-name">supports</a>(<span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">aname</span>)</span><br />
+      Convenience method to check if object <code class="link">p</code> has an <a href="wins.packet.ANNO-class.html" class="link">ANNO</a> sublayer and
+has annotation <code class="link">aname</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.packet-pysrc.html#ANNO.supports">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.packet.ANNO-class.html#fields_desc" class="summary-name">fields_desc</a> = <code title="[&lt;Field (ANNO).getanno&gt;,
+ &lt;Field (ANNO).setanno&gt;,
+ &lt;Field (ANNO).hasanno&gt;,
+ &lt;Field (ANNO).delanno&gt;,
+ &lt;Field (ANNO).mergeanno&gt;,
+ &lt;Field (ANNO).writeanno&gt;,
+ &lt;Field (ANNO).setprivanno&gt;,
+ &lt;Field (ANNO).anno&gt;,
+..."><code class="variable-group">[</code>&lt;Field (ANNO).getanno&gt;<code class="variable-op">, </code>&lt;Field (ANNO).setanno&gt;<code class="variable-op">,</code><code class="variable-ellipsis">...</code></code><br />
+      Internal list of Packet fields used to implement
+interface to <a href="wins.packet.ANNO-class.html" class="link">ANNO</a>.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__specialanno"></a><span class="summary-name">__specialanno</span> = <code title="['root', 'parent']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">root</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">parent</code><code class="variable-quote">'</code><code class="variable-group">]</code></code><br />
+      Private list of special annotations maintained by
+<a href="wins.base.Reference-class.html" class="link">Reference</a> in <a href="wins.packet.ANNO-class.html" class="link">ANNO</a>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>aliastypes</code>,
+      <code>explicit</code>,
+      <code>initialized</code>,
+      <code>name</code>,
+      <code>overload_fields</code>,
+      <code>payload_guess</code>,
+      <code>show_indent</code>,
+      <code>underlayer</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_anno"></a><span class="summary-name">_anno</span><br />
+      : Private dictionary object to implement <a href="wins.packet.ANNO-class.html" class="link">ANNO</a> functionality.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="delanno"></a><span class="summary-name">delanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to remove an annotation; see
+<a href="wins.packet.ANNO-class.html#__delanno" class="link" onclick="show_private();">__delanno</a> for more.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="getanno"></a><span class="summary-name">getanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to retrieve an annotation; see
+<a href="wins.packet.ANNO-class.html#__getanno" class="link" onclick="show_private();">__getanno</a> for more.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="hasanno"></a><span class="summary-name">hasanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to check if an annotation is
+present; see <a href="wins.packet.ANNO-class.html#__hasanno" class="link" onclick="show_private();">__hasanno</a> for more.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mergeanno"></a><span class="summary-name">mergeanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to merge the current set of
+annotations with another packet's annotation or with a dictionary of
+annotations; see <a href="wins.packet.ANNO-class.html#__mergeanno" class="link" onclick="show_private();">__mergeanno</a> for more.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="setanno"></a><span class="summary-name">setanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to set an annotation; see
+<a href="wins.packet.ANNO-class.html#__setanno" class="link" onclick="show_private();">__setanno</a> for more.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="writeanno"></a><span class="summary-name">writeanno</span><br />
+      : <a href="wins.packet.FuncField-class.html" class="link">FuncField</a> that can be called to overwrite the current set
+of annotations with another packet's annotation or with a dictionary of
+annotations; see <a href="wins.packet.ANNO-class.html#__writeanno" class="link" onclick="show_private();">__writeanno</a> for more.
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>flatten</code>,
+      <code>traceid</code>,
+      <code>tracename</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setanno"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>,
+        <span class="sig-arg">ref</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">priv</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__setanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Internal method for setting an annotation <code class="link">key</code>; <em>do not call
+directly</em>, instead use <a href="wins.packet.ANNO-class.html#setanno" class="link">setanno</a>.</p>
+<p>When <code class="link">ref</code> is True a <a href="wins.base.Reference-class.html" class="link">Reference</a> to <code class="link">val</code> is stored in the internal
+dictionary. This means that when a deepcopy of the Packet occurs, the
+new Packet will contain a <a href="wins.base.Reference-class.html" class="link">Reference</a> to the original object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>key</code></strong> - : Name of annotation to be set.</li>
+        <li><strong class="pname"><code>val</code></strong> - : New value of annotation.</li>
+        <li><strong class="pname"><code>ref</code></strong> - : Optional argument; when True, a <a href="wins.base.Reference-class.html" class="link">Reference</a> to <code class="link">val</code> is stored
+rather than a direct pointer.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setprivanno"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setprivanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>,
+        <span class="sig-arg">ref</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__setprivanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Internal method for setting private annotation <code class="link">key</code>; <em>do not call
+directly</em>, instead use <code class="link">setprivanno</code>.</p>
+<p>When <code class="link">ref</code> is True a <a href="wins.base.Reference-class.html" class="link">Reference</a> to <code class="link">val</code> is stored in the internal
+dictionary. This means that when a deepcopy of the Packet occurs, the
+new Packet will contain a <a href="wins.base.Reference-class.html" class="link">Reference</a> to the original object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>key</code></strong> - : Name of annotation to be set.</li>
+        <li><strong class="pname"><code>val</code></strong> - : New value of annotation.</li>
+        <li><strong class="pname"><code>ref</code></strong> - : Optional argument; when True, a <a href="wins.base.Reference-class.html" class="link">Reference</a> to <code class="link">val</code> is stored
+rather than a direct pointer.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__mergeanno"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__mergeanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.__mergeanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Internal method for merging an annotation from a Packet or dictionary
+with the current set of annotations; <em>do not call directly</em>, instead use
+<a href="wins.packet.ANNO-class.html#mergeanno" class="link">mergeanno</a>.</p>
+<p>If <code class="link">p</code> is a Packet, this method will extract the new set of annotations
+from the packet using the <code class="link">anno</code> method. The new set of annotations will
+be merged with the current set.</p>
+<p><em>Annotations from `p` will overwrite any existing annotations of the
+same name</em>. So if an annotation 'x' existed in <code class="link">p</code> and in the current
+set of annotations, the annotation value <code class="link">p.getanno('x')</code> would
+overwrite the current annotation value.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet or dictionary of new annotations.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="copy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">copy</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.copy">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overwrite Packet.copy from Scapy Packet class.
+  <dl class="fields">
+    <dt>Overrides:
+        scapy.packet.Packet.copy
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="supports"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">supports</span>(<span class="sig-arg">p</span>,
+        <span class="sig-arg">aname</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.packet-pysrc.html#ANNO.supports">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convenience method to check if object <code class="link">p</code> has an <a href="wins.packet.ANNO-class.html" class="link">ANNO</a> sublayer and
+has annotation <code class="link">aname</code>.</p>
+<p>This is the same as calling <a href="wins.packet.ANNO-class.html#supported" class="link">ANNO.supported()</a> and <a href="wins.packet.ANNO-class.html#hasanno" class="link">hasanno</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="fields_desc"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">fields_desc</h3>
+  Internal list of Packet fields used to implement
+interface to <a href="wins.packet.ANNO-class.html" class="link">ANNO</a>.
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code>&lt;Field (ANNO).getanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).setanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).hasanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).delanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).mergeanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).writeanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).setprivanno&gt;<code class="variable-op">,</code>
+ &lt;Field (ANNO).anno&gt;<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:34 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

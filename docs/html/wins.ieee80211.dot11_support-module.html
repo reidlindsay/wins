@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.ieee80211.dot11_support</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.ieee80211-module.html">Package&nbsp;ieee80211</a> ::
+        Module&nbsp;dot11_support
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module dot11_support</h1><p class="nomargin-top"><span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html">source&nbsp;code</a></span></p>
+<p>Packet definitions, enumerations, and helper functions for IEEE 802.11 protocol.</p>
+<div class="rst-section" id="rst-revision-info">
+<h1 class="heading">Revision Info</h1>
+<ul class="rst-simple">
+<li>$LastChangedBy: mandke $</li>
+<li>$LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</li>
+<li>$LastChangedRevision: 5420 $</li>
+</ul>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        Ketan Mandke &lt;<a class="rst-reference external" href="mailto:kmandke&#64;mail.utexas.edu" target="_top">kmandke&#64;mail.utexas.edu</a>&gt;
+      </p>
+      <p><strong>Copyright:</strong>
+        <p>Copyright 2009 The University of Texas at Austin</p>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<a class="rst-reference external" href="http://www.apache.org/licenses/LICENSE-2.0" target="_top">http://www.apache.org/licenses/LICENSE-2.0</a></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="summary-name">Dot11Data</a><br />
+      IEEE 802.11 Data.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support.Dot11Ack-class.html" class="summary-name">Dot11Ack</a><br />
+      IEEE 802.11 Acknowledgement.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support.Dot11RTS-class.html" class="summary-name">Dot11RTS</a><br />
+      IEEE 802.11 Request-To-Send message.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support.Dot11CTS-class.html" class="summary-name">Dot11CTS</a><br />
+      IEEE 802.11 Clear-To-Send message.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11data"></a><span class="summary-sig-name">isdot11data</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is packet an IEEE 802.11 Data packet?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#isdot11data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11ack"></a><span class="summary-sig-name">isdot11ack</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is packet an IEEE 802.11 Acknowledgement packet?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#isdot11ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11rts"></a><span class="summary-sig-name">isdot11rts</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is packet an IEEE 802.11 Request-to-send packet?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#isdot11rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11cts"></a><span class="summary-sig-name">isdot11cts</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is packet an IEEE 802.11 Clear-to-send packet?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#isdot11cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11_support-module.html#get_dot11data" class="summary-sig-name">get_dot11data</a>(<span class="summary-sig-arg">p</span>)</span><br />
+      Extract IEEE 802.11 Data from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11_support-module.html#get_dot11ack" class="summary-sig-name">get_dot11ack</a>(<span class="summary-sig-arg">p</span>)</span><br />
+      Extract IEEE 802.11 Acknowledgement (ACK) from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11_support-module.html#get_dot11rts" class="summary-sig-name">get_dot11rts</a>(<span class="summary-sig-arg">p</span>)</span><br />
+      Extract IEEE 802.11 Request-to-send (RTS) from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11_support-module.html#get_dot11cts" class="summary-sig-name">get_dot11cts</a>(<span class="summary-sig-arg">p</span>)</span><br />
+      Extract IEEE 802.11 Clear-to-send (CTS) from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support-module.html#DOT11_VERBOSE" class="summary-name">DOT11_VERBOSE</a> = <code title="53">53</code><br />
+      Constant enumeration to control verbose threshold of <code class="link">Dot11MAC</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_CWMIN"></a><span class="summary-name">DOT11_CWMIN</span> = <code title="32">32</code><br />
+      Minimum contention window size for IEEE 802.11 MAC.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_CWMAX"></a><span class="summary-name">DOT11_CWMAX</span> = <code title="1024">1024</code><br />
+      Maximum contention window size for IEEE 802.11 MAC.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_RETRYLIMIT"></a><span class="summary-name">DOT11_RETRYLIMIT</span> = <code title="7">7</code><br />
+      Maximum number of retries allowed.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_TYPE_DATA"></a><span class="summary-name">DOT11_FC_TYPE_DATA</span> = <code title="2">2</code><br />
+      Type enumeration for data.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_TYPE_CONTROL"></a><span class="summary-name">DOT11_FC_TYPE_CONTROL</span> = <code title="1">1</code><br />
+      Type enumeration for control.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_SUBTYPE_DATA"></a><span class="summary-name">DOT11_FC_SUBTYPE_DATA</span> = <code title="0">0</code><br />
+      Subtype enumeration for data.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_SUBTYPE_RTS"></a><span class="summary-name">DOT11_FC_SUBTYPE_RTS</span> = <code title="11">11</code><br />
+      Subtype enumeration for request-to-send message.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_SUBTYPE_CTS"></a><span class="summary-name">DOT11_FC_SUBTYPE_CTS</span> = <code title="12">12</code><br />
+      Subtype enumeration for clear-to-send message.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_SUBTYPE_ACK"></a><span class="summary-name">DOT11_FC_SUBTYPE_ACK</span> = <code title="13">13</code><br />
+      Subtype enumeration for acknowledgement.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_TODS"></a><span class="summary-name">DOT11_FC_TODS</span> = <code title="1">1</code><br />
+      Frame control bit mask for to-DS field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_FROMDS"></a><span class="summary-name">DOT11_FC_FROMDS</span> = <code title="2">2</code><br />
+      Frame control bit mask for from-DS field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_MF"></a><span class="summary-name">DOT11_FC_MF</span> = <code title="4">4</code><br />
+      Frame control bit mask for more fragment (MF) field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_RETRY"></a><span class="summary-name">DOT11_FC_RETRY</span> = <code title="8">8</code><br />
+      Frame control bit mask for retry field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_PWMGT"></a><span class="summary-name">DOT11_FC_PWMGT</span> = <code title="16">16</code><br />
+      Frame control bit mask for power management (pw-mgt) field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_MD"></a><span class="summary-name">DOT11_FC_MD</span> = <code title="32">32</code><br />
+      Frame control bit mask for more data (MD) field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_WEP"></a><span class="summary-name">DOT11_FC_WEP</span> = <code title="64">64</code><br />
+      Frame control bit mask for wep (WEP) field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11_FC_ORDER"></a><span class="summary-name">DOT11_FC_ORDER</span> = <code title="128">128</code><br />
+      Frame control bit mask for order field.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11A_PHY_MODE"></a><span class="summary-name">DOT11A_PHY_MODE</span> = <code title="'IEEE 802.11a'"><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11a</code><code class="variable-quote">'</code></code><br />
+      Enumeration for IEEE 802.11a physical layer.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11B_PHY_MODE"></a><span class="summary-name">DOT11B_PHY_MODE</span> = <code title="'IEEE 802.11b'"><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11b</code><code class="variable-quote">'</code></code><br />
+      Enumeration for IEEE 802.11b physical layer.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11G_PHY_MODE"></a><span class="summary-name">DOT11G_PHY_MODE</span> = <code title="'IEEE 802.11g'"><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11g</code><code class="variable-quote">'</code></code><br />
+      Enumeration for IEEE 802.11g physical layer.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOT11N_PHY_MODE"></a><span class="summary-name">DOT11N_PHY_MODE</span> = <code title="'IEEE 802.11n'"><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11n</code><code class="variable-quote">'</code></code><br />
+      Enumeration for IEEE 802.11n physical layer.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11_support-module.html#DOT11_TIMING" class="summary-name">DOT11_TIMING</a> = <code title="{'IEEE 802.11a': {'sifs': 1.6e-05, 'slottime': 9e-06},
+ 'IEEE 802.11b': {'sifs': 1e-05, 'slottime': 2e-05},
+ 'IEEE 802.11g': {'sifs': 1e-05, 'slottime': 9e-06},
+ 'IEEE 802.11n': {'sifs': 1.6e-05, 'slottime': 9e-06}}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">sifs</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.6e-05<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">slottime</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-ellipsis">...</code></code><br />
+      Dictionary containing IEEE 802.11 timing parameters for
+various physical layer modes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'wins.ieee80211'"><code class="variable-quote">'</code><code class="variable-string">wins.ieee80211</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="get_dot11data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_dot11data</span>(<span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Extract IEEE 802.11 Data from packet <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IEEE 802.11 Data packet or <code class="link">None</code> if no matching layer found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_dot11ack"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_dot11ack</span>(<span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11ack">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Extract IEEE 802.11 Acknowledgement (ACK) from packet <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IEEE 802.11 ACK packet or <code class="link">None</code> if no matching layer found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_dot11rts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_dot11rts</span>(<span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11rts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Extract IEEE 802.11 Request-to-send (RTS) from packet <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IEEE 802.11 RTS packet or <code class="link">None</code> if no matching layer found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_dot11cts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_dot11cts</span>(<span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11_support-pysrc.html#get_dot11cts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Extract IEEE 802.11 Clear-to-send (CTS) from packet <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IEEE 802.11 CTS packet or <code class="link">None</code> if no matching layer found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="DOT11_VERBOSE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DOT11_VERBOSE</h3>
+  <p>Constant enumeration to control verbose threshold of <code class="link">Dot11MAC</code>.</p>
+<p>Setting the verbose level of a <code class="link">Dot11MAC</code> above this threshold will cause
+the corresponding output in this class to be written (or logged).</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+53
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="DOT11_TIMING"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DOT11_TIMING</h3>
+  Dictionary containing IEEE 802.11 timing parameters for
+various physical layer modes.
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">sifs</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.6e-05<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">slottime</code><code class="variable-quote">'</code><code class="variable-op">: </code>9e-06<code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">IEEE 802.11b</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">sifs</code><code class="variable-quote">'</code><code class="variable-op">: </code>1e-05<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">slottime</code><code class="variable-quote">'</code><code class="variable-op">: </code>2e-05<code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">IEEE 802.11g</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">sifs</code><code class="variable-quote">'</code><code class="variable-op">: </code>1e-05<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">slottime</code><code class="variable-quote">'</code><code class="variable-op">: </code>9e-06<code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">IEEE 802.11n</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">sifs</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.6e-05<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">slottime</code><code class="variable-quote">'</code><code class="variable-op">: </code>9e-06<code class="variable-group">}</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:29 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">scapy.fields.Field</strong>:
+      <em class="summary">For more informations on how this work, please refer to
+<a class="rst-reference external" href="http://www.secdev.org/projects/scapy/files/scapydoc.pdf" target="_top">http://www.secdev.org/projects/scapy/files/scapydoc.pdf</a>
+chapter <a href="#id1"><span class="rst-problematic" id="rst-id2">``</span></a>Adding a New Field''</em>
+    <ul>
+    <li> <strong class="uidlink">scapy.fields.StrField</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.packet.FuncField-class.html">wins.packet.FuncField</a></strong>:
+      <em class="summary">Allows a function to be assigned to a Packet Field.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.packet.HiddenField-class.html">wins.packet.HiddenField</a></strong>:
+      <em class="summary">Null or zero length field that maintains a value that will not be added
+to the Packet when it is converted to a string.</em>
+    </li>
+    <li> <strong class="uidlink">scapy.layers.inet.IPTools</strong>:
+      <em class="summary">Add more powers to a class that have a &quot;src&quot; attribute.</em>
+    <ul>
+    <li> <strong class="uidlink">scapy.layers.inet.IP</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.helper.PseudoIPv4-class.html">wins.helper.PseudoIPv4</a></strong>:
+      <em class="summary">Pseudo header that mimics IPv4 header for computing checksum in transport
+layer protocols (i.e. UDP and TCP).</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_rreq.RouteRequestEntry-class.html">wins.net.dsr_rreq.RouteRequestEntry</a></strong>:
+      <em class="summary">DSR Route Request Entry used by <a href="wins.net.dsr_rreq.RouteRequestTable-class.html" class="link">RouteRequestTable</a>.</em>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.base.Base-class.html">wins.base.Base</a></strong>:
+      <em class="summary">Implement basic functionality needed by objects.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.trace.Trace-class.html">wins.trace.Trace</a></strong>:
+      <em class="summary">Maintains log of events.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.trace.Traceable-class.html">wins.trace.Traceable</a></strong>:
+      <em class="summary">Base class to provide convenient API for accessing a <a href="wins.trace.Trace-class.html" class="link">Trace</a>.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.channel.channelbase.ChannelModel-class.html">wins.channel.channelbase.ChannelModel</a></strong>:
+      <em class="summary">Implement channel model between two <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.channel.propagation.Propagation-class.html">wins.channel.propagation.Propagation</a></strong>:
+      <em class="summary">Basic propagation model for wireless channels.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.channel.breakpoint.Breakpoint-class.html">wins.channel.breakpoint.Breakpoint</a></strong>:
+      <em class="summary">Breakpoint pathloss model uses threshold policy for propagation model.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n_channel.Dot11NChannel-class.html">wins.ieee80211.dot11n_channel.Dot11NChannel</a></strong>:
+      <em class="summary">IEEE 802.11n channel models for propagation over wireless channel.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.channel.refprop.ReferencePropagation-class.html">wins.channel.refprop.ReferencePropagation</a></strong>:
+      <em class="summary">Reference model for propagation over wireless channel.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.element.Element-class.html">wins.element.Element</a></strong>:
+      <em class="summary">Basic building block for all protocol objects.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.protocol.arp.ARP-class.html">wins.protocol.arp.ARP</a></strong>:
+      <em class="summary">Address resolution protocol.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.traffic.agent.Agent-class.html">wins.traffic.agent.Agent</a></strong>:
+      <em class="summary">Act as a source and sink.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.channel.channelbase.Channel-class.html">wins.channel.channelbase.Channel</a></strong>:
+      <em class="summary">Maintain connection graph in which each node is a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> and
+each link is a <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.channel.interface.ChannelInterface-class.html">wins.channel.interface.ChannelInterface</a></strong>:
+      <em class="summary">Interface to connect to a <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.channel.radio.Radio-class.html">wins.channel.radio.Radio</a></strong>:
+      <em class="summary">Interface to connect to a wireless channel.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11a.Dot11ARadio-class.html">wins.ieee80211.dot11a.Dot11ARadio</a></strong>:
+      <em class="summary">Radio interface for IEEE 802.11a physical layer.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n.Dot11NRadio-class.html">wins.ieee80211.dot11n.Dot11NRadio</a></strong>:
+      <em class="summary">Radio interface for IEEE 802.11n physical layer.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html">wins.ieee80211.dot11n_dsp.Dot11N_DSP</a></strong>:
+      <em class="summary">Provides API for baseband DSP needed for waveform-level processing of
+IEEE 802.11n packets.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.mac.MAC-class.html">wins.protocol.mac.MAC</a></strong>:
+      <em class="summary">Base class for medium-access control (i.e. Layer 2) protocols.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.protocol.aloha.Aloha-class.html">wins.protocol.aloha.Aloha</a></strong>:
+      <em class="summary">Implementation of pure Aloha MAC protocol.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.csmac.CSMAC-class.html">wins.protocol.csmac.CSMAC</a></strong>:
+      <em class="summary">Base class for implementing carrier sense MAC protocols such as CSMA/CA.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dcf.DCF-class.html">wins.ieee80211.dcf.DCF</a></strong>:
+      <em class="summary">Distributed Control Function of IEEE 802.11 MAC protocol.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.mac.arf.ARF-class.html">wins.mac.arf.ARF</a></strong>:
+      <em class="summary">Auto Rate Fallback (ARF) protocol.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.mac.rbar.RBAR-class.html">wins.mac.rbar.RBAR</a></strong>:
+      <em class="summary">Receiver-Based AutoRate (RBAR) protocol.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.mobile.motion.Motion-class.html">wins.mobile.motion.Motion</a></strong>:
+      <em class="summary">Base class for simulating motion of <code class="link">Node</code> objects.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.mobile.waypoint.RandomWaypoint-class.html">wins.mobile.waypoint.RandomWaypoint</a></strong>:
+      <em class="summary">Random Waypoint mobility model.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.navtimer.NAVTimer-class.html">wins.ieee80211.navtimer.NAVTimer</a></strong>:
+      <em class="summary">Provides API to maintain network allocation vector and associated virtual
+carrier sense timer.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.net.NET-class.html">wins.protocol.net.NET</a></strong>:
+      <em class="summary">Base class for implementing network (i.e. Layer 3) protocols.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.protocol.routing.Routing-class.html">wins.protocol.routing.Routing</a></strong>:
+      <em class="summary">Base class for routing protocols.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.net.dsr.DSR-class.html">wins.net.dsr.DSR</a></strong>:
+      <em class="summary">Dynamic Source Routing protocol (RFC 4728).</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.phy.PHY-class.html">wins.protocol.phy.PHY</a></strong>:
+      <em class="summary">Base class for physical layer (i.e. Layer 1) protocols.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.protocol.csphy.CSPHY-class.html">wins.protocol.csphy.CSPHY</a></strong>:
+      <em class="summary">Base class for implementing physical layer with carrier sense support,
+which is needed by <a href="wins.protocol.csmac.CSMAC-class.html" class="link">CSMAC</a> MAC protocols.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html">wins.ieee80211.dot11a.Dot11APHY</a></strong>:
+      <em class="summary">Implementation of IEEE 802.11a physical layer protocol.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n.Dot11NPHY-class.html">wins.ieee80211.dot11n.Dot11NPHY</a></strong>:
+      <em class="summary">Implementation of IEEE 802.11n physical layer protocol.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.mac.rateadaptation.RateAdapt-class.html">wins.mac.rateadaptation.RateAdapt</a></strong>:
+      <em class="summary">Maintains table for current rate being used to send data.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.fsm.FSM-class.html">wins.fsm.FSM</a></strong>:
+      <em class="summary">Finite state machine.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.util.monitor.Monitor-class.html">wins.util.monitor.Monitor</a></strong>:
+      <em class="summary">Monitor progress of simulation.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.fsm.Timer-class.html">wins.fsm.Timer</a></strong>:
+      <em class="summary">Stopwatch timer that fires an event after waiting for a specified time.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.digital.modulation.Modulation-class.html">wins.digital.modulation.Modulation</a></strong>:
+      <em class="summary">Abstract base class for implementing digital modulation.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.digital.mqam.MQAM-class.html">wins.digital.mqam.MQAM</a></strong>:
+      <em class="summary">Models M-order quadrature amplitude modulation.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.queue.Queue-class.html">wins.queue.Queue</a></strong>:
+      <em class="summary">Convenient API to SimPy Store.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.element.Port-class.html">wins.element.Port</a></strong>:
+      <em class="summary">Interface for enabling connections between <a href="wins.element.Element-class.html" class="link">Element</a> objects.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.digital.rcpc.RCPC-class.html">wins.digital.rcpc.RCPC</a></strong>:
+      <em class="summary">Model for (133,171) rate-compatible punctured convolutional (RCPC) code.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.digital.reedsolomon.ReedSolomon-class.html">wins.digital.reedsolomon.ReedSolomon</a></strong>:
+      <em class="summary">Model for Reed-Solomon (R-S) error-correcting codes.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_rreq.RouteRequestTable-class.html">wins.net.dsr_rreq.RouteRequestTable</a></strong>:
+      <em class="summary">DSR Route Request Table.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.routetable.RouteTable-class.html">wins.protocol.routetable.RouteTable</a></strong>:
+      <em class="summary">Table to maintain routing information.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.net.routecache.RouteCache-class.html">wins.net.routecache.RouteCache</a></strong>:
+      <em class="summary">Routing table/cache for source routes in DSR.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.crc.CRC-class.html">wins.backend.crc.CRC</a></strong>:
+      <em class="summary">Proxy of C++ CRC class</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n_support.DOT11N_DATARATE-class.html">wins.ieee80211.dot11n_support.DOT11N_DATARATE</a></strong>:
+      <em class="summary">Meta class to enable access to <a href="wins.ieee80211.dot11n_support-module.html#get_dot11n_datarate" class="link">get_dot11n_datarate</a> using index operator.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.dot11n_backend.Dot11N_Receiver-class.html">wins.backend.dot11n_backend.Dot11N_Receiver</a></strong>:
+      <em class="summary">Proxy of C++ Dot11N_Receiver class</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.dot11n_backend.Dot11N_Transmitter-class.html">wins.backend.dot11n_backend.Dot11N_Transmitter</a></strong>:
+      <em class="summary">Proxy of C++ Dot11N_Transmitter class</em>
+    </li>
+    <li> <strong class="uidlink">scapy.base_classes.Gen</strong>
+    <ul>
+    <li> <strong class="uidlink">scapy.base_classes.BasePacket</strong>
+    <ul>
+    <li> <strong class="uidlink">scapy.packet.Packet</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.traffic.agent.AGT-class.html">wins.traffic.agent.AGT</a></strong>:
+      <em class="summary">Packet header for traffic generated by Agent.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.packet.ANNO-class.html">wins.packet.ANNO</a></strong>:
+      <em class="summary">Packet annotations implicit to every Scapy Packet object.</em>
+    </li>
+    <li> <strong class="uidlink">scapy.layers.l2.ARP</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.protocol.arp_support.ARPReply-class.html">wins.protocol.arp_support.ARPReply</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.protocol.arp_support.ARPRequest-class.html">wins.protocol.arp_support.ARPRequest</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.crc.CRC32-class.html">wins.crc.CRC32</a></strong>:
+      <em class="summary">32-bit cyclic redundancy check (or CRC-32).</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT-class.html">wins.net.dsr_support.DSROPT</a></strong>:
+      <em class="summary">Base class for DSR Option packet.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_ACK-class.html">wins.net.dsr_support.DSROPT_ACK</a></strong>:
+      <em class="summary">DSR Acknowledgement Option.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_ACKREQ-class.html">wins.net.dsr_support.DSROPT_ACKREQ</a></strong>:
+      <em class="summary">DSR Acknowledgement Request Option.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_RERR-class.html">wins.net.dsr_support.DSROPT_RERR</a></strong>:
+      <em class="summary">DSR Route Error Option.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_RREP-class.html">wins.net.dsr_support.DSROPT_RREP</a></strong>:
+      <em class="summary">DSR Route Reply Option.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_RREQ-class.html">wins.net.dsr_support.DSROPT_RREQ</a></strong>:
+      <em class="summary">DSR Route Request Option.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSROPT_SRCROUTE-class.html">wins.net.dsr_support.DSROPT_SRCROUTE</a></strong>:
+      <em class="summary">DSR Source Route Option.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support.DSRPacket-class.html">wins.net.dsr_support.DSRPacket</a></strong>:
+      <em class="summary">DSR packet; use specific subclasses for different options.</em>
+    </li>
+    <li> <strong class="uidlink">scapy.layers.dot11.Dot11</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11_support.Dot11Ack-class.html">wins.ieee80211.dot11_support.Dot11Ack</a></strong>:
+      <em class="summary">IEEE 802.11 Acknowledgement.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11_support.Dot11CTS-class.html">wins.ieee80211.dot11_support.Dot11CTS</a></strong>:
+      <em class="summary">IEEE 802.11 Clear-To-Send message.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11_support.Dot11Data-class.html">wins.ieee80211.dot11_support.Dot11Data</a></strong>:
+      <em class="summary">IEEE 802.11 Data.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.mac.rbar_support.Dot11RSH-class.html">wins.mac.rbar_support.Dot11RSH</a></strong>:
+      <em class="summary">IEEE 802.11 Data.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11_support.Dot11RTS-class.html">wins.ieee80211.dot11_support.Dot11RTS</a></strong>:
+      <em class="summary">IEEE 802.11 Request-To-Send message.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11a_support.Dot11A-class.html">wins.ieee80211.dot11a_support.Dot11A</a></strong>:
+      <em class="summary">Packet format for IEEE 802.11a physical layer packet header.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n_support.Dot11N-class.html">wins.ieee80211.dot11n_support.Dot11N</a></strong>:
+      <em class="summary">Packet format for IEEE 802.11n physical layer packet header.</em>
+    </li>
+    <li> <strong class="uidlink">scapy.layers.inet.IP</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.helper.PseudoIPv4-class.html">wins.helper.PseudoIPv4</a></strong>:
+      <em class="summary">Pseudo header that mimics IPv4 header for computing checksum in transport
+layer protocols (i.e. UDP and TCP).</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.mac.rateadaptation.RAI-class.html">wins.mac.rateadaptation.RAI</a></strong>:
+      <em class="summary">Rate Adaptation Information packet.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.net.dsr_support._DSROPT_HDR-class.html" onclick="show_private();">wins.net.dsr_support._DSROPT_HDR</a></strong>:
+      <em class="summary">Internal packet structure for fields common among DSR options.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">SimPy.Lister.Lister</strong>
+    <ul>
+    <li> <strong class="uidlink">SimPy.Lib.Buffer</strong>:
+      <em class="summary">Abstract class for buffers
+Blocks a process when a put would cause buffer overflow or a get would cause
+buffer underflow.
+Default queuing discipline for blocked processes is FIFO.</em>
+    <ul>
+    <li> <strong class="uidlink">SimPy.Lib.Store</strong>:
+      <em class="summary">Models buffers for processes coupled by putting / getting distinguishable
+items.
+Blocks a process when a put would cause buffer overflow or a get would cause
+buffer underflow.
+Default queuing discipline for blocked processes is priority FIFO.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.queue.Queue-class.html">wins.queue.Queue</a></strong>:
+      <em class="summary">Convenient API to SimPy Store.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.element.Port-class.html">wins.element.Port</a></strong>:
+      <em class="summary">Interface for enabling connections between <a href="wins.element.Element-class.html" class="link">Element</a> objects.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">SimPy.Lib.Process</strong>:
+      <em class="summary">Superclass of classes which may use generator functions</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.fsm.FSM-class.html">wins.fsm.FSM</a></strong>:
+      <em class="summary">Finite state machine.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.util.monitor.Monitor-class.html">wins.util.monitor.Monitor</a></strong>:
+      <em class="summary">Monitor progress of simulation.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.fsm.Timer-class.html">wins.fsm.Timer</a></strong>:
+      <em class="summary">Stopwatch timer that fires an event after waiting for a specified time.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.dot11n_backend.MimoChannel-class.html">wins.backend.dot11n_backend.MimoChannel</a></strong>:
+      <em class="summary">Proxy of C++ Channel class</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.backend.dot11n_backend.Dot11N_Channel-class.html">wins.backend.dot11n_backend.Dot11N_Channel</a></strong>:
+      <em class="summary">Proxy of C++ Dot11N_Channel class</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.base.Reference-class.html">wins.base.Reference</a></strong>:
+      <em class="summary">Weakly reference another object.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.waveform.SwigPyIterator-class.html">wins.backend.waveform.SwigPyIterator</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.waveform.Waveform-class.html">wins.backend.waveform.Waveform</a></strong>:
+      <em class="summary">Proxy of C++ Waveform class</em>
+    </li>
+    <li> <strong class="uidlink">list</strong>:
+      <em class="summary">list() -&gt; new empty list
+list(iterable) -&gt; new list initialized from iterable's items</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="wins.queue._PriorityList-class.html" onclick="show_private();">wins.queue._PriorityList</a></strong>:
+      <em class="summary">Internal class for implementing <code class="link">theBuffer</code> for <code class="link">PriorityQueue</code>.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">type</strong>:
+      <em class="summary">type(object) -&gt; the object's type
+type(name, bases, dict) -&gt; a new type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="scapy.base_classes.Packet_metaclass-class.html">scapy.base_classes.Packet_metaclass</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.ieee80211.dot11n_support._GetDataRateType-class.html" onclick="show_private();">wins.ieee80211.dot11n_support._GetDataRateType</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.waveform.vectorc-class.html">wins.backend.waveform.vectorc</a></strong>:
+      <em class="summary">Proxy of C++ std::vector&lt;(std::complex&lt;(double)&gt;)&gt; class</em>
+    </li>
+    <li> <strong class="uidlink"><a href="wins.backend.waveform.vectori-class.html">wins.backend.waveform.vectori</a></strong>:
+      <em class="summary">Proxy of C++ std::vector&lt;(int)&gt; class</em>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:28 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

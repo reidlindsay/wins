@@ -1,0 +1,49 @@
+##############################################################################
+#
+#   Common scripts used for experiments, data collection, and analysis.
+#   
+#   Revision Info
+#   =============
+#   * $LastChangedBy: mandke $
+#   * $LastChangedDate: 2011-07-12 15:22:05 -0500 (Tue, 12 Jul 2011) $
+#   * $LastChangedRevision: 5048 $
+#   
+#   :author: Ketan Mandke <kmandke@mail.utexas.edu>
+#   
+#   :copyright:
+#       Copyright 2009-2010 The University of Texas at Austin
+#   
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#       You may obtain a copy of the License at
+#   
+#          http://www.apache.org/licenses/LICENSE-2.0
+#   
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+##############################################################################
+
+==============================================================================
+Files
+==============================================================================
+
+  1. printtrace.py - Read WiNS trace file and print formatted output.
+  2. mergedata.py  - Merge multiple data sets together.
+  3. plotdata.py   - Plot data points [with/without error bars].
+
+==============================================================================
+How to convert PDF to PNG
+==============================================================================
+
+Find out the dimensions using pdf info:
+
+  > pdfinfo INPUT.PDF
+
+Figure out the appropriate scaled size you want, and then convert the pdf:
+
+  > convert -resize WIDTHxHEIGHT INPUT.PDF OUTPUT.PNG
+

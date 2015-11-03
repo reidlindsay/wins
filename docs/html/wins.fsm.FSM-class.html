@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.fsm.FSM</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.fsm-module.html">Module&nbsp;fsm</a> ::
+        Class&nbsp;FSM
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class FSM</h1><p class="nomargin-top"><span class="codelink"><a href="wins.fsm-pysrc.html#FSM">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_fsm" name="class_hierarchy_for_fsm">
+<area shape="rect" href="javascript:void(0);" title="SimPy.Lib.Process" alt="" coords="139,61,269,88"/>
+<area shape="rect" href="wins.fsm.FSM-class.html" title="FSM" alt="" coords="108,117,156,144"/>
+<area shape="rect" href="javascript:void(0);" title="SimPy.Lister.Lister" alt="" coords="139,5,269,32"/>
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="19,5,101,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="5,61,115,88"/>
+<area shape="rect" href="wins.fsm.Timer-class.html" title="Timer" alt="" coords="48,173,101,200"/>
+<area shape="rect" href="wins.util.monitor.Monitor-class.html" title="util.monitor.Monitor" alt="" coords="125,173,256,200"/>
+</map>
+  <img src="class_hierarchy_for_fsm.gif" alt='' usemap="#class_hierarchy_for_fsm" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Finite state machine.</p>
+<div class="rst-section" id="rst-state-execution-methods">
+<h1 class="heading">State Execution Methods</h1>
+<p>State execution methods must accept the calling <a href="wins.fsm.FSM-class.html" class="link">FSM</a> as an argument. For
+example:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">S0</span>(fsm):
+<span class="py-more">... </span>    yield hold, fsm, 1.0
+<span class="py-more">... </span>    yield fsm.goto(S1, 1.0)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">S1</span>(fsm, d):
+<span class="py-more">... </span>    yield hold, fsm, d
+<span class="py-more">... </span>    yield fsm.goto(S2)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">S2</span>(fsm):
+<span class="py-more">... </span>    yield hold, fsm, 0  <span class="py-comment"># do nothing and kill fsm</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>fsm = FSM()
+<span class="py-prompt">&gt;&gt;&gt; </span>fsm.goto(S0)
+<span class="py-prompt">&gt;&gt;&gt; </span>fsm.start()</pre>
+</blockquote>
+<p>creates a finite state machine that transitions through three states (S0,
+S1, and S2). Note that state S1 accepts any additional argument which was
+passed to it by using <a href="wins.fsm.FSM-class.html#goto" class="link">goto()</a>.</p>
+<p>Use <a href="wins.fsm.FSM-class.html#goto" class="link">goto()</a> to transition between states and to set the initial state for
+the FSM. Use <a href="wins.fsm.FSM-class.html#start" class="link">start()</a> to start the FSM; using activate() may result in
+unintended consequences.</p>
+</div>
+<div class="rst-section" id="rst-fsm-and-ports">
+<h1 class="heading">FSM and Ports</h1>
+<p>This class overloads the <a href="wins.fsm.FSM-class.html#acquired" class="link">acquired()</a> and <a href="wins.fsm.FSM-class.html#stored" class="link">stored()</a> methods from SimPy
+Process. These overloaded methods cause the <a href="wins.fsm.FSM-class.html" class="link">FSM</a> to clear any stale
+SimEvents which might be present in the <code class="link">eventFired</code> list. This usually only
+relevant when using renege clauses with get or put requests from a SimPy
+Store (see <a href="wins.queue.Queue-class.html" class="link">Queue</a> for more on getting/putting with a renege clause).</p>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        Since <a href="wins.fsm.FSM-class.html" class="link">FSM</a> is a SimPy Process. All normal SimPy Process commands,
+such as cancel() and interrupt() may be used.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">initstate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">start</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#start" class="summary-sig-name">start</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sem</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded start to go to initial state.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.start">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#goto" class="summary-sig-name">goto</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nextstate</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Transition to a new state.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.goto">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#stop" class="summary-sig-name">stop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Stop execution and transition to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.stop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#acquired" class="summary-sig-name">acquired</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">buf</span>)</span><br />
+      Overload to clear <code class="link">eventsFired</code> when successfully acquired.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.acquired">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#stored" class="summary-sig-name">stored</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">buffer</span>)</span><br />
+      Overload to clear <code class="link">eventsFired</code> when successfully stored.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.stored">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#halt" class="summary-sig-name">halt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Halt execution of <a href="wins.fsm.FSM-class.html" class="link">FSM</a>; send to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a> state.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.halt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_RUN_HALT"></a><span class="summary-sig-name">_RUN_HALT</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Internal SEM to halt execution of <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM._RUN_HALT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_statename"></a><span class="summary-sig-name">get_statename</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return current state name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.get_statename">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="HALT"></a><span class="summary-sig-name">HALT</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      Default state to halt execution.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.HALT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evt</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>SimPy.Lib.Process</code></b>:
+      <code>active</code>,
+      <code>cancel</code>,
+      <code>interrupt</code>,
+      <code>interruptReset</code>,
+      <code>interrupted</code>,
+      <code>passive</code>,
+      <code>queuing</code>,
+      <code>terminated</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>SimPy.Lib.Process</code></b> (private):
+      <code>_hold</code>,
+      <code>_passivate</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>SimPy.Lister.Lister</code></b>:
+      <code>attrnames</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.fsm.FSM-class.html#launch" class="summary-sig-name">launch</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">sem</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Start a new <a href="wins.fsm.FSM-class.html" class="link">FSM</a> that starts running <em>immediately</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.fsm-pysrc.html#FSM.launch">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'fsm'"><code class="variable-quote">'</code><code class="variable-string">fsm</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'FSM'"><code class="variable-quote">'</code><code class="variable-string">FSM</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_fixsimhold"></a><span class="summary-name">_fixsimhold</span> = <code title="False">False</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>SimPy.Lister.Lister</code></b>:
+      <code>indent</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__sem"></a><span class="summary-name">__sem</span><br />
+      : Private variable for generator running current state execution
+method.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__started"></a><span class="summary-name">__started</span><br />
+      : Private boolean flag indicates if <a href="wins.fsm.FSM-class.html" class="link">FSM</a> has been started.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__state"></a><span class="summary-name">__state</span><br />
+      : Private variable for current state of FSM, i.e. current state
+execution method. Use <a href="wins.fsm.FSM-class.html#goto" class="link">goto()</a> to transition to new state or set state
+before starting state machine.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.fsm.FSM-class.html#sem" class="summary-name">sem</a><br />
+      : Property to access generator running current state execution
+method.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.fsm.FSM-class.html#state" class="summary-name">state</a><br />
+      : Property to access current state of FSM, i.e. current state
+execution method.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.fsm.FSM-class.html#statename" class="summary-name">statename</a><br />
+      : Property to get readable name of current <a href="wins.fsm.FSM-class.html#state" class="link">state</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.fsm.FSM-class.html#started" class="summary-name">started</a><br />
+      : Property to indicate if <a href="wins.fsm.FSM-class.html" class="link">FSM</a> has been started.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">initstate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">start</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>initstate</code></strong> - Initial state to <a href="wins.fsm.FSM-class.html#goto" class="link">goto</a>.</li>
+        <li><strong class="pname"><code>start</code></strong> - Boolean; if true, <a href="wins.fsm.FSM-class.html#start" class="link">start()</a> immediately.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to <a href="wins.trace.Traceable-class.html" class="link">Traceable</a> constructor.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="start"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">start</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sem</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.start">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Overloaded start to go to initial state.</p>
+<p>State execution method (SEM) is a function that takes a <a href="wins.fsm.FSM-class.html" class="link">FSM</a> as its
+first argument. This function is like a Process execution method (PEM)
+in SimPy, but meant to be used exclusively with <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>sem</code></strong> - State execution method.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keyword arguments passed to Process.start().</li>
+    </ul></dd>
+    <dt>Overrides:
+        SimPy.Lib.Process.start
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="goto"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">goto</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nextstate</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.goto">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Transition to a new state.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>nextstate</code></strong> - Generator method for next state.</li>
+        <li><strong class="pname"><code>args</code></strong> - Arguments passed to next state.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to next state.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        <code class="link">nextstate</code> must be a valid state execution method, see above.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="stop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.stop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stop execution and transition to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a>.</p>
+<p>This should only be used for &quot;normal&quot; transitions to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a>:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>yield fsm.stop()</pre>
+</blockquote>
+<p>Use <a href="wins.fsm.FSM-class.html#halt" class="link">halt()</a> to force transitions on active <a href="wins.fsm.FSM-class.html" class="link">FSM</a> to the <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a> state,
+e.g. when an <a href="wins.fsm.FSM-class.html" class="link">FSM</a> is waiting on an event or a queue.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a>.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="acquired"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">acquired</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">buf</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.acquired">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overload to clear <code class="link">eventsFired</code> when successfully acquired.
+  <dl class="fields">
+    <dt>Overrides:
+        SimPy.Lib.Process.acquired
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="stored"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stored</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">buffer</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.stored">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overload to clear <code class="link">eventsFired</code> when successfully stored.
+  <dl class="fields">
+    <dt>Overrides:
+        SimPy.Lib.Process.stored
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="halt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">halt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.halt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Halt execution of <a href="wins.fsm.FSM-class.html" class="link">FSM</a>; send to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a> state.</p>
+<p>This method forces the current running <a href="wins.fsm.FSM-class.html" class="link">FSM</a> to halt execution by use of
+the SimPy directive cancel(). If <a href="wins.fsm.FSM-class.html" class="link">FSM</a> is to be reactivated (or woken
+up) later, use passivate instead of <a href="wins.fsm.FSM-class.html#halt" class="link">halt()</a>.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>yield passivate, fsm</pre>
+</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a> state.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.fsm.FSM-class.html#HALT" class="link">HALT</a> state.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="launch"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">launch</span>(<span class="sig-arg">cls</span>,
+        <span class="sig-arg">sem</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.launch">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Start a new <a href="wins.fsm.FSM-class.html" class="link">FSM</a> that starts running <em>immediately</em>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>sem</code></strong> - State execution method (SEM).</li>
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to SEM.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to SEM.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Newly created <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        The SEM will start running immediately.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">evt</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.fsm-pysrc.html#FSM.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="sem"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sem</h3>
+  : Property to access generator running current state execution
+method.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="state"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">state</h3>
+  : Property to access current state of FSM, i.e. current state
+execution method.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="statename"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">statename</h3>
+  : Property to get readable name of current <a href="wins.fsm.FSM-class.html#state" class="link">state</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="started"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">started</h3>
+  : Property to indicate if <a href="wins.fsm.FSM-class.html" class="link">FSM</a> has been started.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:31 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

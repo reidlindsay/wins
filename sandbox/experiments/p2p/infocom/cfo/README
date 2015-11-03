@@ -1,0 +1,68 @@
+##############################################################################
+#
+#   CFO: AWGN channel using hard-decoding; with frequency offset.
+#   
+#   Revision Info
+#   =============
+#   * $LastChangedBy: mandke $
+#   * $LastChangedDate: 2011-07-27 22:47:39 -0500 (Wed, 27 Jul 2011) $
+#   * $LastChangedRevision: 5080 $
+#   
+#   :author: Ketan Mandke <kmandke@mail.utexas.edu>
+#   
+#   :copyright:
+#       Copyright 2009-2011 The University of Texas at Austin
+#   
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#       You may obtain a copy of the License at
+#   
+#          http://www.apache.org/licenses/LICENSE-2.0
+#   
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+##############################################################################
+
+==============================================================================
+Desired Performance Data
+==============================================================================
+
+  1. PER vs. SNR vs. RMS delay-spread
+  2. FDR vs. SNR vs. RMS delay-spread
+
+==============================================================================
+Physical Layer Setup
+==============================================================================
+
+  * Hard-decision decoding
+  * Frequency offset correction enabled
+
+==============================================================================
+Simulation Parameters
+==============================================================================
+
+  * Packet length: 1500 bytes
+  * fomax: 13.675 ppm
+  * Enable CFO correction
+  * Use hard-decision decoding
+  * LOS AWGN Channel Model
+  * Disabled doppler filtering of NLOS channel
+
+==============================================================================
+MCS -> SNR Range
+==============================================================================
+
+SNR range for each MCS should cover range of interest (i.e. transition from
+failure to error-free region).
+
+  ===== ============================
+  MCS   SNR Range (min, max [,step])
+  ----- ----------------------------
+  0     (-2, 12)
+  3     ( 7, 19)
+  6     (17, 29)
+  ===== ============================

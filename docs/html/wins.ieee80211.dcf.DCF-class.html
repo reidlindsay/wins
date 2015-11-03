@@ -1,0 +1,2245 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.ieee80211.dcf.DCF</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.ieee80211-module.html">Package&nbsp;ieee80211</a> ::
+        <a href="wins.ieee80211.dcf-module.html">Module&nbsp;dcf</a> ::
+        Class&nbsp;DCF
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class DCF</h1><p class="nomargin-top"><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_dcf" name="class_hierarchy_for_dcf">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="73,5,156,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="60,61,169,88"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="55,117,175,144"/>
+<area shape="rect" href="wins.protocol.mac.MAC-class.html" title="protocol.mac.MAC" alt="" coords="51,173,179,200"/>
+<area shape="rect" href="wins.ieee80211.dcf.DCF-class.html" title="DCF" alt="" coords="91,285,139,312"/>
+<area shape="rect" href="wins.mac.arf.ARF-class.html" title="mac.arf.ARF" alt="" coords="5,341,99,368"/>
+<area shape="rect" href="wins.mac.rbar.RBAR-class.html" title="mac.rbar.RBAR" alt="" coords="123,341,235,368"/>
+<area shape="rect" href="wins.protocol.csmac.CSMAC-class.html" title="protocol.csmac.CSMAC" alt="" coords="35,229,195,256"/>
+</map>
+  <img src="class_hierarchy_for_dcf.gif" alt='' usemap="#class_hierarchy_for_dcf" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Distributed Control Function of IEEE 802.11 MAC protocol.</p>
+<div class="rst-section" id="rst-dcf-and-ports">
+<h1 class="heading">DCF and Ports</h1>
+<p>The DCF module has two downstream port ('TXD' and 'RXD'). These ports are
+used to interact with the associated physical layer.</p>
+</div>
+<div class="rst-section" id="rst-csma-ca">
+<h1 class="heading">CSMA/CA</h1>
+<p>Carrier sense multiple access with collision avoidance (CSMA/CA) may be used
+for the IEEE 802.11 MAC protocol. This mode of operation will not use
+RTS/CTS reservation messages. Instead, after carrier sense backoff, the
+protocol will immediately send the data message. Use the boolean flag
+<a href="wins.ieee80211.dcf.DCF-class.html#usecsma" class="link">usecsma</a> to enable this mode of operation.</p>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        <a href="wins.ieee80211.dcf.DCF-class.html" class="link">DCF</a> only handles Ethernet packets. (i.e. <a href="wins.protocol.mac.MAC-class.html#htype" class="link">htype</a> must be
+<a href="wins.const-module.html#ARP_HTYPE_ETHERNET" class="link">const.ARP_HTYPE_ETHERNET</a>).
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cwmin</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cwmax</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">retrylimit</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">usecsma</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Configure downstream ports and <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#encapsulate" class="summary-sig-name">encapsulate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">dst</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method to encapsulate an packet in an IEEE 802.11 data
+header (i.e. <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="link">Dot11Data</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.encapsulate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#retry" class="summary-sig-name">retry</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">count</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Update retry count and set backoff parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.retry">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="IDLE"></a><span class="summary-sig-name">IDLE</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      IDLE state; reset parameters and check for new data from 'RXU'.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.IDLE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXDATA"></a><span class="summary-sig-name">TXDATA</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      TXDATA state; initialize <a href="wins.ieee80211.dcf.DCF-class.html#datatosend" class="link">datatosend</a> and associated parameters
+before transitioning to <a href="wins.ieee80211.dcf.DCF-class.html#BACKOFF" class="link">BACKOFF</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXDATA">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="BACKOFF"></a><span class="summary-sig-name">BACKOFF</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      BACKOFF state; perform backoff operation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.BACKOFF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="NAVBACKOFF"></a><span class="summary-sig-name">NAVBACKOFF</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      NAVBACKOFF state; defer access for NAV and virtual carrier sense.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.NAVBACKOFF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXBCAST"></a><span class="summary-sig-name">TXBCAST</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      TXBCAST state; broadcast <a href="wins.ieee80211.dcf.DCF-class.html#datatosend" class="link">datatosend</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXBCAST">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXRTS"></a><span class="summary-sig-name">TXRTS</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      TXRTS state; send RTS for <a href="wins.ieee80211.dcf.DCF-class.html#datatosend" class="link">datatosend</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXRTS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXCTS"></a><span class="summary-sig-name">RXCTS</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RXCTS state; wait for CTS response.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXCTS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXUCAST"></a><span class="summary-sig-name">TXUCAST</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      TXUCAST state; transmit unicast <a href="wins.ieee80211.dcf.DCF-class.html#datatosend" class="link">datatosend</a> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXUCAST">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXACK"></a><span class="summary-sig-name">RXACK</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RXACK state; wait on ACK for <a href="wins.ieee80211.dcf.DCF-class.html#datatosend" class="link">datatosend</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXACK">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXBUSY"></a><span class="summary-sig-name">RXBUSY</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RXBUSY state; check for <a href="wins.ieee80211.dcf.DCF-class.html#rxdata" class="link">rxdata</a> and <a href="wins.protocol.csmac.CSMAC-class.html#csidle" class="link">csidle</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXBUSY">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXPKT"></a><span class="summary-sig-name">RXPKT</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      RXPKT state; classify incoming packets.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXPKT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#RXETH" class="summary-sig-name">RXETH</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      RXETH state; classify incoming Ethernet <code class="link">pkt</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXETH">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXDATA"></a><span class="summary-sig-name">RXDATA</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      RXDATA state; process received DATA message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXDATA">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXACK"></a><span class="summary-sig-name">TXACK</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      TXACK state; transmit ACK message in response to <code class="link">data</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXACK">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RXRTS"></a><span class="summary-sig-name">RXRTS</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      RXRTS state; update NAV and process RTS message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXRTS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXCTS"></a><span class="summary-sig-name">TXCTS</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">rts</span>)</span><br />
+      TXCTS state; send CTS response message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.TXCTS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RESUME"></a><span class="summary-sig-name">RESUME</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RESUME state; resume operation in <a href="wins.ieee80211.dcf.DCF-class.html#IDLE" class="link">IDLE</a> or <a href="wins.ieee80211.dcf.DCF-class.html#BACKOFF" class="link">BACKOFF</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RESUME">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RECV"></a><span class="summary-sig-name">RECV</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RECV state; check for receive data from downstream element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RECV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="send_rts"></a><span class="summary-sig-name">send_rts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rts</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Additional processing for outgoing RTS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.send_rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="recv_rts"></a><span class="summary-sig-name">recv_rts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rts</span>)</span><br />
+      Additional processing for incoming RTS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.recv_rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="send_cts"></a><span class="summary-sig-name">send_cts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cts</span>,
+        <span class="summary-sig-arg">rts</span>)</span><br />
+      Additional processing for outgoing CTS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.send_cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="recv_cts"></a><span class="summary-sig-name">recv_cts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cts</span>)</span><br />
+      Additional processing for incoming CTS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.recv_cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="send_data"></a><span class="summary-sig-name">send_data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Additional processing for outgoing DATA.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.send_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="recv_data"></a><span class="summary-sig-name">recv_data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Additional processing for incoming DATA.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.recv_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="send_ack"></a><span class="summary-sig-name">send_ack</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ack</span>)</span><br />
+      Additional processing for outgoing ACK.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.send_ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="recv_ack"></a><span class="summary-sig-name">recv_ack</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ack</span>)</span><br />
+      Additional processing for incoming ACK.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.recv_ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#rtsnav" class="summary-sig-name">rtsnav</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate NAV value for RTS given DATA <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.rtsnav">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#ctsnav" class="summary-sig-name">ctsnav</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rts</span>)</span><br />
+      Calculate NAV value for CTS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.ctsnav">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#navupdate" class="summary-sig-name">navupdate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">proc</span>,
+        <span class="summary-sig-arg">t</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Update NAVTimer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.navupdate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#get_ctstimeout" class="summary-sig-name">get_ctstimeout</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Calculate timeout for CTS messages.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ctstimeout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#get_acktimeout" class="summary-sig-name">get_acktimeout</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Calculate timeout for ACK messages.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_acktimeout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#get_ctsduration" class="summary-sig-name">get_ctsduration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Calculate duration of CTS message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ctsduration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#get_ackduration" class="summary-sig-name">get_ackduration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Calculate duration of ack message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ackduration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#set_timing" class="summary-sig-name">set_timing</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">phymode</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set up timing parameters (e.g. <a href="wins.ieee80211.dcf.DCF-class.html#sifs" class="link">sifs</a>, <a href="wins.ieee80211.dcf.DCF-class.html#slottime" class="link">slottime</a>, etc.).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.set_timing">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#get_datarate" class="summary-sig-name">get_datarate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">r</span>)</span><br />
+      Get the data rate in bits-per-second (bps).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_datarate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#calclength" class="summary-sig-name">calclength</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">duration</span>,
+        <span class="summary-sig-arg">rate</span>)</span><br />
+      Calculate length of packet in bytes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.calclength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11data"></a><span class="summary-sig-name">isdot11data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Check if packet is DATA; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.isdot11data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11rts"></a><span class="summary-sig-name">isdot11rts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Check if packet is RTS; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.isdot11rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11cts"></a><span class="summary-sig-name">isdot11cts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Check if packet is CTS; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.isdot11cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isdot11ack"></a><span class="summary-sig-name">isdot11ack</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Check if packet is ACK; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.isdot11ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dot11data"></a><span class="summary-sig-name">get_dot11data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Extract DATA from <code class="link">p</code>; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_dot11data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dot11rts"></a><span class="summary-sig-name">get_dot11rts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Extract RTS from <code class="link">p</code>; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_dot11rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dot11cts"></a><span class="summary-sig-name">get_dot11cts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Extract CTS from <code class="link">p</code>; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_dot11cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dot11ack"></a><span class="summary-sig-name">get_dot11ack</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Extract ACK from <code class="link">p</code>; <em>overload as needed</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_dot11ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dot11data"></a><span class="summary-sig-name">dot11data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create new <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="link">Dot11Data</a> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.dot11data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dot11rts"></a><span class="summary-sig-name">dot11rts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create new <a href="wins.ieee80211.dot11_support.Dot11RTS-class.html" class="link">Dot11RTS</a> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.dot11rts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dot11cts"></a><span class="summary-sig-name">dot11cts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create new <a href="wins.ieee80211.dot11_support.Dot11CTS-class.html" class="link">Dot11CTS</a> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.dot11cts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dot11ack"></a><span class="summary-sig-name">dot11ack</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create new <code class="link">Dot11ACK</code> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.dot11ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#connect" class="summary-sig-name">connect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Overloaded to connect and call <a href="wins.protocol.csmac.CSMAC-class.html#set_phy" class="link">set_phy()</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.connect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_send"></a><span class="summary-sig-name">log_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging send event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.log_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_recv"></a><span class="summary-sig-name">log_recv</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging receive event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.log_recv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_drop"></a><span class="summary-sig-name">log_drop</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging drop event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.log_drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dcf.DCF-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dcf_anno"></a><span class="summary-sig-name">get_dcf_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Convenience method to extract annotations and convert to strings.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_dcf_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.csmac.CSMAC-class.html">protocol.csmac.CSMAC</a></code></b>:
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#set_phy">set_phy</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.mac.MAC-class.html">protocol.mac.MAC</a></code></b>:
+      <code><a href="wins.protocol.mac.MAC-class.html#duration">duration</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#haserror">haserror</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#set_address">set_address</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'distributed coordination function'"><code class="variable-quote">'</code><code class="variable-string">distributed coordination function</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'DCF'"><code class="variable-quote">'</code><code class="variable-string">DCF</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.mac.MAC-class.html">protocol.mac.MAC</a></code></b>:
+      <code><a href="wins.protocol.mac.MAC-class.html#broadcast">broadcast</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#mtu">mtu</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#nulladdr">nulladdr</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cwmin"></a><span class="summary-name">cwmin</span> = <code title="32">32</code><br />
+      : Minimum contention window size.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cwmax"></a><span class="summary-name">cwmax</span> = <code title="1024">1024</code><br />
+      : Maximum contention window size.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="retrylimit"></a><span class="summary-name">retrylimit</span> = <code title="7">7</code><br />
+      : Maximum number of retries allowed.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_ackduration"></a><span class="summary-name">_ackduration</span><br />
+      : Internal member used to cache duration of ACK.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_ctsduration"></a><span class="summary-name">_ctsduration</span><br />
+      : Internal member used to cache duration of CTS.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cslot"></a><span class="summary-name">cslot</span><br />
+      : Contention slot value.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="datatosend"></a><span class="summary-name">datatosend</span><br />
+      : Packet currently being handled; <code class="link">None</code> indicates not busy.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="retrycount"></a><span class="summary-name">retrycount</span><br />
+      : Retry counter.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rxdata"></a><span class="summary-name">rxdata</span><br />
+      : SimEvent signalled when a packet arrives on <a href="wins.element.Port-class.html" class="link">Port</a> 'RXD'.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sifs"></a><span class="summary-name">sifs</span><br />
+      : Short interframe spacing.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="slottime"></a><span class="summary-name">slottime</span><br />
+      : Duration of a contention slot.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="usecsma"></a><span class="summary-name">usecsma</span><br />
+      : Boolean flag; if true, use CSMA/CA.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.mac.MAC-class.html">protocol.mac.MAC</a></code></b>:
+      <code><a href="wins.protocol.mac.MAC-class.html#ackdata">ackdata</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#checkcrc">checkcrc</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#drpdata">drpdata</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#promiscuous">promiscuous</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#pifs" class="summary-name">pifs</a><br />
+      : Property to access point-coordination interframe spacing.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#difs" class="summary-name">difs</a><br />
+      : Property to access distributed interframe spacing.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#ctstimeout" class="summary-name">ctstimeout</a><br />
+      : Property to access CTS timeout.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#acktimeout" class="summary-name">acktimeout</a><br />
+      : Property to access ACK timeout.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#navbusy" class="summary-name">navbusy</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#navidle" class="summary-name">navidle</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#ctsduration" class="summary-name">ctsduration</a><br />
+      : Property to access duration of CTS.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dcf.DCF-class.html#ackduration" class="summary-name">ackduration</a><br />
+      : Property to access duration of ACK.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.csmac.CSMAC-class.html">protocol.csmac.CSMAC</a></code></b>:
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#csbusy">csbusy</a></code>,
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#csidle">csidle</a></code>,
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#csmode">csmode</a></code>,
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#isbusy">isbusy</a></code>,
+      <code><a href="wins.protocol.csmac.CSMAC-class.html#isidle">isidle</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.mac.MAC-class.html">protocol.mac.MAC</a></code></b>:
+      <code><a href="wins.protocol.mac.MAC-class.html#addr">addr</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#address">address</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#htype">htype</a></code>,
+      <code><a href="wins.protocol.mac.MAC-class.html#phy">phy</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cwmin</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cwmax</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">retrylimit</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">usecsma</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor.</p>
+<p>The default parameters are specified by the class.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cwmin</code></strong> - Minimum contention window size.</li>
+        <li><strong class="pname"><code>cwmax</code></strong> - Maximum contention window size.</li>
+        <li><strong class="pname"><code>retrylimit</code></strong> - Maximum number of retries allowed.</li>
+        <li><strong class="pname"><code>usecsma</code></strong> - Boolean flag; if true, use CSMA/CA without RTS-CTS
+reservation messages.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.ieee80211.dcf.DCF-class.html#configure" class="link">configure()</a>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Configure downstream ports and <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>phy</code></strong> - Pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a> for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.</li>
+        <li><strong class="pname"><code>addr</code></strong> - Address for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> (see <code class="link">MAC and Addressing</code> for more).</li>
+        <li><strong class="pname"><code>htype</code></strong> - Hardware type enumeration for <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>; Ethernet by default.</li>
+        <li><strong class="pname"><code>checkcrc</code></strong> - Boolean flag; if false <a href="wins.protocol.mac.MAC-class.html#haserror" class="link">haserror()</a> will ignore the CRC
+when determining if an error has occurred.</li>
+        <li><strong class="pname"><code>promiscuous</code></strong> - Boolean flag; should be used to indicate whether or
+not MAC is operating in promiscuous mode
+[default=False].</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="encapsulate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">encapsulate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">dst</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.encapsulate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Convenience method to encapsulate an packet in an IEEE 802.11 data
+header (i.e. <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="link">Dot11Data</a>).
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to encapsulate.</li>
+        <li><strong class="pname"><code>src</code></strong> - Source address [default=`address`]</li>
+        <li><strong class="pname"><code>dst</code></strong> - Destination address [default=`broadcast`]</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="link">Dot11Data</a> constructor.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Newly created <a href="wins.ieee80211.dot11_support.Dot11Data-class.html" class="link">Dot11Data</a> packet.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method adds/updates a CRC using <a href="wins.crc-module.html#crcupdate" class="link">crcupdate()</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="retry"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">retry</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">count</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.retry">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update retry count and set backoff parameters.</p>
+<p>Slot value <a href="wins.ieee80211.dcf.DCF-class.html#cslot" class="link">cslot</a> is set to a random integer between [0, CW), where
+the contention window CW is defined as:</p>
+<blockquote>
+CW = CWmin + 2^`retrycount`</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>count</code></strong> - If specified, <a href="wins.ieee80211.dcf.DCF-class.html#retrycount" class="link">retrycount</a> will be set to this value;
+otherwise, increment <a href="wins.ieee80211.dcf.DCF-class.html#retrycount" class="link">retrycount</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="RXETH"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RXETH</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">pkt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.RXETH">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>RXETH state; classify incoming Ethernet <code class="link">pkt</code>.</p>
+<p>All packets that have an error will be dropped.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rtsnav"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rtsnav</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.rtsnav">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate NAV value for RTS given DATA <code class="link">p</code>.</p>
+<p>This method uses <a href="wins.protocol.mac.MAC-class.html#duration" class="link">duration()</a> to compute the NAV as follows:</p>
+<blockquote>
+NAV = SIFS + CTS + SIFS + DATA + SIFS + ACK</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - DATA packet.</li>
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to compute <a href="wins.protocol.mac.MAC-class.html#duration" class="link">duration</a> of DATA.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to compute <a href="wins.protocol.mac.MAC-class.html#duration" class="link">duration</a> of DATA.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Integer; representing NAV value.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        It is assumed that <code class="link">p</code> is a valid packet.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="ctsnav"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ctsnav</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">rts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.ctsnav">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate NAV value for CTS.</p>
+<p>This method computes CTS NAV as follows:</p>
+<blockquote>
+NAV = RTSNAV - SIFS - CTS</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>rts</code></strong> - RTS packet.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Integer; representing NAV value.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assumes NAV for <code class="link">rts</code> is greater than a SIFS + CTS duration.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="navupdate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">navupdate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">proc</span>,
+        <span class="sig-arg">t</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.navupdate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update NAVTimer.</p>
+<p>If <code class="link">t</code> is None, this method will reset the NAVTimer <code class="link">nav</code>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>proc</code></strong> - Process that blocks on NAV update.</li>
+        <li><strong class="pname"><code>t</code></strong> - New timer value for virtual carrier sense busy.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_ctstimeout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_ctstimeout</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ctstimeout">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate timeout for CTS messages.</p>
+<p>CTSTIMEOUT = SIFS + CTS duration + SLOTTIME</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_acktimeout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_acktimeout</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_acktimeout">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate timeout for ACK messages.</p>
+<p>ACKTIMEOUT = SIFS + ACK duration + SLOTTIME</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_ctsduration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_ctsduration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ctsduration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate duration of CTS message.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>force</code></strong> - If true, ignore any cached value.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_ackduration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_ackduration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_ackduration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate duration of ack message.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>force</code></strong> - If true, ignore any cached value.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_timing"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_timing</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">phymode</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.set_timing">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set up timing parameters (e.g. <a href="wins.ieee80211.dcf.DCF-class.html#sifs" class="link">sifs</a>, <a href="wins.ieee80211.dcf.DCF-class.html#slottime" class="link">slottime</a>, etc.).</p>
+<p>This method sets up timing parameters based on the <code class="link">phymode</code> enumeration
+which enumerates the physical layer mode of operation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>phymode</code></strong> - Enumeration for physical layer mode of operation
+[default=None].</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method is called from <a href="wins.ieee80211.dcf.DCF-class.html#configure" class="link">configure()</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_datarate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_datarate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">r</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.get_datarate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the data rate in bits-per-second (bps).</p>
+<p>This method calls <a href="wins.ieee80211.dcf.DCF-class.html#get_datarate" class="link">get_datarate()</a> for <a href="wins.protocol.mac.MAC-class.html#phy" class="link">phy</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>r</code></strong> - Rate enumeration.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calclength"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calclength</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">duration</span>,
+        <span class="sig-arg">rate</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.calclength">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate length of packet in bytes.</p>
+<p>This method calls <a href="wins.ieee80211.dcf.DCF-class.html#calclength" class="link">calclength()</a> for <a href="wins.protocol.mac.MAC-class.html#phy" class="link">phy</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>duration</code></strong> - Duration of packet in seconds.</li>
+        <li><strong class="pname"><code>rate</code></strong> - Rate enumeration.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="connect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">connect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.connect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to connect and call <a href="wins.protocol.csmac.CSMAC-class.html#set_phy" class="link">set_phy()</a>.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#connect">element.Element.connect</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">event</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dcf-pysrc.html#DCF.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="pifs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">pifs</h3>
+  : Property to access point-coordination interframe spacing.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="difs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">difs</h3>
+  : Property to access distributed interframe spacing.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ctstimeout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ctstimeout</h3>
+  : Property to access CTS timeout.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="acktimeout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">acktimeout</h3>
+  : Property to access ACK timeout.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="navbusy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">navbusy</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="navidle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">navidle</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ctsduration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ctsduration</h3>
+  : Property to access duration of CTS.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ackduration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ackduration</h3>
+  : Property to access duration of ACK.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:32 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=2;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR [TOPO]";
+  echo "  EXEC   - experiment executable"
+  echo "  DIR    - output directory"
+  echo "  [TOPO] - topology file"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS+1 )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+if [ $# -gt 1 ]; then
+  DIR=$2;
+  if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+else
+  DIR=$PWD;
+fi
+
+if [ $# -gt 2 ]; then
+  TOPOFILE=$3;
+else
+  TOPOFILE=topo.dat;
+fi
+
+#######################################
+# Simulation parameters
+#######################################
+
+# simulation parameters
+VERBOSE=35
+NUMNODES=50                 # number of nodes
+NCONNECT=10                 # number of connections
+SIMTIME=1.000               # simulation time
+
+# topology parameters
+if [ ! -f $TOPOFILE ]; then
+  echo "Cannot find topology file ... TOPOFILE=$TOPOFILE"
+  print_usage;
+  exit -1;
+fi
+
+# agent parameters
+PACKETLEN=1024      # in bytes
+RATE=4.0            # in packets/second
+AGTMODE="CBR"       # traffic generation mode
+
+# DSR parameters
+RREQRATE=                   # specify RREQ rate (default -> "", otherwise -> "--rreqrate=RATE")
+DATARATE=                   # specify data rate (default -> "", otherwise -> "--datarate=RATE")
+ROUTEFILE=route.dat         # routing file
+#SAVEROUTE="--save-route=$ROUTEFILE" # save routing?  (no -> "", yes -> "--save-route=$ROUTEFILE")
+
+# PHY parameters
+MCS=0               # mcs index
+FOMAX=0.0           # in ppm (default = 13.675)
+USEWAVEFORM=""                            # enable waveform? (no -> "", yes -> "--use-waveform")
+CFOCORRECTION="--disable-cfo-correction"  # enable CFO correction (yes -> "", no -> "--disable-cfo-correction")
+
+# Channel parameters
+ALPHA=2.0                               # pathloss exponent
+BIDIRECTIONAL="--bidirectional-channel" # bidirectional (yes -> "--bidirectional-channel", no -> "")
+#TGNMODEL=""                             # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+#USEDOPPLER=""                           # enable doppler filter (yes -> "--use-doppler", no -> "")
+#USEFADING="--disable-fading"            # use fading (yes -> "", no -> "--disable-fading")
+TGNMODEL="--tgn-model=A"                # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+USEDOPPLER="--use-doppler"              # enable doppler filter (yes -> "--use-doppler", no -> "")
+USEFADING=""                            # use fading (yes -> "", no -> "--disable-fading")
+
+# definitions
+# Use environment speed (km/hr) as independent variable
+runtests="0.12 "
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+DSREXEC=$EXEC
+if [ ! -x $DSREXEC ]; then
+  echo "Cannot find executable $DSREXEC";
+  exit 0;
+fi
+
+for v in $runtests; do
+  # simulation parameters
+  verbose="-v $VERBOSE"
+  simtime="-s $SIMTIME"
+  simargs="$simtime $verbose"
+
+  # experiment parameters
+  numnodes="-n $NUMNODES"
+  nconnect="-c $NCONNECT"
+  expargs="$numnodes $nconnect"
+
+  # agent parameters
+  rate="-r $RATE"
+  plen="-l $PACKETLEN"
+  mode="--agent-mode $AGTMODE"
+  agtargs="$rate $plen $mode"
+
+  # network parameters
+  if [ -f $ROUTEFILE ]; then
+    useroute="--use-route=$ROUTEFILE";
+  fi
+  saveroute=$SAVEROUTE;
+  rreqrate="$RREQRATE";
+  datarate="$DATARATE";
+  netargs="$rreqrate $datarate $useroute $saveroute"
+
+  # PHY parameters
+  mcs="--mcs=$MCS"
+  fomax="--fomax=$FOMAX"
+  usewaveform=$USEWAVEFORM
+  cfocorrection=$CFOCORRECTION
+  phyargs="$mcs $fomax $usewaveform $cfocorrection";
+
+  # topology parameters
+  usetopo="--use-topo=$TOPOFILE";
+  topoargs="$usetopo"
+
+  # channel parameters
+  alpha="--alpha=$ALPHA"
+  bidirectional="$BIDIRECTIONAL"
+  tgnmodel=$TGNMODEL
+  usedoppler=$USEDOPPLER
+  usefading=$USEFADING
+  envspeed="--environment-speed=$v"
+  chargs="$alpha $bidirectional $tgnmodel $usedoppler $usefading $envspeed";
+
+  # run simulation
+  args="$simargs $expargs $agtargs $netargs $phyargs $topoargs $chargs"
+  tracefile="dsr-n$NUMNODES-c$NCONNECT-v$v.raw"
+  simexec="$DSREXEC $args -o $DIR/$tracefile"
+  echo $simexec
+  $simexec
+done
+
+exit 0;

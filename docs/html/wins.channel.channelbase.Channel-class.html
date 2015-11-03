@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel.channelbase.Channel</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.channel-module.html">Package&nbsp;channel</a> ::
+        <a href="wins.channel.channelbase-module.html">Module&nbsp;channelbase</a> ::
+        Class&nbsp;Channel
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Channel</h1><p class="nomargin-top"><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_channel" name="class_hierarchy_for_channel">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="24,5,107,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="11,61,120,88"/>
+<area shape="rect" href="wins.channel.channelbase.Channel-class.html" title="Channel" alt="" coords="32,173,99,200"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="5,117,125,144"/>
+</map>
+  <img src="class_hierarchy_for_channel.gif" alt='' usemap="#class_hierarchy_for_channel" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Maintain connection graph in which each node is a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> and
+each link is a <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</p>
+<p>The <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a> and <a href="wins.channel.channelbase.Channel-class.html#bidirectional" class="link">bidirectional</a> parameters can be set through keywords
+passed to the constructor (i.e. passed to <a href="wins.channel.channelbase.Channel-class.html#configure" class="link">configure()</a>). The basic
+operation of a <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a> is as follows:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>Get packets transmitted from <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</li>
+<li>Create deepcopy of packets, and forward on all outgoing edges in
+<a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>, after applying annotations and appropriate <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</li>
+<li>Check for 'cm-delay' annotation to apply propagation delay.</li>
+</ol>
+</blockquote>
+<div class="rst-section" id="rst-packet-annotations-and-channel">
+<h1 class="heading">Packet Annotations and Channel</h1>
+<p>Channel will mark or use the following annotations when forwarding packets.</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cif-src</td>
+<td>Reference to <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> that sent packet.</td>
+</tr>
+<tr><td>cif-dst</td>
+<td>Reference to <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> to which packet is forwarded.</td>
+</tr>
+<tr><td>cm-delay</td>
+<td>Propagation delay annotation marked by <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>If the 'cm-delay' annotation is set by a <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>, then <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a> will
+forward the packet after applying the appropriate delay.</p>
+</div>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">model</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">bidirectional</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Set up <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a> and other parameters</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_model"></a><span class="summary-sig-name">set_model</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span><br />
+      Set default <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> used to create links in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.set_model">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#connect" class="summary-sig-name">connect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cif</span>)</span><br />
+      Add <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> as a node in graph.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.connect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#disconnect" class="summary-sig-name">disconnect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cif</span>)</span><br />
+      Disconnect a previously connected <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.disconnect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="has_edge"></a><span class="summary-sig-name">has_edge</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      Check if a link exists between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">a</code> and <code class="link">b</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.has_edge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_edge"></a><span class="summary-sig-name">get_edge</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      Get edge between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> a and b.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.get_edge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#add_edge" class="summary-sig-name">add_edge</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>,
+        <span class="summary-sig-arg">model</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Add a link between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">a</code> and <code class="link">b</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.add_edge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#del_edge" class="summary-sig-name">del_edge</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      Delete edge between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">a</code> and <code class="link">b</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.del_edge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#apply_filter" class="summary-sig-name">apply_filter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">model</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Apply filter for <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a> to <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.apply_filter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#apply_model" class="summary-sig-name">apply_model</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">model</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">u</span>,
+        <span class="summary-sig-arg">v</span>)</span><br />
+      Apply a <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> to a given packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.apply_model">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="LISTEN"></a><span class="summary-sig-name">LISTEN</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">cif</span>,
+        <span class="summary-sig-arg">rxport</span>)</span><br />
+      Listen to traffic sent by <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> on <code class="link">rxport</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.LISTEN">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="FORWARD"></a><span class="summary-sig-name">FORWARD</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">txport</span>,
+        <span class="summary-sig-arg">S</span>)</span><br />
+      FORWARD state; internal state to forward packets for channel.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.FORWARD">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.channelbase.Channel-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evt</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'channel'"><code class="variable-quote">'</code><code class="variable-string">channel</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'CHAN'"><code class="variable-quote">'</code><code class="variable-string">CHAN</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.channelbase.Channel-class.html#model" class="summary-name">model</a><br />
+      : Property to access default <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> used to create new
+links between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> objects in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.channelbase.Channel-class.html#bidirectional" class="summary-name">bidirectional</a><br />
+      : Immutable boolean flag; if true, indicates that the
+underlying graph is bidirectional (or undirected).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.channelbase.Channel-class.html#graph" class="summary-name">graph</a><br />
+      : Property to access underlying NetworkX graph.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.channelbase.Channel-class.html#interfaces" class="summary-name">interfaces</a><br />
+      : Property to access nodes in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a> for <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.channel.channelbase.Channel-class.html#listen" class="summary-name">listen</a><br />
+      : Property to access private dictionary for processes listening
+for data from all <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> connected.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>start</code></strong> - Boolean; if true, call <a href="wins.element.Element-class.html#start" class="link">start()</a> at the end of constructor.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to <a href="wins.trace.Traceable-class.html" class="link">Traceable</a> constructor and
+<a href="wins.channel.channelbase.Channel-class.html#configure" class="link">configure()</a> method.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">model</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">bidirectional</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Set up <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a> and other parameters
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>bidirectional</code></strong> - Boolean; if true, use undirected graph, otherwise
+use a directed graph.</li>
+        <li><strong class="pname"><code>model</code></strong> - Default <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> used to create links in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="connect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">connect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cif</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.connect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Add <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> as a node in graph.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cif</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> to add.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Added <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#connect">element.Element.connect</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        If <code class="link">cif</code> is already in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>, this method will do nothing.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="disconnect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">disconnect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cif</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.disconnect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Disconnect a previously connected <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</p>
+<p>After removing the interface and its listener process, this method will
+delete the <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> from the <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a> and each <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>
+for every outgoing edge from <code class="link">cif</code>.</p>
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        After disconnecting an interface, it will still be able to send
+traffic from its ports, but this traffic will not be received by
+the <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="add_edge"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_edge</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>,
+        <span class="sig-arg">model</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.add_edge">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a link between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">a</code> and <code class="link">b</code>.</p>
+<p>If model is not specified as a parameter, the default <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a> will be
+used to create the link.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>a</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> on one end of link.</li>
+        <li><strong class="pname"><code>b</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> on other end of link.</li>
+        <li><strong class="pname"><code>model</code></strong> - Optional <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> subclass to create link with.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keywords passed to channel model constructor.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Newly created link (i.e. channel model)</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="del_edge"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">del_edge</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.del_edge">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Delete edge between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">a</code> and <code class="link">b</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Deleted <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> for removed link or <code class="link">None</code> if not found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="apply_filter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">apply_filter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">model</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.apply_filter">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Apply filter for <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a> to <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>model</code></strong> - <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> to do filtering.</li>
+        <li><strong class="pname"><code>p</code></strong> - Packet to be passed to filter.</li>
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to filter of <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a>.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keyword arguments passed to filter of <a href="wins.channel.channelbase.Channel-class.html#model" class="link">model</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Reason for drop (string), or <code class="link">None</code> if packet was not filtered
+out by the <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="apply_model"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">apply_model</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">model</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">u</span>,
+        <span class="sig-arg">v</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.apply_model">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Apply a <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> to a given packet.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>model</code></strong> - <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> to apply.</li>
+        <li><strong class="pname"><code>p</code></strong> - Packet being modified.</li>
+        <li><strong class="pname"><code>u</code></strong> - Source <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> that sent <code class="link">p</code>.</li>
+        <li><strong class="pname"><code>v</code></strong> - Destination <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Modified packet from <a href="wins.channel.channelbase.ChannelModel-class.html#apply" class="link">ChannelModel.apply()</a>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">evt</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.channelbase-pysrc.html#Channel.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="model"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">model</h3>
+  : Property to access default <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a> used to create new
+links between <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> objects in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bidirectional"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">bidirectional</h3>
+  : Immutable boolean flag; if true, indicates that the
+underlying graph is bidirectional (or undirected).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="graph"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">graph</h3>
+  : Property to access underlying NetworkX graph.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="interfaces"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">interfaces</h3>
+  : Property to access nodes in <a href="wins.channel.channelbase.Channel-class.html#graph" class="link">graph</a> for <a href="wins.channel.channelbase.Channel-class.html" class="link">Channel</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="listen"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">listen</h3>
+  : Property to access private dictionary for processes listening
+for data from all <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> connected.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:30 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

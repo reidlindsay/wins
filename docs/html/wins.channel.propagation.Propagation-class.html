@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel.propagation.Propagation</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.channel-module.html">Package&nbsp;channel</a> ::
+        <a href="wins.channel.propagation-module.html">Module&nbsp;propagation</a> ::
+        Class&nbsp;Propagation
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Propagation</h1><p class="nomargin-top"><span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_propagatio" name="class_hierarchy_for_propagatio">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="193,5,276,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="180,61,289,88"/>
+<area shape="rect" href="wins.channel.breakpoint.Breakpoint-class.html" title="breakpoint.Breakpoint" alt="" coords="65,229,212,256"/>
+<area shape="rect" href="wins.ieee80211.dot11n_channel.Dot11NChannel-class.html" title="ieee80211.dot11n_channel.Dot11NChannel" alt="" coords="5,285,272,312"/>
+<area shape="rect" href="wins.channel.channelbase.ChannelModel-class.html" title="channelbase.ChannelModel" alt="" coords="145,117,324,144"/>
+<area shape="rect" href="wins.channel.propagation.Propagation-class.html" title="Propagation" alt="" coords="189,173,280,200"/>
+<area shape="rect" href="wins.channel.refprop.ReferencePropagation-class.html" title="refprop.ReferencePropagation" alt="" coords="236,229,428,256"/>
+</map>
+  <img src="class_hierarchy_for_propagatio.gif" alt='' usemap="#class_hierarchy_for_propagatio" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Basic propagation model for wireless channels.</p>
+<p>By default, this class implements the Freespace pathloss model using unit
+antenna gain and no system loss. Overload the <a href="wins.channel.propagation.Propagation-class.html#apply" class="link">apply()</a> method to customize
+a <a href="wins.channel.propagation.Propagation-class.html" class="link">Propagation</a> subclass. The following parameters are defined in this class
+and may be redefined in dervied classes:</p>
+<blockquote>
+<ul class="rst-simple">
+<li><a href="wins.channel.propagation.Propagation-class.html#n" class="link">n</a>:  Pathloss exponent.</li>
+<li><a href="wins.channel.propagation.Propagation-class.html#fc" class="link">fc</a>: Center frequency for channel.</li>
+</ul>
+</blockquote>
+<div class="rst-section" id="rst-packet-annotations-and-propagation">
+<h1 class="heading">Packet Annotations and Propagation</h1>
+<p>By default, this class will set the annotation listed below. <strong>Derived
+classes must set 'pathloss', 'cm-delay', and any other needed annotations.</strong></p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>pathloss</td>
+<td>Pathloss between transmitter and receiver.</td>
+</tr>
+<tr><td>doppler</td>
+<td>Doppler shift from perspective of receiver (in Hz).</td>
+</tr>
+<tr><td>cm-delay</td>
+<td>Propagation delay annotation marked by <a href="wins.channel.channelbase.ChannelModel-class.html" class="link">ChannelModel</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Pathloss is defined as a ratio of transmit power to receive power (i.e.
+pathloss is greater than or equal to 1). Thus received power is equal to
+transmit power divided by pathloss, or in decibels:</p>
+<blockquote>
+Pr (db) = Pt (db) - PL (db).</blockquote>
+<p>See <a class="rst-reference external" href="http://en.wikipedia.org/wiki/Link_budget" target="_top">Link Budget</a> and <a class="rst-reference external" href="http://en.wikipedia.org/wiki/Friis_transmission_equation#Modifications_to_the_basic_equation" target="_top">Friis transmission equation</a> for more about how
+pathloss is computed.</p>
+<p>Propagation delay is a function of separation <a href="wins.channel.propagation.Propagation-class.html#distance" class="link">distance()</a> and the speed of
+light (<a href="wins.const-module.html#SPEED_OF_LIGHT" class="link">const.SPEED_OF_LIGHT</a>):</p>
+<blockquote>
+delay = (separation distance)/(speed of light) (meters/sec)</blockquote>
+</div>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">n</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#apply" class="summary-sig-name">apply</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">u</span>,
+        <span class="summary-sig-arg">v</span>)</span><br />
+      Apply freespace channel model.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.apply">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#pathloss" class="summary-sig-name">pathloss</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dist</span>,
+        <span class="summary-sig-arg">fc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">n</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate pathloss over specified distance using local (or specified)
+parameters; <strong>overload this method as needed</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.pathloss">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#log_forward" class="summary-sig-name">log_forward</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overload to log 'pathloss' annotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.log_forward">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.channel.channelbase.ChannelModel-class.html">channelbase.ChannelModel</a></code></b>:
+      <code><a href="wins.channel.channelbase.ChannelModel-class.html#disable">disable</a></code>,
+      <code><a href="wins.channel.channelbase.ChannelModel-class.html#enable">enable</a></code>,
+      <code><a href="wins.channel.channelbase.ChannelModel-class.html#filter">filter</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#log">log</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#freespace" class="summary-sig-name">freespace</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">dist</span>,
+        <span class="summary-sig-arg">fc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">n</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate freespace pathloss over distance <code class="link">dist</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#distance" class="summary-sig-name">distance</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">u</span>,
+        <span class="summary-sig-arg">v</span>)</span><br />
+      Calculate the distance between <code class="link">u</code> and <code class="link">v</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#doppler" class="summary-sig-name">doppler</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">u</span>,
+        <span class="summary-sig-arg">v</span>,
+        <span class="summary-sig-arg">fc</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate doppler shift between <code class="link">u</code> and <code class="link">v</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#position" class="summary-sig-name">position</a>(<span class="summary-sig-arg">c</span>)</span><br />
+      Determine position of a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.channel.propagation.Propagation-class.html#velocity" class="summary-sig-name">velocity</a>(<span class="summary-sig-arg">c</span>)</span><br />
+      Determine velocity for <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">c</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="n"></a><span class="summary-name">n</span> = <code title="2">2</code><br />
+      :  Pathloss exponent.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fc"></a><span class="summary-name">fc</span> = <code title="2400000000.0">2400000000.0</code><br />
+      : Center frequency for channel.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'propagation'"><code class="variable-quote">'</code><code class="variable-string">propagation</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'PROP'"><code class="variable-quote">'</code><code class="variable-string">PROP</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.channel.channelbase.ChannelModel-class.html">channelbase.ChannelModel</a></code></b>:
+      <code><a href="wins.channel.channelbase.ChannelModel-class.html#active">active</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">n</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fc</code></strong> - Center frequency of channel [default=2.4e9]</li>
+        <li><strong class="pname"><code>n</code></strong> - Pathloss exponent.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="apply"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">apply</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">u</span>,
+        <span class="sig-arg">v</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.apply">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply freespace channel model.</p>
+<p>This method set the 'pathloss' and 'cm-delay' annotations. Overload
+this method to change how the channel model applies channel annotations
+(i.e. to implement a new channel model).</p>
+<p>This method also computes the doppler shift between the transmitter and
+receiver and sets the 'doppler' annotation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to modify.</li>
+        <li><strong class="pname"><code>u</code></strong> - Transmitting <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</li>
+        <li><strong class="pname"><code>v</code></strong> - Receiving <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+    <dt>Overrides:
+        <a href="wins.channel.channelbase.ChannelModel-class.html#apply">channelbase.ChannelModel.apply</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pathloss"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pathloss</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dist</span>,
+        <span class="sig-arg">fc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">n</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.pathloss">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate pathloss over specified distance using local (or specified)
+parameters; <strong>overload this method as needed</strong>.</p>
+<p>By default this method returns the <a href="wins.channel.propagation.Propagation-class.html#freespace" class="link">freespace</a> pathloss. Overload this
+method to change how pathloss is computed.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dist</code></strong> - Separation distance (in meters).</li>
+        <li><strong class="pname"><code>fc</code></strong> - Center frequency of channel.</li>
+        <li><strong class="pname"><code>n</code></strong> - Pathloss exponent.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Pathloss (in dB).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="freespace"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">freespace</span>(<span class="sig-arg">cls</span>,
+        <span class="sig-arg">dist</span>,
+        <span class="sig-arg">fc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">n</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate freespace pathloss over distance <code class="link">dist</code>.</p>
+<p>If <a href="wins.channel.propagation.Propagation-class.html#fc" class="link">fc</a> or <a href="wins.channel.propagation.Propagation-class.html#n" class="link">n</a> are not provided, this method will simply use the default
+values associated with the class. Freespace pathloss is given by:</p>
+<blockquote>
+PL (db) = 10n*log10(4*pi*d/wavelength),</blockquote>
+<p>where wavelength = (fc/c) and d = separation distance.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dist</code></strong> - Separation distance between transmitter and receiver.</li>
+        <li><strong class="pname"><code>fc</code></strong> - Center frequency of channel.</li>
+        <li><strong class="pname"><code>n</code></strong> - Pathloss exponent.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Freespace pathloss in dB.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method assumes unit antenna gain and no system loss. This
+method also uses <a href="wins.const-module.html#SPEED_OF_LIGHT" class="link">const.SPEED_OF_LIGHT</a> as the speed of light
+parameter 'c' in meters/second.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="distance"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">distance</span>(<span class="sig-arg">cls</span>,
+        <span class="sig-arg">u</span>,
+        <span class="sig-arg">v</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate the distance between <code class="link">u</code> and <code class="link">v</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>u</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> or location of transmitter.</li>
+        <li><strong class="pname"><code>v</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> or location of receiver.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method calls <code class="link">getposition()</code> to determine the position of
+<code class="link">u</code> and <code class="link">v</code>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="position"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">position</span>(<span class="sig-arg">c</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Determine position of a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.</p>
+<p>If <code class="link">c</code> is a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> object, this method will attempt to get
+the location of the interface by searching for a <a href="wins.mobile.motion.Motion-class.html" class="link">Motion</a> object
+registered with its <a href="wins.base.Base-class.html#container" class="link">container</a> under the nickname 'motion'. If no such
+child is found in the container, this method throws an AssertionError.</p>
+<p>If <code class="link">c</code> is already position information, this method will convert it to a
+<code class="link">numpy.array</code>. Overload this method to change how position is found.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>c</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> or position information.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Location as a <code class="link">numpy.array</code>.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method throws an AssertionError if it cannot find a valid
+'motion' in the <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="velocity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">velocity</span>(<span class="sig-arg">c</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Determine velocity for <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> <code class="link">c</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>c</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> or velocity vector.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Velocity as a <code class="link">numpy.array</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="doppler"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">doppler</span>(<span class="sig-arg">cls</span>,
+        <span class="sig-arg">u</span>,
+        <span class="sig-arg">v</span>,
+        <span class="sig-arg">fc</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate doppler shift between <code class="link">u</code> and <code class="link">v</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>u</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> of transmitter.</li>
+        <li><strong class="pname"><code>v</code></strong> - <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> of receiver.</li>
+        <li><strong class="pname"><code>fc</code></strong> - Center frequency of channel.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Doppler shift (w.r.t. receiver) in Hz.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method calls <code class="link">getvelocity()</code> to determine the position of
+<code class="link">u</code> and <code class="link">v</code>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="log_forward"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log_forward</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.channel.propagation-pysrc.html#Propagation.log_forward">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overload to log 'pathloss' annotation.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.channel.channelbase.ChannelModel-class.html#log_forward">channelbase.ChannelModel.log_forward</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:30 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

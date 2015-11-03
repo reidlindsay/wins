@@ -1,0 +1,120 @@
+##############################################################################
+#
+#   Readme file for using WiNS.
+#   
+#   Revision Info
+#   =============
+#   * $LastChangedBy: mandke $
+#   * $LastChangedDate: 2011-05-23 16:13:13 -0500 (Mon, 23 May 2011) $
+#   * $LastChangedRevision: 4118 $
+#   
+#   :author: Ketan Mandke <kmandke@mail.utexas.edu>
+#   
+#   :copyright:
+#       Copyright 2009-2010 The University of Texas at Austin
+#   
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#       You may obtain a copy of the License at
+#   
+#          http://www.apache.org/licenses/LICENSE-2.0
+#   
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+##############################################################################
+
+==============================================================================
+Dependencies
+==============================================================================
+1. SimPy >= 2.1.0
+http://simpy.sourceforge.net
+
+2. NetworkX >= 1.3
+https://networkx.lanl.gov/wiki
+
+3. NumPy >= 1.3
+http://numpy.scipy.org
+http://www.scipy.org/Download
+
+4. SciPy >= 0.7.0
+http://www.scipy.org/
+
+5. Python >= 2.6
+http://www.python.org
+
+6. Scapy >= 2.1.0
+http://dirk-loss.de/scapy-doc/
+
+7. Swig >= 1.3.40
+http://www.swig.org/
+
+8. IT++ >= 4.0
+http://itpp.sourceforge.net/
+
+9. wins-80211n >= 0.1
+http://netlab.ece.utexas.edu/wins/
+
+For Ubuntu users, you can get many of these packages from the package manager.
+Get the following dependencies for building wins-80211n:
+
+  sudo apt-get install automake autoconf libtool libcppunit-dev libitpp-dev \
+                       libfftw3-dev liblapack-dev libatlas-sse2-dev g++
+
+Get the following dependencies for building WiNS:
+
+  sudo apt-get install python python-dev swig python-numpy python-scipy \
+                       python-matplotlib
+
+The remaining dependencies (SimPy, Scapy, and NetworkX) should be downloaded 
+and compiled from source code.
+
+==============================================================================
+Optional Packages
+==============================================================================
+1. wxPython >= 2.6.3
+http://www.wxpython.org
+
+2. Matplotlib >= 0.90.0
+http://matplotlib.sourceforge.net
+NOTE: To install Matplotlib, you must first install an older version of NumPy.
+    i)   install NumPy v1.0.3
+    ii)  install Matplotlib
+    iii) overwrite NumPy by installing the latest version (i.e. Numpy >= 1.0.4)
+
+3. Epydoc >= 3.0
+http://epydoc.sourceforge.net/
+NOTE: Only needed to build documentation.
+
+==============================================================================
+Building WiNS
+==============================================================================
+This will create a 'build' directory in your source tree:
+    python setup.py build
+
+==============================================================================
+Running Test
+==============================================================================
+This will run all UnitTests in the 'tests' subdirectory':
+    python setup.py test
+
+==============================================================================
+Installing WiNS
+==============================================================================
+Modify 'setup.cfg' or use the --prefix option to change the installation prefix
+for WiNS. By default, the installation prefix is /usr/local.
+    python setup.py install
+
+==============================================================================
+Building WiNS Documentation
+==============================================================================
+This will build the WiNS documentation using Doxygen inside the docs folder:
+    python setup.py docs
+
+==============================================================================
+Other commands
+==============================================================================
+Run 'python setup.py --help-commands' for other options.

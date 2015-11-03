@@ -1,0 +1,76 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+
+#######################################
+# Script Parameters
+#######################################
+DIR=`$PWD`;               # current directory
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$SRCDIR/..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+RUNTRIAL=$SRCDIR/runtrial # script to run trial
+TOPODIR=$TOPDIR/topology  # directory containing topology files
+
+EXEC=$TOPDIR/test.py
+NUMTRIALS=5
+
+#######################################
+# Test Parameters
+#######################################
+SIMTIME=10.0                          # simulation time
+MODEL=1                               # use model? -> 0 or 1
+TOPO=$TOPODIR/n25-100x100/topo2.dat   # topology file
+#TOPO=                                # [use new topology]
+TESTARGS="$SIMTIME $MODEL $TOPO"
+
+# check parameters
+if [ -z $NUMTRIALS ]; then
+  TRIALS="1 ";
+else
+  TRIALS=`seq 1 $NUMTRIALS`
+fi
+
+if [ ! -x $RUNTRIAL ]; then
+  echo "Could not find script ... RUNTRIAL=$RUNTRIAL";
+  exit -1;
+fi
+
+if [ ! -x $EXEC ] || [ -z "$EXEC" ]; then
+  echo "Could not find executable ... EXEC=$EXEC";
+  exit -1;
+fi
+
+if [ ! -z $TOPO ] && [ ! -f $TOPO ]; then
+  echo "Could not find topology file ... TOPO=$TOPO";
+  exit -1;
+fi
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Run Trials
+#######################################
+for k in $TRIALS; do
+  TNUM=`printf "%03d" $k`;
+  # create trial directory
+  TDIR=$DIR/trial-$TNUM;
+  if [ ! -d $TDIR ]; then $MKDIR -p $TDIR; fi
+  # run trial
+  runexec="$RUNTRIAL $EXEC $TDIR $TESTARGS"
+  logfile=sim-$TNUM.log
+  echo "Running trial $k ...";
+  trap "echo; exit $k;" INT TERM;
+  $runexec > $logfile 2>&1;
+  mv $logfile $TDIR/;
+  trap - INT TERM;
+done

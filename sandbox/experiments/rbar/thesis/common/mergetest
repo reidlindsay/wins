@@ -1,0 +1,95 @@
+#!  /bin/bash
+
+###########################################################
+# NOTE: All additional arguments are passed to all scripts!
+#       ONLY USE ARGUMENTS COMMON TO ALL SCRIPTS
+###########################################################
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+MV=`which mv`;
+
+#######################################
+# Test Parameters
+#######################################
+SIGMA=0.01
+EPSILON=0.10
+TESTARGS=
+
+#######################################
+# Get Arguments
+#######################################
+if [ $# -lt 1 ]; then
+  DIR=`$PWD`;             # current directory
+else
+  DIR=$1;
+fi
+
+#######################################
+# Script Parameters
+#######################################
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$DIR/../..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+COMMON=$DIR/../../../../common  # common utilities (plotting, merging, etc.)
+
+# Executables
+MERGEDATA=$COMMON/mergedata.py
+MODDATA=$COMMON/mod_data.py
+
+# Trial parameters
+TRIALS=`seq 1 10`;
+
+# check parameters
+if [ ! -x $MERGEDATA ]; then
+  echo "Could not find executable ... MERGEDATA=$MERGEDATA";
+  exit -1;
+fi
+
+if [ ! -x $MODDATA ]; then
+  echo "Could not find executable ... MODDATA=$MODDATA";
+  exit -1;
+fi
+
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Parse Data
+#######################################
+# Combine all trials
+#######################################
+cd $DIR
+echo "Merging data in $DIR";
+TRACEDIRS=`ls -d trial-*`
+# check if trial  found
+if [ -z "$TRACEDIRS" ]; then
+    echo "Cannot find trial directories with trace files ... trial-*";
+    exit -1;
+fi
+
+# merge all directories together
+tputfiles=$( for tdir in $TRACEDIRS; do \
+              if [ -f $tdir/tput.dat ]; then echo -n "$tdir/tput.dat "; fi; \
+            done );
+pdrfiles=$( for tdir in $TRACEDIRS; do \
+              if [ -f $tdir/pdr.dat ]; then echo -n "$tdir/pdr.dat "; fi; \
+            done );
+
+IGNORE="source rmsdelay"
+if [ ! -z "$tputfiles" ]; then
+  echo "Merging TPUT data in $tputfiles";
+  $MERGEDATA $tputfiles -e $EPSILON --ignore="$IGNORE" > tput.dat;
+fi
+if [ ! -z "$pdrfiles" ]; then
+  echo "Merging PDR data in $pdrfiles";
+  $MERGEDATA $pdrfiles -e $EPSILON --ignore="$IGNORE" > pdr.dat;
+fi

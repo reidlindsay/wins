@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.protocol.routetable.RouteTable</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="wins.protocol.routetable-module.html">Module&nbsp;routetable</a> ::
+        Class&nbsp;RouteTable
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class RouteTable</h1><p class="nomargin-top"><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_routetable" name="class_hierarchy_for_routetable">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="55,5,137,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="41,61,151,88"/>
+<area shape="rect" href="wins.net.routecache.RouteCache-class.html" title="net.routecache.RouteCache" alt="" coords="5,173,187,200"/>
+<area shape="rect" href="wins.protocol.routetable.RouteTable-class.html" title="RouteTable" alt="" coords="53,117,139,144"/>
+</map>
+  <img src="class_hierarchy_for_routetable.gif" alt='' usemap="#class_hierarchy_for_routetable" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Table to maintain routing information.</p>
+<p>Each routing entry consists of a destination, route, and cost. This class
+supports multiple paths to the same destination. It uses cost to order the
+paths so that <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">nexthop</a> and <code class="link">route</code> will select the lowest cost path.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">maxweight</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">quiet</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">timeout</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#addroute" class="summary-sig-name">addroute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>,
+        <span class="summary-sig-arg">nexthop</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cost</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Add new route to <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.addroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#hasroute" class="summary-sig-name">hasroute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Check if route to <code class="link">dest</code> exists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.hasroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#_removestale" class="summary-sig-name" onclick="show_private();">_removestale</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Internal method to remove stale routing data from table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable._removestale">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#delroute" class="summary-sig-name">delroute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>,
+        <span class="summary-sig-arg">nexthop</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">reset</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Remove least desirable route to <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.delroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="summary-sig-name">nexthop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Find address of next hop to destination <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.nexthop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#cost" class="summary-sig-name">cost</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Find cost of route to destination <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.cost">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="timestamp"></a><span class="summary-sig-name">timestamp</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Find timestamp for route to destination <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.timestamp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#getcost" class="summary-sig-name">getcost</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>,
+        <span class="summary-sig-arg">nexthop</span>,
+        <span class="summary-sig-arg">ts</span>)</span><br />
+      Determine cost of path to <code class="link">dest</code> using route through <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">nexthop</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.getcost">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#_index" class="summary-sig-name" onclick="show_private();">_index</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>,
+        <span class="summary-sig-arg">maxcost</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">costfunc</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Internal method to find index of max [or min] cost path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable._index">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_currindex"></a><span class="summary-sig-name">_currindex</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Internal method to get/update current index for path to <code class="link">dest</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable._currindex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routetable.RouteTable-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evt</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'routing table'"><code class="variable-quote">'</code><code class="variable-string">routing table</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'RT'"><code class="variable-quote">'</code><code class="variable-string">RT</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="data"></a><span class="summary-name">data</span><br />
+      Data structure used to maintain routing information; use
+accessor/modifier methods <a href="wins.protocol.routetable.RouteTable-class.html#addroute" class="link">addroute()</a>, <a href="wins.protocol.routetable.RouteTable-class.html#hasroute" class="link">hasroute()</a>, etc.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="maxweight"></a><span class="summary-name">maxweight</span><br />
+      If true, this module will use the maximum weight path.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="quiet"></a><span class="summary-name">quiet</span><br />
+      If true, operate in quiet mode (do not log events).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="timeout"></a><span class="summary-name">timeout</span><br />
+      Timeout used to invalidate stale entries.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">maxweight</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">quiet</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">timeout</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>maxweight</code></strong> - If true, this module will use the maximum weight path.</li>
+        <li><strong class="pname"><code>quiet</code></strong> - If true, operate in quiet mode (do not log events).</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addroute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addroute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>,
+        <span class="sig-arg">nexthop</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cost</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.addroute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add new route to <code class="link">dest</code>.</p>
+<p>If <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">nexthop</a> is <code class="link">None</code>, it is assumed that <code class="link">dest</code> is a one hop neighbor.
+If cost is None, <a href="wins.protocol.routetable.RouteTable-class.html" class="link">RouteTable()</a> uses <a href="wins.protocol.routetable.RouteTable-class.html#cost" class="link">cost()</a> to determine the cost of
+the route through <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">nexthop</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dest</code></strong> - Address of destination.</li>
+        <li><strong class="pname"><code>nexthop</code></strong> - Address of nexthop [default=`None`].</li>
+        <li><strong class="pname"><code>cost</code></strong> - Cost of <code class="link">route</code> [default=None].</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Number of paths to <code class="link">dest</code> in routing table.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="hasroute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">hasroute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.hasroute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Check if route to <code class="link">dest</code> exists.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Boolean; true if <code class="link">dest</code> is found, false otherwise.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_removestale"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_removestale</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable._removestale">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Internal method to remove stale routing data from table.</p>
+<p>This method is called from <a href="wins.protocol.routetable.RouteTable-class.html#hasroute" class="link">hasroute</a>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="delroute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">delroute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>,
+        <span class="sig-arg">nexthop</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">reset</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.delroute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Remove least desirable route to <code class="link">dest</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dest</code></strong> - Destination to modify.</li>
+        <li><strong class="pname"><code>nexthop</code></strong> - Specify which route should be removed based on nexthop
+value [optional].</li>
+        <li><strong class="pname"><code>reset</code></strong> - If true, remove all routes associated with <code class="link">dest</code>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nexthop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">nexthop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.nexthop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Find address of next hop to destination <code class="link">dest</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Address of next hop, or <code class="link">None</code> if no route to <code class="link">dest</code> is found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cost"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cost</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.cost">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Find cost of route to destination <code class="link">dest</code>.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Cost of route, or <code class="link">None</code> if no route to <code class="link">dest</code> is found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getcost"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getcost</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>,
+        <span class="sig-arg">nexthop</span>,
+        <span class="sig-arg">ts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.getcost">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Determine cost of path to <code class="link">dest</code> using route through <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">nexthop</a>.</p>
+<p>By default this method calculates the cost using the timestamp <code class="link">ts</code>.
+That is, this method returns the &quot;age&quot; of the path.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dest</code></strong> - Destination of path.</li>
+        <li><strong class="pname"><code>nexthop</code></strong> - Next hop in path.</li>
+        <li><strong class="pname"><code>ts</code></strong> - Timestamp for when route was added to table.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Overload this method to change how cost of a path is computed.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="_index"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_index</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dest</span>,
+        <span class="sig-arg">maxcost</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">costfunc</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable._index">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Internal method to find index of max [or min] cost path.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>maxcost</code></strong> - If true, return index of path with maximum cost;
+otherwise return index of path with minimum cost.</li>
+        <li><strong class="pname"><code>costfunc</code></strong> - Cost function used to automatically determine cost when
+needed [default=`getcost`].</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Index into <a href="wins.protocol.routetable.RouteTable-class.html#data" class="link">data</a> entry corresponding to <code class="link">dest</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">evt</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routetable-pysrc.html#RouteTable.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:35 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.net.dsr_support</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.net-module.html">Package&nbsp;net</a> ::
+        Module&nbsp;dsr_support
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module dsr_support</h1><p class="nomargin-top"><span class="codelink"><a href="wins.net.dsr_support-pysrc.html">source&nbsp;code</a></span></p>
+<p>Packet definitions, enumerations, and helper functions for <a href="wins.net.dsr.DSR-class.html" class="link">DSR</a> protocol.</p>
+<div class="rst-section" id="rst-revision-info">
+<h1 class="heading">Revision Info</h1>
+<ul class="rst-simple">
+<li>$LastChangedBy: mandke $</li>
+<li>$LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</li>
+<li>$LastChangedRevision: 5420 $</li>
+</ul>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        Ketan Mandke &lt;<a class="rst-reference external" href="mailto:kmandke&#64;mail.utexas.edu" target="_top">kmandke&#64;mail.utexas.edu</a>&gt;
+      </p>
+      <p><strong>Copyright:</strong>
+        <p>Copyright 2009-2011 The University of Texas at Austin</p>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<a class="rst-reference external" href="http://www.apache.org/licenses/LICENSE-2.0" target="_top">http://www.apache.org/licenses/LICENSE-2.0</a></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support._DSROPT_HDR-class.html" class="summary-name" onclick="show_private();">_DSROPT_HDR</a><br />
+      Internal packet structure for fields common among DSR options.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT-class.html" class="summary-name">DSROPT</a><br />
+      Base class for DSR Option packet.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_RREQ-class.html" class="summary-name">DSROPT_RREQ</a><br />
+      DSR Route Request Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_RREP-class.html" class="summary-name">DSROPT_RREP</a><br />
+      DSR Route Reply Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_RERR-class.html" class="summary-name">DSROPT_RERR</a><br />
+      DSR Route Error Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_ACKREQ-class.html" class="summary-name">DSROPT_ACKREQ</a><br />
+      DSR Acknowledgement Request Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_ACK-class.html" class="summary-name">DSROPT_ACK</a><br />
+      DSR Acknowledgement Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSROPT_SRCROUTE-class.html" class="summary-name">DSROPT_SRCROUTE</a><br />
+      DSR Source Route Option.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support.DSRPacket-class.html" class="summary-name">DSRPacket</a><br />
+      DSR packet; use specific subclasses for different options.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_update_IP_with_DSR"></a><span class="summary-sig-name">_update_IP_with_DSR</span>()</span><br />
+      Internal method to update IP for DSR.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#_update_IP_with_DSR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_RREQ"></a><span class="summary-sig-name">DSR_RREQ</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Route Request Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_RREQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_RREP"></a><span class="summary-sig-name">DSR_RREP</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Route Reply Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_RREP">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_RERR"></a><span class="summary-sig-name">DSR_RERR</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Route Error Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_RERR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_ACKREQ"></a><span class="summary-sig-name">DSR_ACKREQ</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Acknowledgement Request Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_ACKREQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_ACK"></a><span class="summary-sig-name">DSR_ACK</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Acknowledgement Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_ACK">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DSR_SRCROUTE"></a><span class="summary-sig-name">DSR_SRCROUTE</span>(<span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Create DSR Source Route Packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#DSR_SRCROUTE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_rreq"></a><span class="summary-sig-name">getdsr_rreq</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_RREQ-class.html" class="link">DSROPT_RREQ</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_rreq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_rrep"></a><span class="summary-sig-name">getdsr_rrep</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_RREP-class.html" class="link">DSROPT_RREP</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_rrep">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_rerr"></a><span class="summary-sig-name">getdsr_rerr</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_RERR-class.html" class="link">DSROPT_RERR</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_rerr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_ackreq"></a><span class="summary-sig-name">getdsr_ackreq</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_ACKREQ-class.html" class="link">DSROPT_ACKREQ</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_ackreq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_ack"></a><span class="summary-sig-name">getdsr_ack</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_ACK-class.html" class="link">DSROPT_ACK</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getdsr_srcroute"></a><span class="summary-sig-name">getdsr_srcroute</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Get <a href="wins.net.dsr_support.DSROPT_SRCROUTE-class.html" class="link">DSROPT_SRCROUTE</a> option from packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#getdsr_srcroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_rreq"></a><span class="summary-sig-name">hasdsr_rreq</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Route Request?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_rreq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_rrep"></a><span class="summary-sig-name">hasdsr_rrep</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Route Reply?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_rrep">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_rerr"></a><span class="summary-sig-name">hasdsr_rerr</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Route Error?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_rerr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_ackreq"></a><span class="summary-sig-name">hasdsr_ackreq</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Acknowledgement Request?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_ackreq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_ack"></a><span class="summary-sig-name">hasdsr_ack</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Acknowledgement?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_ack">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasdsr_srcroute"></a><span class="summary-sig-name">hasdsr_srcroute</span>(<span class="summary-sig-arg">p</span>)</span><br />
+      Is <code class="link">p</code> a DSR Source Route?</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr_support-pysrc.html#hasdsr_srcroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_CACHE_ALL_HOPS"></a><span class="summary-name">DSR_CACHE_ALL_HOPS</span> = <code title="1">1</code><br />
+      If true, cache all intermediate hops in a source route.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_USE_REVERSE_ROUTES"></a><span class="summary-name">DSR_USE_REVERSE_ROUTES</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_USE_CACHE_REPLY"></a><span class="summary-name">DSR_USE_CACHE_REPLY</span> = <code title="0">0</code><br />
+      Allow intermediate node to reply to route request
+using its rout cache (if possible).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_USE_GRATUITOUS_RREQ"></a><span class="summary-name">DSR_USE_GRATUITOUS_RREQ</span> = <code title="0">0</code><br />
+      Send gratuitous RREQ+RERR for routes broken by an
+incoming route error message.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_MAX_SALVAGE_COUNT"></a><span class="summary-name">DSR_MAX_SALVAGE_COUNT</span> = <code title="15">15</code><br />
+      Maximum number of route errors that can be salvaged.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_RREQ"></a><span class="summary-name">DSR_OPTION_TYPE_RREQ</span> = <code title="1">1</code><br />
+      Enumeration for DSR Route Request Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_RREP"></a><span class="summary-name">DSR_OPTION_TYPE_RREP</span> = <code title="2">2</code><br />
+      Enumeration for DSR Route Reply Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_RERR"></a><span class="summary-name">DSR_OPTION_TYPE_RERR</span> = <code title="3">3</code><br />
+      Enumeration for DSR Route Error Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_ACKREQ"></a><span class="summary-name">DSR_OPTION_TYPE_ACKREQ</span> = <code title="160">160</code><br />
+      Enumeration for DSR Acknowledgement Request Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_ACK"></a><span class="summary-name">DSR_OPTION_TYPE_ACK</span> = <code title="32">32</code><br />
+      Enumeration for DSR Acknowledgement Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_SRCROUTE"></a><span class="summary-name">DSR_OPTION_TYPE_SRCROUTE</span> = <code title="96">96</code><br />
+      Enumeration for DSR Source Route Option Type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_PAD1"></a><span class="summary-name">DSR_OPTION_TYPE_PAD1</span> = <code title="224">224</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_OPTION_TYPE_PADN"></a><span class="summary-name">DSR_OPTION_TYPE_PADN</span> = <code title="0">0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support-module.html#_dsr_types_names" class="summary-name" onclick="show_private();">_dsr_types_names</a> = <code title="{1: 'route_request',
+ 2: 'route_reply',
+ 3: 'route_error',
+ 32: 'acknowledgement',
+ 96: 'source_route',
+ 160: 'acknowledgement_request',
+ 224: 'padN'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">route_request</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">route_reply</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      Internal dictionary for DSR option type enumerations.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support-module.html#_dsr_option_names" class="summary-name" onclick="show_private();">_dsr_option_names</a> = <code title="{1: 'RREQ',
+ 2: 'RREP',
+ 3: 'RERR',
+ 32: 'ACK',
+ 96: 'SRCROUTE',
+ 160: 'ACKREQ',
+ 224: 'PADN'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RREQ</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RREP</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RERR</code><code class="variable-quote">'</code><code class="variable-op">, </code>32<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ACK</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_ERROR_NODE_UNREACHABLE"></a><span class="summary-name">DSR_ERROR_NODE_UNREACHABLE</span> = <code title="1">1</code><br />
+      DSR error type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_ERROR_FLOW_STATE_NOT_SUPPORTED"></a><span class="summary-name">DSR_ERROR_FLOW_STATE_NOT_SUPPORTED</span> = <code title="2">2</code><br />
+      DSR error type.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DSR_ERROR_OPTION_NOT_SUPPORTED"></a><span class="summary-name">DSR_ERROR_OPTION_NOT_SUPPORTED</span> = <code title="3">3</code><br />
+      DSR error type.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr_support-module.html#_dsr_error_types" class="summary-name" onclick="show_private();">_dsr_error_types</a> = <code title="{1: 'node_unreachable',
+ 2: 'flow_state_not_supported',
+ 3: 'option_not_supported'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">node_unreachable</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">flow_state_not_</code><code class="variable-ellipsis">...</code></code><br />
+      Internal dictionary for DSR error types.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'wins.net'"><code class="variable-quote">'</code><code class="variable-string">wins.net</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_dsr_types_names"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_dsr_types_names</h3>
+  Internal dictionary for DSR option type enumerations.
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">route_request</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">route_reply</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">route_error</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 32<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">acknowledgement</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 96<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">source_route</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 160<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">acknowledgement_request</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 224<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">padN</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_dsr_option_names"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_dsr_option_names</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RREQ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RREP</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RERR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 32<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ACK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 96<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SRCROUTE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 160<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ACKREQ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 224<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PADN</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_dsr_error_types"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_dsr_error_types</h3>
+  Internal dictionary for DSR error types.
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">node_unreachable</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">flow_state_not_supported</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">option_not_supported</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:29 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

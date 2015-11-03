@@ -1,0 +1,89 @@
+#!  /bin/bash
+
+###########################################################
+# NOTE: All additional arguments are passed to all scripts!
+#       ONLY USE ARGUMENTS COMMON TO ALL SCRIPTS
+###########################################################
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+MV=`which mv`;
+CAT=`which cat`;
+RM=`which rm`;
+GREP=`which grep`;
+
+#######################################
+# Test Parameters
+#######################################
+SIGMA=0.01
+EPSILON=0.10
+TESTARGS=
+
+#######################################
+# Get Arguments
+#######################################
+if [ $# -lt 1 ]; then
+  DIR=`$PWD`;             # current directory
+else
+  DIR=$1;
+fi
+
+#######################################
+# Script Parameters
+#######################################
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$DIR/../..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+COMMON=$DIR/../../../common  # common utilities (plotting, merging, etc.)
+
+# Executables
+MERGEDATA=$COMMON/mergedata.py
+COMBINEDATA=$TOPDIR/combine.py
+
+# Trial parameters
+TRIALS=`seq 1 10`;
+
+# check parameters
+if [ ! -x $MERGEDATA ]; then
+  echo "Could not find executable ... MERGEDATA=$MERGEDATA";
+  exit -1;
+fi
+
+if [ ! -x $COMBINEDATA ]; then
+  echo "Could not find executable ... COMBINEDATA=$COMBINEDATA";
+  exit -1;
+fi
+
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Parse Data
+#######################################
+# Combine all trials
+#######################################
+cd $DIR
+echo "Combining data in $DIR";
+# combine all data from pdr.dat
+if [ ! -f pdr.dat ]; then
+  echo "Cannot find pdr.dat!";
+  exit -1;
+fi
+
+# combine data into pdr.ncoll.dat
+TITLE="PDR vs. \$N_{coll}\$"
+IGNORE="source rmsdelay"
+$COMBINEDATA pdr.dat --title="$TITLE" > pdr.ncoll.dat;
+$MERGEDATA   pdr.ncoll.dat -e $SIGMA --ignore="$IGNORE" > data.tmp;
+$MV data.tmp pdr.ncoll.dat;
+
+# cat "all" data finto pdr.all.dat
+$CAT pdr.dat|$GREP all > pdr.all.dat

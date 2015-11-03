@@ -1,0 +1,121 @@
+#!  /bin/bash
+
+###########################################################
+# NOTE: All additional arguments are passed to all scripts!
+#       ONLY USE ARGUMENTS COMMON TO ALL SCRIPTS
+###########################################################
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+DATE=`which date`;
+MV=`which mv`;
+
+#######################################
+# Test Parameters
+#######################################
+SIGMA=0.01
+EPSILON=0.25
+TESTARGS=
+
+#######################################
+# Get Arguments
+#######################################
+DIR=`$PWD`;             # current directory
+
+#######################################
+# Script Parameters
+#######################################
+SRCDIR=$DIR/..            # shared scripts for scenario
+TOPDIR=$DIR/../..         # top level of experiment
+TS="`$DATE +%Y%m%d`";     # timestamp
+COMMON=$DIR/../../../../common  # common utilities (plotting, merging, etc.)
+
+# Executables
+PARSETPUT=$TOPDIR/parse-tput.py
+PARSEFDR=$TOPDIR/parse-fdr.py
+PARSEPER=$TOPDIR/parse-per.py
+MERGEDATA=$COMMON/mergedata.py
+MODDATA=$COMMON/mod_data.py
+
+# Trial parameters
+TRIALS=`seq 1 10`;
+
+# check parameters
+
+if [ ! -x $PARSETPUT ]; then
+  echo "Could not find executable ... PARSETPUT=$PARSETPUT";
+  exit -1;
+fi
+
+if [ ! -x $PARSEFDR ]; then
+  echo "Could not find executable ... PARSEFDR=$PARSEFDR";
+  exit -1;
+fi
+
+if [ ! -x $PARSEPER ]; then
+  echo "Could not find executable ... PARSEPER=$PARSEPER";
+  exit -1;
+fi
+
+if [ ! -x $MERGEDATA ]; then
+  echo "Could not find executable ... MERGEDATA=$MERGEDATA";
+  exit -1;
+fi
+
+if [ ! -x $MODDATA ]; then
+  echo "Could not find executable ... MODDATA=$MODDATA";
+  exit -1;
+fi
+
+
+# print simulation parameters
+if [ -f README ]; then
+  cat README;
+  echo "";
+fi
+
+#######################################
+# Parse Data
+#######################################
+cd $DIR
+echo "Parsing data in $DIR";
+TRACEDIRS=`ls -d trial-*`
+# check if trial  found
+if [ -z "$TRACEDIRS" ]; then
+    echo "Cannot find trial directories with trace files ... trial-*";
+    exit -1;
+fi
+
+IGNORE="source rmsdelay"
+
+# parse all trial directories individually
+for tdir in $TRACEDIRS; do
+  cd $DIR/$tdir;
+  echo "Entering $tdir ...";
+  tracefiles=`ls trace-*.raw`;
+  if [ ! -z "$tracefiles" ]; then
+    # parse TPUT
+    echo "Parsing tput ..."
+    $PARSETPUT $tracefiles $@ > data.tmp
+    $MERGEDATA data.tmp -e $SIGMA --ignore="$IGNORE" > tput.dat
+    $MODDATA tput.dat --set-yvar="0" > data.tmp
+    $MV data.tmp tput.dat
+    # PARSE FDR
+    echo "Parsing fdr ..."
+    $PARSEFDR  $tracefiles $@ > data.tmp
+    $MERGEDATA data.tmp -e $EPSILON --ignore="$IGNORE" > fdr.dat
+    $MODDATA fdr.dat --set-yvar="0" > data.tmp
+    $MV data.tmp fdr.dat
+    # PARSE PER
+    echo "Parsing per ..."
+    $PARSEPER  $tracefiles $@ > data.tmp
+    $MERGEDATA data.tmp -e $EPSILON --ignore="$IGNORE" > per.dat
+    $MODDATA per.dat --set-yvar="0" > data.tmp
+    $MV data.tmp per.dat
+  else
+    echo "WARNING: Cannot find any trace files ... trace-*.raw";
+  fi
+done

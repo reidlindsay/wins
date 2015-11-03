@@ -1,0 +1,2 @@
+#{'data':[{'y':1.338958, 'x':0, 'ndata': 1}, {'y':1.4030988, 'x':3, 'ndata':1}, {'y':2.9725494, 'x':6, 'ndata':1}], 'parameters': {'title': 'PER benchmark vs. MCS', 'xlabel': 'MCS', 'ylabel': 'PER benchmark', 'format':'bo'}}
+{'data':[{'y':3.3417077, 'x':0, 'ndata': 1}, {'y':3.429943, 'x':3, 'ndata':1}, {'y':5.1853469, 'x':6, 'ndata':1}], 'parameters': {'title': 'PER benchmark vs. MCS', 'xlabel': 'MCS', 'ylabel': 'PER benchmark', 'format':'bo'}}

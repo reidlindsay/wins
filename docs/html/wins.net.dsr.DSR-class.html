@@ -1,0 +1,1861 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.net.dsr.DSR</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.net-module.html">Package&nbsp;net</a> ::
+        <a href="wins.net.dsr-module.html">Module&nbsp;dsr</a> ::
+        Class&nbsp;DSR
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class DSR</h1><p class="nomargin-top"><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_dsr" name="class_hierarchy_for_dsr">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="43,5,125,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="29,61,139,88"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="24,117,144,144"/>
+<area shape="rect" href="wins.protocol.net.NET-class.html" title="protocol.net.NET" alt="" coords="25,173,143,200"/>
+<area shape="rect" href="wins.net.dsr.DSR-class.html" title="DSR" alt="" coords="60,285,108,312"/>
+<area shape="rect" href="wins.protocol.routing.Routing-class.html" title="protocol.routing.Routing" alt="" coords="5,229,163,256"/>
+</map>
+  <img src="class_hierarchy_for_dsr.gif" alt='' usemap="#class_hierarchy_for_dsr" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Dynamic Source Routing protocol (RFC 4728).</p>
+<p>This implementation uses link-level acknowledgements to do route
+maintenance (see <a href="wins.protocol.mac.MAC-class.html#drpdata" class="link">MAC.drpdata</a> and <a href="wins.protocol.mac.MAC-class.html#ackdata" class="link">MAC.ackdata</a>).</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">mac</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">rreqrate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">datarate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Configure pointers and parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#IPFORWARD" class="summary-sig-name">IPFORWARD</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPFORWARD state; start route maintenance for IP+DSR if needed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPFORWARD">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#IPROUTING" class="summary-sig-name">IPROUTING</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPROUTING state; start route discovery for <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPROUTING">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#TXRREQ" class="summary-sig-name">TXRREQ</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">target</span>,
+        <span class="summary-sig-arg">options</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="summary-sig-arg">rexmt</span>=<span class="summary-sig-default">0</span>)</span><br />
+      TXRREQ state; create and send route request.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.TXRREQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXRREP"></a><span class="summary-sig-name">TXRREP</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>,
+        <span class="summary-sig-arg">rreq</span>,
+        <span class="summary-sig-arg">addresses</span>)</span><br />
+      TXRREP state; create and send route reply to <code class="link">dst</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.TXRREP">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TXRERR"></a><span class="summary-sig-name">TXRERR</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>,
+        <span class="summary-sig-arg">errortype</span>,
+        <span class="summary-sig-arg">type_specific</span>)</span><br />
+      TXRERR state; create and send a new route error message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.TXRERR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#MAINT" class="summary-sig-name">MAINT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">nexthop</span>,
+        <span class="summary-sig-arg">rexmt</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">send</span>=<span class="summary-sig-default">True</span>)</span><br />
+      MAINT state; perform route maintenace for nexthop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.MAINT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#IPRECOVER" class="summary-sig-name">IPRECOVER</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>)</span><br />
+      IPRECOVER state; attempt to resend packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPRECOVER">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#IPCLASSIFY" class="summary-sig-name">IPCLASSIFY</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">cache</span>=<span class="summary-sig-default">True</span>)</span><br />
+      IPCLASSIFY state; overloaded to implement DSR classification.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPCLASSIFY">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#RXSRCROUTE" class="summary-sig-name">RXSRCROUTE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">ip</span>,
+        <span class="summary-sig-arg">dsr</span>,
+        <span class="summary-sig-arg">opt</span>)</span><br />
+      RXSRCROUTE state; process source route option.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXSRCROUTE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#RXRREQ" class="summary-sig-name">RXRREQ</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">ip</span>,
+        <span class="summary-sig-arg">dsr</span>,
+        <span class="summary-sig-arg">opt</span>)</span><br />
+      RXRREQ state; process route request option.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRREQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#RXRREP" class="summary-sig-name">RXRREP</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">ip</span>,
+        <span class="summary-sig-arg">dsr</span>,
+        <span class="summary-sig-arg">opt</span>)</span><br />
+      RXRREP state; handle route reply message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRREP">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#RXRERR" class="summary-sig-name">RXRERR</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">ip</span>,
+        <span class="summary-sig-arg">dsr</span>,
+        <span class="summary-sig-arg">opt</span>)</span><br />
+      RXRERR state; handle route error message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRERR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#encap_data" class="summary-sig-name">encap_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Encapsulate data packet (if needed) for delivery to next hop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.encap_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#maintain" class="summary-sig-name">maintain</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">nexthop</span>)</span><br />
+      Start or udpate route maintenace on IP+DSR packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.maintain">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#cacheroute" class="summary-sig-name">cacheroute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Cache relevant route information from IP+DSR packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.cacheroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#checkiprecv" class="summary-sig-name">checkiprecv</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">nextheader</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check for valid IP+DSR packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.checkiprecv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#checkdsropt" class="summary-sig-name">checkdsropt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">exception</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">incoming</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Check DSR options of incoming packet for any violations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.checkdsropt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#updateroute" class="summary-sig-name">updateroute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">chksum</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Update IP+DSR routing info using a particular route.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.updateroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#set_sendanno" class="summary-sig-name">set_sendanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to set rate annotations in outgoing packets.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.set_sendanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#getproto" class="summary-sig-name">getproto</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Overloaded to check for DSR packets.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.getproto">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="issame"></a><span class="summary-sig-name">issame</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pa</span>,
+        <span class="summary-sig-arg">pb</span>)</span><br />
+      See if packets have the same IP+DSR header information.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.issame">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="srcroute"></a><span class="summary-sig-name">srcroute</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Get source route from route cache.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.srcroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="removelink"></a><span class="summary-sig-name">removelink</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      Remove link from route cache.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.removelink">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_mac"></a><span class="summary-sig-name">get_mac</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get MAC corresponding to this module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_mac">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_mac"></a><span class="summary-sig-name">set_mac</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">mac</span>)</span><br />
+      Set MAC corresponding to this module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.set_mac">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_promiscuous"></a><span class="summary-sig-name">get_promiscuous</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get <a href="wins.protocol.mac.MAC-class.html#promiscuous" class="link">MAC.promiscuous</a> flag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_promiscuous">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#get_ip_anno" class="summary-sig-name">get_ip_anno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method to get relevant annotations for an IP+DSR packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_ip_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_agt_anno"></a><span class="summary-sig-name">get_agt_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method to get relevant annotations for a AGT packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_agt_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dsr_anno"></a><span class="summary-sig-name">get_dsr_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method to get relevant annotations for a DSR packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_dsr_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.net.dsr.DSR-class.html#debug" class="summary-sig-name">debug</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Log debug statements to trace.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.debug">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="safe"></a><span class="summary-sig-name">safe</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Print trace to standard out before throwing exception.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.safe">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.routing.Routing-class.html">protocol.routing.Routing</a></code></b>:
+      <code><a href="wins.protocol.routing.Routing-class.html#ERRRECV">ERRRECV</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#ERRSEND">ERRSEND</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#IPDELIVER">IPDELIVER</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#IPRECV">IPRECV</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#IPSEND">IPSEND</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#RECV">RECV</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#SEND">SEND</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#addroute">addroute</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#cost">cost</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#delroute">delroute</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#get_route_anno">get_route_anno</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#hasroute">hasroute</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log">log</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log_drop">log_drop</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log_forward">log_forward</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log_loopback">log_loopback</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log_recv">log_recv</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#log_send">log_send</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#nexthop">nexthop</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#set_recvanno">set_recvanno</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#set_table">set_table</a></code>,
+      <code><a href="wins.protocol.routing.Routing-class.html#updatechksum">updatechksum</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">protocol.net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#get_net_anno">get_net_anno</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#set_address">set_address</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#connect">connect</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'DSR'"><code class="variable-quote">'</code><code class="variable-string">DSR</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'DSR'"><code class="variable-quote">'</code><code class="variable-string">DSR</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MaxMaintRexmt"></a><span class="summary-name">MaxMaintRexmt</span> = <code title="0">0</code><br />
+      Maximum number of retransmission for route maintenance.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DiscoveryHopLimit"></a><span class="summary-name">DiscoveryHopLimit</span> = <code title="255">255</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MaxTTL"></a><span class="summary-name">MaxTTL</span> = <code title="255">255</code><br />
+      Maximum Time-to-live value for packets in the network.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="BroadcastJitter"></a><span class="summary-name">BroadcastJitter</span> = <code title="0.01">0.01</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MaintenanceTimeout"></a><span class="summary-name">MaintenanceTimeout</span> = <code title="10.0">10.0</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RexmtBufferSize"></a><span class="summary-name">RexmtBufferSize</span> = <code title="50">50</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MaxGratuitousRexmt"></a><span class="summary-name">MaxGratuitousRexmt</span> = <code title="6">6</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">protocol.net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#broadcast">broadcast</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#mtu">mtu</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#nulladdr">nulladdr</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="datarate"></a><span class="summary-name">datarate</span><br />
+      Rate annotation applied to all unicast messages.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="maintbuffer"></a><span class="summary-name">maintbuffer</span><br />
+      Dictionary containing buffer of packets being maintained
+by DSR, indexed by next hop addresses.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rreqrate"></a><span class="summary-name">rreqrate</span><br />
+      Rate annotation applied to all Route Requests.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rreqtable"></a><span class="summary-name">rreqtable</span><br />
+      <a href="wins.net.dsr_rreq.RouteRequestTable-class.html" class="link">RouteRequestTable</a> used to manage route requests.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr.DSR-class.html#mac" class="summary-name">mac</a><br />
+      Property to access pointer to <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr.DSR-class.html#rrt" class="summary-name">rrt</a><br />
+      Alias for <a href="wins.net.dsr.DSR-class.html#rreqtable" class="link">rreqtable</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.net.dsr.DSR-class.html#promiscuous" class="summary-name">promiscuous</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.routing.Routing-class.html">protocol.routing.Routing</a></code></b>:
+      <code><a href="wins.protocol.routing.Routing-class.html#table">table</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">protocol.net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#addr">addr</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#address">address</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#ptype">ptype</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>broadcast</code></strong> - Broadcast address.</li>
+        <li><strong class="pname"><code>nulladdr</code></strong> - Null address (used by <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>).</li>
+        <li><strong class="pname"><code>mtu</code></strong> - Maximum transmission unit.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">mac</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">rreqrate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">datarate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Configure pointers and parameters.</p>
+<p>If <a href="wins.net.dsr.DSR-class.html#mac" class="link">mac</a> is not provided, this module will attempt to automatically
+determine the appropriate <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.</p>
+<p>If <a href="wins.net.dsr.DSR-class.html#rreqrate" class="link">rreqrate</a> and/or <a href="wins.net.dsr.DSR-class.html#datarate" class="link">datarate</a> are not specified, <a href="wins.net.dsr.DSR-class.html" class="link">DSR</a> will not
+attempt to set the rate annotation of the outgoing packet. It is
+important that the <a href="wins.net.dsr.DSR-class.html#rreqrate" class="link">rreqrate</a> be higher than <a href="wins.net.dsr.DSR-class.html#datarate" class="link">datarate</a> to ensure stable
+links for DSR.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>mac</code></strong> - <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> module corresponding to this network protocol.</li>
+        <li><strong class="pname"><code>rreqrate</code></strong> - Rate index used for flooding RREQ messages.</li>
+        <li><strong class="pname"><code>datarate</code></strong> - Rate index used for sending other DSR messages.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.protocol.routing.Routing-class.html#configure" class="link">Routing.configure()</a>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="IPFORWARD"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPFORWARD</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPFORWARD">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  IPFORWARD state; start route maintenance for IP+DSR if needed.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - IP packet to send.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#IPFORWARD">protocol.routing.Routing.IPFORWARD</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes a valid IP+DSR packet was went to it.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPROUTING"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPROUTING</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPROUTING">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  IPROUTING state; start route discovery for <code class="link">p</code>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to send.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keyword arguments.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#IPROUTING">protocol.routing.Routing.IPROUTING</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TXRREQ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">TXRREQ</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">target</span>,
+        <span class="sig-arg">options</span>=<span class="sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="sig-arg">rexmt</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.TXRREQ">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  TXRREQ state; create and send route request.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>target</code></strong> - Target for route discovery.</li>
+        <li><strong class="pname"><code>options</code></strong> - Additional DSR options [default=None].</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state is persistent. It will keep trying to send until
+      </p>
+</div></td></tr></table>
+</div>
+<a name="MAINT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MAINT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">nexthop</span>,
+        <span class="sig-arg">rexmt</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">send</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.MAINT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  MAINT state; perform route maintenace for nexthop.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assume maintenance buffer contains valid IP+DSR packets.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPRECOVER"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPRECOVER</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPRECOVER">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  IPRECOVER state; attempt to resend packet <code class="link">p</code>.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method assumes that <code class="link">p</code> is a valid IP+DSR packet.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPCLASSIFY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPCLASSIFY</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">cache</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.IPCLASSIFY">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  IPCLASSIFY state; overloaded to implement DSR classification.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Received IP packet.</li>
+        <li><strong class="pname"><code>cache</code></strong> - Cache routing information from <code class="link">p</code>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#IPCLASSIFY">protocol.routing.Routing.IPCLASSIFY</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes that packet <code class="link">p</code> passed all validity checks in
+<a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a> (i.e. <a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a>).
+      </p>
+</div></td></tr></table>
+</div>
+<a name="RXSRCROUTE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RXSRCROUTE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">ip</span>,
+        <span class="sig-arg">dsr</span>,
+        <span class="sig-arg">opt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXSRCROUTE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  RXSRCROUTE state; process source route option.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assumes <a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a> passed.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="RXRREQ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RXRREQ</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">ip</span>,
+        <span class="sig-arg">dsr</span>,
+        <span class="sig-arg">opt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRREQ">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  RXRREQ state; process route request option.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assumes <a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a> passed.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="RXRREP"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RXRREP</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">ip</span>,
+        <span class="sig-arg">dsr</span>,
+        <span class="sig-arg">opt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRREP">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  RXRREP state; handle route reply message.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assumes <a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a> passed.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="RXRERR"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RXRERR</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">ip</span>,
+        <span class="sig-arg">dsr</span>,
+        <span class="sig-arg">opt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.RXRERR">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  RXRERR state; handle route error message.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Assumes <a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a> passed.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="encap_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">encap_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.encap_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Encapsulate data packet (if needed) for delivery to next hop.</p>
+<p>If <code class="link">p</code> is already an IP packet and <code class="link">force</code> is false, this method will
+update 'src', 'dst', and 'ttl' fields as needed. Otherwise, this method
+encapsulates <code class="link">p</code> with an IP header.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to deliver.</li>
+        <li><strong class="pname"><code>src</code></strong> - Source address.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Destination address.</li>
+        <li><strong class="pname"><code>force</code></strong> - If true, force encapsulation into a new IP packet.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to IP constructor.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Encapsulated/modified packet for delivery.</dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#encap_data">protocol.routing.Routing.encap_data</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        By default this method assumes that <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a> indicates IPv4.
+<em>Overload this method to handle other protocol types</em>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="maintain"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">maintain</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">nexthop</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.maintain">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Start or udpate route maintenace on IP+DSR packet.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This assumes a IP+DSR packet was passed to it.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="cacheroute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cacheroute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.cacheroute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Cache relevant route information from IP+DSR packet.
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method assumes that the packet has passed through
+<a href="wins.net.dsr.DSR-class.html#checkiprecv" class="link">checkiprecv()</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="checkiprecv"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">checkiprecv</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">nextheader</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.checkiprecv">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check for valid IP+DSR packet.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet received in <a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a>.</li>
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to base class method.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to base class method.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>String containing any error condition, or nothing for no error.</dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#checkiprecv">protocol.routing.Routing.checkiprecv</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="checkdsropt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">checkdsropt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">exception</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">incoming</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.checkdsropt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Check DSR options of incoming packet for any violations.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to check.</li>
+        <li><strong class="pname"><code>exception</code></strong> - If true, throws exception for violation.</li>
+        <li><strong class="pname"><code>incoming</code></strong> - If true, treat <code class="link">p</code> as a received packet.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Boolean flag; if True, DSR packet is okay.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Do not use this method to check options for outgoing packets
+without setting <code class="link">incoming</code> to False.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="updateroute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">updateroute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">chksum</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.updateroute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Update IP+DSR routing info using a particular route.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - IP+DSR packet.</li>
+        <li><strong class="pname"><code>path</code></strong> - New route; if <code class="link">None</code>, get it from route cache.</li>
+        <li><strong class="pname"><code>chksum</code></strong> - If true, update checksum.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Packet with updated routing info (or <code class="link">None</code> if no valid route).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_sendanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_sendanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.set_sendanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to set rate annotations in outgoing packets.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to modify.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#set_sendanno">protocol.routing.Routing.set_sendanno</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getproto"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getproto</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.getproto">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check for DSR packets.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IPv4 protocol opcode for <code class="link">p</code>; this can be used when
+encapsulating <code class="link">p</code> in an IPv4 packet.</dd>
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#getproto">protocol.routing.Routing.getproto</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_ip_anno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_ip_anno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.get_ip_anno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Internal method to get relevant annotations for an IP+DSR packet.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.protocol.routing.Routing-class.html#get_ip_anno">protocol.routing.Routing.get_ip_anno</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="debug"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">debug</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.net.dsr-pysrc.html#DSR.debug">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Log debug statements to trace.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#debug">trace.Traceable.debug</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="mac"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">mac</h3>
+  Property to access pointer to <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rrt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rrt</h3>
+  Alias for <a href="wins.net.dsr.DSR-class.html#rreqtable" class="link">rreqtable</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="promiscuous"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">promiscuous</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:34 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

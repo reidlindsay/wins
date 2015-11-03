@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.ieee80211.dot11a_support.Dot11A</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.ieee80211-module.html">Package&nbsp;ieee80211</a> ::
+        <a href="wins.ieee80211.dot11a_support-module.html">Module&nbsp;dot11a_support</a> ::
+        Class&nbsp;Dot11A
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Dot11A</h1><p class="nomargin-top"><span class="codelink"><a href="wins.ieee80211.dot11a_support-pysrc.html#Dot11A">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_dot11a" name="class_hierarchy_for_dot11a">
+<area shape="rect" href="javascript:void(0);" title="scapy.base_classes.BasePacket" alt="" coords="5,61,219,88"/>
+<area shape="rect" href="javascript:void(0);" title="scapy.packet.Packet" alt="" coords="40,117,184,144"/>
+<area shape="rect" href="javascript:void(0);" title="scapy.base_classes.Gen" alt="" coords="28,5,196,32"/>
+<area shape="rect" href="wins.ieee80211.dot11a_support.Dot11A-class.html" title="Dot11A" alt="" coords="80,173,144,200"/>
+</map>
+  <img src="class_hierarchy_for_dot11a.gif" alt='' usemap="#class_hierarchy_for_dot11a" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Packet format for IEEE 802.11a physical layer packet header.</p>
+<p>This class inherits from the Dot11 class from Scapy. All the fields will
+be encoded as part of the SIGNAL field in the IEEE 802.11a packet.</p>
+<blockquote>
+4      1       12       1       6</blockquote>
+<div class="rst-section" id="rst-rate-rsvd-length-parity-tail">
+<h1 class="heading">| rate | rsvd | length | parity | tail |</h1>
+</div>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code><a href="scapy.base_classes.Packet_metaclass-class.html">__metaclass__</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="updatepar"></a><span class="summary-sig-name">updatepar</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">val</span>,
+        <span class="summary-sig-arg">fld</span>,
+        <span class="summary-sig-arg">param</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Update parity check value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a_support-pysrc.html#Dot11A.updatepar">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="checkpar"></a><span class="summary-sig-name">checkpar</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Check parity of checksum.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a_support-pysrc.html#Dot11A.checkpar">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>__contains__</code>,
+      <code>__deepcopy__</code>,
+      <code>__delattr__</code>,
+      <code>__delitem__</code>,
+      <code>__div__</code>,
+      <code>__eq__</code>,
+      <code>__getattr__</code>,
+      <code>__getitem__</code>,
+      <code>__gt__</code>,
+      <code>__init__</code>,
+      <code>__iter__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__mul__</code>,
+      <code>__ne__</code>,
+      <code>__nonzero__</code>,
+      <code>__rdiv__</code>,
+      <code>__repr__</code>,
+      <code>__rmul__</code>,
+      <code>__setattr__</code>,
+      <code>__setitem__</code>,
+      <code>__str__</code>,
+      <code>add_payload</code>,
+      <code>add_underlayer</code>,
+      <code>answers</code>,
+      <code>build</code>,
+      <code>build_done</code>,
+      <code>build_payload</code>,
+      <code>build_ps</code>,
+      <code>canvas_dump</code>,
+      <code>clone_with</code>,
+      <code>command</code>,
+      <code>copy</code>,
+      <code>decode_payload_as</code>,
+      <code>default_payload_class</code>,
+      <code>delfieldval</code>,
+      <code>display</code>,
+      <code>dissect</code>,
+      <code>dissection_done</code>,
+      <code>do_build</code>,
+      <code>do_build_ps</code>,
+      <code>do_dissect</code>,
+      <code>do_dissect_payload</code>,
+      <code>do_init_fields</code>,
+      <code>extract_padding</code>,
+      <code>firstlayer</code>,
+      <code>fragment</code>,
+      <code>get_field</code>,
+      <code>get_tracename</code>,
+      <code>getfield_and_val</code>,
+      <code>getfieldval</code>,
+      <code>getlayer</code>,
+      <code>guess_payload_class</code>,
+      <code>hashret</code>,
+      <code>haslayer</code>,
+      <code>hide_defaults</code>,
+      <code>init_fields</code>,
+      <code>lastlayer</code>,
+      <code>libnet</code>,
+      <code>mysummary</code>,
+      <code>pdfdump</code>,
+      <code>post_build</code>,
+      <code>post_dissect</code>,
+      <code>post_dissection</code>,
+      <code>pre_dissect</code>,
+      <code>psdump</code>,
+      <code>remove_payload</code>,
+      <code>remove_underlayer</code>,
+      <code>route</code>,
+      <code>setfieldval</code>,
+      <code>show</code>,
+      <code>show2</code>,
+      <code>sprintf</code>,
+      <code>summary</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b> (private):
+      <code>_do_summary</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>from_hexcap</code>,
+      <code>lower_bonds</code>,
+      <code>upper_bonds</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'802.11A PHY'"><code class="variable-quote">'</code><code class="variable-string">802.11A PHY</code><code class="variable-quote">'</code></code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.ieee80211.dot11a_support.Dot11A-class.html#fields_desc" class="summary-name">fields_desc</a> = <code title="[&lt;Field (Dot11A).rate&gt;,
+ &lt;Field (Dot11A).reserved&gt;,
+ &lt;Field (Dot11A).length&gt;,
+ &lt;Field (Dot11A).parity&gt;,
+ &lt;Field (Dot11A).tail&gt;]"><code class="variable-group">[</code>&lt;Field (Dot11A).rate&gt;<code class="variable-op">, </code>&lt;Field (Dot11A).reserved<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>aliastypes</code>,
+      <code>explicit</code>,
+      <code>initialized</code>,
+      <code>overload_fields</code>,
+      <code>payload_guess</code>,
+      <code>show_indent</code>,
+      <code>underlayer</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>scapy.packet.Packet</code></b>:
+      <code>flatten</code>,
+      <code>traceid</code>,
+      <code>tracename</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="fields_desc"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">fields_desc</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code>&lt;Field (Dot11A).rate&gt;<code class="variable-op">,</code>
+ &lt;Field (Dot11A).reserved&gt;<code class="variable-op">,</code>
+ &lt;Field (Dot11A).length&gt;<code class="variable-op">,</code>
+ &lt;Field (Dot11A).parity&gt;<code class="variable-op">,</code>
+ &lt;Field (Dot11A).tail&gt;<code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:32 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

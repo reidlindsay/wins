@@ -1,0 +1,1687 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.protocol.routing.Routing</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="wins.protocol.routing-module.html">Module&nbsp;routing</a> ::
+        Class&nbsp;Routing
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Routing</h1><p class="nomargin-top"><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_routing" name="class_hierarchy_for_routing">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="24,5,107,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="11,61,120,88"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="5,117,125,144"/>
+<area shape="rect" href="wins.protocol.net.NET-class.html" title="net.NET" alt="" coords="32,173,99,200"/>
+<area shape="rect" href="wins.net.dsr.DSR-class.html" title="net.dsr.DSR" alt="" coords="20,285,111,312"/>
+<area shape="rect" href="wins.protocol.routing.Routing-class.html" title="Routing" alt="" coords="33,229,97,256"/>
+</map>
+  <img src="class_hierarchy_for_routing.gif" alt='' usemap="#class_hierarchy_for_routing" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Base class for routing protocols.</p>
+<p>The base class provides the methods needed for maintaining a local routing
+table and implements a simple static routing protocol. If a route to the
+destination cannot be found for a packet, this protocol will drop the
+packet. Subclasses can implement custom routing algorithms as needed.</p>
+<p>The routing table contains two entries by default:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>A route to itself (i.e. <a href="wins.protocol.net.NET-class.html#address" class="link">address</a> -&gt; <a href="wins.protocol.net.NET-class.html#address" class="link">address</a>).</li>
+<li>A broadcast entry (i.e. <a href="wins.protocol.net.NET-class.html#broadcast" class="link">broadcast</a> -&gt; <a href="wins.protocol.net.NET-class.html#broadcast" class="link">broadcast</a>).</li>
+</ol>
+</blockquote>
+<p>This is implemented in <a href="wins.protocol.routing.Routing-class.html#set_table" class="link">set_table()</a>. Overload methods as needed.</p>
+<div class="rst-section" id="rst-routing-and-ports">
+<h1 class="heading">Routing and Ports</h1>
+<p>In addition to the ports created by <a href="wins.protocol.net.NET-class.html" class="link">NET</a>, this class has two ports:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>&quot;TXU&quot; - sends traffic to an upstream element/protocol.</li>
+<li>&quot;RXU&quot; - receives traffic from an upstream element/protocol.</li>
+</ol>
+</blockquote>
+<p>Overload <a href="wins.protocol.routing.Routing-class.html#configure" class="link">configure()</a> to change how ports are set up.</p>
+</div>
+<div class="rst-section" id="rst-routing-and-annotations">
+<h1 class="heading">Routing and Annotations</h1>
+<p>The following annotations are used or marked by <a href="wins.protocol.routing.Routing-class.html" class="link">Routing</a>.</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>net-dst</td>
+<td>Network address for destination of packet. If not marked,
+<a href="wins.protocol.routing.Routing-class.html" class="link">Routing</a> assumes packet is for <a href="wins.protocol.net.NET-class.html#broadcast" class="link">broadcast</a>.
+<em>This should be set by an upstream protocol.</em></td>
+</tr>
+<tr><td>net-src</td>
+<td><a href="wins.protocol.routing.Routing-class.html" class="link">Routing</a> marks this annotation to indicate the address
+of the sender. An upstream protocol may overload this
+annotation to spoof the send address of a packet.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        The routing <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a> is also accessible as a child with the nick name
+'routetable'. This is set throught <a href="wins.protocol.routing.Routing-class.html#set_table" class="link">set_table()</a>.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Call <a href="wins.protocol.net.NET-class.html#configure" class="link">NET.configure()</a>, initialize routing table, add ports, and
+spawn <a href="wins.fsm.FSM-class.html" class="link">FSM</a> to run static routing algorithm.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#SEND" class="summary-sig-name">SEND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      SEND state; monitor traffic from upstream protocol and pass to
+routing algorithm.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.SEND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#ERRSEND" class="summary-sig-name">ERRSEND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>)</span><br />
+      ERRSEND state; process packets for unknown <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.ERRSEND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPSEND" class="summary-sig-name">IPSEND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      IPSEND state; encapsulate packet using available routing info and
+pass to appropriate handler.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPSEND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPFORWARD" class="summary-sig-name">IPFORWARD</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPFORWARD state; update packet as needed before passing to
+<a href="wins.protocol.routing.Routing-class.html#IPDELIVER" class="link">IPDELIVER</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPFORWARD">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPDELIVER" class="summary-sig-name">IPDELIVER</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">nexthop</span>)</span><br />
+      IPDELIVER state; deliver packet to lower layer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPDELIVER">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPROUTING" class="summary-sig-name">IPROUTING</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPROUTING state; find route for packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPROUTING">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#RECV" class="summary-sig-name">RECV</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      RECV state; monitor traffic from lower layer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.RECV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#ERRRECV" class="summary-sig-name">ERRRECV</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      ERRRECV state; process packets for unknown <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.ERRRECV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPRECV" class="summary-sig-name">IPRECV</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPRECV state; error check and classify IP packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPRECV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#IPCLASSIFY" class="summary-sig-name">IPCLASSIFY</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      IPCLASSIFY state; classify packet received in <a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPCLASSIFY">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#set_sendanno" class="summary-sig-name">set_sendanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>)</span><br />
+      Set relevant annotations for outgoing packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.set_sendanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#set_recvanno" class="summary-sig-name">set_recvanno</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>)</span><br />
+      Set relevant annotations for received data to upper layer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.set_recvanno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#encap_data" class="summary-sig-name">encap_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dst</span>,
+        <span class="summary-sig-arg">force</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Encapsulate data packet (if needed) for delivery to next hop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.encap_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#checkiprecv" class="summary-sig-name">checkiprecv</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">chksum</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">proto</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Check for valid IP packet and errors.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.checkiprecv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#updatechksum" class="summary-sig-name">updatechksum</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">overwrite</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Update checksum and len field of IP packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.updatechksum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#getproto" class="summary-sig-name">getproto</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Convenience method to determine IPv4 protocol opcode for packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.getproto">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasroute"></a><span class="summary-sig-name">hasroute</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Wrapper to access <a href="wins.protocol.routetable.RouteTable-class.html#hasroute" class="link">RouteTable.hasroute()</a> for <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.hasroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addroute"></a><span class="summary-sig-name">addroute</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Wrapper to access <a href="wins.protocol.routetable.RouteTable-class.html#addroute" class="link">RouteTable.addroute()</a> for <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.addroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="delroute"></a><span class="summary-sig-name">delroute</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Wrapper to access <a href="wins.protocol.routetable.RouteTable-class.html#delroute" class="link">RouteTable.delroute()</a> for <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.delroute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="nexthop"></a><span class="summary-sig-name">nexthop</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Wrapper to access <a href="wins.protocol.routetable.RouteTable-class.html#nexthop" class="link">RouteTable.nexthop()</a> for <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.nexthop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cost"></a><span class="summary-sig-name">cost</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Wrapper to access <a href="wins.protocol.routetable.RouteTable-class.html#cost" class="link">RouteTable.cost()</a> for <a href="wins.protocol.routing.Routing-class.html#table" class="link">table</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.cost">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_table"></a><span class="summary-sig-name">set_table</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rt</span>)</span><br />
+      Add new routing table as a child wih nickname 'routetable', and add
+basic routing entries (i.e. <a href="wins.protocol.net.NET-class.html#address" class="link">address</a> and <a href="wins.protocol.net.NET-class.html#broadcast" class="link">broadcast</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.set_table">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_send"></a><span class="summary-sig-name">log_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging send event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_recv"></a><span class="summary-sig-name">log_recv</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging receive event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log_recv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_forward"></a><span class="summary-sig-name">log_forward</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging forward event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log_forward">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_drop"></a><span class="summary-sig-name">log_drop</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging drop event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log_drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_loopback"></a><span class="summary-sig-name">log_loopback</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging loopback.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log_loopback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.routing.Routing-class.html#log" class="summary-sig-name">log</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evt</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">p</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overloaded to check verbose level and set common annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_route_anno"></a><span class="summary-sig-name">get_route_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method to get relevant annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.get_route_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_ip_anno"></a><span class="summary-sig-name">get_ip_anno</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Internal method to get relevant annotations for an IP packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.get_ip_anno">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#get_net_anno">get_net_anno</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#set_address">set_address</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#connect">connect</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'routing'"><code class="variable-quote">'</code><code class="variable-string">routing</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'RTG'"><code class="variable-quote">'</code><code class="variable-string">RTG</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="MaxTTL"></a><span class="summary-name">MaxTTL</span> = <code title="16">16</code><br />
+      Maximum Time-to-live value for packets in the network.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#broadcast">broadcast</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#mtu">mtu</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#nulladdr">nulladdr</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__table"></a><span class="summary-name">__table</span><br />
+      Private member to maintina <a href="wins.protocol.routetable.RouteTable-class.html" class="link">RouteTable</a>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.protocol.routing.Routing-class.html#table" class="summary-name">table</a><br />
+      Property to access/modify <a href="wins.protocol.routetable.RouteTable-class.html" class="link">RouteTable</a>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.net.NET-class.html">net.NET</a></code></b>:
+      <code><a href="wins.protocol.net.NET-class.html#addr">addr</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#address">address</a></code>,
+      <code><a href="wins.protocol.net.NET-class.html#ptype">ptype</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>broadcast</code></strong> - Broadcast address.</li>
+        <li><strong class="pname"><code>nulladdr</code></strong> - Null address (used by <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>).</li>
+        <li><strong class="pname"><code>mtu</code></strong> - Maximum transmission unit.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Call <a href="wins.protocol.net.NET-class.html#configure" class="link">NET.configure()</a>, initialize routing table, add ports, and
+spawn <a href="wins.fsm.FSM-class.html" class="link">FSM</a> to run static routing algorithm.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>addr</code></strong> - Address for <a href="wins.protocol.net.NET-class.html" class="link">NET</a> (see <code class="link">NET and Addressing</code> for more).</li>
+        <li><strong class="pname"><code>ptype</code></strong> - Protocol type enumeration for <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>; IPv4 by default.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SEND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SEND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.SEND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>SEND state; monitor traffic from upstream protocol and pass to
+routing algorithm.</p>
+<p>This state uses the 'net-src' and 'net-dst' annotations to determine the
+addresses of the source and destination. If not available, these values
+default to the local <a href="wins.protocol.net.NET-class.html#address" class="link">address</a> and <a href="wins.protocol.net.NET-class.html#broadcast" class="link">broadcast</a> address.</p>
+<p>This state then uses <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a> to determine which packet handler should
+process the new data packet, and spawns a new thread to run the handler.</p>
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Currently, IPv4 is the only protocol type supported. Non-IPv4
+packets are passed to <a href="wins.protocol.routing.Routing-class.html#ERRSEND" class="link">ERRSEND</a> for handling. Also, this state
+will check for loopback addresses and send them back to the upper
+layer protocol.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="ERRSEND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ERRSEND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.ERRSEND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>ERRSEND state; process packets for unknown <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a>.</p>
+<p>By default this method just raises an exception. Overload this state in
+subclasses to add support for new protocol types.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to send.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="IPSEND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPSEND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPSEND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IPSEND state; encapsulate packet using available routing info and
+pass to appropriate handler.</p>
+<p>This state uses <a href="wins.protocol.routing.Routing-class.html#hasroute" class="link">hasroute()</a> to determine if a route exists to the
+desired destination. If its known, transition to <a href="wins.protocol.routing.Routing-class.html#IPFORWARD" class="link">IPFORWARD</a>, otherwise
+go to <a href="wins.protocol.routing.Routing-class.html#IPROUTING" class="link">IPROUTING</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to send.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to <a href="wins.protocol.routing.Routing-class.html#encap_data" class="link">encap_data()</a>.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes an IPv4 protocol type is being used.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPFORWARD"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPFORWARD</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPFORWARD">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  IPFORWARD state; update packet as needed before passing to
+<a href="wins.protocol.routing.Routing-class.html#IPDELIVER" class="link">IPDELIVER</a>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - IP packet to send.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes a valid IPv4 packet was went to it.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPDELIVER"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPDELIVER</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">nexthop</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPDELIVER">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IPDELIVER state; deliver packet to lower layer.</p>
+<p>This state updates the 'net-src' and 'net-dst' annotations using the
+values of <a href="wins.protocol.net.NET-class.html#address" class="link">address</a> and <a href="wins.protocol.routing.Routing-class.html#nexthop" class="link">nexthop</a> respectively. Then the packet is sent
+to the lower layer (if the TTL has not expired).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - IP packet to send.</li>
+        <li><strong class="pname"><code>nexthop</code></strong> - Network address of next hop destination.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes a valid IPv4 packet was went to it.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPROUTING"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPROUTING</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPROUTING">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IPROUTING state; find route for packet.</p>
+<p><em>Overload this method to implement a routing protocol.</em></p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to send.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keyword arguments.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes a valid IPv4 packet was went to it.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="RECV"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RECV</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.RECV">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>RECV state; monitor traffic from lower layer.</p>
+<p>This state receives packets on <a href="wins.element.Port-class.html" class="link">Port</a> 'RXD'. It then uses <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a> to
+determine which packet handler should process the new data packet, and
+spawns a new thread to run the handler.</p>
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Currently, IPv4 is the only protocol type supported. Non-IPv4
+packets are passed to <a href="wins.protocol.routing.Routing-class.html#ERRRECV" class="link">ERRRECV</a> for handling.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="ERRRECV"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ERRRECV</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.ERRRECV">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>ERRRECV state; process packets for unknown <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a>.</p>
+<p>By default this method just raises an exception. Overload this method in
+subclass to add support for new protocol types.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IPRECV"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPRECV</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPRECV">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IPRECV state; error check and classify IP packet.</p>
+<p>This state uses <code class="link">isctrl()</code> and <code class="link">isdata()</code> to classify packets and send
+them to <code class="link">IPCTRL</code> or <code class="link">IPDATA</code> for handling.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Received packet.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state drops any non-IP packets.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="IPCLASSIFY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IPCLASSIFY</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.IPCLASSIFY">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IPCLASSIFY state; classify packet received in <a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a>.</p>
+<p><em>Overload to change how packets are classified and handled</em>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Received IP packet.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This state assumes that packet <code class="link">p</code> passed all validity checks in
+<a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a> (i.e. <a href="wins.protocol.routing.Routing-class.html#checkiprecv" class="link">checkiprecv()</a>).
+      </p>
+</div></td></tr></table>
+</div>
+<a name="set_sendanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_sendanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.set_sendanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set relevant annotations for outgoing packet.</p>
+<p>This method sets the 'net-src' and 'net-dst' annotations.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to modify.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_recvanno"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_recvanno</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.set_recvanno">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set relevant annotations for received data to upper layer.</p>
+<p>This method sets the 'net-src' and 'net-dst' annotations.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to modify.</li>
+        <li><strong class="pname"><code>src</code></strong> - Network address of source.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Network address of destination.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Modified packet.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="encap_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">encap_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">src</span>,
+        <span class="sig-arg">dst</span>,
+        <span class="sig-arg">force</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.encap_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Encapsulate data packet (if needed) for delivery to next hop.</p>
+<p>If <code class="link">p</code> is already an IP packet and <code class="link">force</code> is false, this method will
+update 'src', 'dst', and 'ttl' fields as needed. Otherwise, this method
+encapsulates <code class="link">p</code> with an IP header.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to deliver.</li>
+        <li><strong class="pname"><code>src</code></strong> - Source address.</li>
+        <li><strong class="pname"><code>dst</code></strong> - Destination address.</li>
+        <li><strong class="pname"><code>force</code></strong> - If true, force encapsulation into a new IP packet.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords passed to IP constructor.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Encapsulated/modified packet for delivery.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        By default this method assumes that <a href="wins.protocol.net.NET-class.html#ptype" class="link">ptype</a> indicates IPv4.
+<em>Overload this method to handle other protocol types</em>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="checkiprecv"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">checkiprecv</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">chksum</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">proto</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.checkiprecv">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Check for valid IP packet and errors.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet received in <a href="wins.protocol.routing.Routing-class.html#IPRECV" class="link">IPRECV</a>.</li>
+        <li><strong class="pname"><code>chksum</code></strong> - If true, check 'chksum' of <code class="link">p</code>.</li>
+        <li><strong class="pname"><code>proto</code></strong> - If true, check consistency of 'proto' field.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>String containing any error condition, or nothing for no error.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="updatechksum"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">updatechksum</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">overwrite</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.updatechksum">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Update checksum and len field of IP packet.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - IP packet to check.</li>
+        <li><strong class="pname"><code>overwrite</code></strong> - If true, overwrite the 'chksum' field of packet <code class="link">p</code>
+[default=True].</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Newly computed checksum.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getproto"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getproto</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.getproto">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convenience method to determine IPv4 protocol opcode for packet <code class="link">p</code>.</p>
+<p>By default, this method will return <a href="wins.const-module.html#IP_PROTO_NONE" class="link">const.IP_PROTO_NONE</a> if no valid
+payload can be found. Unidentifiable Packet types will be classified
+with the proto value <a href="wins.const-module.html#IP_PROTO_HOST" class="link">const.IP_PROTO_HOST</a>.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>IPv4 protocol opcode for <code class="link">p</code>; this can be used when
+encapsulating <code class="link">p</code> in an IPv4 packet.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">log</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">evt</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">p</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.routing-pysrc.html#Routing.log">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Overloaded to check verbose level and set common annotations.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.trace.Traceable-class.html#log">trace.Traceable.log</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="table"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">table</h3>
+  Property to access/modify <a href="wins.protocol.routetable.RouteTable-class.html" class="link">RouteTable</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">t</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:35 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

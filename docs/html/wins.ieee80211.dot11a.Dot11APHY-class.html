@@ -1,0 +1,1620 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.ieee80211.dot11a.Dot11APHY</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.ieee80211-module.html">Package&nbsp;ieee80211</a> ::
+        <a href="wins.ieee80211.dot11a-module.html">Module&nbsp;dot11a</a> ::
+        Class&nbsp;Dot11APHY
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Dot11APHY</h1><p class="nomargin-top"><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_dot11aphy" name="class_hierarchy_for_dot11aphy">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="41,5,124,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="28,61,137,88"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="23,117,143,144"/>
+<area shape="rect" href="wins.protocol.phy.PHY-class.html" title="protocol.phy.PHY" alt="" coords="21,173,144,200"/>
+<area shape="rect" href="wins.ieee80211.dot11a.Dot11APHY-class.html" title="Dot11APHY" alt="" coords="37,285,128,312"/>
+<area shape="rect" href="wins.protocol.csphy.CSPHY-class.html" title="protocol.csphy.CSPHY" alt="" coords="5,229,160,256"/>
+</map>
+  <img src="class_hierarchy_for_dot11aphy.gif" alt='' usemap="#class_hierarchy_for_dot11aphy" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Implementation of IEEE 802.11a physical layer protocol.</p>
+<div class="rst-section" id="rst-modulation-and-coding-parameters">
+<h1 class="heading">Modulation and Coding Parameters</h1>
+<p>The table below describes modulation and convolutional coding parameters for
+IEEE 802.11a.</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="19%" />
+<col width="22%" />
+<col width="21%" />
+<col width="10%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>Rate Index</td>
+<td>Data Rate</td>
+<td>Modulation</td>
+<td>Nbps</td>
+<td>M</td>
+<td>Code rate</td>
+</tr>
+<tr><td>0</td>
+<td>6 Mbps</td>
+<td>BPSK</td>
+<td>1</td>
+<td>2</td>
+<td>1/2</td>
+</tr>
+<tr><td>1</td>
+<td>9 Mbps</td>
+<td>BPSK</td>
+<td>1</td>
+<td>2</td>
+<td>3/4</td>
+</tr>
+<tr><td>2</td>
+<td>12 Mbps</td>
+<td>QPSK</td>
+<td>2</td>
+<td>4</td>
+<td>1/2</td>
+</tr>
+<tr><td>3</td>
+<td>18 Mbps</td>
+<td>QPSK</td>
+<td>2</td>
+<td>4</td>
+<td>3/4</td>
+</tr>
+<tr><td>4</td>
+<td>24 Mbps</td>
+<td>16-QAM</td>
+<td>4</td>
+<td>16</td>
+<td>1/2</td>
+</tr>
+<tr><td>5</td>
+<td>36 Mbps</td>
+<td>16-QAM</td>
+<td>4</td>
+<td>16</td>
+<td>3/4</td>
+</tr>
+<tr><td>6</td>
+<td>48 Mbps</td>
+<td>64-QAM</td>
+<td>6</td>
+<td>64</td>
+<td>2/3</td>
+</tr>
+<tr><td>7</td>
+<td>54 Mbps</td>
+<td>64-QAM</td>
+<td>6</td>
+<td>64</td>
+<td>3/4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="rst-section" id="rst-dot11aphy-and-ports">
+<h1 class="heading">Dot11APHY and Ports</h1>
+<p>Every <a href="wins.ieee80211.dot11a.Dot11APHY-class.html" class="link">Dot11APHY</a> has the following ports:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>&quot;TXU&quot; - sends decoded packets to an upstream element.</li>
+<li>&quot;RXU&quot; - receives traffic to send from an upstream element.</li>
+<li>&quot;TXD&quot; - sends encoded packets to a downstream element.</li>
+<li>&quot;RXD&quot; - receives traffic from a downstream element.</li>
+</ol>
+</blockquote>
+<p>The upstream element of a <a href="wins.ieee80211.dot11a.Dot11APHY-class.html" class="link">Dot11APHY</a> is usually a <a href="wins.protocol.csmac.CSMAC-class.html" class="link">CSMAC</a> (or subclass),
+and the downstream element is usually a <a href="wins.channel.interface.ChannelInterface-class.html" class="link">ChannelInterface</a> (or subclass).</p>
+</div>
+<div class="rst-section" id="rst-dot11aphy-and-annotations">
+<h1 class="heading">Dot11APHY and Annotations</h1>
+<p>This class uses/sets the following annotations:</p>
+<table border="1" class="rst-docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="rst-head">Name</th>
+<th class="rst-head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cif-txpower</td>
+<td>Power of transmitted packets (in dBm).</td>
+</tr>
+<tr><td>rate</td>
+<td>Rate index used to specify coding and modulation scheme.</td>
+</tr>
+<tr><td>cif-duration</td>
+<td>Duration of packet is marked on outgoing packets using
+the <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#duration" class="link">duration()</a> method during <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#SEND" class="link">SEND</a>.</td>
+</tr>
+<tr><td>cif-collision</td>
+<td>List of packets that arrived at the same time as the
+current packet (i.e. collided with the marked packet).</td>
+</tr>
+<tr><td>dot11a-detect</td>
+<td>Indicates whether or not the physical layer packet
+detection was successful (see <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#framedetect" class="link">framedetect()</a>).</td>
+</tr>
+<tr><td>dot11a-header</td>
+<td>Indicates whether or not the physical layer header
+decoding was successful (see <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode_header" class="link">decode_header()</a>).</td>
+</tr>
+<tr><td>dot11a-per</td>
+<td>Packet-error rate (PER) modeled by the physical layer
+(the <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode_header" class="link">decode_header()</a> will initially set this, but
+<code class="link">decode_data()</code> will overwrite it as necessary).</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        Rate index is used in Packets when referring to rate. Use
+DOT11A_DATARATE to convert this to a bitrate value.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">detectdelay</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Call <a href="wins.protocol.phy.PHY-class.html#configure" class="link">CSPHY.configure()</a>; add ports, <a href="wins.fsm.FSM-class.html" class="link">FSM</a>, and other members.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#connect" class="summary-sig-name">connect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">radio</span>)</span><br />
+      Convenience method to connect PHY to an RF front end (i.e. <a href="wins.channel.radio.Radio-class.html" class="link">Radio</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.connect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#duration" class="summary-sig-name">duration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">rate</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate duration of packet <code class="link">p</code> using <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcduration" class="link">calcduration()</a> method.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.duration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcper_header" class="summary-sig-name">calcper_header</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate probability of error for header decoding.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper_header">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcper_data" class="summary-sig-name">calcper_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate probability of error for data decoding.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcper" class="summary-sig-name">calcper</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">rate</span>,
+        <span class="summary-sig-arg">sinr</span>)</span><br />
+      Calculate packet-error rate for given parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#encode" class="summary-sig-name">encode</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">rate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">txpower</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Encapsulate MPDU in a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet; set annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.encode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#framedetect" class="summary-sig-name">framedetect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">thresh</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Apply packet detection model for detecting training sequence; based
+on signal-to-interference-and-noise ratio (SINR).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.framedetect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode_header" class="summary-sig-name">decode_header</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Apply physical layer model for header decoding.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.decode_header">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode" class="summary-sig-name">decode</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Apply physical layer model for decoding a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.decode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#sinr" class="summary-sig-name">sinr</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate signal-to-interference-and-noise ratio (SINR).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.sinr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#parity" class="summary-sig-name">parity</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Check parity of <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet header.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.parity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#SEND" class="summary-sig-name">SEND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      SEND state; simulate encoding and send process.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.SEND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="LISTEN"></a><span class="summary-sig-name">LISTEN</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>)</span><br />
+      LISTEN state; monitor <a href="wins.protocol.phy.PHY-class.html#radio" class="link">radio</a> and manage packet detection.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.LISTEN">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DECODE"></a><span class="summary-sig-name">DECODE</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>)</span><br />
+      DECODE state; monitor <a href="wins.protocol.phy.PHY-class.html#radio" class="link">radio</a> and manage packet decoding.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.DECODE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#DETECT" class="summary-sig-name">DETECT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fsm</span>,
+        <span class="summary-sig-arg">pkt</span>,
+        <span class="summary-sig-arg">thresh</span>=<span class="summary-sig-default">None</span>)</span><br />
+      DETECT state; simulate physical layer frame detection.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.DETECT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#get_valid_rates" class="summary-sig-name">get_valid_rates</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get list of rate enumerations supported by PHY.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.get_valid_rates">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#get_datarate" class="summary-sig-name">get_datarate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">r</span>)</span><br />
+      Get the data rate in bits-per-second (bps).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.get_datarate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_send"></a><span class="summary-sig-name">log_send</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging send event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.log_send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_recv"></a><span class="summary-sig-name">log_recv</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging receive event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.log_recv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_drop"></a><span class="summary-sig-name">log_drop</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method for logging drop event.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.log_drop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcduration" class="summary-sig-name">calcduration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">plen</span>,
+        <span class="summary-sig-arg">rate</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate duration of a packet of length <code class="link">plen</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcduration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcnofdm" class="summary-sig-name">calcnofdm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">plen</span>,
+        <span class="summary-sig-arg">rate</span>)</span><br />
+      Calculate the number of OFDM symbols in the data payload of a packet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcnofdm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.csphy.CSPHY-class.html">protocol.csphy.CSPHY</a></code></b>:
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#set_csbusy">set_csbusy</a></code>,
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#set_csidle">set_csidle</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.phy.PHY-class.html">protocol.phy.PHY</a></code></b>:
+      <code><a href="wins.protocol.phy.PHY-class.html#calclength">calclength</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#cleananno">cleananno</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#get_bandwidth">get_bandwidth</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#interval_heap">interval_heap</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#rxproctime">rxproctime</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#set_channelif">set_channelif</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#set_radio">set_radio</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#seterror">seterror</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#sinr_heap">sinr_heap</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#txproctime">txproctime</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#log">log</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'IEEE 802.11a'"><code class="variable-quote">'</code><code class="variable-string">IEEE 802.11a</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'80211A'"><code class="variable-quote">'</code><code class="variable-string">80211A</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.phy.PHY-class.html">protocol.phy.PHY</a></code></b>:
+      <code><a href="wins.protocol.phy.PHY-class.html#mtu">mtu</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="detectdelay"></a><span class="summary-name">detectdelay</span> = <code title="4e-06">4e-06</code><br />
+      : Duration required for packet detection.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="coder"></a><span class="summary-name">coder</span><br />
+      : <a href="wins.digital.rcpc.RCPC-class.html" class="link">RCPC</a>, child member for coding.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="detect"></a><span class="summary-name">detect</span><br />
+      : Internal SimEvent signalled when a packet is detected.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mod"></a><span class="summary-name">mod</span><br />
+      : <a href="wins.digital.mqam.MQAM-class.html" class="link">MQAM</a>, child member for modulation.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.csphy.CSPHY-class.html">protocol.csphy.CSPHY</a></code></b>:
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#csbusy">csbusy</a></code>,
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#csidle">csidle</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.csphy.CSPHY-class.html">protocol.csphy.CSPHY</a></code></b>:
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#csmode">csmode</a></code>,
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#isbusy">isbusy</a></code>,
+      <code><a href="wins.protocol.csphy.CSPHY-class.html#isidle">isidle</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.protocol.phy.PHY-class.html">protocol.phy.PHY</a></code></b>:
+      <code><a href="wins.protocol.phy.PHY-class.html#bandwidth">bandwidth</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#cif">cif</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#radio">radio</a></code>,
+      <code><a href="wins.protocol.phy.PHY-class.html#rate">rate</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Constructor.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>mtu</code></strong> - Maximum transmission unit.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">detectdelay</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Call <a href="wins.protocol.phy.PHY-class.html#configure" class="link">CSPHY.configure()</a>; add ports, <a href="wins.fsm.FSM-class.html" class="link">FSM</a>, and other members.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>kwargs</code></strong> - Optional keyword arguments passed from constructor.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="connect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">connect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">radio</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.connect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convenience method to connect PHY to an RF front end (i.e. <a href="wins.channel.radio.Radio-class.html" class="link">Radio</a>).</p>
+<p><strong>Overload this method to change how a connection is made.</strong></p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#connect">element.Element.connect</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method also calls <a href="wins.protocol.phy.PHY-class.html#set_radio" class="link">set_radio()</a> to set the appropriate
+pointer for the physical layer.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="duration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">duration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">rate</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.duration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate duration of packet <code class="link">p</code> using <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#calcduration" class="link">calcduration()</a> method.</p>
+<p>This method checks for the 'phy-rate' annotation, which is a rate index
+to denote the coding and modulation scheme to be used. If a 'phy-rate'
+annotation is not found (or specified as a parameter), this method uses
+the base rate (i.e. rate 0) to calculate the duration of the waveform.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to compute duration for (or packet length in bytes).</li>
+        <li><strong class="pname"><code>rate</code></strong> - Optional rate index to denote modulation/coding scheme.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Duration of packet in seconds.</dd>
+    <dt>Overrides:
+        <a href="wins.protocol.phy.PHY-class.html#duration">protocol.phy.PHY.duration</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calcper_header"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calcper_header</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper_header">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate probability of error for header decoding.</p>
+<p>This method sets the 'dot11a-sinr' and 'dot11a-per' annotations. The
+operation of this method depends on DOT11A_USE_PIECEWISE_PER.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet being decoded.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords arguments passed to <a href="wins.protocol.phy.PHY-class.html#sinr_heap" class="link">sinr_heap()</a>
+(or <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#sinr" class="link">sinr()</a>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>PER for header decoding.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calcper_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calcper_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate probability of error for data decoding.</p>
+<p>This method sets the 'dot11a-sinr' and 'dot11a-per' annotations. The
+operation of this method depends on DOT11A_USE_PIECEWISE_PER.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet being decoded.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keywords arguments passed to <a href="wins.protocol.phy.PHY-class.html#sinr_heap" class="link">sinr_heap()</a>
+(or <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#sinr" class="link">sinr()</a>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>PER for decoding packet payload.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calcper"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calcper</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">rate</span>,
+        <span class="sig-arg">sinr</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcper">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate packet-error rate for given parameters.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet or packet length in bytes.</li>
+        <li><strong class="pname"><code>rate</code></strong> - Rate enumeration to indicate modulation and coding scheme.</li>
+        <li><strong class="pname"><code>sinr</code></strong> - Signal-to-interference-and-noise ratio.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="encode"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">encode</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">rate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">txpower</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.encode">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Encapsulate MPDU in a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet; set annotations.</p>
+<dl class="rst-docutils">
+<dt>This method will make sure that the following annotations are set:</dt>
+<dd><ul class="rst-first rst-last rst-simple">
+<li>rate [default=0]</li>
+<li>txpower [default=`DOT11A_MAXPOWER`]</li>
+<li>duration [from <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#duration" class="link">duration()</a>]</li>
+</ul>
+</dd>
+</dl>
+<p>If the <a href="wins.protocol.phy.PHY-class.html#rate" class="link">rate</a> parameter is not specified and no 'phy-rate' annotation is
+found in packet <code class="link">p</code>, this method will use the base rate (i.e. zero) to
+encode packet <code class="link">p</code>.</p>
+<p>If the <code class="link">txpower</code> parameter is not specified and no 'cif-txpower'
+annotation is found in packet <code class="link">p</code>, this method will use
+DOT11A_MAXPOWER as the default transmit power.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - MPDU to encode.</li>
+        <li><strong class="pname"><code>rate</code></strong> - Optional rate index to denote modulation/coding scheme.</li>
+        <li><strong class="pname"><code>txpower</code></strong> - Optional transmit power (in dBm).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd><a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet with MPDU as payload.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="framedetect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">framedetect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">thresh</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.framedetect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply packet detection model for detecting training sequence; based
+on signal-to-interference-and-noise ratio (SINR).</p>
+<p>This method checks to make sure <code class="link">p</code> is a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet, and that the
+received SINR is greater than the receiver detection threshold <code class="link">thresh</code>.
+This method will also mark the 'dot11a-detect' annotation to indicate
+the success (or failure) of the frame detection.</p>
+<p><strong>Overload this method to change how frame detection works.</strong></p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet being received.</li>
+        <li><strong class="pname"><code>thresh</code></strong> - Packet detection SINR threshold (in dB)
+[default=`DOT11A_FDTHRESHOLD`].</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Boolean flag; if true, packet detection was successful.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        If <code class="link">p</code> is not a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet, this method will set the
+'dot11a-detect' annotation to false and return false.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="decode_header"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">decode_header</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.decode_header">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply physical layer model for header decoding.</p>
+<p>This method uses <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#mod" class="link">mod</a> and <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#coder" class="link">coder</a> to determine the error
+characteristics of the header decoding process. The following conditions
+must be met in order to have successful header decoding:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>packet <code class="link">p</code> must be a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet,</li>
+<li>the 'dot11a-detect' annotation must be true,</li>
+<li>the header decoding must succeed,</li>
+<li>and all header parameters must be valid.</li>
+</ul>
+</blockquote>
+<p>This method marks the 'dot11a-header' annotation to mark success (or
+reason for failure) of header decoding, and sets the 'dot11a-per'
+annotation to indicate the probability of error in decoding the header.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet being received.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Boolean flag; if true, header decoding was successful.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="decode"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">decode</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.decode">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply physical layer model for decoding a <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet.</p>
+<p>This method uses <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#mod" class="link">mod</a> and <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#coder" class="link">coder</a> to simulate packet errors. This
+method decodes the <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> header and then decodes the payload. If
+<a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode_header" class="link">decode_header()</a> fails, this method will return <code class="link">None</code> and skip payload
+decoding. Otherwise, this method will simulate errors and call
+<a href="wins.protocol.phy.PHY-class.html#seterror" class="link">seterror()</a> if any packet errors occur.</p>
+<p>This method also overwrites the 'dot11a-per' annotation with the packet
+error probability for the payload.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet to decode.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Decoded payload (or <code class="link">None</code> if header decoding fails).</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method will log a drop event if <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#decode_header" class="link">decode_header()</a> fails.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="sinr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sinr</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.sinr">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate signal-to-interference-and-noise ratio (SINR).</p>
+<p>This method uses the 'rxpower', 'noisepower', and 'cif-collision'
+annotations to calculate the SINR of the received packet p.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - Packet to compute SINR for.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Additional keyword arguments passed to <a href="wins.protocol.phy.PHY-class.html#sinr_heap" class="link">sinr_heap()</a>.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method sets the 'phy-sinr' annotation indicating the SINR (in dB).
+      </p>
+</div></td></tr></table>
+</div>
+<a name="parity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parity</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.parity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Check parity of <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet header.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p</code></strong> - <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Boolean; true if parity check passes.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        If DOT11A_USEPARITY is false, this method returns true.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="SEND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SEND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.SEND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>SEND state; simulate encoding and send process.</p>
+<p>This state performs the following tasks:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>Get packet from 'RXU' port.</li>
+<li>Call <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#encode" class="link">encode()</a> to generate waveform for outgoing packet.</li>
+<li>Mark 'cif-duration' annotation with value returned by <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#duration" class="link">duration()</a>.</li>
+<li>Simulate <a href="wins.protocol.phy.PHY-class.html#txproctime" class="link">txproctime</a> for outgoing packet.</li>
+<li>Send outgoing waveform to 'TXD'.</li>
+<li>Simulate <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#duration" class="link">duration</a> of waveform.</li>
+</ol>
+</blockquote>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="DETECT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">DETECT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fsm</span>,
+        <span class="sig-arg">pkt</span>,
+        <span class="sig-arg">thresh</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.DETECT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>DETECT state; simulate physical layer frame detection.</p>
+<p>This method signals the <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#detect" class="link">detect</a> SimEvent when <code class="link">pkt</code> is detected. Before
+calling <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#framedetect" class="link">framedetect()</a>, this state will pause for the packet detection
+duration <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#detectdelay" class="link">detectdelay</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pkt</code></strong> - <a href="wins.ieee80211.dot11a_support.Dot11A-class.html" class="link">Dot11A</a> packet being detected.</li>
+        <li><strong class="pname"><code>thresh</code></strong> - SINR threshold used by <a href="wins.ieee80211.dot11a.Dot11APHY-class.html#framedetect" class="link">framedetect()</a>.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Upon completion this state method sleeps the calling <a href="wins.fsm.FSM-class.html" class="link">FSM</a>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_valid_rates"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_valid_rates</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.get_valid_rates">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get list of rate enumerations supported by PHY.</p>
+<p>This method uses the PHY configuration to determine the list of valid
+rate enumerations supported by the PHY (i.e. <code class="link">ntx</code>).</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.protocol.phy.PHY-class.html#get_valid_rates">protocol.phy.PHY.get_valid_rates</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_datarate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_datarate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">r</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.get_datarate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the data rate in bits-per-second (bps).</p>
+<p>This method gets data rate from DOT11A_DATARATE.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>r</code></strong> - Rate enumeration.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.protocol.phy.PHY-class.html#get_datarate">protocol.phy.PHY.get_datarate</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calcduration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calcduration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">plen</span>,
+        <span class="sig-arg">rate</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcduration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate duration of a packet of length <code class="link">plen</code>.</p>
+<p>If <a href="wins.protocol.phy.PHY-class.html#rate" class="link">rate</a> is not specified this method will use the base rate (i.e. rate
+index 0) to calculate the duration of the waveform.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>plen</code></strong> - Packet length (in bytes).</li>
+        <li><strong class="pname"><code>rate</code></strong> - Optional rate index to denote modulation/coding scheme.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Duration of packet in seconds.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="calcnofdm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">calcnofdm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">plen</span>,
+        <span class="sig-arg">rate</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.ieee80211.dot11a-pysrc.html#Dot11APHY.calcnofdm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Calculate the number of OFDM symbols in the data payload of a packet.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>plen</code></strong> - Length of packet in bytes).</li>
+        <li><strong class="pname"><code>rate</code></strong> - Rate index to denote modulation/coding scheme.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Number of OFDM symbols in payload of 802.11n waveform.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:32 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=5;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR MCS SNR MODEL";
+  echo "  EXEC     - experiment executable"
+  echo "  DIR      - output directory"
+  echo "  MCS      - modulation/coding scheme"
+  echo "  SNR      - minimum SNR"
+  echo "  MODEL    - use model? -> 0 or 1"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+if [ $# -gt 1 ]; then
+  DIR=$2;
+  if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+else
+  DIR=$PWD;
+fi
+
+if [ $# -gt 2 ]; then
+  MCS=$3;
+else
+  MCS=0;
+fi
+
+if [ $# -gt 3 ]; then
+  SNR=$4;                     # minimum SNR
+else
+  SNR=30;
+fi
+
+if [ $# -gt 4 ]; then
+  MODEL=$5;                   # use model?
+else
+  MODEL=0;
+fi
+
+#######################################
+# Simulation parameters
+#######################################
+
+# simulation parameters
+VERBOSE=65            # ALOHA_VERBOSE=54, DOT11N_VERBOSE=64
+
+# experiment parameters
+NUMNODES=100
+NUMSLOTS=1000         # in number of frame-slots
+PACKETLEN=1480        # in bytes
+TFRAME="0.001876"     # corresponds to 1480 byte packet @ MCS 0
+#TFRAME="0.001352"     # corresponds to 1024 byte packet @ MCS 0
+#TFRAME="0.000144"     # corresponds to   40 byte packet @ MCS 0
+SIMTIME=`echo "scale=8; $NUMSLOTS*$TFRAME/($MCS + 1)"|bc`
+
+# topology parameters
+TOPOFILE=topo.dat
+
+# agent parameters
+RATE=1.0            # in packets/second   XXX IGNORED - see workload below XXX
+AGTMODE="poisson"   # traffic generation mode
+
+# NET parameters
+
+# PHY parameters
+FOMAX=0.0           # in ppm (default = 13.675)
+CFOCORRECTION="--disable-cfo-correction"  # enable CFO correction (yes -> "", no -> "--disable-cfo-correction")
+# -> optional PHY parameters
+if [ $MODEL -lt 1 ]; then
+  USEWAVEFORM="--use-waveform"          # enable waveform? (no -> "", yes -> "--use-waveform")
+else
+  USEWAVEFORM=""
+fi
+
+# Channel parameters
+ALPHA=2.0                               # pathloss exponent
+BIDIRECTIONAL=""                        # bidirectional (yes -> "--bidirectional-channel", no -> "")
+TGNMODEL="--tgn-model=D"                # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+USEDOPPLER=""                           # enable doppler filter (yes -> "--use-doppler", no -> "")
+USEFADING="--disable-fading"            # use fading (yes -> "", no -> "--disable-fading")
+ENVSPEED=1.2                            # (in km/hr) - only relevat when doppler is enabled
+
+#######################################
+# Independent Variables
+#   - use workload as independent variable (in transmissions/frame-time)
+#######################################
+runtests="0.2 0.4 0.6 0.8 1.0 1.3 1.6 1.9"
+#runtests="0.5 1.0 1.5 "
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+TESTEXEC=$EXEC
+if [ ! -x $TESTEXEC ]; then
+  echo "Cannot find executable $TESTEXEC";
+  exit 0;
+fi
+
+for g in $runtests; do
+  # simulation parameters
+  verbose="-v $VERBOSE"
+  simtime="-s `echo "scale=8; $SIMTIME"|bc`"
+  simargs="$simtime $verbose"
+
+  # experiment parameters
+  snr="--snr=$SNR"
+  numnodes="-n $NUMNODES"
+  workload="-G $g"
+  expargs="$snr $numnodes $workload"
+
+  # agent parameters
+  rate="-r $RATE"
+  plen="-l $PACKETLEN"
+  mode="--agent-mode $AGTMODE"
+  agtargs="$rate $plen $mode"
+
+  # network parameters
+  netargs=""
+
+  # PHY parameters
+  mcs="--mcs=$MCS"
+  fomax="--fomax=$FOMAX"
+  usewaveform=$USEWAVEFORM
+  cfocorrection=$CFOCORRECTION
+  phyargs="$mcs $fomax $usewaveform $cfocorrection";
+
+  # topology parameters
+  savetopo="--save-topo=$DIR/$TOPOFILE";
+  topoargs="$savetopo"
+
+  # channel parameters
+  alpha="--alpha=$ALPHA"
+  bidirectional="$BIDIRECTIONAL"
+  tgnmodel=$TGNMODEL
+  usedoppler=$USEDOPPLER
+  usefading=$USEFADING
+  envspeed="--environment-speed=$ENVSPEED"
+  chargs="$alpha $bidirectional $tgnmodel $usedoppler $usefading $envspeed";
+
+  # run simulation
+  args="$simargs $expargs $agtargs $netargs $phyargs $topoargs $chargs"
+  tracefile="trace-g$g.raw"
+  simexec="$TESTEXEC $args -o $DIR/$tracefile"
+  echo $simexec
+  $simexec
+done
+
+exit 0;

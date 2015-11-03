@@ -1,0 +1,178 @@
+#!  /bin/bash
+
+#######################################
+# Macros and Definitions
+#######################################
+MKDIR=`which mkdir`;
+PWD=`which pwd`;
+
+#######################################
+# Process arguments
+#######################################
+NARGS=5;    # min number of arguments
+print_usage() {
+  echo "usage: $0 EXEC DIR FADING SIMTIME MODEL [LIMIT]";
+  echo "  EXEC     - experiment executable"
+  echo "  DIR      - output directory"
+  echo "  FADING   - use fading? -> [0=nofade, 1=slow, 2=fast]"
+  echo "  SIMTIME  - simulation time (in sec)"
+  echo "  MODEL    - use model? -> 0 or 1"
+  echo "  [LIMIT]  - number of success per data point"
+}
+
+# check arguments
+if [ $# -lt $(( NARGS )) ]; then
+  echo "Insufficient arguments."
+  print_usage;
+  exit -1;
+fi
+
+EXEC=$1
+if [ ! -x $EXEC ]; then
+  echo "Could not find experiment executable $EXEC";
+  print_usage;
+  exit -1;
+fi
+
+DIR=$2;
+if [ ! -d $DIR ]; then $MKDIR -p $DIR; fi
+FADING=$3;                  # specify fading [0=nofade, 1=slow, 2=fast]
+SIMTIME=$4;                 # simulation time
+MODEL=$5;                   # use model?
+if [ $# -gt 5 ]; then
+  LIMIT=$6;                 # number of success per data point
+else
+  LIMIT=
+fi
+
+# Default Parameter Setting
+#DIR=$PWD;
+#FADING=0;
+#SIMTIME=10.0;
+#MODEL=0;
+#LIMIT=100;
+
+#######################################
+# Simulation parameters
+#######################################
+
+# simulation parameters
+VERBOSE=55          # DOT11_VERBOSE=53, DOT11N_VERBOSE=64
+CONSERVATIVE="--conservative"
+
+# agent parameters
+PACKETLEN=1480      # in bytes
+RATE=2.0            # in packets/second
+AGTMODE="BACKLOG"   # traffic generation mode
+
+# NET parameters
+
+# PHY parameters
+FOMAX=0.0           # in ppm (default = 13.675)
+CFOCORRECTION="--disable-cfo-correction"  # enable CFO correction (yes -> "", no -> "--disable-cfo-correction")
+# -> optional PHY parameters
+if [ $MODEL -lt 1 ]; then
+  USEWAVEFORM="--use-waveform"          # enable waveform? (no -> "", yes -> "--use-waveform")
+else
+  USEWAVEFORM=""
+fi
+
+# Channel parameters
+ALPHA=2.0                               # pathloss exponent
+BIDIRECTIONAL=""                        # bidirectional (yes -> "--bidirectional-channel", no -> "")
+TGNMODEL="--tgn-model=D"                # TGN model type (LOS -> "", TGn CM-A -> "--tgn-model=A")
+# -> optional channel parameters
+if [ $FADING -lt 1 ]; then
+  # No Fading
+  USEDOPPLER=""                         # enable doppler filter (yes -> "--use-doppler", no -> "")
+  ENVSPEED=1.2                          # (in km/hr) - only relevant when doppler is enabled
+  USEFADING="--disable-fading"          # use fading (yes -> "", no -> "--disable-fading")
+elif [ $FADING -lt 2 ]; then
+  # Slow Fading
+  USEDOPPLER="--use-doppler"
+  ENVSPEED=1.2
+  USEFADING=""
+else
+  # Fast Fading
+  USEDOPPLER="--use-doppler"
+  ENVSPEED=6.0
+  USEFADING=""
+fi
+
+#######################################
+# Independent Variables
+#   - use MCS as independent variable
+#######################################
+SNRSTEP=1.0
+SNRMIN=( 3 )
+SNRMAX=(38 )
+runtests="0 "
+
+#######################################
+# Run Simulation
+#   - output data and logs to $DIR
+#######################################
+
+# check experiment executable
+TESTEXEC=$EXEC
+if [ ! -x $TESTEXEC ]; then
+  echo "Cannot find executable $TESTEXEC";
+  exit 0;
+fi
+
+for k in $runtests; do
+  # simulation parameters
+  verbose="-v $VERBOSE"
+  simtime="-s $SIMTIME"
+  simargs="$simtime $verbose"
+
+  # experiment parameters
+  snrmin="--snrmin=${SNRMIN[k]}";
+  snrmax="--snrmax=${SNRMAX[k]}";
+  snrstep="--snrstep=$SNRSTEP";
+  if [ ! -z $LIMIT ]; then
+    limit="--limit=$LIMIT";
+  fi
+  conservative="$CONSERVATIVE"
+  expargs="$snrmin $snrmax $snrstep $limit $conservative"
+
+  # agent parameters
+  if [ ! -z $RATE ]; then
+    rate="-r $RATE"
+  fi
+  plen="-l $PACKETLEN"
+  mode="--agent-mode=$AGTMODE"
+  agtargs="$rate $plen $mode"
+
+  # network parameters
+  netargs=""
+
+  # PHY parameters
+  mcs="--mcs=$k"
+  fomax="--fomax=$FOMAX"
+  usewaveform=$USEWAVEFORM
+  cfocorrection=$CFOCORRECTION
+  phyargs="$mcs $fomax $usewaveform $cfocorrection";
+
+  # topology parameters
+  usetopo=""
+  topoargs="$usetopo"
+
+  # channel parameters
+  alpha="--alpha=$ALPHA"
+  bidirectional="$BIDIRECTIONAL"
+  tgnmodel=$TGNMODEL
+  usedoppler=$USEDOPPLER
+  usefading=$USEFADING
+  envspeed="--environment-speed=$ENVSPEED"
+  chargs="$alpha $bidirectional $tgnmodel $usedoppler $usefading $envspeed";
+
+  # run simulation
+  args="$simargs $expargs $agtargs $netargs $phyargs $topoargs $chargs"
+  tracefile="trace-rbar$k.raw"
+  simexec="$TESTEXEC $args -o $DIR/$tracefile"
+  echo $simexec
+  $simexec
+done
+
+exit 0;

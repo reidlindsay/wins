@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.helper</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        Module&nbsp;helper
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins.helper-module.html">Module wins.helper</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Helper classes and methods for `wins`.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009 The University of Texas at Austin</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">SimPy</tt><tt class="py-op">.</tt><tt class="py-name">Simulation</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Process</tt><tt class="py-op">,</tt> <tt class="py-name">SimEvent</tt><tt class="py-op">,</tt> <tt class="py-name">waitevent</tt><tt class="py-op">,</tt> <tt class="py-name">activate</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package wins=wins-module.html"><a title="wins" class="py-name" href="#" onclick="return doclink('link-0', 'wins', 'link-0');">wins</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module wins.const=wins.const-module.html"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-1', 'const', 'link-1');">const</a></tt> </tt>
+<a name="monitor_events"></a><div id="monitor_events-def"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="monitor_events-toggle" onclick="return toggle('monitor_events');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#monitor_events">monitor_events</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="monitor_events-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="monitor_events-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-docstring">"""Monitor event(s) to keep them up to date.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">    :param args: All arguments are SimEvents to wait on.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    :param kwargs: All keywords are passed to `activate()` Process that monitors</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">                   events in `args`.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    :return: Monitoring Process.</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">proc</tt> <tt class="py-op">=</tt> <tt class="py-name">Process</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name" targets="Variable wins.base.Base.name=wins.base.Base-class.html#name,Variable wins.channel.breakpoint.Breakpoint.name=wins.channel.breakpoint.Breakpoint-class.html#name,Variable wins.channel.channelbase.Channel.name=wins.channel.channelbase.Channel-class.html#name,Variable wins.channel.channelbase.ChannelModel.name=wins.channel.channelbase.ChannelModel-class.html#name,Variable wins.channel.interface.ChannelInterface.name=wins.channel.interface.ChannelInterface-class.html#name,Variable wins.channel.propagation.Propagation.name=wins.channel.propagation.Propagation-class.html#name,Variable wins.channel.radio.Radio.name=wins.channel.radio.Radio-class.html#name,Variable wins.channel.refprop.ReferencePropagation.name=wins.channel.refprop.ReferencePropagation-class.html#name,Variable wins.crc.CRC32.name=wins.crc.CRC32-class.html#name,Variable wins.digital.modulation.Modulation.name=wins.digital.modulation.Modulation-class.html#name,Variable wins.digital.mqam.MQAM.name=wins.digital.mqam.MQAM-class.html#name,Variable wins.digital.rcpc.RCPC.name=wins.digital.rcpc.RCPC-class.html#name,Variable wins.digital.reedsolomon.ReedSolomon.name=wins.digital.reedsolomon.ReedSolomon-class.html#name,Variable wins.element.Port.name=wins.element.Port-class.html#name,Variable wins.fsm.FSM.name=wins.fsm.FSM-class.html#name,Variable wins.fsm.Timer.name=wins.fsm.Timer-class.html#name,Variable wins.helper.PseudoIPv4.name=wins.helper.PseudoIPv4-class.html#name,Variable wins.ieee80211.dcf.DCF.name=wins.ieee80211.dcf.DCF-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Ack.name=wins.ieee80211.dot11_support.Dot11Ack-class.html#name,Variable wins.ieee80211.dot11_support.Dot11CTS.name=wins.ieee80211.dot11_support.Dot11CTS-class.html#name,Variable wins.ieee80211.dot11_support.Dot11Data.name=wins.ieee80211.dot11_support.Dot11Data-class.html#name,Variable wins.ieee80211.dot11_support.Dot11RTS.name=wins.ieee80211.dot11_support.Dot11RTS-class.html#name,Variable wins.ieee80211.dot11a.Dot11APHY.name=wins.ieee80211.dot11a.Dot11APHY-class.html#name,Variable wins.ieee80211.dot11a.Dot11ARadio.name=wins.ieee80211.dot11a.Dot11ARadio-class.html#name,Variable wins.ieee80211.dot11a_support.Dot11A.name=wins.ieee80211.dot11a_support.Dot11A-class.html#name,Variable wins.ieee80211.dot11n.Dot11NPHY.name=wins.ieee80211.dot11n.Dot11NPHY-class.html#name,Variable wins.ieee80211.dot11n.Dot11NRadio.name=wins.ieee80211.dot11n.Dot11NRadio-class.html#name,Variable wins.ieee80211.dot11n_channel.Dot11NChannel.name=wins.ieee80211.dot11n_channel.Dot11NChannel-class.html#name,Variable wins.ieee80211.dot11n_dsp.Dot11N_DSP.name=wins.ieee80211.dot11n_dsp.Dot11N_DSP-class.html#name,Variable wins.ieee80211.dot11n_support.Dot11N.name=wins.ieee80211.dot11n_support.Dot11N-class.html#name,Variable wins.ieee80211.navtimer.NAVTimer.name=wins.ieee80211.navtimer.NAVTimer-class.html#name,Variable wins.mac.arf.ARF.name=wins.mac.arf.ARF-class.html#name,Variable wins.mac.rateadaptation.RAI.name=wins.mac.rateadaptation.RAI-class.html#name,Variable wins.mac.rateadaptation.RateAdapt.name=wins.mac.rateadaptation.RateAdapt-class.html#name,Variable wins.mac.rbar.RBAR.name=wins.mac.rbar.RBAR-class.html#name,Variable wins.mac.rbar_support.Dot11RSH.name=wins.mac.rbar_support.Dot11RSH-class.html#name,Variable wins.mobile.motion.Motion.name=wins.mobile.motion.Motion-class.html#name,Variable wins.mobile.waypoint.RandomWaypoint.name=wins.mobile.waypoint.RandomWaypoint-class.html#name,Variable wins.net.dsr.DSR.name=wins.net.dsr.DSR-class.html#name,Variable wins.net.dsr_rreq.RouteRequestTable.name=wins.net.dsr_rreq.RouteRequestTable-class.html#name,Variable wins.net.dsr_support.DSRPacket.name=wins.net.dsr_support.DSRPacket-class.html#name,Variable wins.net.routecache.RouteCache.name=wins.net.routecache.RouteCache-class.html#name,Variable wins.protocol.aloha.Aloha.name=wins.protocol.aloha.Aloha-class.html#name,Variable wins.protocol.arp.ARP.name=wins.protocol.arp.ARP-class.html#name,Variable wins.protocol.arp_support.ARPReply.name=wins.protocol.arp_support.ARPReply-class.html#name,Variable wins.protocol.arp_support.ARPRequest.name=wins.protocol.arp_support.ARPRequest-class.html#name,Variable wins.protocol.csmac.CSMAC.name=wins.protocol.csmac.CSMAC-class.html#name,Variable wins.protocol.csphy.CSPHY.name=wins.protocol.csphy.CSPHY-class.html#name,Variable wins.protocol.mac.MAC.name=wins.protocol.mac.MAC-class.html#name,Variable wins.protocol.net.NET.name=wins.protocol.net.NET-class.html#name,Variable wins.protocol.phy.PHY.name=wins.protocol.phy.PHY-class.html#name,Variable wins.protocol.routetable.RouteTable.name=wins.protocol.routetable.RouteTable-class.html#name,Variable wins.protocol.routing.Routing.name=wins.protocol.routing.Routing-class.html#name,Variable wins.queue.Queue.name=wins.queue.Queue-class.html#name,Variable wins.trace.Trace.name=wins.trace.Trace-class.html#name,Variable wins.trace.Traceable.name=wins.trace.Traceable-class.html#name,Variable wins.traffic.agent.Agent.name=wins.traffic.agent.Agent-class.html#name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-2', 'name', 'link-2');">name</a></tt><tt class="py-op">=</tt><tt class="py-string">"monitor events"</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">activate</tt><tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Function wins.helper._monitor_events()=wins.helper-module.html#_monitor_events"><a title="wins.helper._monitor_events" class="py-name" href="#" onclick="return doclink('link-3', '_monitor_events', 'link-3');">_monitor_events</a></tt><tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">proc</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="_monitor_events"></a><div id="_monitor_events-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="_monitor_events-toggle" onclick="return toggle('_monitor_events');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#_monitor_events">_monitor_events</a><tt class="py-op">(</tt><tt class="py-param">proc</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_monitor_events-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_monitor_events-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-docstring">"""Internal process execution method (PEM) to monitor event(s)."""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">assert</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">,</tt> <tt class="py-name">Process</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> \ </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">           <tt class="py-string">"[monitor_events]: PEM must have Process as first argument!"</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">assert</tt> <tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt><tt class="py-name">SimEvent</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">args</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> \ </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">           <tt class="py-string">"[monitor_events]: PEM arguments must be SimEvents!"</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">proc</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable wins.channel.channelbase.ChannelModel.active=wins.channel.channelbase.ChannelModel-class.html#active"><a title="wins.channel.channelbase.ChannelModel.active" class="py-name" href="#" onclick="return doclink('link-4', 'active', 'link-4');">active</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">&lt;</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt class="py-keyword">yield</tt> <tt class="py-name">waitevent</tt><tt class="py-op">,</tt> <tt class="py-name">proc</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt>           <tt class="py-keyword">yield</tt> <tt class="py-name">waitevent</tt><tt class="py-op">,</tt> <tt class="py-name">proc</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="isnum"></a><div id="isnum-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="isnum-toggle" onclick="return toggle('isnum');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#isnum">isnum</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="isnum-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="isnum-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-docstring">"""Check if an object is a float or int."""</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-name">num</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-name">num</tt> <tt class="py-op">=</tt> <tt class="py-name">num</tt> <tt class="py-keyword">or</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">num</tt> <tt class="py-op">=</tt> <tt class="py-name">num</tt> <tt class="py-keyword">or</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">float</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">num</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">misc</tt> <tt class="py-keyword">import</tt> <tt class="py-name">comb</tt> </tt>
+<a name="nchoosek"></a><div id="nchoosek-def"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="nchoosek-toggle" onclick="return toggle('nchoosek');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#nchoosek">nchoosek</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="nchoosek-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="nchoosek-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-docstring">"""Wrapper for combinatorial function (i.e. n choose k)."""</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">comb</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="linear2db"></a><div id="linear2db-def"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="linear2db-toggle" onclick="return toggle('linear2db');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#linear2db">linear2db</a><tt class="py-op">(</tt><tt class="py-param">xlinear</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="linear2db-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="linear2db-expanded"><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert a linear value to decibels.</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    :param xlinear: Value(s) in linear scale.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    :returns: 10*log10(`xlinear`)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-name">yval</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-name">xval</tt> <tt class="py-op">=</tt> <tt class="py-name">xlinear</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-name">isiter</tt> <tt class="py-op">=</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">xlinear</tt><tt class="py-op">,</tt> <tt class="py-string">'__iter__'</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isiter</tt><tt class="py-op">:</tt> <tt class="py-name">xval</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">xlinear</tt><tt class="py-op">]</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xval</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt>   <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">&gt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-number">10</tt><tt class="py-op">*</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">&lt;</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">nan</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">inf</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">yval</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method wins.backend.waveform.vectorc.append()=wins.backend.waveform.vectorc-class.html#append,Method wins.backend.waveform.vectori.append()=wins.backend.waveform.vectori-class.html#append"><a title="wins.backend.waveform.vectorc.append
+wins.backend.waveform.vectori.append" class="py-name" href="#" onclick="return doclink('link-5', 'append', 'link-5');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">yval</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isiter</tt><tt class="py-op">:</tt> <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">yval</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">y</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="db2linear"></a><div id="db2linear-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="db2linear-toggle" onclick="return toggle('db2linear');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#db2linear">db2linear</a><tt class="py-op">(</tt><tt class="py-param">xdb</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="db2linear-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="db2linear-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert a decibel value to a linear scale.</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">    :param xdb: Value(s) in decibels.</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">    :returns: 10^(`xdb`/10)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">10.0</tt><tt class="py-op">**</tt><tt class="py-op">(</tt><tt class="py-name">xdb</tt><tt class="py-op">/</tt><tt class="py-number">10.0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="time2usec"></a><div id="time2usec-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="time2usec-toggle" onclick="return toggle('time2usec');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#time2usec">time2usec</a><tt class="py-op">(</tt><tt class="py-param">t</tt><tt class="py-op">,</tt> <tt class="py-param">fmt</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="time2usec-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="time2usec-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert a float time into a readable time in microseconds.</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">    :param t: Time value.</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">    :param fmt: Optional format string [default="%.4f"].</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    :return: Formatted string representation of time in microseconds.</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">fmt</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">fmt</tt><tt class="py-op">=</tt> <tt class="py-string">"%.2f"</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">exec</tt><tt class="py-op">(</tt><tt class="py-string">"s = \"%s usec\"%%(t*1e6)"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">fmt</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="time2msec"></a><div id="time2msec-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="time2msec-toggle" onclick="return toggle('time2msec');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper-module.html#time2msec">time2msec</a><tt class="py-op">(</tt><tt class="py-param">t</tt><tt class="py-op">,</tt> <tt class="py-param">fmt</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="time2msec-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="time2msec-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert a float time into a readable time in milliseconds.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    :param t: Time value.</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    :param fmt: Optional format string [default="%.4f"].</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    :return: Formatted string representation of time in milliseconds.</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">fmt</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">fmt</tt><tt class="py-op">=</tt> <tt class="py-string">"%.3f"</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-keyword">exec</tt><tt class="py-op">(</tt><tt class="py-string">"s = \"%s msec\"%%(t*1e3)"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">fmt</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">scapy</tt><tt class="py-op">.</tt><tt class="py-name">all</tt> <tt class="py-keyword">import</tt> <tt class="py-name">IP</tt><tt class="py-op">,</tt> <tt class="py-name">ICMP</tt><tt class="py-op">,</tt> <tt class="py-name">TCP</tt><tt class="py-op">,</tt> <tt class="py-name">UDP</tt><tt class="py-op">,</tt> <tt class="py-name">ByteField</tt><tt class="py-op">,</tt> <tt class="py-name">bind_layers</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">struct</tt> </tt>
+<a name="PseudoIPv4"></a><div id="PseudoIPv4-def"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="PseudoIPv4-toggle" onclick="return toggle('PseudoIPv4');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="wins.helper.PseudoIPv4-class.html">PseudoIPv4</a><tt class="py-op">(</tt><tt class="py-base-class">IP</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PseudoIPv4-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PseudoIPv4-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-docstring">"""Pseudo header that mimics IPv4 header for computing checksum in transport</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    layer protocols (i.e. UDP and TCP)."""</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt id="link-6" class="py-name"><a title="wins.base.Base.name
+wins.channel.breakpoint.Breakpoint.name
+wins.channel.channelbase.Channel.name
+wins.channel.channelbase.ChannelModel.name
+wins.channel.interface.ChannelInterface.name
+wins.channel.propagation.Propagation.name
+wins.channel.radio.Radio.name
+wins.channel.refprop.ReferencePropagation.name
+wins.crc.CRC32.name
+wins.digital.modulation.Modulation.name
+wins.digital.mqam.MQAM.name
+wins.digital.rcpc.RCPC.name
+wins.digital.reedsolomon.ReedSolomon.name
+wins.element.Port.name
+wins.fsm.FSM.name
+wins.fsm.Timer.name
+wins.helper.PseudoIPv4.name
+wins.ieee80211.dcf.DCF.name
+wins.ieee80211.dot11_support.Dot11Ack.name
+wins.ieee80211.dot11_support.Dot11CTS.name
+wins.ieee80211.dot11_support.Dot11Data.name
+wins.ieee80211.dot11_support.Dot11RTS.name
+wins.ieee80211.dot11a.Dot11APHY.name
+wins.ieee80211.dot11a.Dot11ARadio.name
+wins.ieee80211.dot11a_support.Dot11A.name
+wins.ieee80211.dot11n.Dot11NPHY.name
+wins.ieee80211.dot11n.Dot11NRadio.name
+wins.ieee80211.dot11n_channel.Dot11NChannel.name
+wins.ieee80211.dot11n_dsp.Dot11N_DSP.name
+wins.ieee80211.dot11n_support.Dot11N.name
+wins.ieee80211.navtimer.NAVTimer.name
+wins.mac.arf.ARF.name
+wins.mac.rateadaptation.RAI.name
+wins.mac.rateadaptation.RateAdapt.name
+wins.mac.rbar.RBAR.name
+wins.mac.rbar_support.Dot11RSH.name
+wins.mobile.motion.Motion.name
+wins.mobile.waypoint.RandomWaypoint.name
+wins.net.dsr.DSR.name
+wins.net.dsr_rreq.RouteRequestTable.name
+wins.net.dsr_support.DSRPacket.name
+wins.net.routecache.RouteCache.name
+wins.protocol.aloha.Aloha.name
+wins.protocol.arp.ARP.name
+wins.protocol.arp_support.ARPReply.name
+wins.protocol.arp_support.ARPRequest.name
+wins.protocol.csmac.CSMAC.name
+wins.protocol.csphy.CSPHY.name
+wins.protocol.mac.MAC.name
+wins.protocol.net.NET.name
+wins.protocol.phy.PHY.name
+wins.protocol.routetable.RouteTable.name
+wins.protocol.routing.Routing.name
+wins.queue.Queue.name
+wins.trace.Trace.name
+wins.trace.Traceable.name
+wins.traffic.agent.Agent.name" class="py-name" href="#" onclick="return doclink('link-6', 'name', 'link-2');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"PseudoIPv4"</tt> </tt>
+<a name="PseudoIPv4.post_build"></a><div id="PseudoIPv4.post_build-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="PseudoIPv4.post_build-toggle" onclick="return toggle('PseudoIPv4.post_build');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper.PseudoIPv4-class.html#post_build">post_build</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-param">pay</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PseudoIPv4.post_build-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PseudoIPv4.post_build-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">p</tt> <tt class="py-op">+=</tt> <tt class="py-name">pay</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">len</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">l</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">10</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">struct</tt><tt class="py-op">.</tt><tt class="py-name">pack</tt><tt class="py-op">(</tt><tt class="py-string">"!H"</tt><tt class="py-op">,</tt> <tt class="py-name">l</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-number">12</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">p</tt><tt class="py-op">+</tt><tt class="py-name">pay</tt> </tt>
+</div><a name="PseudoIPv4.extract_padding"></a><div id="PseudoIPv4.extract_padding-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="PseudoIPv4.extract_padding-toggle" onclick="return toggle('PseudoIPv4.extract_padding');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper.PseudoIPv4-class.html#extract_padding">extract_padding</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PseudoIPv4.extract_padding-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PseudoIPv4.extract_padding-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-docstring">"""Seperate header and payload."""</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">len</tt> <tt class="py-op">-</tt> <tt class="py-number">12</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">l</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-name">l</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+</div><a name="PseudoIPv4.mysummary"></a><div id="PseudoIPv4.mysummary-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="PseudoIPv4.mysummary-toggle" onclick="return toggle('PseudoIPv4.mysummary');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper.PseudoIPv4-class.html#mysummary">mysummary</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PseudoIPv4.mysummary-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PseudoIPv4.mysummary-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create readable summary string."""</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sprintf</tt><tt class="py-op">(</tt><tt class="py-string">"%PseudoIPv4.src% &gt; %PseudoIPv4.dst% %PseudoIPv4.proto%"</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="PseudoIPv4._init_fields_desc"></a><div id="PseudoIPv4._init_fields_desc-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="PseudoIPv4._init_fields_desc-toggle" onclick="return toggle('PseudoIPv4._init_fields_desc');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="wins.helper.PseudoIPv4-class.html#_init_fields_desc">_init_fields_desc</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PseudoIPv4._init_fields_desc-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PseudoIPv4._init_fields_desc-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-docstring">"""Internal method to initialize `PseudoIPv4.fields_desc`; this removes</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        unnecessary fields from the header."""</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Class wins.helper.PseudoIPv4=wins.helper.PseudoIPv4-class.html"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-7', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Variable wins.crc.CRC32.fields_desc=wins.crc.CRC32-class.html#fields_desc,Variable wins.helper.PseudoIPv4.fields_desc=wins.helper.PseudoIPv4-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11Ack.fields_desc=wins.ieee80211.dot11_support.Dot11Ack-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11CTS.fields_desc=wins.ieee80211.dot11_support.Dot11CTS-class.html#fields_desc,Variable wins.ieee80211.dot11_support.Dot11RTS.fields_desc=wins.ieee80211.dot11_support.Dot11RTS-class.html#fields_desc,Variable wins.ieee80211.dot11a_support.Dot11A.fields_desc=wins.ieee80211.dot11a_support.Dot11A-class.html#fields_desc,Variable wins.ieee80211.dot11n_support.Dot11N.fields_desc=wins.ieee80211.dot11n_support.Dot11N-class.html#fields_desc,Variable wins.mac.rateadaptation.RAI.fields_desc=wins.mac.rateadaptation.RAI-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT.fields_desc=wins.net.dsr_support.DSROPT-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_ACK.fields_desc=wins.net.dsr_support.DSROPT_ACK-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_ACKREQ.fields_desc=wins.net.dsr_support.DSROPT_ACKREQ-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RERR.fields_desc=wins.net.dsr_support.DSROPT_RERR-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RREP.fields_desc=wins.net.dsr_support.DSROPT_RREP-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_RREQ.fields_desc=wins.net.dsr_support.DSROPT_RREQ-class.html#fields_desc,Variable wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc=wins.net.dsr_support.DSROPT_SRCROUTE-class.html#fields_desc,Variable wins.net.dsr_support.DSRPacket.fields_desc=wins.net.dsr_support.DSRPacket-class.html#fields_desc,Variable wins.net.dsr_support._DSROPT_HDR.fields_desc=wins.net.dsr_support._DSROPT_HDR-class.html#fields_desc,Variable wins.packet.ANNO.fields_desc=wins.packet.ANNO-class.html#fields_desc,Variable wins.traffic.agent.AGT.fields_desc=wins.traffic.agent.AGT-class.html#fields_desc"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-8', 'fields_desc', 'link-8');">fields_desc</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">IP</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-9', 'fields_desc', 'link-8');">fields_desc</a></tt><tt class="py-op">[</tt><tt class="py-number">10</tt><tt class="py-op">]</tt><tt class="py-op">,</tt>       <tt class="py-comment"># src   \</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">                                  <tt class="py-name">IP</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-10', 'fields_desc', 'link-8');">fields_desc</a></tt><tt class="py-op">[</tt><tt class="py-number">11</tt><tt class="py-op">]</tt><tt class="py-op">,</tt>       <tt class="py-comment"># dst   \</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                                  <tt class="py-name">ByteField</tt><tt class="py-op">(</tt><tt class="py-string">"zero"</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt>     <tt class="py-comment"># zero  \</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                                  <tt class="py-name">IP</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-11', 'fields_desc', 'link-8');">fields_desc</a></tt><tt class="py-op">[</tt><tt class="py-number">8</tt><tt class="py-op">]</tt><tt class="py-op">,</tt>        <tt class="py-comment"># proto \</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                                  <tt class="py-name">IP</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="wins.crc.CRC32.fields_desc
+wins.helper.PseudoIPv4.fields_desc
+wins.ieee80211.dot11_support.Dot11Ack.fields_desc
+wins.ieee80211.dot11_support.Dot11CTS.fields_desc
+wins.ieee80211.dot11_support.Dot11RTS.fields_desc
+wins.ieee80211.dot11a_support.Dot11A.fields_desc
+wins.ieee80211.dot11n_support.Dot11N.fields_desc
+wins.mac.rateadaptation.RAI.fields_desc
+wins.net.dsr_support.DSROPT.fields_desc
+wins.net.dsr_support.DSROPT_ACK.fields_desc
+wins.net.dsr_support.DSROPT_ACKREQ.fields_desc
+wins.net.dsr_support.DSROPT_RERR.fields_desc
+wins.net.dsr_support.DSROPT_RREP.fields_desc
+wins.net.dsr_support.DSROPT_RREQ.fields_desc
+wins.net.dsr_support.DSROPT_SRCROUTE.fields_desc
+wins.net.dsr_support.DSRPacket.fields_desc
+wins.net.dsr_support._DSROPT_HDR.fields_desc
+wins.packet.ANNO.fields_desc
+wins.traffic.agent.AGT.fields_desc" class="py-name" href="#" onclick="return doclink('link-12', 'fields_desc', 'link-8');">fields_desc</a></tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> <tt class="py-op">]</tt>       <tt class="py-comment"># len</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">bind_layers</tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-13', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">,</tt> <tt class="py-name">IP</tt><tt class="py-op">,</tt>   <tt class="py-name">proto</tt><tt class="py-op">=</tt><tt id="link-14" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-14', 'const', 'link-1');">const</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable wins.const.IP_PROTO_IP=wins.const-module.html#IP_PROTO_IP"><a title="wins.const.IP_PROTO_IP" class="py-name" href="#" onclick="return doclink('link-15', 'IP_PROTO_IP', 'link-15');">IP_PROTO_IP</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-name">bind_layers</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-16', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">,</tt> <tt class="py-name">ICMP</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">=</tt><tt id="link-17" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-17', 'const', 'link-1');">const</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable wins.const.IP_PROTO_ICMP=wins.const-module.html#IP_PROTO_ICMP"><a title="wins.const.IP_PROTO_ICMP" class="py-name" href="#" onclick="return doclink('link-18', 'IP_PROTO_ICMP', 'link-18');">IP_PROTO_ICMP</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">bind_layers</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-19', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">,</tt> <tt class="py-name">TCP</tt><tt class="py-op">,</tt>  <tt class="py-name">proto</tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-20', 'const', 'link-1');">const</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Variable wins.const.IP_PROTO_TCP=wins.const-module.html#IP_PROTO_TCP"><a title="wins.const.IP_PROTO_TCP" class="py-name" href="#" onclick="return doclink('link-21', 'IP_PROTO_TCP', 'link-21');">IP_PROTO_TCP</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-name">bind_layers</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-22', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">,</tt> <tt class="py-name">UDP</tt><tt class="py-op">,</tt>  <tt class="py-name">proto</tt><tt class="py-op">=</tt><tt id="link-23" class="py-name"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-23', 'const', 'link-1');">const</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Variable wins.const.IP_PROTO_UDP=wins.const-module.html#IP_PROTO_UDP"><a title="wins.const.IP_PROTO_UDP" class="py-name" href="#" onclick="return doclink('link-24', 'IP_PROTO_UDP', 'link-24');">IP_PROTO_UDP</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt id="link-25" class="py-name"><a title="wins.helper.PseudoIPv4" class="py-name" href="#" onclick="return doclink('link-25', 'PseudoIPv4', 'link-7');">PseudoIPv4</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Static Method wins.helper.PseudoIPv4._init_fields_desc()=wins.helper.PseudoIPv4-class.html#_init_fields_desc,Static Method wins.ieee80211.dot11_support.Dot11Ack._init_fields_desc()=wins.ieee80211.dot11_support.Dot11Ack-class.html#_init_fields_desc,Static Method wins.ieee80211.dot11_support.Dot11CTS._init_fields_desc()=wins.ieee80211.dot11_support.Dot11CTS-class.html#_init_fields_desc,Static Method wins.ieee80211.dot11_support.Dot11RTS._init_fields_desc()=wins.ieee80211.dot11_support.Dot11RTS-class.html#_init_fields_desc"><a title="wins.helper.PseudoIPv4._init_fields_desc
+wins.ieee80211.dot11_support.Dot11Ack._init_fields_desc
+wins.ieee80211.dot11_support.Dot11CTS._init_fields_desc
+wins.ieee80211.dot11_support.Dot11RTS._init_fields_desc" class="py-name" href="#" onclick="return doclink('link-26', '_init_fields_desc', 'link-26');">_init_fields_desc</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:37 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

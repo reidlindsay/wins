@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;wins
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins-module.html">Package wins</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">**WiNS**: Wi-reless N-etwork S-imulator.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">The `wins` package is a network simulator built on top of the event-driven</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">simulation environment of SimPy_. The emphasis of this design is on flexibly</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">modeling the wireless channel and the network, MAC, and PHY layers. The</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">simulator will be used to investigate cooperative communication and cross-layer</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">design.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">Dependencies:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">    * Python_ &gt;= 2.4.4 (not version 3.0)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    * SimPy_ &gt;= 1.8</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    * Numpy_ &gt;= 1.0.4</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    * NetworkX_ &gt;= 0.99</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">.. _Python: http://www.python.org</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">.. _SimPy : http://simpy.sourceforge.net/</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">.. _Numpy : http://numpy.scipy.org</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">.. _NetworkX : http://networkx.lanl.gov/</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009 The University of Texas at Austin</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-name">__version__</tt>   <tt class="py-op">=</tt> <tt class="py-number">0.1</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-comment"># import from main module</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module wins.const=wins.const-module.html"><a title="wins.const" class="py-name" href="#" onclick="return doclink('link-0', 'const', 'link-0');">const</a></tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module wins.helper=wins.helper-module.html"><a title="wins.helper" class="py-name" href="#" onclick="return doclink('link-1', 'helper', 'link-1');">helper</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module wins.base=wins.base-module.html,Variable wins.mac.arf.ARF.base=wins.mac.arf.ARF-class.html#base,Variable wins.mac.rbar.RBAR.base=wins.mac.rbar.RBAR-class.html#base"><a title="wins.base
+wins.mac.arf.ARF.base
+wins.mac.rbar.RBAR.base" class="py-name" href="#" onclick="return doclink('link-2', 'base', 'link-2');">base</a></tt>   <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class wins.base.Base=wins.base.Base-class.html"><a title="wins.base.Base" class="py-name" href="#" onclick="return doclink('link-3', 'Base', 'link-3');">Base</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class wins.base.Reference=wins.base.Reference-class.html"><a title="wins.base.Reference" class="py-name" href="#" onclick="return doclink('link-4', 'Reference', 'link-4');">Reference</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name" targets="Module wins.trace=wins.trace-module.html,Variable wins.trace.Traceable.trace=wins.trace.Traceable-class.html#trace"><a title="wins.trace
+wins.trace.Traceable.trace" class="py-name" href="#" onclick="return doclink('link-5', 'trace', 'link-5');">trace</a></tt>  <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class wins.trace.Trace=wins.trace.Trace-class.html"><a title="wins.trace.Trace" class="py-name" href="#" onclick="return doclink('link-6', 'Trace', 'link-6');">Trace</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class wins.trace.Traceable=wins.trace.Traceable-class.html"><a title="wins.trace.Traceable" class="py-name" href="#" onclick="return doclink('link-7', 'Traceable', 'link-7');">Traceable</a></tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Module wins.fsm=wins.fsm-module.html"><a title="wins.fsm" class="py-name" href="#" onclick="return doclink('link-8', 'fsm', 'link-8');">fsm</a></tt>    <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class wins.fsm.FSM=wins.fsm.FSM-class.html"><a title="wins.fsm.FSM" class="py-name" href="#" onclick="return doclink('link-9', 'FSM', 'link-9');">FSM</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Class wins.fsm.Timer=wins.fsm.Timer-class.html"><a title="wins.fsm.Timer" class="py-name" href="#" onclick="return doclink('link-10', 'Timer', 'link-10');">Timer</a></tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name" targets="Module wins.packet=wins.packet-module.html"><a title="wins.packet" class="py-name" href="#" onclick="return doclink('link-11', 'packet', 'link-11');">packet</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Packet</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Class wins.packet.ANNO=wins.packet.ANNO-class.html"><a title="wins.packet.ANNO" class="py-name" href="#" onclick="return doclink('link-12', 'ANNO', 'link-12');">ANNO</a></tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name" targets="Class wins.packet.HiddenField=wins.packet.HiddenField-class.html"><a title="wins.packet.HiddenField" class="py-name" href="#" onclick="return doclink('link-13', 'HiddenField', 'link-13');">HiddenField</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Class wins.packet.FuncField=wins.packet.FuncField-class.html"><a title="wins.packet.FuncField" class="py-name" href="#" onclick="return doclink('link-14', 'FuncField', 'link-14');">FuncField</a></tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-15" class="py-name" targets="Module wins.queue=wins.queue-module.html"><a title="wins.queue" class="py-name" href="#" onclick="return doclink('link-15', 'queue', 'link-15');">queue</a></tt>  <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class wins.queue.Queue=wins.queue.Queue-class.html"><a title="wins.queue.Queue" class="py-name" href="#" onclick="return doclink('link-16', 'Queue', 'link-16');">Queue</a></tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-17" class="py-name" targets="Module wins.element=wins.element-module.html"><a title="wins.element" class="py-name" href="#" onclick="return doclink('link-17', 'element', 'link-17');">element</a></tt> <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name" targets="Class wins.element.Port=wins.element.Port-class.html"><a title="wins.element.Port" class="py-name" href="#" onclick="return doclink('link-18', 'Port', 'link-18');">Port</a></tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name" targets="Class wins.element.Element=wins.element.Element-class.html"><a title="wins.element.Element" class="py-name" href="#" onclick="return doclink('link-19', 'Element', 'link-19');">Element</a></tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-20" class="py-name" targets="Module wins.backend.crc=wins.backend.crc-module.html,Module wins.crc=wins.crc-module.html"><a title="wins.backend.crc
+wins.crc" class="py-name" href="#" onclick="return doclink('link-20', 'crc', 'link-20');">crc</a></tt>    <tt class="py-keyword">import</tt> <tt id="link-21" class="py-name" targets="Class wins.crc.CRC32=wins.crc.CRC32-class.html"><a title="wins.crc.CRC32" class="py-name" href="#" onclick="return doclink('link-21', 'CRC32', 'link-21');">CRC32</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Function wins.crc.crcupdate()=wins.crc-module.html#crcupdate"><a title="wins.crc.crcupdate" class="py-name" href="#" onclick="return doclink('link-22', 'crcupdate', 'link-22');">crcupdate</a></tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name" targets="Function wins.crc.crcremove()=wins.crc-module.html#crcremove"><a title="wins.crc.crcremove" class="py-name" href="#" onclick="return doclink('link-23', 'crcremove', 'link-23');">crcremove</a></tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-comment"># import other modules</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-24" class="py-name" targets="Package wins.util=wins.util-module.html"><a title="wins.util" class="py-name" href="#" onclick="return doclink('link-24', 'util', 'link-24');">util</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-25" class="py-name" targets="Package wins.mobile=wins.mobile-module.html"><a title="wins.mobile" class="py-name" href="#" onclick="return doclink('link-25', 'mobile', 'link-25');">mobile</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-26" class="py-name" targets="Package wins.channel=wins.channel-module.html"><a title="wins.channel" class="py-name" href="#" onclick="return doclink('link-26', 'channel', 'link-26');">channel</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-27" class="py-name" targets="Package wins.digital=wins.digital-module.html"><a title="wins.digital" class="py-name" href="#" onclick="return doclink('link-27', 'digital', 'link-27');">digital</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-28" class="py-name" targets="Package wins.protocol=wins.protocol-module.html"><a title="wins.protocol" class="py-name" href="#" onclick="return doclink('link-28', 'protocol', 'link-28');">protocol</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-29" class="py-name" targets="Package wins.ieee80211=wins.ieee80211-module.html"><a title="wins.ieee80211" class="py-name" href="#" onclick="return doclink('link-29', 'ieee80211', 'link-29');">ieee80211</a></tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-30" class="py-name" targets="Package wins.mac=wins.mac-module.html,Variable wins.net.dsr.DSR.mac=wins.net.dsr.DSR-class.html#mac,Module wins.protocol.mac=wins.protocol.mac-module.html,Variable wins.traffic.agent.Agent.mac=wins.traffic.agent.Agent-class.html#mac"><a title="wins.mac
+wins.net.dsr.DSR.mac
+wins.protocol.mac
+wins.traffic.agent.Agent.mac" class="py-name" href="#" onclick="return doclink('link-30', 'mac', 'link-30');">mac</a></tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-31" class="py-name" targets="Package wins.net=wins.net-module.html,Module wins.protocol.net=wins.protocol.net-module.html"><a title="wins.net
+wins.protocol.net" class="py-name" href="#" onclick="return doclink('link-31', 'net', 'link-31');">net</a></tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-32" class="py-name" targets="Package wins.traffic=wins.traffic-module.html"><a title="wins.traffic" class="py-name" href="#" onclick="return doclink('link-32', 'traffic', 'link-32');">traffic</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:38 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

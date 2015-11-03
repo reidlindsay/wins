@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.protocol.mac.MAC</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        <a href="wins.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="wins.protocol.mac-module.html">Module&nbsp;mac</a> ::
+        Class&nbsp;MAC
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class MAC</h1><p class="nomargin-top"><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="class_hierarchy_for_mac" name="class_hierarchy_for_mac">
+<area shape="rect" href="wins.base.Base-class.html" title="base.Base" alt="" coords="69,5,152,32"/>
+<area shape="rect" href="wins.trace.Traceable-class.html" title="trace.Traceable" alt="" coords="56,61,165,88"/>
+<area shape="rect" href="wins.element.Element-class.html" title="element.Element" alt="" coords="51,117,171,144"/>
+<area shape="rect" href="wins.protocol.mac.MAC-class.html" title="MAC" alt="" coords="85,173,136,200"/>
+<area shape="rect" href="wins.ieee80211.dcf.DCF-class.html" title="ieee80211.dcf.DCF" alt="" coords="108,285,239,312"/>
+<area shape="rect" href="wins.mac.arf.ARF-class.html" title="mac.arf.ARF" alt="" coords="64,341,157,368"/>
+<area shape="rect" href="wins.mac.rbar.RBAR-class.html" title="mac.rbar.RBAR" alt="" coords="181,341,293,368"/>
+<area shape="rect" href="wins.protocol.aloha.Aloha-class.html" title="aloha.Aloha" alt="" coords="5,229,93,256"/>
+<area shape="rect" href="wins.protocol.csmac.CSMAC-class.html" title="csmac.CSMAC" alt="" coords="117,229,229,256"/>
+</map>
+  <img src="class_hierarchy_for_mac.gif" alt='' usemap="#class_hierarchy_for_mac" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Base class for medium-access control (i.e. Layer 2) protocols.</p>
+<div class="rst-section" id="rst-mac-ports">
+<h1 class="heading">MAC Ports</h1>
+<p>Every <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> object has the following two ports:</p>
+<blockquote>
+<ol class="rst-arabic simple">
+<li>&quot;TXU&quot; - sends received packets to upstream protocol (usually <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>).</li>
+<li>&quot;RXU&quot; - receives traffic from an upstream element (usually <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>).</li>
+</ol>
+</blockquote>
+<p>These ports are needed to properly interface <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> protocols with <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>.
+Additional ports should added by subclasses as needed.</p>
+</div>
+<div class="rst-section" id="rst-mac-and-addressing">
+<h1 class="heading">MAC and Addressing</h1>
+<p>The format of MAC layer addresses depends on the hardware type enumeration
+<a href="wins.protocol.mac.MAC-class.html#htype" class="link">htype</a>. This parameter is used by <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a> to determine how to properly format
+messages destined for a MAC layer or how to interpret messages delivered by
+a MAC layer. By default, <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> uses Ethernet addressing.</p>
+</div>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">broadcast</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nulladdr</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">mtu</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">phy</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">addr</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">htype</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">checkcrc</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">promiscuous</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Set up pointers, ports, and addressing.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#connect" class="summary-sig-name">connect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Convenience method to connect to a downstream <a href="wins.element.Element-class.html" class="link">Element</a> with 'TXU'
+and 'RXU' ports; <strong>overload this method as needed</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.connect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#duration" class="summary-sig-name">duration</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method to get duration of packet <code class="link">p</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.duration">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#haserror" class="summary-sig-name">haserror</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Convenience method to determine if packet <code class="link">p</code> has an error.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.haserror">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="wins.protocol.mac.MAC-class.html#set_address" class="summary-sig-name">set_address</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">addr</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">htype</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set address information.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.set_address">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_phy"></a><span class="summary-sig-name">set_phy</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      Set pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a> for MAC layer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.set_phy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#addport">addport</a></code>,
+      <code><a href="wins.element.Element-class.html#delport">delport</a></code>,
+      <code><a href="wins.element.Element-class.html#getport">getport</a></code>,
+      <code><a href="wins.element.Element-class.html#hasport">hasport</a></code>,
+      <code><a href="wins.element.Element-class.html#ports">ports</a></code>,
+      <code><a href="wins.element.Element-class.html#start">start</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#addchild">addchild</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#debug">debug</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#log">log</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#set_trace">set_trace</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__repr__">__repr__</a></code>,
+      <code><a href="wins.base.Base-class.html#__str__">__str__</a></code>,
+      <code><a href="wins.base.Base-class.html#callchild">callchild</a></code>,
+      <code><a href="wins.base.Base-class.html#delchild">delchild</a></code>,
+      <code><a href="wins.base.Base-class.html#get_container">get_container</a></code>,
+      <code><a href="wins.base.Base-class.html#get_parent">get_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#getchild">getchild</a></code>,
+      <code><a href="wins.base.Base-class.html#haschild">haschild</a></code>,
+      <code><a href="wins.base.Base-class.html#newchild">newchild</a></code>,
+      <code><a href="wins.base.Base-class.html#set_parent">set_parent</a></code>,
+      <code><a href="wins.base.Base-class.html#set_verbose">set_verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b> (private):
+      <code><a href="wins.base.Base-class.html#_next_uid" onclick="show_private();">_next_uid</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#stderr">stderr</a></code>,
+      <code><a href="wins.base.Base-class.html#stdout">stdout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="'mac'"><code class="variable-quote">'</code><code class="variable-string">mac</code><code class="variable-quote">'</code></code><br />
+      Name of class objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tracename"></a><span class="summary-name">tracename</span> = <code title="'MAC'"><code class="variable-quote">'</code><code class="variable-string">MAC</code><code class="variable-quote">'</code></code><br />
+      Name used in <a href="wins.trace.Trace-class.html" class="link">Trace</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="broadcast"></a><span class="summary-name">broadcast</span> = <code title="'FF:FF:FF:FF:FF:FF'"><code class="variable-quote">'</code><code class="variable-string">FF:FF:FF:FF:FF:FF</code><code class="variable-quote">'</code></code><br />
+      Default value for broadcast address
+[default=`ETHERNET_BROADCAST_ADDR`].
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="nulladdr"></a><span class="summary-name">nulladdr</span> = <code title="'00:00:00:00:00:00'"><code class="variable-quote">'</code><code class="variable-string">00:00:00:00:00:00</code><code class="variable-quote">'</code></code><br />
+      Default value of null address [default=`ETHERNET_NULL_ADDR`]
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mtu"></a><span class="summary-name">mtu</span> = <code title="None">None</code><br />
+      Default value for maximum transmission unit.
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__addr"></a><span class="summary-name">__addr</span><br />
+      Private variable to maintain address information.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__htype"></a><span class="summary-name">__htype</span><br />
+      Private variable to maintain hardware-type enumeration.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__phy"></a><span class="summary-name">__phy</span><br />
+      Private pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a> for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>; use <a href="wins.protocol.mac.MAC-class.html#phy" class="link">phy</a> property to
+access/modify.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ackdata"></a><span class="summary-name">ackdata</span><br />
+      SimEvent that should be signalled when a data packet is
+successfully acknowledged.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="checkcrc"></a><span class="summary-name">checkcrc</span><br />
+      Boolean flag; if true check CRC for errors before passing to
+upper layer; otherwise ignore CRC [default=True].
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="drpdata"></a><span class="summary-name">drpdata</span><br />
+      SimEvent that should be signalled when a data packet is
+dropped by the MAC.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="promiscuous"></a><span class="summary-name">promiscuous</span><br />
+      Boolean flag; should be used to indicate whether or not
+MAC is operating in promiscuous mode [default=False].
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#parent">parent</a></code>,
+      <code><a href="wins.base.Base-class.html#uid">uid</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.protocol.mac.MAC-class.html#phy" class="summary-name">phy</a><br />
+      Property to access pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.protocol.mac.MAC-class.html#address" class="summary-name">address</a><br />
+      Property to access/modify address information.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.protocol.mac.MAC-class.html#htype" class="summary-name">htype</a><br />
+      Property to access/modify hardware type enumeration.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="wins.protocol.mac.MAC-class.html#addr" class="summary-name">addr</a><br />
+      Property to access <a href="wins.protocol.mac.MAC-class.html#address" class="link">address</a>; acts as alias for address info.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.element.Element-class.html">element.Element</a></code></b>:
+      <code><a href="wins.element.Element-class.html#started">started</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.trace.Traceable-class.html">trace.Traceable</a></code></b>:
+      <code><a href="wins.trace.Traceable-class.html#trace">trace</a></code>,
+      <code><a href="wins.trace.Traceable-class.html#traceid">traceid</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="wins.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="wins.base.Base-class.html#children">children</a></code>,
+      <code><a href="wins.base.Base-class.html#container">container</a></code>,
+      <code><a href="wins.base.Base-class.html#verbose">verbose</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">broadcast</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nulladdr</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">mtu</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor.</p>
+<p>If the <a href="wins.protocol.mac.MAC-class.html#broadcast" class="link">broadcast</a> address is not specified, then the default broadcast
+address is used.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>broadcast</code></strong> - Broadcast address.</li>
+        <li><strong class="pname"><code>nulladdr</code></strong> - Null address (used by <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>).</li>
+        <li><strong class="pname"><code>mtu</code></strong> - Maximum transmission unit.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">phy</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">addr</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">htype</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">auto</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">checkcrc</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">promiscuous</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set up pointers, ports, and addressing.</p>
+<p>By default, this method will use the automatic configuration option for
+<a href="wins.protocol.mac.MAC-class.html#set_address" class="link">set_address()</a>. It will also set up the &quot;TXU&quot; and &quot;RXU&quot; ports.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>phy</code></strong> - Pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a> for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.</li>
+        <li><strong class="pname"><code>addr</code></strong> - Address for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> (see <code class="link">MAC and Addressing</code> for more).</li>
+        <li><strong class="pname"><code>htype</code></strong> - Hardware type enumeration for <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>; Ethernet by default.</li>
+        <li><strong class="pname"><code>checkcrc</code></strong> - Boolean flag; if false <a href="wins.protocol.mac.MAC-class.html#haserror" class="link">haserror()</a> will ignore the CRC
+when determining if an error has occurred.</li>
+        <li><strong class="pname"><code>promiscuous</code></strong> - Boolean flag; should be used to indicate whether or
+not MAC is operating in promiscuous mode
+[default=False].</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#configure">element.Element.configure</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="connect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">connect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.connect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Convenience method to connect to a downstream <a href="wins.element.Element-class.html" class="link">Element</a> with 'TXU'
+and 'RXU' ports; <strong>overload this method as needed</strong>.
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="wins.element.Element-class.html#connect">element.Element.connect</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="duration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">duration</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.duration">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convenience method to get duration of packet <code class="link">p</code>.</p>
+<p>By default, this method calls <a href="wins.protocol.phy.PHY-class.html#duration" class="link">PHY.duration()</a> on the physical layer
+associated with this <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a> (i.e. <a href="wins.protocol.mac.MAC-class.html#phy" class="link">phy</a>). If <a href="wins.protocol.mac.MAC-class.html#phy" class="link">phy</a> is not a valid <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a>,
+this method will attempt to find and return the 'cif-duration' annotation.</p>
+<p>Overload this method as needed.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Duration of packet <code class="link">p</code> in seconds.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        If duration cannot be determined, this method may raise an
+exception.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="haserror"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">haserror</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">p</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.haserror">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convenience method to determine if packet <code class="link">p</code> has an error.</p>
+<p>By default, this method calls <a href="wins.crc.CRC32-class.html#haserror" class="link">CRC32.haserror()</a>. If no <a href="wins.crc.CRC32-class.html" class="link">CRC32</a> layer is
+found, or no 'crcerror' annotation is found the packet is assumed to be
+error-free.</p>
+<p><strong>Overload this method as needed to change this operation.</strong></p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - Additional arguments passed to <a href="wins.crc.CRC32-class.html#haserror" class="link">CRC32.haserror()</a>.</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - Keyword arguments passed to <a href="wins.crc.CRC32-class.html#haserror" class="link">CRC32.haserror()</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Boolean; true if error is found; false otherwise.</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        This method ignores the CRC when <a href="wins.protocol.mac.MAC-class.html#checkcrc" class="link">checkcrc</a> is set to false.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="set_address"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_address</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">addr</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">htype</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="wins.protocol.mac-pysrc.html#MAC.set_address">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set address information.</p>
+<p>If the parameter <a href="wins.protocol.mac.MAC-class.html#addr" class="link">addr</a> (or <a href="wins.protocol.mac.MAC-class.html#htype" class="link">htype</a>) is set to &quot;auto&quot;, the address (or
+hardware type enumeration) will be determined automatically. If <code class="link">None</code>
+is passed in, nothing is done.</p>
+<p>Under automatic configuration, this method uses Ethernet frames and
+automatically configures the address using <a href="wins.base.Base-class.html#uid" class="link">uid</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>addr</code></strong> - Address for <a href="wins.protocol.mac.MAC-class.html" class="link">MAC</a>.</li>
+        <li><strong class="pname"><code>htype</code></strong> - Hardware-type enumeration for <a href="wins.protocol.arp.ARP-class.html" class="link">ARP</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="phy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phy</h3>
+  Property to access pointer to <a href="wins.protocol.phy.PHY-class.html" class="link">PHY</a>.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">v</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="address"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">address</h3>
+  Property to access/modify address information.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">v</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="htype"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">htype</h3>
+  Property to access/modify hardware type enumeration.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">addr</h3>
+  Property to access <a href="wins.protocol.mac.MAC-class.html#address" class="link">address</a>; acts as alias for address info.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">v</span>)</span>
+        - address
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:35 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

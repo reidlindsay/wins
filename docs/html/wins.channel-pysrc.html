@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>wins.channel</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="wins-module.html">Package&nbsp;wins</a> ::
+        Package&nbsp;channel
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="wins.channel-module.html">Package wins.channel</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!  /usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">Package to implement channel.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">Revision Info</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">=============</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedBy: mandke $</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedDate: 2012-02-23 16:12:36 -0600 (Thu, 23 Feb 2012) $</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">* $LastChangedRevision: 5420 $</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">:author: Ketan Mandke &lt;kmandke@mail.utexas.edu&gt;</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">:copyright:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    Copyright 2009 The University of Texas at Austin</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    You may obtain a copy of the License at</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">       http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">    Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">    See the License for the specific language governing permissions and</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    limitations under the License.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module wins.channel.interface=wins.channel.interface-module.html"><a title="wins.channel.interface" class="py-name" href="#" onclick="return doclink('link-0', 'interface', 'link-0');">interface</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class wins.channel.interface.ChannelInterface=wins.channel.interface.ChannelInterface-class.html"><a title="wins.channel.interface.ChannelInterface" class="py-name" href="#" onclick="return doclink('link-1', 'ChannelInterface', 'link-1');">ChannelInterface</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function wins.channel.interface.strcollision()=wins.channel.interface-module.html#strcollision"><a title="wins.channel.interface.strcollision" class="py-name" href="#" onclick="return doclink('link-2', 'strcollision', 'link-2');">strcollision</a></tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="wins.channel.interface" class="py-name" href="#" onclick="return doclink('link-3', 'interface', 'link-0');">interface</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Variable wins.channel.interface.CHANNELIF_RX=wins.channel.interface-module.html#CHANNELIF_RX"><a title="wins.channel.interface.CHANNELIF_RX" class="py-name" href="#" onclick="return doclink('link-4', 'CHANNELIF_RX', 'link-4');">CHANNELIF_RX</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Variable wins.channel.interface.CHANNELIF_TX=wins.channel.interface-module.html#CHANNELIF_TX"><a title="wins.channel.interface.CHANNELIF_TX" class="py-name" href="#" onclick="return doclink('link-5', 'CHANNELIF_TX', 'link-5');">CHANNELIF_TX</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name" targets="Module wins.channel.channelbase=wins.channel.channelbase-module.html"><a title="wins.channel.channelbase" class="py-name" href="#" onclick="return doclink('link-6', 'channelbase', 'link-6');">channelbase</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class wins.channel.channelbase.Channel=wins.channel.channelbase.Channel-class.html"><a title="wins.channel.channelbase.Channel" class="py-name" href="#" onclick="return doclink('link-7', 'Channel', 'link-7');">Channel</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Class wins.channel.channelbase.ChannelModel=wins.channel.channelbase.ChannelModel-class.html"><a title="wins.channel.channelbase.ChannelModel" class="py-name" href="#" onclick="return doclink('link-8', 'ChannelModel', 'link-8');">ChannelModel</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name" targets="Module wins.channel.propagation=wins.channel.propagation-module.html"><a title="wins.channel.propagation" class="py-name" href="#" onclick="return doclink('link-9', 'propagation', 'link-9');">propagation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Class wins.channel.propagation.Propagation=wins.channel.propagation.Propagation-class.html"><a title="wins.channel.propagation.Propagation" class="py-name" href="#" onclick="return doclink('link-10', 'Propagation', 'link-10');">Propagation</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name" targets="Module wins.channel.refprop=wins.channel.refprop-module.html"><a title="wins.channel.refprop" class="py-name" href="#" onclick="return doclink('link-11', 'refprop', 'link-11');">refprop</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Class wins.channel.refprop.ReferencePropagation=wins.channel.refprop.ReferencePropagation-class.html"><a title="wins.channel.refprop.ReferencePropagation" class="py-name" href="#" onclick="return doclink('link-12', 'ReferencePropagation', 'link-12');">ReferencePropagation</a></tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-13" class="py-name" targets="Module wins.channel.breakpoint=wins.channel.breakpoint-module.html"><a title="wins.channel.breakpoint" class="py-name" href="#" onclick="return doclink('link-13', 'breakpoint', 'link-13');">breakpoint</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class wins.channel.breakpoint.Breakpoint=wins.channel.breakpoint.Breakpoint-class.html"><a title="wins.channel.breakpoint.Breakpoint" class="py-name" href="#" onclick="return doclink('link-14', 'Breakpoint', 'link-14');">Breakpoint</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-15" class="py-name" targets="Module wins.channel.radio=wins.channel.radio-module.html,Variable wins.protocol.phy.PHY.radio=wins.protocol.phy.PHY-class.html#radio"><a title="wins.channel.radio
+wins.protocol.phy.PHY.radio" class="py-name" href="#" onclick="return doclink('link-15', 'radio', 'link-15');">radio</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class wins.channel.radio.Radio=wins.channel.radio.Radio-class.html"><a title="wins.channel.radio.Radio" class="py-name" href="#" onclick="return doclink('link-16', 'Radio', 'link-16');">Radio</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-17" class="py-name" targets="Module wins.channel.fixdelay=wins.channel.fixdelay-module.html"><a title="wins.channel.fixdelay" class="py-name" href="#" onclick="return doclink('link-17', 'fixdelay', 'link-17');">fixdelay</a></tt> <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name" targets="Function wins.channel.fixdelay.FixedDelay()=wins.channel.fixdelay-module.html#FixedDelay"><a title="wins.channel.fixdelay.FixedDelay" class="py-name" href="#" onclick="return doclink('link-18', 'FixedDelay', 'link-18');">FixedDelay</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >WiNS</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Thu Feb 23 16:48:39 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
